@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.chem_solution_mobile">
    <application
-        android:label="ChemSolution"
-        android:icon="@mipmap/launcher_icon">
+        android:label="chem_solution_mobile"
+        android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
