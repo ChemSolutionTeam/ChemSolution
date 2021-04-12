@@ -1,11 +1,19 @@
 <template>
   <div
-    class="box m-5 pl-12 p-3 text-left w-4/12 bg-white border-csblack border-2 rounded-lg"
+    class="box m-5 pl-12 p-3 text-left w-4/12 bg-white border-csblack shadow-2xl border rounded-lg"
   >
     <form>
       <h3 class="text-4xl text-center heading pb-5">Авторизація</h3>
-      <BaseInput label="Email"></BaseInput>
-      <BaseInput label="Password"></BaseInput>
+      <BaseInput
+        label="Email"
+        type="email"
+        placeholder="Уведіть E-mail"
+      ></BaseInput>
+      <BaseInput
+        label="Пароль"
+        type="password"
+        placeholder="Уведіть пароль"
+      ></BaseInput>
     </form>
   </div>
 </template>
