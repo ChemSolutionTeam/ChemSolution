@@ -14,7 +14,7 @@ class ChemApp extends StatelessWidget {
       title: 'ChemSolution',
       home: ChemSolutionWidget(),
       theme: ThemeData(        //fontFamily: 'Century Gothic',
-        fontFamily: 'Consolas',
+        fontFamily: 'CenturyGothic',
       ),
     );
   }
