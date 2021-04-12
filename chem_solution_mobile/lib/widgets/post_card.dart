@@ -11,6 +11,7 @@ class BlogCard extends StatefulWidget {
 
 class _BlogCardState extends State<BlogCard> {
   BlogPost post;
+  bool _liked = false;
 
   _BlogCardState(this.post);
 
@@ -18,15 +19,46 @@ class _BlogCardState extends State<BlogCard> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Card(
-          child: InkWell(
-            splashColor: Colors.blue.withAlpha(30),
-            onTap: () {
-              print('Card tapped.');
-            },
-            child: Text(post.title),
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Text(
+                    '${post.title}',
+                    textAlign: TextAlign.start,
+                    style: TextStyle(fontSize: 20.0),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    GestureDetector(
+                      child: Text(
+                        'Детальніше...',
+                        style: TextStyle(color: Color(0xff1DCDFE)),
+                      ),
+                    ),
+                    GestureDetector(
+                      child: Icon(
+                        _liked ? Icons.favorite : Icons.favorite_border,
+                        color: _liked ? Colors.red : null,
+                      ),
+                      onTap: () {
+                        setState(() {
+                          _liked = !_liked;
+                        });
+                      },
+                    )
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
