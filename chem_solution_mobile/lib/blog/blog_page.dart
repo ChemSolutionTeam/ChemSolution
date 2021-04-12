@@ -12,15 +12,18 @@ class Blogs extends StatefulWidget {
 class _BlogsState extends State<Blogs> {
   List<BlogPost> posts = [
     new BlogPost(
-        title: 'post1',
-        category: 'News',
-        img:
-            "https://www.innovationnewsnetwork.com/wp-content/uploads/2019/12/ST27-McGillU1-image-%C2%A9-iStock-Garsya.jpg",
-        information:
-            'information1\ninformation1\ninformation1\ninformation1\ninformation1\ninformation1\n',
-        isLocked: false,
-        liked: false),
+      idPost: 1,
+      title: 'post1',
+      category: 'News',
+      img:
+          "https://www.innovationnewsnetwork.com/wp-content/uploads/2019/12/ST27-McGillU1-image-%C2%A9-iStock-Garsya.jpg",
+      information:
+          'information1\ninformation1\ninformation1\ninformation1\ninformation1\ninformation1\n',
+      isLocked: false,
+      liked: false,
+    ),
     new BlogPost(
+        idPost: 2,
         title: 'post2',
         category: 'News',
         img:
@@ -30,6 +33,7 @@ class _BlogsState extends State<Blogs> {
         isLocked: true,
         liked: false),
     new BlogPost(
+        idPost: 3,
         title: 'post3',
         category: 'News',
         img:
@@ -39,6 +43,7 @@ class _BlogsState extends State<Blogs> {
         isLocked: true,
         liked: false),
     new BlogPost(
+        idPost: 4,
         title: 'post4',
         category: 'News',
         img:

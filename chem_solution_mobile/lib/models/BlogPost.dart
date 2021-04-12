@@ -1,6 +1,7 @@
 import 'Model.dart';
 
 class BlogPost extends Model {
+  int idPost;
   String title;
   String category;
   String information;
@@ -9,6 +10,7 @@ class BlogPost extends Model {
   bool liked;
 
   BlogPost({
+    this.idPost,
     this.title,
     this.category,
     this.information,
