@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:community_material_icon/community_material_icon.dart';
 
 void main() {
   runApp(ChemApp());
@@ -12,10 +13,8 @@ class ChemApp extends StatelessWidget {
     return MaterialApp(
       title: 'ChemSolution',
       home: ChemSolutionWidget(),
-      theme: ThemeData(
-        //fontFamily: 'Century Gothic',
+      theme: ThemeData(        //fontFamily: 'Century Gothic',
         fontFamily: 'Consolas',
-
       ),
     );
   }
@@ -71,16 +70,16 @@ class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
               child: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Icon(CommunityMaterialIcons.atom),
               label: 'Елементи'),
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Icon(CommunityMaterialIcons.newspaper),
               label: 'Новини'),
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Icon(CommunityMaterialIcons.note_search),
               label: 'Шпаргалки'),
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Icon(CommunityMaterialIcons.account),
               label: 'Мій профіль'),
           ],
           currentIndex: _selectedIndex,
