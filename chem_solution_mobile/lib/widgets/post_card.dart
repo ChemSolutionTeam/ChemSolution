@@ -1,5 +1,6 @@
 import 'package:chem_solution_mobile/models/BlogPost.dart';
 import 'package:chem_solution_mobile/widgets/post_info.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class BlogCard extends StatefulWidget {
@@ -12,7 +13,6 @@ class BlogCard extends StatefulWidget {
 
 class _BlogCardState extends State<BlogCard> {
   BlogPost post;
-  
 
   _BlogCardState(this.post);
 
@@ -57,6 +57,36 @@ class _BlogCardState extends State<BlogCard> {
                       ),
                       onTap: () {
                         if (!post.isLocked) {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  elevation: 24,
+                                  title: Text('Увага!'),
+                                  content: Text(
+                                      'Для детального перегляду інформації необхідно зарєєструватися. Зробити це зараз?'),
+                                  actions: [
+                                    // ignore: deprecated_member_use
+                                    FlatButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text(
+                                          'Ні',
+                                          style: TextStyle(color: Colors.red),
+                                        )),
+                                    // ignore: deprecated_member_use
+                                    FlatButton(
+                                        onPressed: () {},
+                                        child: Text(
+                                          'Так',
+                                          style: TextStyle(
+                                              color: Color(0xff1DCDFE)),
+                                        )),
+                                  ],
+                                );
+                              },
+                              barrierDismissible: true);
                         } else {
                           Navigator.of(context).push(
                             MaterialPageRoute(

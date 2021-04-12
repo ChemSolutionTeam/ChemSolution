@@ -14,6 +14,7 @@ class PostInfo extends StatelessWidget {
         }
       },
       child: Scaffold(
+        backgroundColor: Color(0xffEBFAFF),
         appBar: AppBar(
           backgroundColor: Color(0xff2F455C),
           title: Padding(
@@ -31,9 +32,12 @@ class PostInfo extends StatelessWidget {
             children: [
               Container(
                 padding: EdgeInsets.only(bottom: 20.0),
-                child: Image.network(
-                  post.img,
-                  fit: BoxFit.fitWidth,
+                child: Card(
+                  elevation: 5,
+                  child: Image.network(
+                    post.img,
+                    fit: BoxFit.fitWidth,
+                  ),
                 ),
               ),
               Container(
