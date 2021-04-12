@@ -6,6 +6,7 @@ class BlogPost extends Model {
   String information;
   bool isLocked;
   String img;
+  bool liked;
 
   BlogPost({
     this.title,
@@ -13,6 +14,7 @@ class BlogPost extends Model {
     this.information,
     this.isLocked,
     this.img,
+    this.liked
   });
 
   @override

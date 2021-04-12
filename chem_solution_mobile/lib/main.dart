@@ -78,7 +78,7 @@ class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
             title: Text(
               'ChemSolution',
               style: TextStyle(
-                  color: Color(0xffEBFAFF),
+                  color: Color(0xff21D0B2),
                   fontWeight: FontWeight.bold,
                   fontSize: 24.0),
             ),

@@ -1,10 +1,10 @@
 import 'package:chem_solution_mobile/models/BlogPost.dart';
+import 'package:chem_solution_mobile/widgets/post_info.dart';
 import 'package:flutter/material.dart';
 
 class BlogCard extends StatefulWidget {
   final BlogPost post;
-  BlogCard({Key key, @required this.post})
-      : super(key: key);
+  BlogCard({Key key, @required this.post}) : super(key: key);
 
   @override
   _BlogCardState createState() => _BlogCardState(post);
@@ -12,7 +12,7 @@ class BlogCard extends StatefulWidget {
 
 class _BlogCardState extends State<BlogCard> {
   BlogPost post;
-  bool _liked = false;
+  
 
   _BlogCardState(this.post);
 
@@ -21,6 +21,7 @@ class _BlogCardState extends State<BlogCard> {
     return Container(
       padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
       child: Card(
+        elevation: 5,
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
@@ -51,17 +52,30 @@ class _BlogCardState extends State<BlogCard> {
                     GestureDetector(
                       child: Text(
                         'Детальніше...',
+                        //'${post.liked.toString()}',
                         style: TextStyle(color: Color(0xff1DCDFE)),
                       ),
+                      onTap: () {
+                        if (!post.isLocked) {
+                        } else {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => PostInfo(
+                                post: post,
+                              ),
+                            ),
+                          );
+                        }
+                      },
                     ),
                     GestureDetector(
                       child: Icon(
-                        _liked ? Icons.favorite : Icons.favorite_border,
-                        color: _liked ? Colors.red : null,
+                        post.liked ? Icons.favorite : Icons.favorite_border,
+                        color: post.liked ? Colors.red : null,
                       ),
                       onTap: () {
                         setState(() {
-                          _liked = !_liked;
+                          post.liked = !post.liked;
                         });
                       },
                     )
