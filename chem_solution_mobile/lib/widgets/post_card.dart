@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 class BlogCard extends StatefulWidget {
   final BlogPost post;
-  BlogCard({Key key, @required this.post}) : super(key: key);
+  BlogCard({Key key, @required this.post})
+      : super(key: key);
 
   @override
   _BlogCardState createState() => _BlogCardState(post);
@@ -24,12 +25,21 @@ class _BlogCardState extends State<BlogCard> {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
+              Container(
+                padding: EdgeInsets.only(bottom: 10.0),
+                child: Image.network(
+                  post.img,
+                  fit: BoxFit.fitWidth,
+                ),
+              ),
               Row(
                 children: [
                   Text(
                     '${post.title}',
-                    textAlign: TextAlign.start,
-                    style: TextStyle(fontSize: 20.0),
+                    style: TextStyle(
+                        fontSize: 20.0,
+                        color: Color(0xff2F455C),
+                        fontWeight: FontWeight.w400),
                   ),
                 ],
               ),
