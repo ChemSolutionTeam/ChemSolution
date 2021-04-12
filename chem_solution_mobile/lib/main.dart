@@ -49,6 +49,8 @@ class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
     });
   }
 
+  
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -59,7 +61,7 @@ class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
           });
         } else if (details.primaryVelocity < 0) {
           setState(() {
-            if (_selectedIndex < _widgetOptions.length - 1) _selectedIndex += 1;
+            if (_selectedIndex < 3) _selectedIndex += 1;
           });
         }
       },
