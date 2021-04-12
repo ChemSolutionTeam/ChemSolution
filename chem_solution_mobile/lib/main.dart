@@ -93,7 +93,7 @@ class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
                   icon: Icon(CommunityMaterialIcons.atom), label: 'Елементи'),
               BottomNavigationBarItem(
                   icon: Icon(CommunityMaterialIcons.newspaper),
-                  label: 'Новини'),
+                  label: 'Новини та факти'),
               BottomNavigationBarItem(
                   icon: Icon(CommunityMaterialIcons.note_search),
                   label: 'Шпаргалки'),
