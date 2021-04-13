@@ -15,57 +15,57 @@ class _ElementCardState extends State<ElementCard> {
 
   _ElementCardState(this.element);
 
+  Widget _rowInfo(String name, String value) {
+    return Container(
+      child: Wrap(
+        children: [
+          Container(child: Text(name)),
+          Container(child: Text(value)),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+      padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
       child: Card(
-        elevation: 5,
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: ListTile(
-            leading: Image.network(
-              element.images['Позначення'],
-              height: 100,
-              width: 200,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              padding: EdgeInsets.fromLTRB(10, 10, 5, 10),
+              alignment: Alignment.centerLeft,
+              child: Image.network(
+                element.imgSymbol,
+                height: 100,
+              ),
             ),
-            trailing: Icon(
-              CommunityMaterialIcons.more,
-              color: element.isLocked ? Color(0xff1DCDFE) : Colors.blueGrey,
-            ),
-            title: Text(
-                '${element.idElement} - ${element.symbol} - ${element.name}'),
-            subtitle: Flexible(
-              child: Column(
+            Container(
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
+              child: Wrap(
+                direction: Axis.vertical,
                 children: [
-                  Flexible(
-                    child: Row(
-                      children: [
-                        Text('Категорія: '),
-                        Text('${element.category}'),
-                      ],
-                    ),
-                  ),
-                  Flexible(
-                    child: Row(
-                      children: [
-                        Text('Атомна маса: '),
-                        Text('${element.atomicWeight}'),
-                      ],
-                    ),
-                  ),
-                  Flexible(
-                    child: Row(
-                      children: [
-                        Text('Валентність: '),
-                        Text('${element.getValence()}'),
-                      ],
-                    ),
-                  ),
+                  _rowInfo('Порядковий номер: ', '${element.idElement}'),
+                  _rowInfo('Позначення: ', '${element.symbol}'),
+                  _rowInfo('Назва: ', '${element.name}'),
+                  _rowInfo('Категорія: ', '${element.category}'),
+                  _rowInfo('Атомна маса: ', '${element.atomicWeight}'),
+                  _rowInfo('Валентність: ', '${element.getValence()}'),
                 ],
               ),
             ),
-          ),
+            Container(
+              padding: EdgeInsets.fromLTRB(5, 10, 10, 10),
+              alignment: Alignment.centerRight,
+              child: Icon(
+                CommunityMaterialIcons.more,
+                color: element.isLocked ? Color(0xff1DCDFE) : Colors.blueGrey,
+              ),
+            ),
+          ],
         ),
       ),
     );

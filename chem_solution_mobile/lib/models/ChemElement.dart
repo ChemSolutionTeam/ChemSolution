@@ -16,31 +16,32 @@ class ChemElement extends Model {
   double boilingTemperature;
   bool isLocked;
   String info;
-  Map<String, String> images;
+  String imgSymbol;
+  String imgAtom;
   List<String> valence = [];
 
-  ChemElement({
-    this.idElement,
-    this.symbol,
-    this.name,
-    this.atomicWeight,
-    this.electronQuantity,
-    this.protonQuantity,
-    this.neutronQuantity,
-    this.atomicRadius,
-    this.electronegativity,
-    this.category,
-    this.energyLevels,
-    this.meltingTemperature,
-    this.boilingTemperature,
-    this.isLocked,
-    this.info,
-    this.images,
-    this.valence,
-  });
+  ChemElement(
+      {this.idElement,
+      this.symbol,
+      this.name,
+      this.atomicWeight,
+      this.electronQuantity,
+      this.protonQuantity,
+      this.neutronQuantity,
+      this.atomicRadius,
+      this.electronegativity,
+      this.category,
+      this.energyLevels,
+      this.meltingTemperature,
+      this.boilingTemperature,
+      this.isLocked,
+      this.info,
+      this.valence,
+      this.imgAtom,
+      this.imgSymbol});
 
   String getValence() {
-    String _valence;
+    String _valence = '';
     for (String val in valence) {
       _valence += val + " ";
     }
