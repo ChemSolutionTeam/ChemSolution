@@ -54,24 +54,9 @@
       class="w-full h-full block flex-grow lg:flex lg:items-center lg:mr-6 lg:ml-9 lg:w-auto"
     >
       <div class="text-lg lg:flex-grow flex justify-start">
-        <a
-          href="#responsive-header"
-          class="block mt-4 lg:inline-block lg:mt-0 text-csgreen hover:text-cslightgreen mr-4"
-        >
-          Docs
-        </a>
-        <a
-          href="#responsive-header"
-          class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-cslightgreen mr-4"
-        >
-          Examples
-        </a>
-        <a
-          href="#responsive-header"
-          class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-cslightgreen"
-        >
-          Blog
-        </a>
+        <Link />
+        <Link />
+        <Link :isCurrent="true" />
       </div>
       <div>
         <a
@@ -91,9 +76,10 @@
 </template>
 
 <script>
+import Link from '../components/NavigationLink.vue'
 export default {
   name: 'Navigation',
-  components: {},
+  components: { Link },
 }
 </script>
 
