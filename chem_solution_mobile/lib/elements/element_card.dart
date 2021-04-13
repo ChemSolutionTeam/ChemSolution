@@ -1,3 +1,5 @@
+import 'package:chem_solution_mobile/elements/element_info.dart';
+import 'package:chem_solution_mobile/main.dart';
 import 'package:chem_solution_mobile/models/ChemElement.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
@@ -19,9 +21,43 @@ class _ElementCardState extends State<ElementCard> {
     return Container(
       child: Wrap(
         children: [
-          Container(child: Text(name)),
-          Container(child: Text(value)),
+          Container(
+            child: Text(
+              name,
+              style: TextStyle(color: Color(0xff2F455C), fontSize: 16),
+            ),
+          ),
+          Container(
+              child: Text(
+            value,
+            style: TextStyle(
+                color: Color(0xff2F455C),
+                fontSize: 16,
+                fontWeight: FontWeight.bold),
+          )),
         ],
+      ),
+    );
+  } 
+
+  Widget _titleText(String name) {
+    return Container(
+      child: Text(
+        name,
+        style: TextStyle(color: Color(0xff2F455C), fontSize: 16),
+      ),
+    );
+  }
+
+  Widget _valueText(String value) {
+    return Container(
+      child: Text(
+        value,
+        style: TextStyle(
+          color: Color(0xff2F455C),
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }
@@ -53,59 +89,77 @@ class _ElementCardState extends State<ElementCard> {
                   _rowInfo('Назва: ', '${element.name}'),
                   _rowInfo('Категорія: ', '${element.category}'),
                   _rowInfo('Атомна маса: ', '${element.atomicWeight}'),
-                  _rowInfo('Валентність: ', '${element.getValence()}'),
+                  _rowInfo('Валентність: ', '${element.getValence()}'), 
+                 /* _titleText('Порядковий номер: '),
+                  _valueText('${element.idElement}'),
+                  _titleText('Позначення: '),
+                  _valueText('${element.symbol}'),
+                  _titleText('Назва: '),
+                  _valueText('${element.name}'),
+                  _titleText('Категорія: '),
+                  _valueText('${element.category}'),
+                  _titleText('Атомна маса: '),
+                  _valueText('${element.atomicWeight}'),
+                  _titleText('Валентність: '),
+                  _valueText('${element.getValence()}'), */
                 ],
               ),
             ),
             GestureDetector(
               onTap: () {
-                if(!element.isLocked){
-
-                } else{
-                   showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  elevation: 24,
-                                  title: Text(
-                                    'Увага!',
-                                    style: TextStyle(
-                                      color: Color(0xff2F455C),
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  content: Text(
-                                    'Для детального перегляду інформації необхідно авторизуватися. Зробити це зараз?',
-                                    style: TextStyle(
-                                      color: Color(0xff2F455C),
-                                    ),
-                                  ),
-                                  actions: [
-                                    // ignore: deprecated_member_use
-                                    FlatButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text(
-                                          'Ні',
-                                          style: TextStyle(color: Colors.red),
-                                        )),
-                                    // ignore: deprecated_member_use
-                                    FlatButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Text(
-                                        'Так',
-                                        style: TextStyle(
-                                            color: Color(0xff1DCDFE),
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                    ),
-                                  ],
-                                );
+                if (autorized) {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ElementInfo(
+                        element: element,
+                      ),
+                    ),
+                  );
+                } else {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          elevation: 24,
+                          title: Text(
+                            'Увага!',
+                            style: TextStyle(
+                              color: Color(0xff2F455C),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          content: Text(
+                            'Для детального перегляду інформації необхідно авторизуватися. Зробити це зараз?',
+                            style: TextStyle(
+                              color: Color(0xff2F455C),
+                            ),
+                          ),
+                          actions: [
+                            // ignore: deprecated_member_use
+                            FlatButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text(
+                                  'Ні',
+                                  style: TextStyle(color: Colors.red),
+                                )),
+                            // ignore: deprecated_member_use
+                            FlatButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
                               },
-                              barrierDismissible: true);
+                              child: Text(
+                                'Так',
+                                style: TextStyle(
+                                    color: Color(0xff1DCDFE),
+                                    fontWeight: FontWeight.w700),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                      barrierDismissible: true);
                 }
               },
               child: Container(

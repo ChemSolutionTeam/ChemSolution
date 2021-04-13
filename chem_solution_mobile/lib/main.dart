@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'elements/elements_page.dart';
 
+bool autorized = false;
+
 void main() {
   runApp(ChemApp());
 }
@@ -48,8 +50,6 @@ class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
       _selectedIndex = index;
     });
   }
-
-  
 
   @override
   Widget build(BuildContext context) {

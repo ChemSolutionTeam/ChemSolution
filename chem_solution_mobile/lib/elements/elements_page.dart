@@ -28,7 +28,7 @@ List<ChemElement> elements = [
       name: 'Гелій',
       category: 'Благородні гази',
       atomicWeight: 2.0026,
-      isLocked: true,
+      isLocked: false,
       valence: ['II'],
       imgSymbol:
           'https://znaesh-kak.com/wp-content/uploads/2020/04/3-200x200.jpg',

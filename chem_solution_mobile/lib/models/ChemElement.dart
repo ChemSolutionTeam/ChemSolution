@@ -18,6 +18,7 @@ class ChemElement extends Model {
   String info;
   String imgSymbol;
   String imgAtom;
+  int group;
   List<String> valence = [];
 
   ChemElement(
@@ -38,6 +39,7 @@ class ChemElement extends Model {
       this.info,
       this.valence,
       this.imgAtom,
+      this.group,
       this.imgSymbol});
 
   String getValence() {
