@@ -23,7 +23,7 @@ namespace ChemSolution.Middlewares.Authorization
         }
         public async Task InvokeAsync(HttpContext context)
         {
-            if(context.Request.Path.Value.Split("/").Last() == "GetToken")
+            if(context.Request.Path.Value.Split("/").Last() == "GetJwt")
             {
                 var identity = GetIdentity(context.Request.Query["login"],
                     context.Request.Query["password"]);

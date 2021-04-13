@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ChemSolution.Middlewares.Authorization;
+using ChemSolution.Middlewares.Authorization.Settings;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Microsoft.IdentityModel.Tokens;
 
 namespace ChemSolution
 {
@@ -26,7 +30,22 @@ namespace ChemSolution
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.RequireHttpsMetadata = false;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = JwtSettings.ISSUER,
+                        ValidateAudience = true,
+                        ValidAudience = JwtSettings.AUDIENCE,
+                        ValidateLifetime = true,
+                        IssuerSigningKey = JwtSettings.GetSymmetricSecurityKey(),
+                        ValidateIssuerSigningKey = true,
+                    };
+                });
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -47,9 +66,10 @@ namespace ChemSolution
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
             app.UseAuthorization();
-
+            
+            app.UseJwtToken(null);//!!!!!
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
