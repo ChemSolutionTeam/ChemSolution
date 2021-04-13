@@ -23,7 +23,7 @@ namespace ChemSolution.Middlewares.Authorization
         }
         public async Task InvokeAsync(HttpContext context)
         {
-            if(context.Request.Path.Value.Split("/").Last() == "GetJwt")
+            if(context.Request.Path.Value?.Split("/").Last() == "GetJwt")
             {
                 var identity = GetIdentity(context.Request.Query["login"],
                     context.Request.Query["password"]);
@@ -55,8 +55,9 @@ namespace ChemSolution.Middlewares.Authorization
             }
             else
             {
-                context.Response.StatusCode = 403;
+                await _next.Invoke(context);
             }
+            
         }
         private ClaimsIdentity GetIdentity(string login, string password)
         {

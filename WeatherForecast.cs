@@ -1,7 +1,10 @@
 using System;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace ChemSolution
 {
+   
     public class WeatherForecast
     {
         public DateTime Date { get; set; }

@@ -32,6 +32,7 @@ namespace ChemSolution
         {
             
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddCookie(cfg => { cfg.SlidingExpiration = true; })
                 .AddJwtBearer(options =>
                 {
                     options.RequireHttpsMetadata = false;
@@ -47,9 +48,31 @@ namespace ChemSolution
                     };
                 });
             services.AddControllers();
-            services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(options =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ChemSolution", Version = "v1" });
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "ChemSolution", Version = "v1" });
+                var jwtSecurityScheme = new OpenApiSecurityScheme
+                {
+                    Scheme = JwtBearerDefaults.AuthenticationScheme,
+                    BearerFormat = "JWT",
+                    Name = "JWT Authentication",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.Http,
+                    Description = "ChemSolution",
+
+                    Reference = new OpenApiReference
+                    {
+                        Id = JwtBearerDefaults.AuthenticationScheme,
+                        Type = ReferenceType.SecurityScheme
+                    }
+                };
+
+                options.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
+
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    { jwtSecurityScheme, Array.Empty<string>() }
+                });
             });
         }
 
@@ -64,11 +87,11 @@ namespace ChemSolution
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
+            app.UseAuthentication();
             app.UseAuthorization();
             
-            app.UseJwtToken(null);//!!!!!
+           app.UseJwtToken(new TestUserGetter() ); // Jwt Middleware
             
             app.UseEndpoints(endpoints =>
             {
