@@ -57,12 +57,18 @@ class _ElementCardState extends State<ElementCard> {
                 ],
               ),
             ),
-            Container(
-              padding: EdgeInsets.fromLTRB(5, 10, 10, 10),
-              alignment: Alignment.centerRight,
-              child: Icon(
-                CommunityMaterialIcons.more,
-                color: element.isLocked ? Color(0xff1DCDFE) : Colors.blueGrey,
+            GestureDetector(
+              onTap: () {
+                
+              },
+              child: Container(
+                padding: EdgeInsets.fromLTRB(5, 10, 10, 10),
+                alignment: Alignment.centerRight,
+                child: Icon(
+                  CommunityMaterialIcons.more,
+                  color:
+                      !element.isLocked ? Color(0xff1DCDFE) : Colors.blueGrey,
+                ),
               ),
             ),
           ],
