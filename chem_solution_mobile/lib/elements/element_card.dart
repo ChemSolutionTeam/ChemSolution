@@ -59,7 +59,54 @@ class _ElementCardState extends State<ElementCard> {
             ),
             GestureDetector(
               onTap: () {
-                
+                if(!element.isLocked){
+
+                } else{
+                   showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  elevation: 24,
+                                  title: Text(
+                                    'Увага!',
+                                    style: TextStyle(
+                                      color: Color(0xff2F455C),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  content: Text(
+                                    'Для детального перегляду інформації необхідно авторизуватися. Зробити це зараз?',
+                                    style: TextStyle(
+                                      color: Color(0xff2F455C),
+                                    ),
+                                  ),
+                                  actions: [
+                                    // ignore: deprecated_member_use
+                                    FlatButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text(
+                                          'Ні',
+                                          style: TextStyle(color: Colors.red),
+                                        )),
+                                    // ignore: deprecated_member_use
+                                    FlatButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text(
+                                        'Так',
+                                        style: TextStyle(
+                                            color: Color(0xff1DCDFE),
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                              barrierDismissible: true);
+                }
               },
               child: Container(
                 padding: EdgeInsets.fromLTRB(5, 10, 10, 10),

@@ -56,13 +56,13 @@ class _BlogCardState extends State<BlogCard> {
                         'Детальніше...',
                         //'${post.liked.toString()}',
                         style: TextStyle(
-                          color: post.isLocked
+                          color: !post.isLocked
                               ? Color(0xff1DCDFE)
                               : Colors.blueGrey,
                         ),
                       ),
                       onTap: () {
-                        if (!post.isLocked) {
+                        if (post.isLocked) {
                           showDialog(
                               context: context,
                               builder: (context) {
