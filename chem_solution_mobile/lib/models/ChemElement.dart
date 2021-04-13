@@ -1,6 +1,6 @@
 import 'Model.dart';
 
-class Element extends Model {
+class ChemElement extends Model {
   int idElement;
   String symbol;
   String name;
@@ -16,8 +16,10 @@ class Element extends Model {
   double boilingTemperature;
   bool isLocked;
   String info;
+  Map<String, String> images;
+  List<String> valence = [];
 
-  Element({
+  ChemElement({
     this.idElement,
     this.symbol,
     this.name,
@@ -33,7 +35,17 @@ class Element extends Model {
     this.boilingTemperature,
     this.isLocked,
     this.info,
+    this.images,
+    this.valence,
   });
+
+  String getValence() {
+    String _valence;
+    for (String val in valence) {
+      _valence += val + " ";
+    }
+    return _valence;
+  }
 
   @override
   Map<String, dynamic> toMap() {
