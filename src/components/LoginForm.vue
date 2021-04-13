@@ -29,10 +29,6 @@ export default {
 </script>
 
 <style>
-@font-face {
-  font-family: 'Century Gothic';
-  src: url('/public/CenturyGothic.ttf');
-}
 form {
   font-family: 'Century Gothic', serif;
 }

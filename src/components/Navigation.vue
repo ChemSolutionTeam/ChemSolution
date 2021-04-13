@@ -1,5 +1,7 @@
 <template>
-  <nav class="flex items-center justify-between flex-wrap bg-csblack p-2">
+  <nav
+    class="flex items-center justify-between flex-wrap bg-csblack p-2 mb-5 shadow-lg"
+  >
     <div class="flex items-center flex-shrink-0 text-white ml-3 mr-6">
       <svg
         width="75"
@@ -48,7 +50,9 @@
         </svg>
       </button>
     </div>
-    <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+    <div
+      class="w-full h-full block flex-grow lg:flex lg:items-center lg:mr-6 lg:ml-9 lg:w-auto"
+    >
       <div class="text-lg lg:flex-grow flex justify-start">
         <a
           href="#responsive-header"
@@ -71,9 +75,15 @@
       </div>
       <div>
         <a
+          href="#responsive-header"
+          class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-cslightgreen"
+        >
+          Авторизуватися
+        </a>
+        <a
           href="#"
-          class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
-          >Download</a
+          class="inline-block ml-6 h-10 text-lg items-center bg-gradient-to-t from-csgreen to-cslightgreen px-4 py-2 leading-none border rounded text-csblack border-csgreen hover:border-transparent mt-4 lg:mt-0"
+          >Зареєструватися</a
         >
       </div>
     </div>
@@ -107,5 +117,9 @@ export default {
   stroke-miterlimit: 10;
   stroke-width: 5px;
   font-family: ColonnaMT, Colonna MT;
+}
+nav {
+  font-family: 'Century Gothic', serif;
+  font-weight: 700;
 }
 </style>
