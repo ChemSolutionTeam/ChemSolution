@@ -35,12 +35,14 @@ class _BlogCardState extends State<BlogCard> {
               ),
               Row(
                 children: [
-                  Text(
-                    '${post.title}',
-                    style: TextStyle(
-                        fontSize: 20.0,
-                        color: Color(0xff2F455C),
-                        fontWeight: FontWeight.w400),
+                  Flexible(
+                    child: Text(
+                      '${post.title}',
+                      style: TextStyle(
+                          fontSize: 20.0,
+                          color: Color(0xff2F455C),
+                          fontWeight: FontWeight.w400),
+                    ),
                   ),
                 ],
               ),
@@ -54,7 +56,9 @@ class _BlogCardState extends State<BlogCard> {
                         'Детальніше...',
                         //'${post.liked.toString()}',
                         style: TextStyle(
-                        color: post.isLocked ? Color(0xff1DCDFE) : Colors.blueGrey,
+                          color: post.isLocked
+                              ? Color(0xff1DCDFE)
+                              : Colors.blueGrey,
                         ),
                       ),
                       onTap: () {
@@ -64,9 +68,19 @@ class _BlogCardState extends State<BlogCard> {
                               builder: (context) {
                                 return AlertDialog(
                                   elevation: 24,
-                                  title: Text('Увага!'),
+                                  title: Text(
+                                    'Увага!',
+                                    style: TextStyle(
+                                      color: Color(0xff2F455C),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                   content: Text(
-                                      'Для детального перегляду інформації необхідно зарєєструватися. Зробити це зараз?'),
+                                    'Для детального перегляду інформації необхідно авторизуватися. Зробити це зараз?',
+                                    style: TextStyle(
+                                      color: Color(0xff2F455C),
+                                    ),
+                                  ),
                                   actions: [
                                     // ignore: deprecated_member_use
                                     FlatButton(
@@ -79,12 +93,16 @@ class _BlogCardState extends State<BlogCard> {
                                         )),
                                     // ignore: deprecated_member_use
                                     FlatButton(
-                                        onPressed: () {},
-                                        child: Text(
-                                          'Так',
-                                          style: TextStyle(
-                                              color: Color(0xff1DCDFE)),
-                                        )),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text(
+                                        'Так',
+                                        style: TextStyle(
+                                            color: Color(0xff1DCDFE),
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                    ),
                                   ],
                                 );
                               },

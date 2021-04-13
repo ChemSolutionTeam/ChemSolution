@@ -28,8 +28,13 @@ class _BlogsState extends State<Blogs> {
         category: 'News',
         img:
             'https://res.cloudinary.com/grand-canyon-university/image/fetch/w_750,h_564,c_fill,g_faces/https://www.gcu.edu/sites/default/files/media/images/Blog/engineering-and-technology/chemistry-materials.jpg',
-        information:
-            'information2\ninformation2\ninformation2\ninformation2\ninformation2\ninformation2\n',
+        information: '''
+information2\ninformation2\ninformation2information2information2
+information2information2information2information2information2
+information2information2information2information2information2
+information2information2information2information2information2
+information2information2information2
+information2\ninformation2\ninformation2\ninformation2\n''',
         isLocked: true,
         liked: false),
     new BlogPost(
