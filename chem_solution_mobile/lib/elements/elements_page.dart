@@ -41,6 +41,7 @@ class _ElementsState extends State<Elements> {
   Widget build(BuildContext context) {
     return Container(
       child: ListView.builder(
+        shrinkWrap: true,
         itemBuilder: (BuildContext context, int index) {
           return ElementCard(element: elements[index]);
         },

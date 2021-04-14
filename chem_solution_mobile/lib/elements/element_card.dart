@@ -3,6 +3,7 @@ import 'package:chem_solution_mobile/main.dart';
 import 'package:chem_solution_mobile/models/ChemElement.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class ElementCard extends StatefulWidget {
   final ChemElement element;
@@ -29,7 +30,7 @@ class _ElementCardState extends State<ElementCard> {
           ),
           Container(
               child: Text(
-            value,
+            value + " ",
             style: TextStyle(
                 color: Color(0xff2F455C),
                 fontSize: 16,
@@ -38,7 +39,7 @@ class _ElementCardState extends State<ElementCard> {
         ],
       ),
     );
-  } 
+  }
 
   Widget _titleText(String name) {
     return Container(
@@ -65,48 +66,9 @@ class _ElementCardState extends State<ElementCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-      child: Card(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              padding: EdgeInsets.fromLTRB(10, 10, 5, 10),
-              alignment: Alignment.centerLeft,
-              child: Image.network(
-                element.imgSymbol,
-                height: 100,
-              ),
-            ),
-            Container(
-              alignment: Alignment.centerLeft,
-              padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
-              child: Wrap(
-                direction: Axis.vertical,
-                children: [
-                  _rowInfo('Порядковий номер: ', '${element.idElement}'),
-                  _rowInfo('Позначення: ', '${element.symbol}'),
-                  _rowInfo('Назва: ', '${element.name}'),
-                  _rowInfo('Категорія: ', '${element.category}'),
-                  _rowInfo('Атомна маса: ', '${element.atomicWeight}'),
-                  _rowInfo('Валентність: ', '${element.getValence()}'), 
-                 /* _titleText('Порядковий номер: '),
-                  _valueText('${element.idElement}'),
-                  _titleText('Позначення: '),
-                  _valueText('${element.symbol}'),
-                  _titleText('Назва: '),
-                  _valueText('${element.name}'),
-                  _titleText('Категорія: '),
-                  _valueText('${element.category}'),
-                  _titleText('Атомна маса: '),
-                  _valueText('${element.atomicWeight}'),
-                  _titleText('Валентність: '),
-                  _valueText('${element.getValence()}'), */
-                ],
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
+      padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
+      child: GestureDetector(
+        onTap: () {
                 if (autorized) {
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -162,17 +124,46 @@ class _ElementCardState extends State<ElementCard> {
                       barrierDismissible: true);
                 }
               },
-              child: Container(
-                padding: EdgeInsets.fromLTRB(5, 10, 10, 10),
-                alignment: Alignment.centerRight,
-                child: Icon(
-                  CommunityMaterialIcons.more,
-                  color:
-                      !element.isLocked ? Color(0xff1DCDFE) : Colors.blueGrey,
+        child: Card(
+          elevation: 5,
+          child: Container(
+            padding: EdgeInsets.all(10),
+            child: new StaggeredGridView.count(
+              shrinkWrap: true,
+              crossAxisCount: 4,
+              staggeredTiles: [
+                const StaggeredTile.count(1, 2),
+                const StaggeredTile.count(3, 2),
+              ],
+              mainAxisSpacing: 1.0,
+              crossAxisSpacing: 5.0,
+              padding: const EdgeInsets.all(4.0),
+              children: [
+                Container(
+                  alignment: Alignment.centerRight,
+                  child: Image.network(
+                    element.imgSymbol,
+                    height: 100,
+                  ),
                 ),
-              ),
+                Container(
+                  padding: EdgeInsets.only(left: 10),
+                  alignment: Alignment.centerLeft,
+                  child: Wrap(
+                    direction: Axis.horizontal,
+                    children: [
+                      _rowInfo('Порядковий номер: ', '${element.idElement}'),
+                      _rowInfo('Позначення: ', '${element.symbol}'),
+                      _rowInfo('Назва: ', '${element.name}'),
+                      _rowInfo('Категорія: ', '${element.category}'),
+                      _rowInfo('Атомна маса: ', '${element.atomicWeight}'),
+                      _rowInfo('Валентність: ', '${element.getValence()}'),
+                    ],
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
