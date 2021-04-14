@@ -1,7 +1,6 @@
 import 'package:chem_solution_mobile/elements/element_info.dart';
 import 'package:chem_solution_mobile/main.dart';
 import 'package:chem_solution_mobile/models/ChemElement.dart';
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -15,7 +14,7 @@ class ElementCard extends StatefulWidget {
 
 class _ElementCardState extends State<ElementCard> {
   ChemElement element;
-
+  Color _colorCard = Colors.white;
   _ElementCardState(this.element);
 
   Widget _rowInfo(String name, String value) {
@@ -41,90 +40,79 @@ class _ElementCardState extends State<ElementCard> {
     );
   }
 
-  Widget _titleText(String name) {
-    return Container(
-      child: Text(
-        name,
-        style: TextStyle(color: Color(0xff2F455C), fontSize: 16),
-      ),
-    );
-  }
-
-  Widget _valueText(String value) {
-    return Container(
-      child: Text(
-        value,
-        style: TextStyle(
-          color: Color(0xff2F455C),
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
       child: GestureDetector(
         onTap: () {
-                if (autorized) {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => ElementInfo(
-                        element: element,
+          if (autorized) {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => ElementInfo(
+                  element: element,
+                ),
+              ),
+            );
+          } else {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    elevation: 24,
+                    title: Text(
+                      'Увага!',
+                      style: TextStyle(
+                        color: Color(0xff2F455C),
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
+                    content: Text(
+                      'Для детального перегляду інформації необхідно авторизуватися. Зробити це зараз?',
+                      style: TextStyle(
+                        color: Color(0xff2F455C),
+                      ),
+                    ),
+                    actions: [
+                      // ignore: deprecated_member_use
+                      FlatButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text(
+                            'Ні',
+                            style: TextStyle(color: Colors.red),
+                          )),
+                      // ignore: deprecated_member_use
+                      FlatButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(
+                          'Так',
+                          style: TextStyle(
+                              color: Color(0xff1DCDFE),
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                    ],
                   );
-                } else {
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          elevation: 24,
-                          title: Text(
-                            'Увага!',
-                            style: TextStyle(
-                              color: Color(0xff2F455C),
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          content: Text(
-                            'Для детального перегляду інформації необхідно авторизуватися. Зробити це зараз?',
-                            style: TextStyle(
-                              color: Color(0xff2F455C),
-                            ),
-                          ),
-                          actions: [
-                            // ignore: deprecated_member_use
-                            FlatButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: Text(
-                                  'Ні',
-                                  style: TextStyle(color: Colors.red),
-                                )),
-                            // ignore: deprecated_member_use
-                            FlatButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: Text(
-                                'Так',
-                                style: TextStyle(
-                                    color: Color(0xff1DCDFE),
-                                    fontWeight: FontWeight.w700),
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                      barrierDismissible: true);
-                }
-              },
+                },
+                barrierDismissible: true);
+          }
+        },
+        onTapDown: (details) {
+          setState(() {
+            _colorCard = Color(0xff21D0B2);
+          });
+        },
+        onTapUp: (details) {
+          setState(() {
+            _colorCard = Colors.white;
+          });
+        },
         child: Card(
+          color: _colorCard,
           elevation: 5,
           child: Container(
             padding: EdgeInsets.all(10),
