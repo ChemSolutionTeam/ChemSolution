@@ -13,6 +13,8 @@ class BlogCard extends StatefulWidget {
 
 class _BlogCardState extends State<BlogCard> {
   BlogPost post;
+  Color _colorLocked = Colors.blueGrey;
+  Color _colorNonLocked = Color(0xff1dcdfe);
 
   _BlogCardState(this.post);
 
@@ -56,11 +58,28 @@ class _BlogCardState extends State<BlogCard> {
                         'Детальніше...',
                         //'${post.liked.toString()}',
                         style: TextStyle(
-                          color: !post.isLocked
-                              ? Color(0xff1DCDFE)
-                              : Colors.blueGrey,
+                          color:
+                              !post.isLocked ? _colorNonLocked : _colorLocked,
                         ),
                       ),
+                      onTapDown: (details) {
+                        setState(() {
+                          if (post.isLocked) {
+                            _colorLocked = Color(0xff21D0B2);
+                          } else {
+                            _colorNonLocked = Color(0xff21D0B2);
+                          }
+                        });
+                      },
+                      onTapUp: (details) {
+                        setState(() {
+                           if (post.isLocked) {
+                            _colorLocked = Colors.blueGrey;
+                          } else {
+                            _colorNonLocked = Color(0xff1dcdfe);
+                          }
+                        });
+                      },
                       onTap: () {
                         if (post.isLocked) {
                           showDialog(
