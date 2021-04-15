@@ -14,22 +14,53 @@
         type="password"
         placeholder="Уведіть пароль"
       ></BaseInput>
-      <div>
-        <input type="checkbox" id="checkbox" class="ml-3" v-model="checked">
-        <label for="checkbox"> Запам'ятати мене</label>
+
+      <div class="flex items-start ml-1">
+        <div class="flex items-center h-6">
+          <input
+            id="comments"
+            name="comments"
+            type="checkbox"
+            class="focus:ring-cslightgreen border-2 m-2 h-4 w-4 text-csgreen border-csblack-300 rounded"
+          />
+        </div>
+        <div class="ml-1 h-6 text-sm">
+          <label for="comments" class="text-lg text-gray-700"
+            >Запам'ятати мене</label
+          >
+        </div>
       </div>
-      <button id="sign-in" class="button-enter w-11/12 ml-3 m-5">Увійти</button><br>
-      <hr class="m-3 w-11/12">
-      <button id="google-sign-in" class="button-enter w-11/12 ml-3 m-5"><i class="fab fa-google mr-3"></i>Увійти з Google</button>
-      <button id="facebook-sign-in" class="button-enter w-11/12 ml-3 mt-0 m-5"><i class="fab fa-facebook mr-3"></i>Увійти з Facebook</button><br>
-      <hr class="m-3 w-11/12">
+
+      <button
+        id="sign-in"
+        class="shadow-lg p-3 border border-grey-300 bg-csblue button-enter w-11/12 ml-3 m-5 focus:outline-none focus:ring-4 focus:ring-csgreen"
+      >
+        Увійти
+      </button>
+
+      <hr class="m-3 w-11/12" />
+
+      <button
+        id="google-sign-in"
+        class="shadow-lg p-3 border border-grey-300 button-enter w-11/12 ml-3 m-5 text-xl"
+      >
+        <i class="fab fa-google mr-3 transform scale-150"></i>Увійти з Google
+      </button>
+
+      <button
+        id="facebook-sign-in"
+        class="shadow-lg border p-3 border-grey-300 button-enter w-11/12 ml-3 mt-0 m-5 text-xl"
+      >
+        <i class="fab fa-facebook mr-3 transform scale-150"></i>Увійти з
+        Facebook
+      </button>
+
+      <hr class="m-3 w-11/12" />
       <div class="w-11/12 text-center">
-      <div class = "mb-3 mt-3">
-      <a href="" class="link mb-7">Забули пароль?</a><br>
-      </div>
-      <div>
-      <a href="" class="link">Створити аккаунт</a><br>
-      </div>
+        <div class="mb-3 mt-3">
+          <a href="" class="link mb-7">Забули пароль?</a>
+        </div>
+        <div><a href="" class="link">Створити аккаунт</a></div>
       </div>
     </form>
   </div>
@@ -66,16 +97,11 @@ form {
   font-weight: bolder;
 }
 
-#sign-in {
-  background-color: #169BD5;
-}
-
 #google-sign-in {
-  background-color: #EA4335;
+  background-color: #ea4335;
 }
 
 #facebook-sign-in {
-  background-color: #4064AC;
+  background-color: #4064ac;
 }
-
 </style>
