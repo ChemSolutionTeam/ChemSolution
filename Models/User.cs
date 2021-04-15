@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ChemSolution.Models
@@ -17,5 +18,6 @@ namespace ChemSolution.Models
         public int Rating { set; get; } = 0;
         [Range(0, int.MaxValue)]
         public int Honesty { set; get; } = 0;
+        public List<BlogPost> BlogPosts { set; get; } = new List<BlogPost>();
     }
 }
