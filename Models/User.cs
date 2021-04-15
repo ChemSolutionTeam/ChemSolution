@@ -19,5 +19,10 @@ namespace ChemSolution.Models
         [Range(0, int.MaxValue)]
         public int Honesty { set; get; } = 0;
         public List<BlogPost> BlogPosts { set; get; } = new List<BlogPost>();
+        public List<Achievement> Achievement { set; get; } = new List<Achievement>();
+        public List<Element> Elements { set; get; } = new List<Element>();
+        public List<Request> Requests { set; get; } = new List<Request>();
+        public List<ResearchHistory> ResearchHistorys { set; get; } = new List<ResearchHistory>();
+        public List<Material> Materials { set; get; } = new List<Material>();
     }
 }

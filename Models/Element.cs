@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ChemSolution.Models
@@ -6,7 +7,7 @@ namespace ChemSolution.Models
     public class Element
     {
         [Key]
-        public int Id { get; set; }
+        public int ElementId { get; set; }
         [StringLength(5, MinimumLength = 1)]
         public string Symbol { get; set; }
         [StringLength(50, MinimumLength = 1)]
@@ -37,5 +38,9 @@ namespace ChemSolution.Models
         public string ImgAtom { get; set; }
         [Range(0, int.MaxValue)]
         public int Group { get; set; }
+        List<User> Users { get; set; } = new List<User>();
+        public List<ElementMaterial> ElementMaterials { set; get; } = new List<ElementMaterial>();
+        public List<Material> Materials { get; set; } = new List<Material>();
+        public List<Valence> Valences { get; set; } = new List<Valence>();
     }
 }

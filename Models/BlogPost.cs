@@ -12,6 +12,6 @@ namespace ChemSolution.Models
         public string Information { set; get; }
         public string Image { set; get; }
         public bool IsLocked { set; get; }
-        public List<User> Users { set; get; }
+        public List<User> Users { set; get; } = new List<User>();
     }
 }
