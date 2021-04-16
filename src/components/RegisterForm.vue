@@ -1,121 +1,128 @@
 <template>
-  <div
-      class="box m-5 pl-12 p-3 pb-16 text-left w-6/12 bg-white border-csblack shadow-2xl border rounded-lg">
-    <form>
-      <div class="column w-8/12 mt-4">
-        <h3 class="text-4xl text-center heading pb-5">Реєстрація</h3>
-        <div class="column w-6/12">
-          <BaseInput
+  <div class="flex items-start inset-0 my-4 shadow-lg max-w-6xl mx-auto">
+    <div
+      class="box self-center pl-12 p-3 pb-16 text-left w-full bg-white border-csblack shadow-2xl border rounded-lg"
+    >
+      <form>
+        <div class="column w-8/12 mt-4">
+          <h3 class="text-4xl text-center heading pb-5">Реєстрація</h3>
+          <div class="column w-6/12">
+            <BaseInput
               label="Email"
               type="email"
               placeholder="Уведіть E-mail"
-              isMultiline=true
-          ></BaseInput>
-          <BaseInput
+              isMultiline="true"
+            ></BaseInput>
+            <BaseInput
               label="Пароль"
               type="password"
               placeholder="Уведіть пароль"
-              isMultiline=true
-          ></BaseInput>
-          <BaseInput
+              isMultiline="true"
+            ></BaseInput>
+            <BaseInput
               label="Дата народження"
               type="date"
-              isMultiline=true
-          ></BaseInput>
-        </div>
-        <div class="column w-6/12">
-          <BaseInput
+              isMultiline="true"
+            ></BaseInput>
+          </div>
+          <div class="column w-6/12">
+            <BaseInput
               label="Ім'я користувача"
               type="password"
               placeholder="Уведіть ваше ім'я"
-              isMultiline=true
-          ></BaseInput>
-          <BaseInput
+              isMultiline="true"
+            ></BaseInput>
+            <BaseInput
               label="Підтвердження паролю"
               type="password"
               placeholder="Уведіть пароль"
-              isMultiline=true
-          ></BaseInput>
-
-        </div>
-
-        <div class="column">
-          <div class="flex items-start ml-1 mt-3">
-            <div class="flex items-center h-16">
-              <input
+              isMultiline="true"
+            ></BaseInput>
+          </div>
+          <div class="column">
+            <div class="flex items-start ml-1 mt-3">
+              <div class="flex items-center h-16">
+                <input
                   id="personalData"
                   name="personalData"
                   type="checkbox"
                   class="focus:ring-cslightgreen border-2 m-2 h-4 w-4 text-csgreen border-csblack-300 rounded"
-              />
+                />
+              </div>
+              <div class="ml-1 h-6 text-sm">
+                <label for="personalData" class="text-lg text-gray-700">
+                  Я даю згоду на обробку персональних даних та погоджуюсь із
+                  правилами користування сервісом
+                </label>
+              </div>
             </div>
-            <div class="ml-1 h-6 text-sm">
-              <label for="personalData" class="text-lg text-gray-700">
-                Я даю згоду на обробку персональних даних та погоджуюсь із правилами користування сервісом
-              </label>
+
+            <div class="flex items-start ml-1 mt-3">
+              <div class="flex items-center h-6">
+                <input
+                  id="correctData"
+                  name="correctData"
+                  type="checkbox"
+                  class="focus:ring-cslightgreen border-2 m-2 h-4 w-4 text-csgreen border-csblack-300 rounded"
+                />
+              </div>
+              <div class="ml-1 h-6 text-sm">
+                <label for="correctData" class="text-lg text-gray-700">
+                  Я підтверджую достовірність внесених даних
+                </label>
+              </div>
             </div>
           </div>
-
-          <div class="flex items-start ml-1 mt-3">
-          <div class="flex items-center h-6">
-            <input
-                id="correctData"
-                name="correctData"
-                type="checkbox"
-                class="focus:ring-cslightgreen border-2 m-2 h-4 w-4 text-csgreen border-csblack-300 rounded"
+        </div>
+        <!-- <div class="column w-[3.23rem] v-line"> </div> -->
+        <div class="column w-4/12 mt-4">
+          <div class="image-holder mb-5">
+            <img
+              id="logoOnPage"
+              src="ChemSolutionLogo.svg"
+              alt="ChemSolution logo"
             />
           </div>
-          <div class="ml-1 h-6 text-sm">
-            <label for="correctData" class="text-lg text-gray-700">
-              Я підтверджую достовірність внесених даних
-            </label>
-          </div>
-        </div>
-
-        </div>
-      </div>
-      <!-- <div class="column w-[3.23rem] v-line"> </div> -->
-      <div class="column w-4/12 mt-4">
-        <div class="image-holder mb-5">
-            <img id="logoOnPage" src="ChemSolutionLogo.svg" alt="ChemSolution logo">
-        </div>
-        <button
+          <button
             id="sign-in"
-            class="shadow-lg p-3 border border-grey-300 bg-csblue button-enter w-11/12 ml-3 m-5 focus:outline-none focus:ring-4 focus:ring-csgreen">
-          Створити акаунт
-        </button>
-        <hr class="mt-3 mb-3">
+            class="shadow-lg p-3 border border-grey-300 bg-csblue button-enter w-11/12 ml-3 m-5 focus:outline-none focus:ring-4 focus:ring-csgreen"
+          >
+            Створити акаунт
+          </button>
+          <hr class="mt-3 mb-3" />
 
-        <button
+          <button
             id="google-sign-in"
             class="shadow-lg p-3 border border-grey-300 button-enter w-11/12 ml-3 m-5 sm:text-xl"
-        >
-          <i class="fab fa-google mr-3 transform scale-200"></i>Зареєструватися з Google
-        </button>
+          >
+            <i class="fab fa-google mr-3 transform scale-200"></i
+            >Зареєструватися з Google
+          </button>
 
-        <button
+          <button
             id="facebook-sign-in"
             class="shadow-lg border p-3 border-grey-300 button-enter w-11/12 ml-3 mt-0 m-5 text-xl"
-        >
-          <i class="fab fa-facebook mr-3 transform scale-200"></i>Зареєструватися з
-          Facebook
-        </button>
-        <hr class="mt-3 mb-3">
-        <div class="text-center">
-          <div class="mb-3 mt-3">
-            <a href="" class="link mb-7">Вже є акаунт?</a>
+          >
+            <i class="fab fa-facebook mr-3 transform scale-200"></i
+            >Зареєструватися з Facebook
+          </button>
+          <hr class="mt-3 mb-3" />
+          <div class="text-center">
+            <div class="mb-3 mt-3">
+              <a href="" class="link mb-7">Вже є акаунт?</a>
+            </div>
+            <div><a href="" class="link">Увійти</a></div>
           </div>
-          <div><a href="" class="link">Увійти</a></div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
 </template>
 
 <script>
 import BaseInput from '@/components/BaseInput.vue'
 export default {
-  name: 'LoginForm',
+  name: 'RegisterForm',
   components: {
     BaseInput,
   },
@@ -152,7 +159,7 @@ form {
 }
 
 .column {
-  display:inline-block;
+  display: inline-block;
   vertical-align: top;
 }
 

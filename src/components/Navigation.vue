@@ -65,52 +65,90 @@
         >
           Авторизуватися
         </button>
-        <a
-          href="#"
+        <button
+          @click="openRegisterForm()"
           class="inline-block ml-6 h-10 text-lg items-center bg-gradient-to-t from-csgreen to-cslightgreen px-4 py-2 leading-none border rounded text-csblack border-csgreen hover:border-transparent mt-4 lg:mt-0"
-          >Зареєструватися</a
         >
+          Зареєструватися
+        </button>
       </div>
     </div>
   </nav>
-
-  <transition name="bounce">
-    <div
-      class="inset-0 fixed pt-20 w-full h-full"
-      v-show="isLoginShown"
-      @click="closeLoginForm"
-    >
+  <div
+    class="inset-0 fixed pt-20 w-full h-full bg-csblack bg-opacity-50"
+    v-show="isLoginBackgroundShown"
+    @click="closeLoginForm"
+  >
+    <transition name="bounce">
       <LoginForm
         @mouseleave="isMouseOut = true"
         @mouseover="isMouseOut = false"
+        v-show="isLoginShown"
       />
-    </div>
-  </transition>
+    </transition>
+  </div>
+  <div
+    class="inset-0 fixed pt-20 w-full h-full bg-csblack bg-opacity-50"
+    v-show="isRegisterBackgroundShown"
+    @click="closeRegisterForm"
+  >
+    <transition name="bounce">
+      <RegisterForm
+        @mouseleave="isMouseOut = true"
+        @mouseover="isMouseOut = false"
+        v-show="isRegisterShown"
+      />
+    </transition>
+  </div>
 </template>
 
 <script>
 import Link from '../components/NavigationLink.vue'
 import LoginForm from '../components/LoginForm.vue'
+import RegisterForm from '../components/RegisterForm.vue'
+
 export default {
   name: 'Navigation',
-  components: { Link, LoginForm },
+  components: { Link, LoginForm, RegisterForm },
   data() {
     return {
       isMouseOut: true,
       isLoginShown: false,
+      isRegisterShown: false,
+      isLoginBackgroundShown: false,
+      isRegisterBackgroundShown: false,
     }
   },
   methods: {
     openLoginForm() {
       console.log('Open LoginForm')
+      this.isLoginBackgroundShown = true
       this.isLoginShown = true
     },
     closeLoginForm() {
       if (this.isMouseOut) {
         this.isLoginShown = false
+        setTimeout(this.hideBG, 500)
 
         console.log('Close LoginForm')
       }
+    },
+    openRegisterForm() {
+      console.log('Open LoginForm')
+      this.isRegisterBackgroundShown = true
+      this.isRegisterShown = true
+    },
+    closeRegisterForm() {
+      if (this.isMouseOut) {
+        this.isRegisterShown = false
+        setTimeout(this.hideBG, 500)
+
+        console.log('Close RegisterForm')
+      }
+    },
+    hideBG() {
+      this.isLoginBackgroundShown = false
+      this.isRegisterBackgroundShown = false
     },
   },
 }
@@ -141,7 +179,9 @@ nav {
   font-family: 'Century Gothic', serif;
   font-weight: 700;
 }
-
+button {
+  font-weight: 700;
+}
 .bounce-enter-active {
   animation: bounce-in 0.5s;
 }
