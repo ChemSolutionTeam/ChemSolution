@@ -92,7 +92,7 @@ form {
 }
 
 .link {
-  padding-bottom: 50%;
+  padding-bottom: 1px;
   font-size: larger;
   font-weight: bolder;
 }

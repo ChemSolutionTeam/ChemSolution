@@ -77,7 +77,7 @@
       <!-- <div class="column w-[3.23rem] v-line"> </div> -->
       <div class="column w-4/12 mt-4">
         <div class="image-holder mb-5">
-            <img id="logoOnPage" src="ChemSolutionLogo.svg">
+            <img id="logoOnPage" src="ChemSolutionLogo.svg" alt="ChemSolution logo">
         </div>
         <button
             id="sign-in"
@@ -101,7 +101,7 @@
           Facebook
         </button>
         <hr class="mt-3 mb-3">
-        <div class="w-11/12 text-center">
+        <div class="text-center">
           <div class="mb-3 mt-3">
             <a href="" class="link mb-7">Вже є акаунт?</a>
           </div>
@@ -146,7 +146,7 @@ form {
 }
 
 .link {
-  padding-bottom: 50%;
+  padding-bottom: 1px;
   font-size: larger;
   font-weight: bolder;
 }
