@@ -1,18 +1,13 @@
 <template>
   <div class="home">
     <!-- <img alt="Vue logo" src="../assets/logo.png" /> -->
-    <LoginForm msg="Welcome to Your Vue.js App" />
+    <h1>H</h1>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import LoginForm from "@/components/LoginForm.vue";
-
 export default {
-  name: "Home",
-  components: {
-    LoginForm,
-  },
-};
+  name: 'Home',
+  components: {},
+}
 </script>

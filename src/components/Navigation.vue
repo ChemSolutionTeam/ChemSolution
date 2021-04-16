@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="flex items-center justify-between flex-wrap bg-csblack p-2 mb-5 shadow-lg"
+    class="flex items-center justify-between flex-wrap bg-csblack p-2 mb-0 shadow-lg"
   >
     <div class="flex items-center flex-shrink-0 text-white ml-3 mr-6">
       <svg
@@ -59,12 +59,12 @@
         <Link :isCurrent="true" />
       </div>
       <div>
-        <a
-          href="#responsive-header"
+        <button
           class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-cslightgreen"
+          @click="openLoginForm()"
         >
           Авторизуватися
-        </a>
+        </button>
         <a
           href="#"
           class="inline-block ml-6 h-10 text-lg items-center bg-gradient-to-t from-csgreen to-cslightgreen px-4 py-2 leading-none border rounded text-csblack border-csgreen hover:border-transparent mt-4 lg:mt-0"
@@ -73,13 +73,46 @@
       </div>
     </div>
   </nav>
+
+  <transition name="bounce">
+    <div
+      class="inset-0 fixed pt-20 w-full h-full"
+      v-show="isLoginShown"
+      @click="closeLoginForm"
+    >
+      <LoginForm
+        @mouseleave="isMouseOut = true"
+        @mouseover="isMouseOut = false"
+      />
+    </div>
+  </transition>
 </template>
 
 <script>
 import Link from '../components/NavigationLink.vue'
+import LoginForm from '../components/LoginForm.vue'
 export default {
   name: 'Navigation',
-  components: { Link },
+  components: { Link, LoginForm },
+  data() {
+    return {
+      isMouseOut: true,
+      isLoginShown: false,
+    }
+  },
+  methods: {
+    openLoginForm() {
+      console.log('Open LoginForm')
+      this.isLoginShown = true
+    },
+    closeLoginForm() {
+      if (this.isMouseOut) {
+        this.isLoginShown = false
+
+        console.log('Close LoginForm')
+      }
+    },
+  },
 }
 </script>
 
@@ -107,5 +140,23 @@ export default {
 nav {
   font-family: 'Century Gothic', serif;
   font-weight: 700;
+}
+
+.bounce-enter-active {
+  animation: bounce-in 0.5s;
+}
+.bounce-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 </style>
