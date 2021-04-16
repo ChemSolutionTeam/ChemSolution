@@ -51,6 +51,25 @@ class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
     });
   }
 
+  static AppBar _appBar = AppBar(
+    backgroundColor: Color(0xff2F455C),
+    title: ListTile(
+      leading: Image.asset(
+        'assets/images/logo2.png',
+        width: 40.0,
+        height: 40.0,
+      ),
+    
+      title: Text(
+        'ChemSolution',
+        style: TextStyle(
+            color: Color(0xff21D0B2),
+            fontWeight: FontWeight.bold,
+            fontSize: 24.0),
+      ),
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -67,23 +86,7 @@ class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
       },
       child: Scaffold(
         backgroundColor: Color(0xffEBFAFF),
-        appBar: AppBar(
-          backgroundColor: Color(0xff2F455C),
-          title: ListTile(
-            leading: Image.asset(
-              'assets/images/logo2.png',
-              width: 40.0,
-              height: 40.0,
-            ),
-            title: Text(
-              'ChemSolution',
-              style: TextStyle(
-                  color: Color(0xff21D0B2),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24.0),
-            ),
-          ),
-        ),
+        appBar: _appBar,
         body: _widgetOptions.elementAt(_selectedIndex),
         bottomNavigationBar: Theme(
           data: Theme.of(context).copyWith(canvasColor: Color(0xff2F455C)),
