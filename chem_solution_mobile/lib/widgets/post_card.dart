@@ -2,6 +2,8 @@ import 'package:chem_solution_mobile/models/BlogPost.dart';
 import 'package:chem_solution_mobile/widgets/post_info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:community_material_icon/community_material_icon.dart';
 
 class BlogCard extends StatefulWidget {
   final BlogPost post;
@@ -15,6 +17,53 @@ class _BlogCardState extends State<BlogCard> {
   BlogPost post;
   Color _colorLocked = Colors.blueGrey;
   Color _colorNonLocked = Color(0xff1dcdfe);
+
+  FToast fToast;
+
+  @override
+  void initState() {
+    super.initState();
+    fToast = FToast();
+    fToast.init(context);
+  }
+
+  _showToast(String msg, Color back, Color text, IconData icon) {
+    Widget toast = Container(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25.0),
+        color: back,
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            icon,
+            color: text,
+          ),
+          SizedBox(
+            width: 12.0,
+          ),
+          Text(
+            msg,
+            style: TextStyle(color: text),
+          ),
+        ],
+      ),
+    );
+
+    // Custom Toast Position
+    fToast.showToast(
+        child: toast,
+        toastDuration: Duration(milliseconds: 700),
+        positionedToastBuilder: (context, child) {
+          return Positioned(
+            child: child,
+            bottom: MediaQuery.of(context).size.height * 0.1,
+            left: MediaQuery.of(context).size.width * 0.2,
+          );
+        });
+  }
 
   _BlogCardState(this.post);
 
@@ -73,7 +122,7 @@ class _BlogCardState extends State<BlogCard> {
                       },
                       onTapUp: (details) {
                         setState(() {
-                           if (post.isLocked) {
+                          if (post.isLocked) {
                             _colorLocked = Colors.blueGrey;
                           } else {
                             _colorNonLocked = Color(0xff1dcdfe);
@@ -146,6 +195,13 @@ class _BlogCardState extends State<BlogCard> {
                         setState(() {
                           post.liked = !post.liked;
                         });
+                        if (post.liked) {
+                          _showToast('Додано до обраних', Colors.greenAccent,
+                              Color(0xff005c05), CommunityMaterialIcons.check);
+                        } else {
+                          _showToast('Видалено з обраних', Colors.redAccent,
+                              Color(0xff590000), CommunityMaterialIcons.close);
+                        }
                       },
                     )
                   ],
