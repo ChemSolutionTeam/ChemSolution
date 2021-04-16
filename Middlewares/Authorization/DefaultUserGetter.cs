@@ -9,8 +9,13 @@ using Microsoft.Extensions.Configuration;
 
 namespace ChemSolution.Middlewares.Authorization
 {
-    public class DefaultUserGetterAsync:IUserGetterAsync
+    public class DefaultUserGetter:IUserGetter
     {
+        public JwtUser GetUser(DbContext context, string login, string password)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public async Task<JwtUser> GetUserAsync(DbContext context, string login, string password)
         {
             await using (context)

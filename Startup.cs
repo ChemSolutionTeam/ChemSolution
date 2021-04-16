@@ -99,7 +99,7 @@ namespace ChemSolution
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseJwtToken(new DefaultUserGetterAsync());
+            app.UseJwtToken(new DefaultUserGetter());
             
             app.UseEndpoints(endpoints =>
             {

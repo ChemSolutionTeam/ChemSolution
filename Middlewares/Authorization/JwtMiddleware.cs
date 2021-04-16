@@ -17,10 +17,10 @@ namespace ChemSolution.Middlewares.Authorization
     public class JwtMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly IUserGetterAsync _userGetterAsync;
-        public JwtMiddleware(RequestDelegate next, IUserGetterAsync userGetterAsync)
+        private readonly IUserGetter _userGetter;
+        public JwtMiddleware(RequestDelegate next, IUserGetter userGetter)
         {
-            this._userGetterAsync = userGetterAsync;
+            this._userGetter = userGetter;
             this._next = next;
         }
         public async Task InvokeAsync(HttpContext context, DataContext dbContext)
@@ -63,7 +63,7 @@ namespace ChemSolution.Middlewares.Authorization
         }
         private async Task<ClaimsIdentity> GetIdentityAsync(DbContext context, string login, string password)
         {
-            JwtUser user = await _userGetterAsync.GetUserAsync(context, login, password);
+            JwtUser user = await _userGetter.GetUserAsync(context, login, password);
             if (user != null)
             {
                 var claims = new List<Claim>

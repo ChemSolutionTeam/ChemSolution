@@ -5,8 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ChemSolution.Middlewares.Authorization
 {
-    public class TestUserGetterAsync:IUserGetterAsync
+    public class TestUserGetter:IUserGetter
     {
+        public JwtUser GetUser(DbContext context, string login, string password)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public async Task<JwtUser> GetUserAsync(DbContext context, string login, string password)
         {
             return new JwtUser() {Login = "Test", Password = "Test", Role = "Test"};
