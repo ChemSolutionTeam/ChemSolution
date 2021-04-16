@@ -5,6 +5,16 @@ namespace ChemSolution.Data
 {
     public class DataContext : DbContext
     {
+        public DbSet<Achievement> Achievements  { get; set; }
+        public DbSet<User> Users  { get; set; }
+        public DbSet<BlogPost> BlogPosts  { get; set; }
+        public DbSet<Element> Elements  { get; set; }
+        public DbSet<ElementMaterial> ElementMaterials  { get; set; }
+        public DbSet<Material> Materials  { get; set; }
+        public DbSet<MaterialGroup> MaterialGroups  { get; set; }
+        public DbSet<Request> Requests  { get; set; }
+        public DbSet<ResearchHistory> ResearchHistories { set; get; }
+        public DbSet<Valence> Valences  { get; set; }
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
             
