@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'elements/elements_page.dart';
 
-bool autorized = false;
+bool autorised = false;
 
 void main() {
   runApp(ChemApp());

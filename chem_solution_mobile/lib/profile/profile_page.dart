@@ -266,7 +266,7 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    if (!autorized) {
+    if (!autorised) {
       return Container(
         alignment: Alignment.center,
         child: Wrap(

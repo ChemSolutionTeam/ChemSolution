@@ -46,7 +46,7 @@ class _ElementCardState extends State<ElementCard> {
       padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
       child: GestureDetector(
         onTap: () {
-          if (autorized) {
+          if (autorised) {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => ElementInfo(
