@@ -15,10 +15,12 @@ namespace ChemSolution.Data
         public DbSet<Request> Requests  { get; set; }
         public DbSet<ResearchHistory> ResearchHistories { set; get; }
         public DbSet<Valence> Valences  { get; set; }
-        public DataContext(DbContextOptions<DataContext> options) : base(options)
+
+        public DataContext(DbContextOptions<DataContext> options)
+            : base(options)
         {
-            
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             
@@ -27,8 +29,6 @@ namespace ChemSolution.Data
 
             modelBuilder.Entity<Valence>()
                 .HasKey(t => new {t.ElementId, t.ValenceVal});
-            
-            
             //Start ElementMaterial
             modelBuilder
                 .Entity<Element>()

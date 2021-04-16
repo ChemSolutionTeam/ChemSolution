@@ -1,11 +1,13 @@
+using System.Threading.Tasks;
 using ChemSolution.Middlewares.Authorization.Models;
 using ChemSolution.Middlewares.Authorization.Settings;
+using Microsoft.EntityFrameworkCore;
 
 namespace ChemSolution.Middlewares.Authorization
 {
-    public class TestUserGetter:IUserGetter
+    public class TestUserGetterAsync:IUserGetterAsync
     {
-        public JwtUser GetUser(string login, string password)
+        public async Task<JwtUser> GetUserAsync(DbContext context, string login, string password)
         {
             return new JwtUser() {Login = "Test", Password = "Test", Role = "Test"};
         }

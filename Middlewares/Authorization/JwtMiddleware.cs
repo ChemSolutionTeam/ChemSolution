@@ -5,9 +5,11 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text.Json;
 using System.Threading.Tasks;
+using ChemSolution.Data;
 using ChemSolution.Middlewares.Authorization.Models;
 using ChemSolution.Middlewares.Authorization.Settings;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 namespace ChemSolution.Middlewares.Authorization
@@ -15,17 +17,17 @@ namespace ChemSolution.Middlewares.Authorization
     public class JwtMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly IUserGetter _userGetter;
-        public JwtMiddleware(RequestDelegate next, IUserGetter userGetter)
+        private readonly IUserGetterAsync _userGetterAsync;
+        public JwtMiddleware(RequestDelegate next, IUserGetterAsync userGetterAsync)
         {
-            this._userGetter = userGetter;
+            this._userGetterAsync = userGetterAsync;
             this._next = next;
         }
-        public async Task InvokeAsync(HttpContext context)
+        public async Task InvokeAsync(HttpContext context, DataContext dbContext)
         {
             if(context.Request.Path.Value?.Split("/").Last() == "GetJwt")
             {
-                var identity = GetIdentity(context.Request.Query["login"],
+                var identity = await GetIdentityAsync(dbContext, context.Request.Query["login"],
                     context.Request.Query["password"]);
                 if (identity != null)
                 {
@@ -59,9 +61,9 @@ namespace ChemSolution.Middlewares.Authorization
             }
             
         }
-        private ClaimsIdentity GetIdentity(string login, string password)
+        private async Task<ClaimsIdentity> GetIdentityAsync(DbContext context, string login, string password)
         {
-            JwtUser user = _userGetter.GetUser(login, password);
+            JwtUser user = await _userGetterAsync.GetUserAsync(context, login, password);
             if (user != null)
             {
                 var claims = new List<Claim>

@@ -5,9 +5,9 @@ namespace ChemSolution.Middlewares.Authorization
 {
     public static class JwtMiddlewareExtension
     {
-        public static IApplicationBuilder UseJwtToken(this IApplicationBuilder builder, IUserGetter userGetter)
+        public static IApplicationBuilder UseJwtToken(this IApplicationBuilder builder, IUserGetterAsync userGetterAsync)
         {
-            return builder.UseMiddleware<JwtMiddleware>(userGetter);
+            return builder.UseMiddleware<JwtMiddleware>(userGetterAsync);
         }
     }
 }
