@@ -83,6 +83,7 @@
       <LoginForm
         @mouseleave="isMouseOut = true"
         @mouseover="isMouseOut = false"
+        v-on:openRegister="closeLoginForm('force')"
         v-show="isLoginShown"
       />
     </transition>
@@ -97,6 +98,7 @@
         @mouseleave="isMouseOut = true"
         @mouseover="isMouseOut = false"
         v-show="isRegisterShown"
+        v-on:openLogin="closeRegisterForm('force')"
       />
     </transition>
   </div>
@@ -125,12 +127,14 @@ export default {
       this.isLoginBackgroundShown = true
       this.isLoginShown = true
     },
-    closeLoginForm() {
-      if (this.isMouseOut) {
+    closeLoginForm(args) {
+      if (this.isMouseOut || args === 'force') {
         this.isLoginShown = false
         setTimeout(this.hideBG, 500)
-
         console.log('Close LoginForm')
+      }
+      if (args === 'force') {
+        setTimeout(this.openRegisterForm, 500)
       }
     },
     openRegisterForm() {
@@ -138,12 +142,15 @@ export default {
       this.isRegisterBackgroundShown = true
       this.isRegisterShown = true
     },
-    closeRegisterForm() {
-      if (this.isMouseOut) {
+    closeRegisterForm(args) {
+      if (this.isMouseOut || args === 'force') {
         this.isRegisterShown = false
         setTimeout(this.hideBG, 500)
 
         console.log('Close RegisterForm')
+      }
+      if (args === 'force') {
+        setTimeout(this.openLoginForm, 500)
       }
     },
     hideBG() {

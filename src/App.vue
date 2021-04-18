@@ -15,7 +15,7 @@ export default {
 <style>
 @font-face {
   font-family: 'Century Gothic';
-  src: url('/public/CenturyGothic.ttf');
+  src: url('/public/CenturyGothic.ttf') format('ttf');
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

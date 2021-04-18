@@ -3,37 +3,28 @@
     <div
       class="box self-center pl-12 p-3 text-left w-full bg-white border-csblack shadow-2xl border rounded-lg"
     >
-      <form>
+      <form @submit.prevent="logIn">
         <h3 class="text-4xl text-center heading pb-5">Авторизація</h3>
         <BaseInput
           label="Email"
           type="email"
           placeholder="Уведіть E-mail"
+          v-model="user.email"
+          :isIncorrect="emailIsIncorrect"
         ></BaseInput>
         <BaseInput
           label="Пароль"
           type="password"
           placeholder="Уведіть пароль"
+          v-model="user.password"
+          :isIncorrect="passIsIncorrect"
         ></BaseInput>
 
-        <div class="flex items-start ml-1">
-          <div class="flex items-center h-6">
-            <input
-              id="comments"
-              name="comments"
-              type="checkbox"
-              class="focus:ring-cslightgreen border-2 m-2 h-4 w-4 text-csgreen border-csblack-300 rounded"
-            />
-          </div>
-          <div class="ml-1 h-6 text-sm">
-            <label for="comments" class="text-lg text-gray-700"
-              >Запам'ятати мене</label
-            >
-          </div>
-        </div>
+        <BaseCheck label="Запам'ятати мене" v-model="user.remember" />
 
         <button
           id="sign-in"
+          type="submit"
           class="shadow-lg p-3 border border-grey-300 bg-csblue button-enter w-11/12 ml-3 m-5 focus:outline-none focus:ring-4 focus:ring-csgreen"
         >
           Увійти
@@ -61,7 +52,15 @@
           <div class="mb-3 mt-3">
             <a href="" class="link mb-7">Забули пароль?</a>
           </div>
-          <div><a href="" class="link">Створити аккаунт</a></div>
+          <div>
+            <button
+              type="button"
+              class="link"
+              @click="this.$emit('openRegister')"
+            >
+              Створити аккаунт
+            </button>
+          </div>
         </div>
       </form>
     </div>
@@ -70,20 +69,32 @@
 
 <script>
 import BaseInput from '@/components/BaseInput.vue'
+import BaseCheck from '@/components/BaseCheck.vue'
 
 export default {
   name: 'LoginForm',
   components: {
     BaseInput,
+    BaseCheck,
   },
+  emits: ['openRegister'],
   data() {
     return {
+      user: {
+        email: '',
+        password: '',
+        remember: false,
+      },
       isShown: false,
+      emailIsIncorrect: false,
+      passIsIncorrect: false,
     }
   },
   methods: {
-    outlinkClick() {
-      console.log('Click')
+    logIn() {
+      this.emailIsIncorrect = this.user.email !== 'a@g.com'
+      this.passIsIncorrect = this.user.password !== '1234'
+      console.log(this.user)
     },
   },
 }

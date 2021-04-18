@@ -39,9 +39,11 @@
       />
     </div>
   </div>
-  <div class="m-2 flex flex-row justify-end" v-show="!isCorrect()">
-    <div class="w-11/12 mr-5">
-      <p class="text-center text-red-600">{{ label }} неправильний</p>
+  <div class="m-2 flex flex-row justify-end">
+    <div class="w-11/12 mr-5 h-6">
+      <p class="text-center text-red-600">
+        <span v-if="isIncorrect">{{ errorMassage }} </span>
+      </p>
     </div>
   </div>
 </template>
@@ -69,10 +71,13 @@ export default {
       type: Boolean,
       default: false,
     },
-  },
-  methods: {
-    isCorrect() {
-      return false
+    isIncorrect: {
+      type: Boolean,
+      default: false,
+    },
+    errorMassage: {
+      type: String,
+      default: 'error',
     },
   },
 }

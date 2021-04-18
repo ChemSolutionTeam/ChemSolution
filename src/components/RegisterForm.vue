@@ -3,7 +3,7 @@
     <div
       class="box self-center pl-12 p-3 pb-16 text-left w-full bg-white border-csblack shadow-2xl border rounded-lg"
     >
-      <form>
+      <form @submit.prevent="register()">
         <div class="column w-8/12 mt-4">
           <h3 class="text-4xl text-center heading pb-5">Реєстрація</h3>
           <div class="column w-6/12">
@@ -11,67 +11,58 @@
               label="Email"
               type="email"
               placeholder="Уведіть E-mail"
-              isMultiline="true"
-            ></BaseInput>
+              :isMultiline="true"
+              v-model="user.email"
+            />
             <BaseInput
               label="Пароль"
               type="password"
               placeholder="Уведіть пароль"
-              isMultiline="true"
-            ></BaseInput>
-            <BaseInput
-              label="Дата народження"
-              type="date"
-              isMultiline="true"
-            ></BaseInput>
+              :isMultiline="true"
+              v-model="user.pass"
+              :isIncorrect="passWrong"
+              errorMassage="Пароль має містити 8 знаків, 1 цифру, 1 велику , 1 малу літери та 1 символ"
+            />
+            <div class="mt-7">
+              <BaseInput
+                label="Дата народження"
+                type="date"
+                :isMultiline="true"
+                v-model="user.birthDate"
+                errorMassage="Уведіть правильну дату"
+                :isIncorrect="dateWrong"
+              />
+            </div>
           </div>
           <div class="column w-6/12">
             <BaseInput
               label="Ім'я користувача"
-              type="password"
+              type="text"
               placeholder="Уведіть ваше ім'я"
-              isMultiline="true"
-            ></BaseInput>
+              :isMultiline="true"
+              v-model="user.username"
+              errorMassage=""
+            />
             <BaseInput
               label="Підтвердження паролю"
               type="password"
               placeholder="Уведіть пароль"
-              isMultiline="true"
+              :isMultiline="true"
+              v-model="user.passRepeat"
+              :isIncorrect="passDontMatch"
+              errorMassage="Паролі не співпадають"
             ></BaseInput>
           </div>
           <div class="column">
-            <div class="flex items-start ml-1 mt-3">
-              <div class="flex items-center h-16">
-                <input
-                  id="personalData"
-                  name="personalData"
-                  type="checkbox"
-                  class="focus:ring-cslightgreen border-2 m-2 h-4 w-4 text-csgreen border-csblack-300 rounded"
-                />
-              </div>
-              <div class="ml-1 h-6 text-sm">
-                <label for="personalData" class="text-lg text-gray-700">
-                  Я даю згоду на обробку персональних даних та погоджуюсь із
-                  правилами користування сервісом
-                </label>
-              </div>
-            </div>
-
-            <div class="flex items-start ml-1 mt-3">
-              <div class="flex items-center h-6">
-                <input
-                  id="correctData"
-                  name="correctData"
-                  type="checkbox"
-                  class="focus:ring-cslightgreen border-2 m-2 h-4 w-4 text-csgreen border-csblack-300 rounded"
-                />
-              </div>
-              <div class="ml-1 h-6 text-sm">
-                <label for="correctData" class="text-lg text-gray-700">
-                  Я підтверджую достовірність внесених даних
-                </label>
-              </div>
-            </div>
+            <BaseCheck
+              v-model="user.agreeToTerms"
+              label="Я даю згоду на обробку персональних даних та
+            погоджуюсь із правилами користування сервісом"
+            />
+            <BaseCheck
+              v-model="user.isMyInfoTrue"
+              label="Я підтверджую достовірність внесених даних"
+            />
           </div>
         </div>
         <!-- <div class="column w-[3.23rem] v-line"> </div> -->
@@ -84,7 +75,8 @@
             />
           </div>
           <button
-            id="sign-in"
+            id="sign-up"
+            type="submit"
             class="shadow-lg p-3 border border-grey-300 bg-csblue button-enter w-11/12 ml-3 m-5 focus:outline-none focus:ring-4 focus:ring-csgreen"
           >
             Створити акаунт
@@ -92,7 +84,7 @@
           <hr class="mt-3 mb-3" />
 
           <button
-            id="google-sign-in"
+            id="google-sign-up"
             class="shadow-lg p-3 border border-grey-300 button-enter w-11/12 ml-3 m-5 sm:text-xl"
           >
             <i class="fab fa-google mr-3 transform scale-200"></i
@@ -100,7 +92,7 @@
           </button>
 
           <button
-            id="facebook-sign-in"
+            id="facebook-sign-up"
             class="shadow-lg border p-3 border-grey-300 button-enter w-11/12 ml-3 mt-0 m-5 text-xl"
           >
             <i class="fab fa-facebook mr-3 transform scale-200"></i
@@ -111,7 +103,15 @@
             <div class="mb-3 mt-3">
               <a href="" class="link mb-7">Вже є акаунт?</a>
             </div>
-            <div><a href="" class="link">Увійти</a></div>
+            <div>
+              <button
+                type="button"
+                @click="this.$emit('openLogin')"
+                class="link"
+              >
+                Увійти
+              </button>
+            </div>
           </div>
         </div>
       </form>
@@ -121,10 +121,58 @@
 
 <script>
 import BaseInput from '@/components/BaseInput.vue'
+import BaseCheck from '@/components/BaseCheck.vue'
+
 export default {
   name: 'RegisterForm',
   components: {
     BaseInput,
+    BaseCheck,
+  },
+  emits: ['openLogin'],
+  data() {
+    return {
+      user: {
+        email: '',
+        username: '',
+        pass: '',
+        passRepeat: '',
+        birthDate: '',
+        agreeToTerms: false,
+        isMyInfoTrue: false,
+      },
+      passDontMatch: false,
+      passWrong: false,
+      dateWrong: false,
+    }
+  },
+  methods: {
+    register() {
+      //verification
+
+      this.validatePass()
+      this.validatePassRepeat()
+      this.validateAge()
+      if (this.dateWrong || this.passWrong || this.passDontMatch) {
+        // error
+      } else {
+        //register
+      }
+    },
+    validateAge() {
+      //age verification
+      this.dateWrong = false
+    },
+    validatePass() {
+      this.passWrong = !this.user.pass.match(
+        new RegExp(
+          '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})'
+        )
+      )
+    },
+    validatePassRepeat() {
+      this.passDontMatch = this.user.pass !== this.user.passRepeat
+    },
   },
 }
 </script>
@@ -170,11 +218,11 @@ form {
   width: 50%;
 }
 
-#google-sign-in {
+#google-sign-up {
   background-color: #ea4335;
 }
 
-#facebook-sign-in {
+#facebook-sign-up {
   background-color: #4064ac;
 }
 </style>
