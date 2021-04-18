@@ -3,6 +3,7 @@ import 'package:chem_solution_mobile/main.dart';
 import 'package:chem_solution_mobile/models/ChemElement.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:vibration/vibration.dart';
 
 class ElementCard extends StatefulWidget {
   final ChemElement element;
@@ -45,7 +46,7 @@ class _ElementCardState extends State<ElementCard> {
     return Container(
       padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
       child: GestureDetector(
-        onTap: () {
+        onTap: () {       
           if (autorised) {
             Navigator.of(context).push(
               MaterialPageRoute(

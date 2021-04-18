@@ -84,9 +84,7 @@ class _LikedPostsState extends State<LikedPosts> {
         body: Container(
           child: ListView.builder(
             itemBuilder: (BuildContext context, int index) {
-              if (posts[index].liked) {
-                return BlogCard(post: posts[index]);
-              }
+              return BlogCard(post: posts[index]);
             },
             itemCount: posts.length,
           ),
