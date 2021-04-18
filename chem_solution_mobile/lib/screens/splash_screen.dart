@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen>
     );
     animationController.repeat();
 
-    Timer(Duration(milliseconds: 3000), () {
+    Timer(Duration(milliseconds: 2500), () {
       Navigator.of(context).pushReplacementNamed(widget.nextRoute);
     });
   }
