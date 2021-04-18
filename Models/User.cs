@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -10,14 +11,15 @@ namespace ChemSolution.Models
         public string UserEmail { set; get; }
         [StringLength(50, MinimumLength = 3)]
         public string UserName { set; get; }
+        public DateTime DateOfBirth { set; get; }
         [StringLength(50,MinimumLength = 8)]
         public string Password { set; get; }
         [Range(0, int.MaxValue)] 
-        public int Balance { set; get; } = 0;
+        public int Balance { set; get; }
         [Range(0, int.MaxValue)]
-        public int Rating { set; get; } = 0;
+        public int Rating { set; get; }
         [Range(0, int.MaxValue)]
-        public int Honesty { set; get; } = 0;
+        public int Honesty { set; get; }
         public List<BlogPost> BlogPosts { set; get; } = new List<BlogPost>();
         public List<Achievement> Achievement { set; get; } = new List<Achievement>();
         public List<Element> Elements { set; get; } = new List<Element>();

@@ -67,16 +67,13 @@ namespace ChemSolution
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.Http,
                     Description = "ChemSolution",
-
                     Reference = new OpenApiReference
                     {
                         Id = JwtBearerDefaults.AuthenticationScheme,
                         Type = ReferenceType.SecurityScheme
                     }
                 };
-
                 options.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
-
                 options.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
                     { jwtSecurityScheme, Array.Empty<string>() }
