@@ -2,6 +2,7 @@ import 'package:chem_solution_mobile/profile/liked_posts.dart';
 import 'package:flutter/material.dart';
 import 'package:chem_solution_mobile/main.dart';
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 class Profile extends StatefulWidget {
   Profile({Key key}) : super(key: key);
@@ -217,7 +218,25 @@ class _ProfileState extends State<Profile> {
                       endIndent: MediaQuery.of(context).size.width * 0.05,
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => WebviewScaffold(
+                              url: "https://www.google.com",
+                              appBar: new AppBar(
+                                backgroundColor: Color(0xff2F455C),
+                                title: new Text(
+                                  'Відновлення паролю',
+                                  style: TextStyle(
+                                      color: Color(0xff21D0B2),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
                       child: Text(
                         'Забули пароль?',
                         style:
@@ -225,7 +244,25 @@ class _ProfileState extends State<Profile> {
                       ),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                         Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => WebviewScaffold(
+                              url: "https://www.google.com",
+                              appBar: new AppBar(
+                                backgroundColor: Color(0xff2F455C),
+                                title: new Text(
+                                  'Реєстрація',
+                                  style: TextStyle(
+                                      color: Color(0xff21D0B2),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
                       child: Text(
                         'Створити акаунт',
                         style:
