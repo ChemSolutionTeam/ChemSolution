@@ -2,7 +2,11 @@
   <title>{{ title }}</title>
   <h1 class="text-5xl">Welcome to Admin Panel</h1>
   <div class="flex">
-    <AdminCard />
+    <AdminCard
+      label="Добавить вещество"
+      path="home"
+      image="https://i.imgur.com/bAaiGiu.jpeg"
+    />
     <AdminCard />
   </div>
 </template>
