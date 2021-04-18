@@ -148,7 +148,7 @@ export default {
   },
   methods: {
     register() {
-      //verification
+      //verification.
 
       this.validatePass()
       this.validatePassRepeat()
