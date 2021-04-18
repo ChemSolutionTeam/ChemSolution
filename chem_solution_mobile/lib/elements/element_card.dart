@@ -3,7 +3,7 @@ import 'package:chem_solution_mobile/main.dart';
 import 'package:chem_solution_mobile/models/ChemElement.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:vibration/vibration.dart';
+import 'package:chem_solution_mobile/assets/alerts.dart';
 
 class ElementCard extends StatefulWidget {
   final ChemElement element;
@@ -46,7 +46,7 @@ class _ElementCardState extends State<ElementCard> {
     return Container(
       padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
       child: GestureDetector(
-        onTap: () {       
+        onTap: () {
           if (autorised) {
             Navigator.of(context).push(
               MaterialPageRoute(
@@ -56,50 +56,7 @@ class _ElementCardState extends State<ElementCard> {
               ),
             );
           } else {
-            showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    elevation: 24,
-                    title: Text(
-                      'Увага!',
-                      style: TextStyle(
-                        color: Color(0xff2F455C),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    content: Text(
-                      'Для детального перегляду інформації необхідно авторизуватися. Зробити це зараз?',
-                      style: TextStyle(
-                        color: Color(0xff2F455C),
-                      ),
-                    ),
-                    actions: [
-                      // ignore: deprecated_member_use
-                      FlatButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Text(
-                            'Ні',
-                            style: TextStyle(color: Colors.red),
-                          )),
-                      // ignore: deprecated_member_use
-                      FlatButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Text(
-                          'Так',
-                          style: TextStyle(
-                              color: Color(0xff1DCDFE),
-                              fontWeight: FontWeight.w700),
-                        ),
-                      ),
-                    ],
-                  );
-                },
-                barrierDismissible: true);
+            return alertDialogShow(context, createDialog(context), 200);
           }
         },
         onTapDown: (details) {
