@@ -160,8 +160,9 @@ export default {
       }
     },
     validateAge() {
-      //age verification
-      this.dateWrong = false
+      let userYear = parseInt((this.user.birthDate.toString().split("-"))[0]);
+      let currentYear = (new Date).getFullYear();
+      this.dateWrong = userYear < (currentYear - 120) || userYear > (currentYear - 3);
     },
     validatePass() {
       this.passWrong = !this.user.pass.match(
