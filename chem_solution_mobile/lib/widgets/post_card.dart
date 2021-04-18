@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:chem_solution_mobile/assets/alerts.dart';
 
 class BlogCard extends StatefulWidget {
   final BlogPost post;
@@ -131,50 +132,7 @@ class _BlogCardState extends State<BlogCard> {
                       },
                       onTap: () {
                         if (post.isLocked) {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  elevation: 24,
-                                  title: Text(
-                                    'Увага!',
-                                    style: TextStyle(
-                                      color: Color(0xff2F455C),
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  content: Text(
-                                    'Для детального перегляду інформації необхідно авторизуватися. Зробити це зараз?',
-                                    style: TextStyle(
-                                      color: Color(0xff2F455C),
-                                    ),
-                                  ),
-                                  actions: [
-                                    // ignore: deprecated_member_use
-                                    FlatButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text(
-                                          'Ні',
-                                          style: TextStyle(color: Colors.red),
-                                        )),
-                                    // ignore: deprecated_member_use
-                                    FlatButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Text(
-                                        'Так',
-                                        style: TextStyle(
-                                            color: Color(0xff1DCDFE),
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                    ),
-                                  ],
-                                );
-                              },
-                              barrierDismissible: true);
+                          return alertDialogShow(context, createDialog(context), 200);
                         } else {
                           Navigator.of(context).push(
                             MaterialPageRoute(
