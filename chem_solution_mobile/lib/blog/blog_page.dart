@@ -73,8 +73,7 @@ information2\ninformation2\ninformation2\ninformation2\n''',
     });
   }
 
-  Tween<Offset> _offsetToLeft = Tween(begin: Offset(1, 0), end: Offset(0, 0));
-  Tween<Offset> _offsetToRigth = Tween(begin: Offset(-1, 0), end: Offset(0, 0));
+
 
   @override
   void initState() {
