@@ -9,9 +9,15 @@ class Elements extends StatefulWidget {
   _ElementsState createState() => _ElementsState();
 }
 
-class _ElementsState extends State<Elements> {
+class _ElementsState extends State<Elements>
+    with SingleTickerProviderStateMixin {
+
   List<Widget> elements = [];
   final GlobalKey<AnimatedListState> _key = new GlobalKey<AnimatedListState>();
+
+  AnimationController _controller;
+  Animation<Offset> _offsetAnimationToLeft;
+  Animation<Offset> _offsetAnimationToRight;
 
   void _addElements() {
     List<ChemElement> temp = [
@@ -41,23 +47,28 @@ class _ElementsState extends State<Elements> {
               'https://indicator.ru/thumb/2250x0/filters:quality(75):no_upscale()/imgs/2019/08/13/13/3515247/3d8071dc86532a650e3f0b457b02f5ef4ef18f5d.jpg'),
     ];
 
-    Future ft = Future(() {});
-
     temp.forEach((element) {
-      ft = ft.then((_) {
-        return Future.delayed(Duration(milliseconds: 100), () {
-          elements.add(ElementCard(element: element));
-          _key.currentState.insertItem(elements.length - 1);
-        });
-      });
+      elements.add(ElementCard(element: element));
+      _key.currentState.insertItem(elements.length - 1);
     });
   }
-
-  Tween<Offset> _offset = Tween(begin: Offset(1, 0), end: Offset(0, 0));
 
   @override
   void initState() {
     super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 1250),
+      vsync: this,
+    );
+    _controller.forward();
+    _offsetAnimationToLeft = Tween<Offset>(
+      begin: Offset(1, 0),
+      end: const Offset(0, 0), //easeInOut
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.elasticInOut));
+    _offsetAnimationToRight = Tween<Offset>(
+      begin: const Offset(-1, 0),
+      end: Offset(0, 0),
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.elasticInOut));
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _addElements();
     });
@@ -71,7 +82,9 @@ class _ElementsState extends State<Elements> {
         shrinkWrap: true,
         itemBuilder: (context, index, animation) {
           return SlideTransition(
-            position: animation.drive(_offset),
+            position: index % 2 == 0
+                ? _offsetAnimationToLeft
+                : _offsetAnimationToRight,
             child: elements[index],
           );
         },
