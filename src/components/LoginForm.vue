@@ -36,7 +36,7 @@
 
         <button
           id="google-sign-in"
-          class="hover:text-csblack shadow-lg p-3 border border-grey-300 button-enter w-11/12 ml-3 m-5 text-xl"
+          class="focus:outline-none focus:ring-red-400 focus:ring hover:text-csblack shadow-lg p-3 border border-grey-300 button-enter w-11/12 ml-3 m-5 text-xl"
         >
           <i
             class="text-white animate-pulse fab fa-google mr-3 transform scale-150"
