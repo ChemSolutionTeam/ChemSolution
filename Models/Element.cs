@@ -12,7 +12,7 @@ namespace ChemSolution.Models
         public string Symbol { get; set; }
         [StringLength(50, MinimumLength = 1)]
         public string Name { get; set; }
-        [Range(0, int.MaxValue)]
+        [Range(0, double.MaxValue)]
         public double AtomicWeight { get; set; }
         [Range(0, int.MaxValue)]
         public int ElectronQuantity { get; set; }
