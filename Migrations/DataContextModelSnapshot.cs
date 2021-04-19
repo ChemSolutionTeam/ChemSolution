@@ -287,6 +287,9 @@ namespace ChemSolution.Migrations
                     b.Property<int>("Balance")
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("Honesty")
                         .HasColumnType("INTEGER");
 
