@@ -2,39 +2,10 @@
   <nav
     class="flex items-center justify-between flex-wrap bg-csblack p-2 mb-0 shadow-lg"
   >
-    <div class="flex items-center flex-shrink-0 text-white ml-3 mr-6">
-      <svg
-        width="75"
-        hight="75"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        viewBox="0 0 512 512"
-      >
-        <defs>
-          <radialGradient
-            id="Безымянный_градиент_17"
-            cx="256"
-            cy="256"
-            r="241"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop offset="0.72" stop-color="#34f4c5" />
-            <stop offset="1" stop-color="#18d0ea" />
-          </radialGradient>
-        </defs>
-        <g class="cls-1">
-          <g id="Слой_1" data-name="Слой 1">
-            <circle class="cls-2" cx="256" cy="256" r="241" />
-            <g class="cls-3">
-              <path
-                class="cls-4"
-                d="M256,15.25a240.81,240.81,0,0,1,93.71,462.58A240.81,240.81,0,0,1,162.29,34.17,239.31,239.31,0,0,1,256,15.25m0-.25C122.9,15,15,122.9,15,256S122.9,497,256,497,497,389.1,497,256,389.1,15,256,15Z"
-              />
-            </g>
-            <text class="cls-5" transform="translate(58.79 351.96)">Cs</text>
-          </g>
-        </g>
-      </svg>
+    <div
+      class="hover:animate-spin transform md:scale-50 lg:scale-100 flex items-center flex-shrink-0 text-white ml-3 mr-6"
+    >
+      <Logo width="75" />
     </div>
     <div class="block lg:hidden">
       <button
@@ -75,7 +46,7 @@
     </div>
   </nav>
   <div
-    class="inset-0 fixed pt-20 w-full h-full bg-csblack bg-opacity-50"
+    class="inset-0 fixed sm:pt-2 md:pt-5 overflow-auto lg:pt-10 w-full h-full bg-csblack bg-opacity-50"
     v-show="isLoginBackgroundShown"
     @click="closeLoginForm"
   >
@@ -83,13 +54,14 @@
       <LoginForm
         @mouseleave="isMouseOut = true"
         @mouseover="isMouseOut = false"
-        v-on:openRegister="closeLoginForm('force')"
+        v-on:openRegister="closeLoginForm('register')"
+        v-on:openReset="closeLoginForm('reset')"
         v-show="isLoginShown"
       />
     </transition>
   </div>
   <div
-    class="inset-0 fixed pt-20 w-full h-full bg-csblack bg-opacity-50"
+    class="inset-0 fixed sm:pt-2 md:pt-5 overflow-auto lg:pt-10 w-full h-full bg-csblack bg-opacity-50"
     v-show="isRegisterBackgroundShown"
     @click="closeRegisterForm"
   >
@@ -98,7 +70,21 @@
         @mouseleave="isMouseOut = true"
         @mouseover="isMouseOut = false"
         v-show="isRegisterShown"
-        v-on:openLogin="closeRegisterForm('force')"
+        v-on:openLogin="closeRegisterForm('login')"
+        v-on:openReset="closeRegisterForm('reset')"
+      />
+    </transition>
+  </div>
+  <div
+    class="inset-0 fixed sm:pt-2 md:pt-5 overflow-auto lg:pt-10 w-full h-full bg-csblack bg-opacity-50"
+    v-show="isResetBackgroundShown"
+    @click="closeResetForm"
+  >
+    <transition name="bounce">
+      <ForgetPassForm
+        @mouseleave="isMouseOut = true"
+        @mouseover="isMouseOut = false"
+        v-show="isResetShown"
       />
     </transition>
   </div>
@@ -108,54 +94,87 @@
 import Link from '../components/NavigationLink.vue'
 import LoginForm from '../components/LoginForm.vue'
 import RegisterForm from '../components/RegisterForm.vue'
+import ForgetPassForm from '../components/ForgetPassForm.vue'
+import Logo from '../components/Logo.vue'
 
 export default {
   name: 'Navigation',
-  components: { Link, LoginForm, RegisterForm },
+  components: { Link, LoginForm, RegisterForm, ForgetPassForm, Logo },
   data() {
     return {
       isMouseOut: true,
       isLoginShown: false,
       isRegisterShown: false,
+      isResetShown: false,
       isLoginBackgroundShown: false,
       isRegisterBackgroundShown: false,
+      isResetBackgroundShown: false,
     }
   },
   methods: {
+    //Open forms
     openLoginForm() {
       console.log('Open LoginForm')
       this.isLoginBackgroundShown = true
       this.isLoginShown = true
     },
-    closeLoginForm(args) {
-      if (this.isMouseOut || args === 'force') {
-        this.isLoginShown = false
-        setTimeout(this.hideBG, 500)
-        console.log('Close LoginForm')
-      }
-      if (args === 'force') {
-        setTimeout(this.openRegisterForm, 500)
-      }
+    openResetForm() {
+      console.log('Open ResetForm')
+      this.isResetBackgroundShown = true
+      this.isResetShown = true
     },
     openRegisterForm() {
       console.log('Open LoginForm')
       this.isRegisterBackgroundShown = true
       this.isRegisterShown = true
     },
+
+    //Form Close
+
+    closeLoginForm(args) {
+      if (this.isMouseOut || args.length > 0) {
+        this.isLoginShown = false
+        setTimeout(this.hideBG, 500)
+        console.log('Close LoginForm')
+      }
+      this.redirect(args)
+    },
+    closeResetForm(args) {
+      if (this.isMouseOut || args.length > 0) {
+        this.isResetShown = false
+        setTimeout(this.hideBG, 500)
+        console.log('Close ResetForm')
+      }
+      this.redirect(args)
+    },
+
     closeRegisterForm(args) {
-      if (this.isMouseOut || args === 'force') {
+      if (this.isMouseOut || args.length > 0) {
         this.isRegisterShown = false
         setTimeout(this.hideBG, 500)
-
         console.log('Close RegisterForm')
       }
-      if (args === 'force') {
-        setTimeout(this.openLoginForm, 500)
+      this.redirect(args)
+    },
+    redirect(args) {
+      switch (args) {
+        case 'register':
+          setTimeout(this.openRegisterForm, 500)
+          break
+        case 'reset':
+          setTimeout(this.openResetForm, 500)
+          break
+        case 'login':
+          setTimeout(this.openLoginForm, 500)
+          break
+        default:
+          break
       }
     },
     hideBG() {
       this.isLoginBackgroundShown = false
       this.isRegisterBackgroundShown = false
+      this.isResetBackgroundShown = false
     },
   },
 }

@@ -1,5 +1,7 @@
 <template>
-  <div class="flex items-start inset-0 my-4 shadow-lg max-w-xl mx-auto">
+  <div
+    class="transform lg:scale-100 sm:scale-50 md:scale-50 flex items-start inset-0 my-4 shadow-lg max-w-xl mx-auto"
+  >
     <div
       class="box self-center pl-12 p-3 text-left w-full bg-white border-csblack shadow-2xl border rounded-lg"
     >
@@ -25,7 +27,7 @@
         <button
           id="sign-in"
           type="submit"
-          class="shadow-lg p-3 border border-grey-300 bg-csblue button-enter w-11/12 ml-3 m-5 focus:outline-none focus:ring-4 focus:ring-csgreen"
+          class="hover:text-csblack transform shadow-lg p-3 border focus:ring-offset-2 border-grey-300 bg-csblue button-enter w-11/12 ml-3 m-5 focus:outline-none focus:ring-4 focus:ring-csgreen"
         >
           Увійти
         </button>
@@ -34,28 +36,39 @@
 
         <button
           id="google-sign-in"
-          class="shadow-lg p-3 border border-grey-300 button-enter w-11/12 ml-3 m-5 text-xl"
+          class="hover:text-csblack shadow-lg p-3 border border-grey-300 button-enter w-11/12 ml-3 m-5 text-xl"
         >
-          <i class="fab fa-google mr-3 transform scale-150"></i>Увійти з Google
+          <i
+            class="text-white animate-pulse fab fa-google mr-3 transform scale-150"
+          ></i
+          >Увійти з Google
         </button>
 
         <button
           id="facebook-sign-in"
-          class="shadow-lg border p-3 border-grey-300 button-enter w-11/12 ml-3 mt-0 m-5 text-xl"
+          class="hover:text-csblack focus:ring-csblue focus:ring focus:ring-offset-2 focus:outline-none shadow-lg border p-3 border-grey-300 button-enter w-11/12 ml-3 mt-0 m-5 text-xl"
         >
-          <i class="fab fa-facebook mr-3 transform scale-150"></i>Увійти з
-          Facebook
+          <i
+            class="text-white animate-pulse fab fa-facebook mr-3 transform scale-150"
+          ></i
+          >Увійти з Facebook
         </button>
 
         <hr class="m-3 w-11/12" />
         <div class="w-11/12 text-center">
           <div class="mb-3 mt-3">
-            <a href="" class="link mb-7">Забули пароль?</a>
+            <button
+              type="button"
+              class="link focus:outline-none hover:text-csgreen"
+              @click="this.$emit('openReset')"
+            >
+              Забули пароль?
+            </button>
           </div>
           <div>
             <button
               type="button"
-              class="link"
+              class="link focus:outline-none hover:text-csgreen"
               @click="this.$emit('openRegister')"
             >
               Створити аккаунт
@@ -77,7 +90,7 @@ export default {
     BaseInput,
     BaseCheck,
   },
-  emits: ['openRegister'],
+  emits: ['openRegister', 'openReset'],
   data() {
     return {
       user: {
