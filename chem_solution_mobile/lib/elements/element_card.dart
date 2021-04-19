@@ -13,30 +13,53 @@ class ElementCard extends StatefulWidget {
   _ElementCardState createState() => _ElementCardState(element);
 }
 
-class _ElementCardState extends State<ElementCard> {
+class _ElementCardState extends State<ElementCard>
+    with SingleTickerProviderStateMixin {
   ChemElement element;
   Color _colorCard = Colors.white;
+  AnimationController _controller;
+  Animation _myAnimation;
   _ElementCardState(this.element);
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 1200),
+    );
+    _myAnimation = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   Widget _rowInfo(String name, String value) {
     return Container(
-      child: Wrap(
-        children: [
-          Container(
-            child: Text(
-              name,
-              style: TextStyle(color: Color(0xff2F455C), fontSize: 16),
-            ),
-          ),
-          Container(
+      child: FadeTransition(
+              opacity: _myAnimation,
+              child: Wrap(
+          children: [
+            Container(
               child: Text(
-            value + " ",
-            style: TextStyle(
-                color: Color(0xff2F455C),
-                fontSize: 16,
-                fontWeight: FontWeight.bold),
-          )),
-        ],
+                name,
+                style: TextStyle(color: Color(0xff2F455C), fontSize: 16),
+              ),
+            ),
+            Container(
+                child: Text(
+              value + " ",
+              style: TextStyle(
+                  color: Color(0xff2F455C),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold),
+            )),
+          ],
+        ),
       ),
     );
   }

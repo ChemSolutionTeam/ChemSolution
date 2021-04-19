@@ -10,7 +10,12 @@ class Blogs extends StatefulWidget {
 }
 
 class _BlogsState extends State<Blogs> {
-  List<BlogPost> posts = [
+
+  List<Widget> posts = [];
+  final GlobalKey<AnimatedListState> _key = new GlobalKey<AnimatedListState>();
+
+  void _addBlogPost() {
+  List<BlogPost> temp = [
     new BlogPost(
       idPost: 1,
       title: 'post1',
@@ -59,14 +64,40 @@ information2\ninformation2\ninformation2\ninformation2\n''',
         liked: false),
   ];
 
+    Future ft = Future(() {});
+
+    temp.forEach((post) {
+      ft = ft.then((_) {
+        return Future.delayed(Duration(milliseconds: 100), () {
+          posts.add(BlogCard(post: post));
+          _key.currentState.insertItem(posts.length - 1);
+        });
+      });
+    });
+  }
+
+  Tween<Offset> _offset = Tween(begin: Offset(1, 0), end: Offset(0, 0));
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _addBlogPost();
+    });
+  }
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ListView.builder(
-        itemBuilder: (BuildContext context, int index) {
-          return BlogCard(post: posts[index]);
+    return Container(     
+       child: AnimatedList(
+        key: _key,
+        shrinkWrap: true,
+        itemBuilder: (context, index, animation) {
+          return SlideTransition(
+            position: animation.drive(_offset),
+            child: posts[index],
+          );
         },
-        itemCount: posts.length,
+        initialItemCount: posts.length,
       ),
     );
   }

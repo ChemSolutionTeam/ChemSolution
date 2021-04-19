@@ -42,8 +42,8 @@ class _ProfileState extends State<Profile> {
     if (!autorised) {
       return Container(
         alignment: Alignment.center,
-        child: Wrap(
-          direction: Axis.vertical,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             GestureDetector(
               onTap: () {
