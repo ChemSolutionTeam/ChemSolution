@@ -37,6 +37,47 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
     );
   }
 
+Widget _exitDialog(BuildContext context) {
+  return AlertDialog(
+    elevation: 24,
+    title: Text(
+      'Увага!',
+      style: TextStyle(
+        color: Color(0xff2F455C),
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+    content: Text(
+      'Ви точно хочете вийти?',
+      style: TextStyle(
+        color: Color(0xff2F455C),
+      ),
+    ),
+    actions: [
+      // ignore: deprecated_member_use
+      FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: Text(
+            'Так',
+            style: TextStyle(color: Colors.red),
+          )),
+      // ignore: deprecated_member_use
+      FlatButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        child: Text(
+          'Ні',
+          style:
+              TextStyle(color: Color(0xff1DCDFE), fontWeight: FontWeight.w700),
+        ),
+      ),
+    ],
+  );
+}
+
   AnimationController _controller;
   Animation<Offset> _offsetAnimationToLeft;
   Animation<Offset> _offsetAnimationToRight;
@@ -159,7 +200,9 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
             SlideTransition(
               position: _offsetAnimationToLeft,
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  return alertDialogShow(context, _exitDialog(context), 200);
+                },
                 child: _card(
                   context,
                   Colors.white,
