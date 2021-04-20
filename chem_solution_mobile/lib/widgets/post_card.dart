@@ -147,7 +147,7 @@ class _BlogCardState extends State<BlogCard> {
                     GestureDetector(
                       child: Icon(
                         post.liked ? Icons.favorite : Icons.favorite_border,
-                        color: post.liked ? Colors.red : null,
+                        color: post.liked ? Color(0xff21D0B2) : null,
                       ),
                       onTap: () {
                         setState(() {

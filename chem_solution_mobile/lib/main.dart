@@ -2,7 +2,7 @@ import 'package:chem_solution_mobile/screens/home_screen.dart';
 import 'package:chem_solution_mobile/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
-bool autorised = false;
+bool autorised = true;
 
 void main() {
   runApp(ChemApp());

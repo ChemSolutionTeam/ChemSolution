@@ -12,15 +12,15 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
-  Widget _card(double w, double h, Color color, String text, Icon icon) {
+  Widget _card(BuildContext context, Color color, String text, Icon icon) {
     return Container(
       padding: EdgeInsets.all(15),
       child: Card(
         color: color,
         elevation: 5,
         child: Container(
-          width: w,
-          height: h,
+          width: MediaQuery.of(context).size.width * 0.9,
+          height: MediaQuery.of(context).size.height * 0.1,
           padding: EdgeInsets.all(20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -37,12 +37,9 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
     );
   }
 
-
   AnimationController _controller;
   Animation<Offset> _offsetAnimationToLeft;
   Animation<Offset> _offsetAnimationToRight;
-
-
 
   @override
   void initState() {
@@ -52,10 +49,10 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
       vsync: this,
     );
     _controller.forward();
-     _offsetAnimationToLeft = Tween<Offset>(
+    _offsetAnimationToLeft = Tween<Offset>(
       begin: Offset(1, 0),
       end: const Offset(0, 0), //easeInOut
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.elasticInOut)); 
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.elasticInOut));
     _offsetAnimationToRight = Tween<Offset>(
       begin: const Offset(-1, 0),
       end: Offset(0, 0),
@@ -87,13 +84,12 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                   );
                 },
                 child: _card(
-                  MediaQuery.of(context).size.width * 0.9,
-                  MediaQuery.of(context).size.height * 0.1,
+                  context,
                   Colors.white,
                   'Збережене',
                   Icon(
                     CommunityMaterialIcons.heart,
-                    color: Colors.red,
+                    color: Color(0xff21D0B2),
                   ),
                 ),
               ),
@@ -105,8 +101,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                   return alertDialogShow(context, autorisation(context), 400);
                 },
                 child: _card(
-                  MediaQuery.of(context).size.width * 0.9,
-                  MediaQuery.of(context).size.height * 0.1,
+                  context,
                   Color(0xff1DCDFE),
                   'Авторизуватися',
                   Icon(
@@ -120,7 +115,65 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
         ),
       );
     } else {
-      return Container();
+      return Container(
+        alignment: Alignment.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SlideTransition(
+              position: _offsetAnimationToLeft,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => LikedPosts(),
+                    ),
+                  );
+                },
+                child: _card(
+                  context,
+                  Colors.white,
+                  'Збережене',
+                  Icon(
+                    CommunityMaterialIcons.heart,
+                    color: Color(0xff21D0B2),
+                  ),
+                ),
+              ),
+            ),
+            SlideTransition(
+              position: _offsetAnimationToRight,
+              child: GestureDetector(
+                onTap: () {},
+                child: _card(
+                  context,
+                  Color(0xff1DCDFE),
+                  'Відкриті речовини',
+                  Icon(
+                    CommunityMaterialIcons.molecule,
+                    color: Color(0xff2F455C),
+                  ),
+                ),
+              ),
+            ),
+            SlideTransition(
+              position: _offsetAnimationToLeft,
+              child: GestureDetector(
+                onTap: () {},
+                child: _card(
+                  context,
+                  Colors.white,
+                  'Вихід',
+                  Icon(
+                    CommunityMaterialIcons.exit_run,
+                    color: Color(0xff21D0B2),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
     }
   }
 }
