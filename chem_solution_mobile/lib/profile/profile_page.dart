@@ -1,4 +1,5 @@
 import 'package:chem_solution_mobile/profile/liked_posts.dart';
+import 'package:chem_solution_mobile/profile/my_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:chem_solution_mobile/main.dart';
 import 'package:community_material_icon/community_material_icon.dart';
@@ -37,46 +38,46 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
     );
   }
 
-Widget _exitDialog(BuildContext context) {
-  return AlertDialog(
-    elevation: 24,
-    title: Text(
-      'Увага!',
-      style: TextStyle(
-        color: Color(0xff2F455C),
-        fontWeight: FontWeight.bold,
+  Widget _exitDialog(BuildContext context) {
+    return AlertDialog(
+      elevation: 24,
+      title: Text(
+        'Увага!',
+        style: TextStyle(
+          color: Color(0xff2F455C),
+          fontWeight: FontWeight.bold,
+        ),
       ),
-    ),
-    content: Text(
-      'Ви точно хочете вийти?',
-      style: TextStyle(
-        color: Color(0xff2F455C),
+      content: Text(
+        'Ви точно хочете вийти?',
+        style: TextStyle(
+          color: Color(0xff2F455C),
+        ),
       ),
-    ),
-    actions: [
-      // ignore: deprecated_member_use
-      FlatButton(
+      actions: [
+        // ignore: deprecated_member_use
+        FlatButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text(
+              'Так',
+              style: TextStyle(color: Colors.red),
+            )),
+        // ignore: deprecated_member_use
+        FlatButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
           child: Text(
-            'Так',
-            style: TextStyle(color: Colors.red),
-          )),
-      // ignore: deprecated_member_use
-      FlatButton(
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
-        child: Text(
-          'Ні',
-          style:
-              TextStyle(color: Color(0xff1DCDFE), fontWeight: FontWeight.w700),
+            'Ні',
+            style: TextStyle(
+                color: Color(0xff1DCDFE), fontWeight: FontWeight.w700),
+          ),
         ),
-      ),
-    ],
-  );
-}
+      ],
+    );
+  }
 
   AnimationController _controller;
   Animation<Offset> _offsetAnimationToLeft;
@@ -161,6 +162,27 @@ Widget _exitDialog(BuildContext context) {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+              SlideTransition(
+              position: _offsetAnimationToRight,
+              child: GestureDetector(
+                onTap: () {
+                   Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => MyProfile(),
+                    ),
+                  );
+                },
+                child: _card(
+                  context,
+                  Color(0xff1DCDFE),
+                  'Мій профіль',
+                  Icon(
+                    CommunityMaterialIcons.face_profile,
+                    color: Color(0xff2F455C),
+                  ),
+                ),
+              ),
+            ),
             SlideTransition(
               position: _offsetAnimationToLeft,
               child: GestureDetector(
