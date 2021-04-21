@@ -1,5 +1,6 @@
 import 'package:chem_solution_mobile/models/Molecule.dart';
 import 'package:chem_solution_mobile/profile/material_card.dart';
+import 'package:chem_solution_mobile/widgets/search_field.dart';
 import 'package:flutter/material.dart';
 
 class Materials extends StatefulWidget {
@@ -12,7 +13,7 @@ class Materials extends StatefulWidget {
 class _MaterialsState extends State<Materials>
     with SingleTickerProviderStateMixin {
   List<Widget> _materials = [];
-
+  bool _isSearch = false;
   final GlobalKey<AnimatedListState> _key = new GlobalKey<AnimatedListState>();
 
   AnimationController _controller;
@@ -94,17 +95,30 @@ class _MaterialsState extends State<Materials>
         backgroundColor: Color(0xffEBFAFF),
         appBar: new AppBar(
           backgroundColor: Color(0xff2F455C),
-          title: ListTile(title: Text(
-            'Відкриті речовини',
-            style: TextStyle(
-                color: Color(0xff21D0B2),
-                fontSize: 24,
-                fontWeight: FontWeight.bold),
+          title: ListTile(
+            title: _isSearch
+                ? TextField(
+                    style: TextStyle(
+                      color: Color(0xff1dcdfe),
+                    ),
+                    decoration: searchDecor('Введіть речовину'),
+                  )
+                : Text(
+                    'Відкриті речовини',
+                    style: TextStyle(
+                        color: Color(0xff21D0B2),
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+            trailing: IconButton(
+              onPressed: () {
+                setState(() {
+                  _isSearch = !_isSearch;
+                });
+              },
+              icon: searchIcon(_isSearch),
+            ),
           ),
-          trailing: Icon(
-        Icons.search,
-        color: Color(0xff21D0B2),
-      ),),
         ),
         body: Container(
           child: AnimatedList(
