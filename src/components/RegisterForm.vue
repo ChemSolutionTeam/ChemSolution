@@ -70,7 +70,6 @@
         <!-- <div class="column w-[3.23rem] v-line"> </div> -->
         <div class="column w-4/12 mt-4">
           <div class="block mx-auto w-1/2 mb-5 transform">
-            <!-- TODO LOGO -->
             <Logo />
           </div>
           <button
