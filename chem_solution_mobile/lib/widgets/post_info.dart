@@ -32,7 +32,7 @@ class PostInfo extends StatelessWidget {
               Container(
                 padding: EdgeInsets.only(bottom: 20.0),
                 child: Image.network(
-                  post.img,
+                  post.image,
                   fit: BoxFit.fitWidth,
                 ),
               ),

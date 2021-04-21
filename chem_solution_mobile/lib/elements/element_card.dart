@@ -52,7 +52,7 @@ class _ElementCardState extends State<ElementCard> {
               ),
             );
           } else {
-            return alertDialogShow(context, createDialog(context), 200);
+            return alertDialogShow(context, createDialog(context, 'детального перегляду інформації'), 200);
           }
         },
        
@@ -63,7 +63,7 @@ class _ElementCardState extends State<ElementCard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                rowInfo('Порядковий номер: ', '${element.idElement}'),
+                rowInfo('Порядковий номер: ', '${element.elementId}'),
                 rowInfo('Позначення: ', '${element.symbol}'),
                 rowInfo('Назва: ', '${element.name}'),
                 rowInfo('Категорія: ', '${element.category}'),

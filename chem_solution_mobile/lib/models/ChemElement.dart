@@ -1,7 +1,10 @@
+import 'package:chem_solution_mobile/models/Molecule.dart';
+import 'User.dart';
+import 'Valence.dart';
 import 'Model.dart';
 
 class ChemElement extends Model {
-  int idElement;
+  int elementId;
   String symbol;
   String name;
   double atomicWeight;
@@ -19,10 +22,13 @@ class ChemElement extends Model {
   String imgSymbol;
   String imgAtom;
   int group;
-  List<String> valence = [];
+
+  List<User> users = [];
+  List<Molecule> materials = [];
+  List<Valence> valences = [];
 
   ChemElement(
-      {this.idElement,
+      {this.elementId,
       this.symbol,
       this.name,
       this.atomicWeight,
@@ -37,15 +43,44 @@ class ChemElement extends Model {
       this.boilingTemperature,
       this.isLocked,
       this.info,
-      this.valence,
       this.imgAtom,
       this.group,
-      this.imgSymbol});
+      this.imgSymbol,
+      this.users,
+      this.materials,
+      this.valences});
 
   String getValence() {
     String _valence = '';
-    for (String val in valence) {
-      _valence += val + " ";
+    for (Valence val in valences) {
+      String value;
+      switch (val.valenceVal) {
+        case 1:
+          value = 'I';
+          break;
+        case 2:
+          value = 'II';
+          break;
+        case 3:
+          value = 'III';
+          break;
+        case 4:
+          value = 'IV';
+          break;
+        case 5:
+          value = 'V';
+          break;
+        case 6:
+          value = 'VI';
+          break;
+        case 7:
+          value = 'VII';
+          break;
+        case 8:
+          value = 'VIII';
+          break;
+      }
+      _valence += val.valenceVal.toString() + " ";
     }
     return _valence;
   }

@@ -1,4 +1,5 @@
 import 'package:chem_solution_mobile/models/Molecule.dart';
+import 'package:chem_solution_mobile/models/MaterialGroup.dart';
 import 'package:chem_solution_mobile/profile/material_card.dart';
 import 'package:chem_solution_mobile/widgets/search_field.dart';
 import 'package:flutter/material.dart';
@@ -23,30 +24,30 @@ class _MaterialsState extends State<Materials>
   void _addMaterials() {
     List<Molecule> temp = [
       new Molecule(
-        idMaterial: 1,
+        id: 1,
         image:
             'https://lh3.googleusercontent.com/proxy/mo5YkbgOTkcb-5VOl3iYSchHP8JijvWSznG7OItQOdjTg5cpm0THdCSYXq-aRipP_ozX9kTKhSgTqk6E_65abunjlraDDUA2X6z7_uT1YvrkcoZTrdrSVYdFIH6xO2YNkFTVaTWvxMTenee2jjNH0_LOOqBR98ac0rPEY6_15y5CG2osC2Q4',
         formula: 'Ca(OH)2',
         name: 'Кальцій гідроксид',
         info: 'бла бла',
-        materialGroup: 'Луги',
+        materialGroup: MaterialGroup(groupName: 'Луги'),
       ),
       new Molecule(
-        idMaterial: 2,
+        id: 2,
         image:
             'https://img02.flagma.ua/photo/sernaya-kislota-40-sirchana-kislota-h2so4-16359806_big.jpg',
         formula: 'H2SO4',
         name: 'Сульфатна кислота',
         info: 'бла бла бла',
-        materialGroup: 'Кислоти',
+        materialGroup: MaterialGroup(groupName: 'Кислоти'),
       ),
       new Molecule(
-        idMaterial: 3,
+        id: 3,
         image: 'https://altenergy.in.ua/wp-content/uploads/2016/10/co2.jpg',
         formula: 'CO2',
         name: 'Карбон оксид',
         info: 'бла бла бла',
-        materialGroup: 'Кислотні оксиди',
+        materialGroup: MaterialGroup(groupName: 'Кислотні оксиди'),
       ),
     ];
 

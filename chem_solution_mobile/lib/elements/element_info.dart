@@ -14,7 +14,7 @@ class ElementInfo extends StatelessWidget {
       Column(
         children: [
           img(element.imgSymbol),
-          info('Номер елемента: ', element.idElement.toString()),
+          info('Номер елемента: ', element.elementId.toString()),
           info('Позначення: ', element.symbol),
           info('Назва: ', element.name),
           info('Група: ', element.group.toString()),

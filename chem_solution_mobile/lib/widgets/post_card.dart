@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:chem_solution_mobile/assets/alerts.dart';
+import 'package:chem_solution_mobile/main.dart';
 
 class BlogCard extends StatefulWidget {
   final BlogPost post;
@@ -116,7 +117,7 @@ class _BlogCardState extends State<BlogCard> {
                 Container(
                   padding: EdgeInsets.only(bottom: 10.0),
                   child: Image.network(
-                    post.img,
+                    post.image,
                     fit: BoxFit.fitWidth,
                   ),
                 ),
@@ -169,7 +170,7 @@ class _BlogCardState extends State<BlogCard> {
                         onTap: () {
                           if (post.isLocked) {
                             return alertDialogShow(
-                                context, createDialog(context), 200);
+                                context, createDialog(context, 'детального перегляду інформації'), 200);
                           } else {
                             Navigator.of(context).push(
                               MaterialPageRoute(
@@ -178,30 +179,35 @@ class _BlogCardState extends State<BlogCard> {
                                 ),
                               ),
                             );
-                          }
+                          } 
                         },
                       ),
                       GestureDetector(
                         child: Icon(
-                          post.liked ? Icons.favorite : Icons.favorite_border,
-                          color: post.liked ? _colorLike : null,
+                          post.liked(null) ? Icons.favorite : Icons.favorite_border,
+                          color: post.liked(null) ? _colorLike : null,
                         ),
                         onTap: () {
-                          setState(() {
-                            post.liked = !post.liked;
-                          });
-                          if (post.liked) {
-                            _showToast(
-                                'Додано до обраних',
-                                Colors.greenAccent,
-                                Color(0xff005c05),
-                                CommunityMaterialIcons.check);
-                          } else {
-                            _showToast(
-                                'Видалено з обраних',
-                                Colors.redAccent,
-                                Color(0xff590000),
-                                CommunityMaterialIcons.close);
+                          if (autorised) {
+                            setState(() {
+                           //   post.liked = !post.liked;
+                            });
+                            if (post.liked(null)) {
+                              _showToast(
+                                  'Додано до обраних',
+                                  Colors.greenAccent,
+                                  Color(0xff005c05),
+                                  CommunityMaterialIcons.check);
+                            } else {
+                              _showToast(
+                                  'Видалено з обраних',
+                                  Colors.redAccent,
+                                  Color(0xff590000),
+                                  CommunityMaterialIcons.close);
+                            }
+                          } else{
+                             return alertDialogShow(
+                                context, createDialog(context, 'збереження поста'), 200);
                           }
                         },
                       )

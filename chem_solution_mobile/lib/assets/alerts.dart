@@ -2,7 +2,7 @@ import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
-Widget createDialog(BuildContext context) {
+Widget createDialog(BuildContext context, String value) {
   return AlertDialog(
     elevation: 24,
     title: Text(
@@ -13,7 +13,7 @@ Widget createDialog(BuildContext context) {
       ),
     ),
     content: Text(
-      'Для детального перегляду інформації необхідно авторизуватися. Зробити це зараз?',
+      'Для $value необхідно авторизуватися. Зробити це зараз?',
       style: TextStyle(
         color: Color(0xff2F455C),
       ),

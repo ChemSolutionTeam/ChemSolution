@@ -116,29 +116,8 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SlideTransition(
+           SlideTransition(
               position: _offsetAnimationToLeft,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => LikedPosts(),
-                    ),
-                  );
-                },
-                child: _card(
-                  context,
-                  Colors.white,
-                  'Збережене',
-                  Icon(
-                    CommunityMaterialIcons.heart,
-                    color: Color(0xff21D0B2),
-                  ),
-                ),
-              ),
-            ),
-            SlideTransition(
-              position: _offsetAnimationToRight,
               child: GestureDetector(
                 onTap: () {
                   return alertDialogShow(context, autorisation(context), 400);

@@ -2,14 +2,14 @@ import 'package:chem_solution_mobile/screens/home_screen.dart';
 import 'package:chem_solution_mobile/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
-bool autorised = true;
+
+bool autorised = false;
 
 void main() {
   runApp(ChemApp());
 }
 
 class ChemApp extends StatelessWidget {
-
   final routes = <String, WidgetBuilder>{
     '/Home': (BuildContext context) => ChemSolutionWidget()
   };
