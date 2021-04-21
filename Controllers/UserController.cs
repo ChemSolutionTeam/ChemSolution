@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 using ChemSolution.Data;
 using ChemSolution.Models;
@@ -12,18 +13,19 @@ using Microsoft.Extensions.Logging;
 namespace ChemSolution.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("/users")]
     public class UserController:ControllerBase
     {
         private readonly ILogger<UserController> _logger;
         private readonly DataContext _context;
         public UserController(ILogger<UserController> logger, DataContext context)
         {
+            
             _logger = logger;
             _context = context;
         }
         [HttpPost] 
-        public async Task Post(UserRegister user)
+        public async Task<IActionResult> Post(UserRegister user)
         {
             if (ModelState.IsValid)
             {
@@ -35,17 +37,17 @@ namespace ChemSolution.Controllers
                         DateOfBirth = user.DateOfBirth
                     });
                     await _context.SaveChangesAsync();
-                    HttpContext.Response.StatusCode = 201;
                     _logger.LogInformation($"User {user.UserName} was created {DateTime.UtcNow.ToString()}");
+                    return StatusCode(201);
                 }
                 else
                 {
-                    HttpContext.Response.StatusCode = 409;
+                    return StatusCode(409);
                 }
             }
             else
             {
-                HttpContext.Response.StatusCode = 400;
+                return StatusCode(400);
             }
         }
     }
