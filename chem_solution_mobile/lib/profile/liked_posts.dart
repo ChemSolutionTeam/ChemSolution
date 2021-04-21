@@ -1,6 +1,7 @@
 import 'dart:core';
 import 'package:chem_solution_mobile/models/BlogPost.dart';
 import 'package:chem_solution_mobile/widgets/post_card.dart';
+import 'package:chem_solution_mobile/widgets/search_field.dart';
 import 'package:flutter/material.dart';
 
 class LikedPosts extends StatefulWidget {
@@ -13,6 +14,8 @@ class LikedPosts extends StatefulWidget {
 class _LikedPostsState extends State<LikedPosts>
     with SingleTickerProviderStateMixin {
   List<Widget> posts = [];
+  bool _isSearch = false;
+
   final GlobalKey<AnimatedListState> _key = new GlobalKey<AnimatedListState>();
   AnimationController _controller;
   Animation<Offset> _offsetAnimationToLeft;
@@ -115,17 +118,30 @@ information2\ninformation2\ninformation2\ninformation2\n''',
           backgroundColor: Color(0xff2F455C),
           title: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
-            child: ListTile(title: Text(
-            'Збережене',
-            style: TextStyle(
-                color: Color(0xff21D0B2),
-                fontSize: 24,
-                fontWeight: FontWeight.bold),
-          ),
-          trailing: Icon(
-        Icons.search,
-        color: Color(0xff21D0B2),
-      ),),
+            child: ListTile(
+              title: _isSearch
+                  ? TextField(
+                      style: TextStyle(
+                        color: Color(0xff1dcdfe),
+                      ),
+                      decoration: searchDecor('Введіть інформацію'),
+                    )
+                  : Text(
+                      'Збережене',
+                      style: TextStyle(
+                          color: Color(0xff21D0B2),
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold),
+                    ),
+              trailing: IconButton(
+                onPressed: () {
+                  setState(() {
+                    _isSearch = !_isSearch;
+                  });
+                },
+                icon: searchIcon(_isSearch),
+              ),
+            ),
           ),
         ),
         body: Container(
