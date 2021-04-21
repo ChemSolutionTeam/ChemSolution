@@ -40,7 +40,45 @@ class User extends Model {
 
   @override
   Map<String, dynamic> toMap() {
-    // TODO: implement toMap
-    throw UnimplementedError();
+    Map<String, dynamic> map = new Map<String, dynamic>();
+    map['userEmail'] = userEmail;
+    map['userName'] = userName;
+    map['dateOfBirth'] = dateOfBirth;
+    map['password'] = password;
+    map['balance'] = balance;
+    map['rating'] = rating;
+    map['honesty'] = honesty;
+    List<Map<String, dynamic>> blogPostsMaps = [];
+    blogPosts.forEach((element) {
+      blogPostsMaps.add(element.toMap());
+    });
+    map['blogPosts'] = blogPostsMaps;
+    List<Map<String, dynamic>> achievementMaps = [];
+    achievement.forEach((element) {
+      achievementMaps.add(element.toMap());
+    });
+    map['achievement'] = achievementMaps;
+
+    List<Map<String, dynamic>> elementsMaps = [];
+    elements.forEach((element) {
+      elementsMaps.add(element.toMap());
+    });
+    map['elements'] = elementsMaps;
+    List<Map<String, dynamic>> requestsMaps = [];
+    requests.forEach((element) {
+      requestsMaps.add(element.toMap());
+    });
+    map['requests'] = requestsMaps;
+    List<Map<String, dynamic>> researchHistorysMaps = [];
+    researchHistorys.forEach((element) {
+      researchHistorysMaps.add(element.toMap());
+    });
+    map['researchHistorys'] = researchHistorysMaps;
+    List<Map<String, dynamic>> materialsMaps = [];
+    materials.forEach((element) {
+      materialsMaps.add(element.toMap());
+    });
+    map['materials'] = materialsMaps;
+    return map;
   }
 }

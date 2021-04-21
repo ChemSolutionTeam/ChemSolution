@@ -184,6 +184,51 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                 ),
               ),
             ),
+               SlideTransition(
+              position: _offsetAnimationToRight,
+              child: GestureDetector(
+                onTap: () {
+                  /*
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => Materials(),
+                    ),
+                  ); */
+                },
+                child: _card(
+                  context,
+                  Color(0xff1DCDFE),
+                  'Досягнення',
+                  Icon(
+                    CommunityMaterialIcons.gold,
+                    color: Color(0xff2F455C),
+                  ),
+                ),
+              ),
+            ),
+            SlideTransition(
+              position: _offsetAnimationToLeft,
+              child: GestureDetector(
+                onTap: () {
+     /*
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => Materials(),
+                    ),
+                  ); */
+                },
+                child: _card(
+                  context,
+                  Colors.white,
+                  'Запити',
+                  Icon(
+                    Icons.request_page,
+                    color: Color(0xff21D0B2),
+                  ),
+                ),
+              ),
+            ),
+         
             SlideTransition(
               position: _offsetAnimationToRight,
               child: GestureDetector(

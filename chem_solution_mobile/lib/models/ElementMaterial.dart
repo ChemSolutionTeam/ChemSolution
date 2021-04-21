@@ -19,7 +19,7 @@ class ElementMaterial extends Model {
 
   @override
   Map<String, dynamic> toMap() {
-    // TODO: implement toMap
-    throw UnimplementedError();
+ Map<String, dynamic> map = new Map<String, dynamic>();
+    return map;
   }
 }

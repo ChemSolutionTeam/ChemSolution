@@ -18,7 +18,12 @@ class Request extends Model {
 
   @override
   Map<String, dynamic> toMap() {
-    // TODO: implement toMap
-    throw UnimplementedError();
+    Map<String, dynamic> map = new Map<String, dynamic>();
+    map['userEmail'] = userEmail;
+    map['dateTimeSended'] = dateTimeSended;
+    map['theme'] = theme;
+    map['text'] = text;
+    map['user'] = user.toMap();
+    return map;
   }
 }

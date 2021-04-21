@@ -5,19 +5,31 @@ import 'Achievement.dart';
 class MaterialGroup extends Model {
   int materialGroupId;
   List<CS.Material> materials = [];
-  List<Achievement> achievement = [];
+  List<Achievement> achievements = [];
   String groupName;
 
   MaterialGroup({
     this.materialGroupId,
     this.materials,
-    this.achievement,
+    this.achievements,
     this.groupName,
   });
 
   @override
   Map<String, dynamic> toMap() {
-    // TODO: implement toMap
-    throw UnimplementedError();
+    Map<String, dynamic> map = new Map<String, dynamic>();
+    map['materialGroupId'] = materialGroupId;
+    List<Map<String, dynamic>> materialsMaps = [];
+    materials.forEach((element) {
+      materialsMaps.add(element.toMap());
+    });
+    map['materials'] = materialsMaps;
+    List<Map<String, dynamic>> achievementsMaps = [];
+    achievements.forEach((element) {
+      achievementsMaps.add(element.toMap());
+    });
+    map['achievements'] = achievementsMaps;
+    map['groupName'] = groupName;
+    return map;
   }
 }

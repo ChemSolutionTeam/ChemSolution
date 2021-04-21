@@ -26,7 +26,18 @@ class BlogPost extends Model {
 
   @override
   Map<String, dynamic> toMap() {
-    // TODO: implement toMap
-    throw UnimplementedError();
+    Map<String, dynamic> map = new Map<String, dynamic>();
+    map['blogPostId'] = blogPostId;
+    map['title'] = title;
+    map['category'] = category;
+    map['information'] = information;
+    map['isLocked'] = isLocked;
+    map['image'] = image;
+    List<Map<String, dynamic>> usersMaps = [];
+    users.forEach((element) {
+      usersMaps.add(element.toMap());
+    });
+    map['users'] = usersMaps;
+    return map;
   }
 }

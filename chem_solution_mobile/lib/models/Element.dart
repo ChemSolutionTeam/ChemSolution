@@ -80,14 +80,48 @@ class Element extends Model {
           value = 'VIII';
           break;
       }
-      _valence += val.valenceVal.toString() + " ";
+      _valence += value + " ";
     }
     return _valence;
   }
 
   @override
   Map<String, dynamic> toMap() {
-    // TODO: implement toMap
-    throw UnimplementedError();
+    Map<String, dynamic> map = new Map<String, dynamic>();
+    map['elementId'] = elementId;
+    map['symbol'] = symbol;
+    map['name'] = name;
+    map['atomicWeight'] = atomicWeight;
+    map['electronQuantity'] = electronQuantity;
+    map['protonQuantity'] = protonQuantity;
+    map['neutronQuantity'] = neutronQuantity;
+    map['atomicRadius'] = atomicRadius;
+    map['electronegativity'] = electronegativity;
+    map['category'] = category;
+    map['energyLevels'] = energyLevels;
+    map['meltingTemperature'] = meltingTemperature;
+    map['boilingTemperature'] = boilingTemperature;
+    map['isLocked'] = isLocked;
+    map['info'] = info;
+    map['imgAtom'] = imgAtom;
+    map['group'] = group;
+    map['imgSymbol'] = imgSymbol;
+    List<Map<String, dynamic>> usersMaps = [];
+    users.forEach((element) {
+      usersMaps.add(element.toMap());
+    });
+    map['users'] = usersMaps;
+    List<Map<String, dynamic>> materialsMaps = [];
+    materials.forEach((element) {
+      materialsMaps.add(element.toMap());
+    });
+    map['materials'] = materialsMaps;
+    List<Map<String, dynamic>> valencesMaps = [];
+    valences.forEach((element) {
+      valencesMaps.add(element.toMap());
+    });
+
+    map['valences'] = valences;
+    return map;
   }
 }

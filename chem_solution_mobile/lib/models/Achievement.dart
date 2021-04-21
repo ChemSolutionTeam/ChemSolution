@@ -26,7 +26,20 @@ class Achievement extends Model {
 
   @override
   Map<String, dynamic> toMap() {
-    // TODO: implement toMap
-    throw UnimplementedError();
+    Map<String, dynamic> map = new Map<String, dynamic>();
+    map['achievementId'] = achievementId;
+    map['heading'] = heading;
+    map['description'] = description;
+    map['moneyReward'] = moneyReward;
+    map['ratingReward'] = ratingReward;
+    map['countGoal'] = countGoal;
+    map['materialGroupId'] = materialGroupId;
+    map['condition'] = condition.toMap();
+    List<Map<String, dynamic>> usersMaps = [];
+    users.forEach((element) {
+      usersMaps.add(element.toMap());
+    });
+    map['users'] = usersMaps;
+    return map;
   }
 }

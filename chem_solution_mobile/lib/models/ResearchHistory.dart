@@ -19,7 +19,12 @@ class ResearchHistory extends Model {
 
   @override
   Map<String, dynamic> toMap() {
-    // TODO: implement toMap
-    throw UnimplementedError();
+    Map<String, dynamic> map = new Map<String, dynamic>();
+    map['userEmail'] = userEmail;
+    map['materialId'] = materialId;
+    map['material'] = material.toMap();
+    map['user'] = user.toMap();
+    map['dateTime'] = dateTime;
+    return map;
   }
 }
