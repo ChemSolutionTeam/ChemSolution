@@ -19,7 +19,22 @@ class ElementMaterial extends Model {
 
   @override
   Map<String, dynamic> toMap() {
- Map<String, dynamic> map = new Map<String, dynamic>();
+    Map<String, dynamic> map = new Map<String, dynamic>();
+    map['materialId'] = materialId;
+    map['material'] = material.toMap();
+    map['elementId'] = elementId;
+    map['element'] = element.toMap();
+    map['amount'] = amount;
     return map;
+  }
+
+  static ElementMaterial fromObject(dynamic o) {
+    ElementMaterial em = new ElementMaterial();
+    em.materialId = o['materialId'];
+    em.material = CSM.Material.fromObject(o['material']);
+    em.elementId = o['elementId'];
+    em.element = CS.Element.fromObject(o['element']);
+    em.amount = o['amount'];
+    return em;
   }
 }

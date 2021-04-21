@@ -40,4 +40,18 @@ class BlogPost extends Model {
     map['users'] = usersMaps;
     return map;
   }
+
+  static BlogPost fromObject(dynamic o) {
+    BlogPost bp = BlogPost();
+    bp.blogPostId = o['blogPostId'];
+    bp.title = o['title'];
+    bp.category = o['category'];
+    bp.information = o['information'];
+    bp.isLocked = o['isLocked'];
+    bp.image = o['image'];
+    o['users'].forEach((e) {
+      bp.users.add(User.fromObject(e));
+    });
+    return bp;
+  }
 }

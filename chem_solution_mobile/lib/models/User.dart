@@ -15,6 +15,7 @@ class User extends Model {
   int balance;
   int rating;
   int honesty;
+
   List<BlogPost> blogPosts = [];
   List<Achievement> achievement = [];
   List<CS.Element> elements = [];
@@ -80,5 +81,43 @@ class User extends Model {
     });
     map['materials'] = materialsMaps;
     return map;
+  }
+
+/*
+  List<BlogPost> blogPosts = [];
+  List<Achievement> achievement = [];
+  List<CS.Element> elements = [];
+  List<Request> requests = [];
+  List<ResearchHistory> researchHistorys = [];
+  List<CSM.Material> materials = [];
+ */
+  static User fromObject(dynamic o) {
+    User u = new User();
+    u.userEmail = o['userEmail'];
+    u.userName = o['userName'];
+    u.dateOfBirth = o['dateOfBirth'];
+    u.password = o['password'];
+    u.balance = o['balance'];
+    u.rating = o['rating'];
+    u.honesty = o['honesty'];
+    o['blogPosts'].forEach((element) {
+      u.blogPosts.add(BlogPost.fromObject(element));
+    });
+    o['achievement'].forEach((element) {
+      u.achievement.add(Achievement.fromObject(element));
+    });
+    o['elements'].forEach((element) {
+      u.elements.add(CS.Element.fromObject(element));
+    });
+    o['requests'].forEach((element) {
+      u.requests.add(Request.fromObject(element));
+    });
+    o['researchHistorys'].forEach((element) {
+      u.researchHistorys.add(ResearchHistory.fromObject(element));
+    });
+    o['materials'].forEach((element) {
+      u.materials.add(CSM.Material.fromObject(element));
+    });
+    return u;
   }
 }

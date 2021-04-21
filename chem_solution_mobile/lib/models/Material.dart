@@ -11,6 +11,7 @@ class Material extends Model {
   String formula;
   String name;
   String info;
+
   List<CS.Element> elements = [];
   List<User> users = [];
   List<ElementMaterial> elementMaterials = [];
@@ -62,5 +63,30 @@ class Material extends Model {
     map['materialGroup'] = materialGroup.toMap();
     map['materialGroupId'] = materialGroupId;
     return map;
+  }
+
+  static Material fromObject(dynamic o) {
+    Material m = new Material();
+    m.id = o['id'];
+    m.image = o['image'];
+    m.formula = o['formula'];
+    m.name = o['name'];
+    m.info = o['info'];
+    m.materialGroup = MaterialGroup.fromObject(o['materialGroup']);
+    o['elementMaterials'].forEach((e) {
+      m.elementMaterials.add(ElementMaterial.fromObject(e));
+    });
+    o['elements'].forEach((e) {
+      m.elements.add(CS.Element.fromObject(e));
+    });
+    o['researchHistories'].forEach((e) {
+      m.researchHistories.add(ResearchHistory.fromObject(e));
+    });
+    o['users'].forEach((e) {
+      m.users.add(User.fromObject(e));
+    });
+
+    m.materialGroupId = o['materialGroupId'];
+    return m;
   }
 }

@@ -20,4 +20,12 @@ class Valence extends Model {
     map['valenceVal'] = valenceVal;
     return map;
   }
+
+  static Valence fromObject(dynamic o) {
+    Valence v = new Valence();
+    v.element = CS.Element.fromObject(o['element']);
+    v.elementId = o['elementId'];
+    v.valenceVal = o['valenceVal'];
+    return v;
+  }
 }

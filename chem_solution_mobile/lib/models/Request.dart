@@ -26,4 +26,14 @@ class Request extends Model {
     map['user'] = user.toMap();
     return map;
   }
+
+  static Request fromObject(dynamic o) {
+    Request r = new Request();
+    r.dateTimeSended = o['dateTimeSended'];
+    r.text = o['text'];
+    r.theme = o['theme'];
+    r.user = User.fromObject(o['user']);
+    r.userEmail = o['userEmail'];
+    return r;
+  }
 }

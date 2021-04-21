@@ -27,4 +27,14 @@ class ResearchHistory extends Model {
     map['dateTime'] = dateTime;
     return map;
   }
+
+  static ResearchHistory fromObject(dynamic o) {
+    ResearchHistory rh = new ResearchHistory();
+    rh.dateTime=o['dateTime'];
+    rh.material=CS.Material.fromObject(o['material']);
+    rh.materialId=o['materialId'];
+    rh.user=User.fromObject(o['user']);
+    rh.userEmail=o['userEmail'];
+    return rh;
+  }
 }

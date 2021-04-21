@@ -32,4 +32,17 @@ class MaterialGroup extends Model {
     map['groupName'] = groupName;
     return map;
   }
+
+  static MaterialGroup fromObject(dynamic o) {
+    MaterialGroup mg = new MaterialGroup();
+    mg.materialGroupId = o['materialGroupId'];
+    o['materials'].forEach((e) {
+      mg.materials.add(CS.Material.fromObject(e));
+    });
+    o['achievements'].forEach((e) {
+      mg.achievements.add(Achievement.fromObject(e));
+    });
+    mg.groupName = o['groupName'];
+    return mg;
+  }
 }

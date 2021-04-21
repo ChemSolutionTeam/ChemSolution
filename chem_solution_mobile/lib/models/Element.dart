@@ -124,4 +124,39 @@ class Element extends Model {
     map['valences'] = valences;
     return map;
   }
+
+  static Element fromObject(dynamic o) {
+    Element e = new Element();
+    e.elementId = o['elementId'];
+    e.symbol = o['symbol'];
+    e.name = o['name'];
+    e.atomicWeight = o['atomicWeight'];
+    e.electronQuantity = o['electronQuantity'];
+    e.protonQuantity = o['protonQuantity'];
+    e.neutronQuantity = o['neutronQuantity'];
+    e.atomicRadius = o['atomicRadius'];
+    e.electronegativity = o['electronegativity'];
+    e.category = o['category'];
+    e.energyLevels = o['energyLevels'];
+    e.meltingTemperature = o['meltingTemperature'];
+    e.boilingTemperature = o['boilingTemperature'];
+    e.isLocked = o['isLocked'];
+    e.info = o['info'];
+    e.imgAtom = o['imgAtom'];
+    e.group = o['group'];
+    e.imgSymbol = o['imgSymbol'];
+
+    o['users'].forEach((e) {
+      e.users.add(User.fromObject(e));
+    });
+
+    o['materials'].forEach((e) {
+      e.materials.add(CS.Material.fromObject(e));
+    });
+
+    o['valences'].forEach((e) {
+      e.valences.add(Valence.fromObject(e));
+    });
+    return e;
+  }
 }

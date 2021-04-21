@@ -42,4 +42,20 @@ class Achievement extends Model {
     map['users'] = usersMaps;
     return map;
   }
+
+  static Achievement fromObject(dynamic o) {
+    Achievement a = Achievement();
+    a.achievementId = o['achievementId'];
+    a.heading = o['heading'];
+    a.description = o['description'];
+    a.moneyReward = o['moneyReward'];
+    a.ratingReward = o['ratingReward'];
+    a.countGoal = o['countGoal'];
+    a.materialGroupId = o['materialGroupId'];
+    a.condition = MaterialGroup.fromObject(o['condition']);
+    o['users'].forEach((element) {
+      a.users.add(User.fromObject(element));
+    });
+    return a;
+  }
 }
