@@ -27,7 +27,11 @@ Widget cardElementMaterial(String image, Color colorCard, Column column, double 
     color: colorCard,
     clipBehavior: Clip.antiAlias,
     elevation: 5,
-    child: Container(
+    child: AnimatedContainer(
+      decoration: BoxDecoration(
+              color: colorCard,
+            ),
+      duration: Duration(milliseconds: 500),
       height: h,
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Row(

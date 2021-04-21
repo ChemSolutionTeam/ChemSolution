@@ -13,17 +13,35 @@ class ElementCard extends StatefulWidget {
   _ElementCardState createState() => _ElementCardState(element);
 }
 
-class _ElementCardState extends State<ElementCard>
-    with SingleTickerProviderStateMixin {
+class _ElementCardState extends State<ElementCard> {
   ChemElement element;
   Color _colorCard = Colors.white;
   _ElementCardState(this.element);
 
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
+      padding: EdgeInsets.fromLTRB(20, 10, 20, 0),      
       child: GestureDetector(
+        onLongPressStart: (_){
+            setState(() {
+            _colorCard = Color(0xff1dcdfe);
+          });
+        },
+        onLongPressEnd: (_){
+           setState(() {
+            _colorCard = Colors.white;
+          });
+        },
+         onTapDown: (details) {
+          setState(() {
+            _colorCard = Color(0xff21D0B2);
+          });
+        },
+        onTapUp: (details) {
+          _colorCard = Colors.white;
+        },
         onTap: () {
           if (autorised) {
             Navigator.of(context).push(
@@ -37,16 +55,7 @@ class _ElementCardState extends State<ElementCard>
             return alertDialogShow(context, createDialog(context), 200);
           }
         },
-        onTapDown: (details) {
-          setState(() {
-            _colorCard = Color(0xff21D0B2);
-          });
-        },
-        onTapUp: (details) {
-          setState(() {
-            _colorCard = Colors.white;
-          });
-        },
+       
         child: cardElementMaterial(
             element.imgSymbol,
             _colorCard,

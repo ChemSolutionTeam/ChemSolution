@@ -18,6 +18,8 @@ class _BlogCardState extends State<BlogCard> {
   BlogPost post;
   Color _colorLocked = Colors.blueGrey;
   Color _colorNonLocked = Color(0xff1dcdfe);
+  Color _colorCard = Colors.white;
+  Color _colorLike = Color(0xff21D0B2);
 
   FToast fToast;
 
@@ -72,100 +74,142 @@ class _BlogCardState extends State<BlogCard> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-      child: Card(
-        elevation: 5,
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.only(bottom: 10.0),
-                child: Image.network(
-                  post.img,
-                  fit: BoxFit.fitWidth,
-                ),
-              ),
-              Row(
-                children: [
-                  Flexible(
-                    child: Text(
-                      '${post.title}',
-                      style: TextStyle(
-                          fontSize: 20.0,
-                          color: Color(0xff2F455C),
-                          fontWeight: FontWeight.w400),
-                    ),
+      child: GestureDetector(
+        onLongPressStart: (_) {
+          setState(() {
+            _colorNonLocked = Color(0xff2F455C);
+            _colorCard = Color(0xff1dcdfe);
+            _colorLike = Color(0xff2F455C);
+          });
+        },
+        onLongPressEnd: (_) {
+          setState(() {
+            _colorNonLocked = Color(0xff1dcdfe);
+            _colorCard = Colors.white;
+            _colorLike = Color(0xff21D0B2);
+          });
+        },
+        onTapDown: (details) {
+          setState(() {
+            _colorNonLocked = Color(0xff28acd1);
+            _colorCard = Color(0xff21D0B2);
+            _colorLike = Color(0xff28acd1);
+          });
+        },
+        onTapUp: (details) {
+          setState(() {
+            _colorNonLocked = Color(0xff1dcdfe);
+            _colorCard = Colors.white;
+            _colorLike = Color(0xff21D0B2);
+          });
+        },
+        child: Card(
+          elevation: 5,
+          child: AnimatedContainer(
+            decoration: BoxDecoration(
+              color: _colorCard,
+            ),
+            duration: Duration(milliseconds: 500),
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.only(bottom: 10.0),
+                  child: Image.network(
+                    post.img,
+                    fit: BoxFit.fitWidth,
                   ),
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                ),
+                Row(
                   children: [
-                    GestureDetector(
+                    Flexible(
                       child: Text(
-                        'Детальніше...',
-                        //'${post.liked.toString()}',
+                        '${post.title}',
                         style: TextStyle(
-                          color:
-                              !post.isLocked ? _colorNonLocked : _colorLocked,
-                        ),
+                            fontSize: 20.0,
+                            color: Color(0xff2F455C),
+                            fontWeight: FontWeight.w400),
                       ),
-                      onTapDown: (details) {
-                        setState(() {
-                          if (post.isLocked) {
-                            _colorLocked = Color(0xff21D0B2);
-                          } else {
-                            _colorNonLocked = Color(0xff21D0B2);
-                          }
-                        });
-                      },
-                      onTapUp: (details) {
-                        setState(() {
-                          if (post.isLocked) {
-                            _colorLocked = Colors.blueGrey;
-                          } else {
-                            _colorNonLocked = Color(0xff1dcdfe);
-                          }
-                        });
-                      },
-                      onTap: () {
-                        if (post.isLocked) {
-                          return alertDialogShow(context, createDialog(context), 200);
-                        } else {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => PostInfo(
-                                post: post,
-                              ),
-                            ),
-                          );
-                        }
-                      },
                     ),
-                    GestureDetector(
-                      child: Icon(
-                        post.liked ? Icons.favorite : Icons.favorite_border,
-                        color: post.liked ? Color(0xff21D0B2) : null,
-                      ),
-                      onTap: () {
-                        setState(() {
-                          post.liked = !post.liked;
-                        });
-                        if (post.liked) {
-                          _showToast('Додано до обраних', Colors.greenAccent,
-                              Color(0xff005c05), CommunityMaterialIcons.check);
-                        } else {
-                          _showToast('Видалено з обраних', Colors.redAccent,
-                              Color(0xff590000), CommunityMaterialIcons.close);
-                        }
-                      },
-                    )
                   ],
                 ),
-              ),
-            ],
+                Padding(
+                  padding: EdgeInsets.only(top: 10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                        child: Text(
+                          'Детальніше...',
+                          //'${post.liked.toString()}',
+                          style: TextStyle(
+                            color:
+                                !post.isLocked ? _colorNonLocked : _colorLocked,
+                          ),
+                        ),
+                        onTapDown: (details) {
+                          setState(() {
+                            if (post.isLocked) {
+                              _colorLocked = Color(0xff21D0B2);
+                            } else {
+                              _colorNonLocked = Color(0xff21D0B2);
+                            }
+                          });
+                        },
+                        onTapUp: (details) {
+                          _colorCard = Colors.white;
+                          setState(() {
+                            if (post.isLocked) {
+                              _colorLocked = Colors.blueGrey;
+                            } else {
+                              _colorNonLocked = Color(0xff1dcdfe);
+                            }
+                          });
+                        },
+                        onTap: () {
+                          if (post.isLocked) {
+                            return alertDialogShow(
+                                context, createDialog(context), 200);
+                          } else {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => PostInfo(
+                                  post: post,
+                                ),
+                              ),
+                            );
+                          }
+                        },
+                      ),
+                      GestureDetector(
+                        child: Icon(
+                          post.liked ? Icons.favorite : Icons.favorite_border,
+                          color: post.liked ? _colorLike : null,
+                        ),
+                        onTap: () {
+                          setState(() {
+                            post.liked = !post.liked;
+                          });
+                          if (post.liked) {
+                            _showToast(
+                                'Додано до обраних',
+                                Colors.greenAccent,
+                                Color(0xff005c05),
+                                CommunityMaterialIcons.check);
+                          } else {
+                            _showToast(
+                                'Видалено з обраних',
+                                Colors.redAccent,
+                                Color(0xff590000),
+                                CommunityMaterialIcons.close);
+                          }
+                        },
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

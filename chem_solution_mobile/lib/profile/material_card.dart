@@ -28,6 +28,16 @@ class _MaterialCardState extends State<MaterialCard>
             ),
           );
         },
+         onLongPressStart: (_){
+            setState(() {
+            _colorCard = Color(0xff1dcdfe);
+          });
+        },
+        onLongPressEnd: (_){
+           setState(() {
+            _colorCard = Colors.white;
+          });
+        },
         onTapDown: (details) {
           setState(() {
             _colorCard = Color(0xff21D0B2);
