@@ -115,11 +115,17 @@ information2\ninformation2\ninformation2\ninformation2\n''',
           backgroundColor: Color(0xff2F455C),
           title: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
-            child: Text('Збережене',
-                style: TextStyle(
-                    color: Color(0xff21D0B2),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24.0)),
+            child: ListTile(title: Text(
+            'Збережене',
+            style: TextStyle(
+                color: Color(0xff21D0B2),
+                fontSize: 24,
+                fontWeight: FontWeight.bold),
+          ),
+          trailing: Icon(
+        Icons.search,
+        color: Color(0xff21D0B2),
+      ),),
           ),
         ),
         body: Container(

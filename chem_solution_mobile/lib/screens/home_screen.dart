@@ -1,4 +1,3 @@
-
 import 'package:chem_solution_mobile/blog/blog_page.dart';
 import 'package:chem_solution_mobile/elements/elements_page.dart';
 import 'package:chem_solution_mobile/info/informations_page.dart';
@@ -37,13 +36,16 @@ class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
         width: 40.0,
         height: 40.0,
       ),
-    
       title: Text(
         'ChemSolution',
         style: TextStyle(
             color: Color(0xff21D0B2),
             fontWeight: FontWeight.bold,
             fontSize: 24.0),
+      ),
+      trailing: Icon(
+        Icons.search,
+        color: Color(0xff21D0B2),
       ),
     ),
   );

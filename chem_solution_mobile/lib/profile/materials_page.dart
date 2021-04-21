@@ -94,13 +94,17 @@ class _MaterialsState extends State<Materials>
         backgroundColor: Color(0xffEBFAFF),
         appBar: new AppBar(
           backgroundColor: Color(0xff2F455C),
-          title: new Text(
+          title: ListTile(title: Text(
             'Відкриті речовини',
             style: TextStyle(
                 color: Color(0xff21D0B2),
                 fontSize: 24,
                 fontWeight: FontWeight.bold),
           ),
+          trailing: Icon(
+        Icons.search,
+        color: Color(0xff21D0B2),
+      ),),
         ),
         body: Container(
           child: AnimatedList(
