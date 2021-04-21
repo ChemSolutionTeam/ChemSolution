@@ -1,4 +1,4 @@
-import 'package:chem_solution_mobile/models/Molecule.dart';
+import 'package:chem_solution_mobile/models/Material.dart' as CS;
 import 'package:chem_solution_mobile/models/MaterialGroup.dart';
 import 'package:chem_solution_mobile/profile/material_card.dart';
 import 'package:chem_solution_mobile/widgets/search_field.dart';
@@ -22,8 +22,8 @@ class _MaterialsState extends State<Materials>
   Animation<Offset> _offsetAnimationToRight;
 
   void _addMaterials() {
-    List<Molecule> temp = [
-      new Molecule(
+    List<CS.Material> temp = [
+      new CS.Material(
         id: 1,
         image:
             'https://lh3.googleusercontent.com/proxy/mo5YkbgOTkcb-5VOl3iYSchHP8JijvWSznG7OItQOdjTg5cpm0THdCSYXq-aRipP_ozX9kTKhSgTqk6E_65abunjlraDDUA2X6z7_uT1YvrkcoZTrdrSVYdFIH6xO2YNkFTVaTWvxMTenee2jjNH0_LOOqBR98ac0rPEY6_15y5CG2osC2Q4',
@@ -32,7 +32,7 @@ class _MaterialsState extends State<Materials>
         info: 'бла бла',
         materialGroup: MaterialGroup(groupName: 'Луги'),
       ),
-      new Molecule(
+      new CS.Material(
         id: 2,
         image:
             'https://img02.flagma.ua/photo/sernaya-kislota-40-sirchana-kislota-h2so4-16359806_big.jpg',
@@ -41,7 +41,7 @@ class _MaterialsState extends State<Materials>
         info: 'бла бла бла',
         materialGroup: MaterialGroup(groupName: 'Кислоти'),
       ),
-      new Molecule(
+      new CS.Material(
         id: 3,
         image: 'https://altenergy.in.ua/wp-content/uploads/2016/10/co2.jpg',
         formula: 'CO2',

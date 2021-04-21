@@ -1,9 +1,9 @@
-import 'package:chem_solution_mobile/models/ChemElement.dart';
+import 'package:chem_solution_mobile/models/Element.dart' as CS;
 import 'package:chem_solution_mobile/widgets/element_material_info.dart';
 import 'package:flutter/material.dart';
 
 class ElementInfo extends StatelessWidget {
-  final ChemElement element;
+  final CS.Element element;
   const ElementInfo({Key key, @required this.element}) : super(key: key);
 
   @override

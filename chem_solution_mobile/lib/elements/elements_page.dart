@@ -1,5 +1,5 @@
 import 'package:chem_solution_mobile/elements/element_card.dart';
-import 'package:chem_solution_mobile/models/ChemElement.dart';
+import 'package:chem_solution_mobile/models/Element.dart' as CS;
 import 'package:chem_solution_mobile/models/Valence.dart';
 import 'package:flutter/material.dart';
 
@@ -20,8 +20,8 @@ class _ElementsState extends State<Elements>
   Animation<Offset> _offsetAnimationToRight;
 
   void _addElements() {
-    List<ChemElement> temp = [
-      new ChemElement(
+    List<CS.Element> temp = [
+      new CS.Element(
           elementId: 1,
           symbol: 'H',
           name: 'Гідроген',
@@ -33,7 +33,7 @@ class _ElementsState extends State<Elements>
               'https://i.yaklass.by/res/659b46b2-754a-414f-a138-1149c2710f01/vodorod.jpg',
           imgAtom:
               'https://indicator.ru/thumb/2250x0/filters:quality(75):no_upscale()/imgs/2019/08/13/13/3515248/e388b0fea75f40fa2f7f992e2825a976b85eb50f.jpg'),
-      new ChemElement(
+      new CS.Element(
           elementId: 2,
           symbol: 'He',
           name: 'Гелій',

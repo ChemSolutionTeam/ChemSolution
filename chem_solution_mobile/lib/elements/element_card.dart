@@ -1,12 +1,12 @@
 import 'package:chem_solution_mobile/elements/element_info.dart';
 import 'package:chem_solution_mobile/main.dart';
-import 'package:chem_solution_mobile/models/ChemElement.dart';
+import 'package:chem_solution_mobile/models/Element.dart' as CS;
 import 'package:chem_solution_mobile/widgets/element_material_card.dart';
 import 'package:flutter/material.dart';
 import 'package:chem_solution_mobile/assets/alerts.dart';
 
 class ElementCard extends StatefulWidget {
-  final ChemElement element;
+  final CS.Element element;
   ElementCard({Key key, @required this.element}) : super(key: key);
 
   @override
@@ -14,7 +14,7 @@ class ElementCard extends StatefulWidget {
 }
 
 class _ElementCardState extends State<ElementCard> {
-  ChemElement element;
+  CS.Element element;
   Color _colorCard = Colors.white;
   _ElementCardState(this.element);
 

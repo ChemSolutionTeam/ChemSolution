@@ -1,9 +1,9 @@
-import 'package:chem_solution_mobile/models/Molecule.dart';
+import 'package:chem_solution_mobile/models/Material.dart' as CS;
 import 'package:chem_solution_mobile/widgets/element_material_info.dart';
 import 'package:flutter/material.dart';
 
 class MaterialInfo extends StatelessWidget {
-  final Molecule material;
+  final CS.Material material;
   const MaterialInfo({Key key, @required this.material}) : super(key: key);
 
   @override

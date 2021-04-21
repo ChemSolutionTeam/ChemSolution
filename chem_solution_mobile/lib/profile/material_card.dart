@@ -1,10 +1,10 @@
-import 'package:chem_solution_mobile/models/Molecule.dart';
+import 'package:chem_solution_mobile/models/Material.dart' as CS;
 import 'package:chem_solution_mobile/profile/material_info.dart';
 import 'package:chem_solution_mobile/widgets/element_material_card.dart';
 import 'package:flutter/material.dart';
 
 class MaterialCard extends StatefulWidget {
-  final Molecule material;
+  final CS.Material material;
   MaterialCard({Key key, @required this.material}) : super(key: key);
 
   @override
@@ -13,7 +13,7 @@ class MaterialCard extends StatefulWidget {
 
 class _MaterialCardState extends State<MaterialCard>
     with SingleTickerProviderStateMixin {
-  Molecule material;
+  CS.Material material;
   Color _colorCard = Colors.white;
   _MaterialCardState({this.material});
   @override

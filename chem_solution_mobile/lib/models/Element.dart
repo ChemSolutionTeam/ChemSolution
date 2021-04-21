@@ -1,9 +1,9 @@
-import 'package:chem_solution_mobile/models/Molecule.dart';
+import 'package:chem_solution_mobile/models/Material.dart' as CS;
 import 'User.dart';
 import 'Valence.dart';
 import 'Model.dart';
 
-class ChemElement extends Model {
+class Element extends Model {
   int elementId;
   String symbol;
   String name;
@@ -24,10 +24,10 @@ class ChemElement extends Model {
   int group;
 
   List<User> users = [];
-  List<Molecule> materials = [];
+  List<CS.Material> materials = [];
   List<Valence> valences = [];
 
-  ChemElement(
+  Element(
       {this.elementId,
       this.symbol,
       this.name,

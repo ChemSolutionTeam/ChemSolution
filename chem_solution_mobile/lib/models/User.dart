@@ -1,6 +1,6 @@
-import 'package:chem_solution_mobile/models/ChemElement.dart';
+import 'package:chem_solution_mobile/models/Element.dart' as CS;
 import 'package:chem_solution_mobile/models/Model.dart';
-import 'package:chem_solution_mobile/models/Molecule.dart';
+import 'package:chem_solution_mobile/models/Material.dart' as CSM;
 
 import 'BlogPost.dart';
 import 'Achievement.dart';
@@ -17,10 +17,10 @@ class User extends Model {
   int honesty;
   List<BlogPost> blogPosts = [];
   List<Achievement> achievement = [];
-  List<ChemElement> elements = [];
+  List<CS.Element> elements = [];
   List<Request> requests = [];
   List<ResearchHistory> researchHistorys = [];
-  List<Molecule> materials = [];
+  List<CSM.Material> materials = [];
 
   User({
     this.achievement,

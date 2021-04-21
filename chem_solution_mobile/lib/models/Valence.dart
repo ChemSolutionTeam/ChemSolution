@@ -1,9 +1,9 @@
-import 'package:chem_solution_mobile/models/ChemElement.dart';
+import 'package:chem_solution_mobile/models/Element.dart' as CS;
 import 'package:chem_solution_mobile/models/Model.dart';
 
 class Valence extends Model {
   int elementId;
-  ChemElement element;
+  CS.Element element;
   int valenceVal;
 
   Valence({

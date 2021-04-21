@@ -1,12 +1,12 @@
-import 'package:chem_solution_mobile/models/ChemElement.dart';
+import 'package:chem_solution_mobile/models/Element.dart' as CS;
 import 'package:chem_solution_mobile/models/Model.dart';
-import 'package:chem_solution_mobile/models/Molecule.dart';
+import 'package:chem_solution_mobile/models/Material.dart' as CSM;
 
 class ElementMaterial extends Model {
   int materialId;
-  Molecule material;
+  CSM.Material material;
   int elementId;
-  ChemElement element;
+  CS.Element element;
   int amount;
 
   ElementMaterial({
