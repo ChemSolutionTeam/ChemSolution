@@ -56,6 +56,8 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/images/logo2.png
+    - assets/images/AtomCoinGreen.png
+    - assets/images/Trophy.png
   fonts:
     - family: CenturyGothic
       fonts:

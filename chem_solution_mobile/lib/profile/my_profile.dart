@@ -10,14 +10,16 @@ class MyProfile extends StatefulWidget {
 }
 
 class _MyProfileState extends State<MyProfile> {
-  Widget _tile(IconData data, String title, String subtitle) {
+  Widget _tile(Widget icon, String title, String subtitle) {
     return Container(
       padding: EdgeInsets.all(15),
       child: ListTile(
-        leading: Icon(
+        leading:
+            /* Icon(
           data,
           color: Color(0xff21D0B2),
-        ),
+        ), */
+            icon,
         title: Text(
           title,
           style: TextStyle(
@@ -60,12 +62,44 @@ class _MyProfileState extends State<MyProfile> {
           alignment: Alignment.center,
           child: ListView(
             children: [
-              _tile(CommunityMaterialIcons.face_profile, 'Логін', 'login'),
-              _tile(Icons.mail, 'Електронна пошта', 'blabla@nure.ua'),
-              _tile(Icons.cake, 'Дата народження', '18.12.2000'),
+              _tile(
+                  Icon(
+                    CommunityMaterialIcons.face_profile,
+                    color: Color(0xff21D0B2),
+                  ),
+                  'Логін',
+                  'login'),
+              _tile(
+                  Icon(
+                    Icons.mail,
+                    color: Color(0xff21D0B2),
+                  ),
+                  'Електронна пошта',
+                  'blabla@nure.ua'),
+              _tile(
+                  Icon(
+                    Icons.cake,
+                    color: Color(0xff21D0B2),
+                  ),
+                  'Дата народження',
+                  '18.12.2000'),
               //must add needed icons
-              _tile(CommunityMaterialIcons.cash, 'Баланс', '2000'),
-              _tile(CommunityMaterialIcons.scoreboard, 'Рейтинг', '2000'),
+              _tile(
+                  Image.asset(
+        'assets/images/AtomCoinGreen.png',
+        width: 30.0,
+        height: 30.0,
+      ),
+                  'Баланс',
+                  '2000'),
+              _tile(
+                 Image.asset(
+        'assets/images/Trophy.png',
+        width: 30.0,
+        height: 30.0,
+      ),
+                  'Рейтинг',
+                  '2000'),
             ],
           ),
         ),
@@ -73,18 +107,21 @@ class _MyProfileState extends State<MyProfile> {
           color: Color(0xff2F455C),
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-            child: Row(mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-                 TextButton(
-              onPressed: () {
-                toBrowser(context, 'https://www.google.com', 'Редагування даних');
-              },
-              child: Text(
-                'Редагувати',
-                style: TextStyle(color: Color(0xff21D0B2), fontSize: 20),
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    toBrowser(
+                        context, 'https://www.google.com', 'Редагування даних');
+                  },
+                  child: Text(
+                    'Редагувати',
+                    style: TextStyle(color: Color(0xff21D0B2), fontSize: 20),
+                  ),
+                ),
+              ],
             ),
-            ],),
           ),
         ),
       ),
