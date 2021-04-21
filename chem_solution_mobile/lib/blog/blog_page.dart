@@ -73,7 +73,11 @@ information2\ninformation2\ninformation2\ninformation2\n''',
     });
   }
 
-
+ @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {

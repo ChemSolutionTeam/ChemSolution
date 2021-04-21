@@ -1,4 +1,5 @@
 import 'package:chem_solution_mobile/profile/liked_posts.dart';
+import 'package:chem_solution_mobile/profile/materials_page.dart';
 import 'package:chem_solution_mobile/profile/my_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:chem_solution_mobile/main.dart';
@@ -207,7 +208,13 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
             SlideTransition(
               position: _offsetAnimationToRight,
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => Materials(),
+                    ),
+                  );
+                },
                 child: _card(
                   context,
                   Color(0xff1DCDFE),

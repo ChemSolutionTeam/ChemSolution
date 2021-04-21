@@ -11,7 +11,6 @@ class Elements extends StatefulWidget {
 
 class _ElementsState extends State<Elements>
     with SingleTickerProviderStateMixin {
-
   List<Widget> elements = [];
   final GlobalKey<AnimatedListState> _key = new GlobalKey<AnimatedListState>();
 
@@ -72,6 +71,12 @@ class _ElementsState extends State<Elements>
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _addElements();
     });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
