@@ -43,17 +43,25 @@ namespace ChemSolution.Controllers
             return user;
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id}&{key}")]
         [Authorize]
-        public async Task<IActionResult> PutUser(string id, User user)
+        public async Task<IActionResult> PutUser(string id,string key, User user)
         {
             if (id != user.UserEmail)
             {
                 return BadRequest();
             }
-
-            _context.Entry(user).State = EntityState.Modified;
-
+            var tmpUser = await _context.Users.FindAsync(user.UserEmail);
+            if (tmpUser != null)
+            {
+                tmpUser.UserName = user.UserName ?? tmpUser.UserName;
+                tmpUser.Password = user.Password ?? tmpUser.Password;
+                tmpUser.DateOfBirth = (user.DateOfBirth != default)?user.DateOfBirth:tmpUser.DateOfBirth;
+            }
+            else
+            {
+                return NotFound();
+            }
             try
             {
                 await _context.SaveChangesAsync();
