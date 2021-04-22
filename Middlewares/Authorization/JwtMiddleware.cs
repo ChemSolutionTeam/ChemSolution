@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using ChemSolution.Data;
 using ChemSolution.Middlewares.Authorization.Models;
 using ChemSolution.Middlewares.Authorization.Settings;
+using ChemSolution.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -25,10 +26,13 @@ namespace ChemSolution.Middlewares.Authorization
         }
         public async Task InvokeAsync(HttpContext context, DataContext dbContext)
         {
-            if(context.Request.Path.Value?.Split("/").Last() == "GetJwt")
+            if(context.Request.Path.Value?.Split("/").Last() == "getjwt")
             {
-                var identity = await GetIdentityAsync(dbContext, context.Request.Query["login"],
+                var identity = await GetIdentityAsync(dbContext, context.Request.Query["email"],
                     context.Request.Query["password"]);
+
+                var tmp = context.Request.Body;
+                
                 if (identity != null)
                 {
                     var now = DateTime.UtcNow;

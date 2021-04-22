@@ -14,17 +14,19 @@ namespace ChemSolution.Controllers
 {
     [ApiController]
     [Route("/users")]
-    public class UserController:ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly ILogger<UserController> _logger;
         private readonly DataContext _context;
+
         public UserController(ILogger<UserController> logger, DataContext context)
         {
-            
+
             _logger = logger;
             _context = context;
         }
-        [HttpPost] 
+
+        [HttpPost]
         public async Task<IActionResult> Post(UserRegister user)
         {
             if (ModelState.IsValid)
@@ -40,15 +42,8 @@ namespace ChemSolution.Controllers
                     _logger.LogInformation($"User {user.UserName} was created {DateTime.UtcNow.ToString()}");
                     return StatusCode(201);
                 }
-                else
-                {
-                    return StatusCode(409);
-                }
             }
-            else
-            {
-                return StatusCode(400);
-            }
+            return StatusCode(400);
         }
     }
 }
