@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ChemSolution.Data;
 using ChemSolution.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ChemSolution.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class RequestsController : ControllerBase
     {
@@ -21,15 +22,15 @@ namespace ChemSolution.Controllers
             _context = context;
         }
 
-        // GET: api/Requests
         [HttpGet]
+        [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<ActionResult<IEnumerable<Request>>> GetRequests()
         {
             return await _context.Requests.ToListAsync();
         }
 
-        // GET: api/Requests/5
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<Request>> GetRequest(string id)
         {
             var request = await _context.Requests.FindAsync(id);
@@ -42,9 +43,8 @@ namespace ChemSolution.Controllers
             return request;
         }
 
-        // PUT: api/Requests/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<IActionResult> PutRequest(string id, Request request)
         {
             if (id != request.UserEmail)
@@ -73,9 +73,8 @@ namespace ChemSolution.Controllers
             return NoContent();
         }
 
-        // POST: api/Requests
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles = Startup.Roles.User)]
         public async Task<ActionResult<Request>> PostRequest(Request request)
         {
             _context.Requests.Add(request);
@@ -98,8 +97,8 @@ namespace ChemSolution.Controllers
             return CreatedAtAction("GetRequest", new { id = request.UserEmail }, request);
         }
 
-        // DELETE: api/Requests/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<IActionResult> DeleteRequest(string id)
         {
             var request = await _context.Requests.FindAsync(id);
@@ -113,7 +112,7 @@ namespace ChemSolution.Controllers
 
             return NoContent();
         }
-
+        [Authorize(Roles = Startup.Roles.Admin)]
         private bool RequestExists(string id)
         {
             return _context.Requests.Any(e => e.UserEmail == id);

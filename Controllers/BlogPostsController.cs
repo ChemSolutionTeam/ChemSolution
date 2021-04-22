@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ChemSolution.Data;
 using ChemSolution.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ChemSolution.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class BlogPostsController : ControllerBase
     {
@@ -21,15 +22,15 @@ namespace ChemSolution.Controllers
             _context = context;
         }
 
-        // GET: api/BlogPosts
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<BlogPost>>> GetBlogPosts()
         {
             return await _context.BlogPosts.ToListAsync();
         }
 
-        // GET: api/BlogPosts/5
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<BlogPost>> GetBlogPost(int id)
         {
             var blogPost = await _context.BlogPosts.FindAsync(id);
@@ -42,9 +43,8 @@ namespace ChemSolution.Controllers
             return blogPost;
         }
 
-        // PUT: api/BlogPosts/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<IActionResult> PutBlogPost(int id, BlogPost blogPost)
         {
             if (id != blogPost.BlogPostId)
@@ -73,9 +73,8 @@ namespace ChemSolution.Controllers
             return NoContent();
         }
 
-        // POST: api/BlogPosts
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<ActionResult<BlogPost>> PostBlogPost(BlogPost blogPost)
         {
             _context.BlogPosts.Add(blogPost);
@@ -84,8 +83,8 @@ namespace ChemSolution.Controllers
             return CreatedAtAction("GetBlogPost", new { id = blogPost.BlogPostId }, blogPost);
         }
 
-        // DELETE: api/BlogPosts/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<IActionResult> DeleteBlogPost(int id)
         {
             var blogPost = await _context.BlogPosts.FindAsync(id);

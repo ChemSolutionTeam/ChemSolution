@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ChemSolution.Data;
 using ChemSolution.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ChemSolution.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class MaterialsController : ControllerBase
     {
@@ -21,15 +22,15 @@ namespace ChemSolution.Controllers
             _context = context;
         }
 
-        // GET: api/Materials
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<Material>>> GetMaterials()
         {
             return await _context.Materials.ToListAsync();
         }
 
-        // GET: api/Materials/5
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<Material>> GetMaterial(int id)
         {
             var material = await _context.Materials.FindAsync(id);
@@ -42,9 +43,8 @@ namespace ChemSolution.Controllers
             return material;
         }
 
-        // PUT: api/Materials/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<IActionResult> PutMaterial(int id, Material material)
         {
             if (id != material.Id)
@@ -73,9 +73,8 @@ namespace ChemSolution.Controllers
             return NoContent();
         }
 
-        // POST: api/Materials
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<ActionResult<Material>> PostMaterial(Material material)
         {
             _context.Materials.Add(material);
@@ -84,8 +83,8 @@ namespace ChemSolution.Controllers
             return CreatedAtAction("GetMaterial", new { id = material.Id }, material);
         }
 
-        // DELETE: api/Materials/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<IActionResult> DeleteMaterial(int id)
         {
             var material = await _context.Materials.FindAsync(id);
@@ -99,7 +98,7 @@ namespace ChemSolution.Controllers
 
             return NoContent();
         }
-
+        [Authorize(Roles = Startup.Roles.Admin)]
         private bool MaterialExists(int id)
         {
             return _context.Materials.Any(e => e.Id == id);

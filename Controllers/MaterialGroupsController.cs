@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ChemSolution.Data;
 using ChemSolution.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ChemSolution.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
+    [Authorize(Roles = Startup.Roles.Admin)]
     public class MaterialGroupsController : ControllerBase
     {
         private readonly DataContext _context;
@@ -21,14 +23,12 @@ namespace ChemSolution.Controllers
             _context = context;
         }
 
-        // GET: api/MaterialGroups
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MaterialGroup>>> GetMaterialGroups()
         {
             return await _context.MaterialGroups.ToListAsync();
         }
 
-        // GET: api/MaterialGroups/5
         [HttpGet("{id}")]
         public async Task<ActionResult<MaterialGroup>> GetMaterialGroup(int id)
         {
@@ -42,8 +42,6 @@ namespace ChemSolution.Controllers
             return materialGroup;
         }
 
-        // PUT: api/MaterialGroups/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutMaterialGroup(int id, MaterialGroup materialGroup)
         {
@@ -73,8 +71,6 @@ namespace ChemSolution.Controllers
             return NoContent();
         }
 
-        // POST: api/MaterialGroups
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<MaterialGroup>> PostMaterialGroup(MaterialGroup materialGroup)
         {
@@ -84,7 +80,6 @@ namespace ChemSolution.Controllers
             return CreatedAtAction("GetMaterialGroup", new { id = materialGroup.MaterialGroupId }, materialGroup);
         }
 
-        // DELETE: api/MaterialGroups/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMaterialGroup(int id)
         {
