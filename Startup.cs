@@ -22,6 +22,12 @@ namespace ChemSolution
 {
     public class Startup
     {
+        public static class Roles
+        {
+            public const string Admin = "Admin";
+            public const string User = "User";
+        }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;

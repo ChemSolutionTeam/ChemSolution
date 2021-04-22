@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ChemSolution.Data;
 using ChemSolution.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ChemSolution.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class ElementsController : ControllerBase
     {
@@ -21,15 +22,15 @@ namespace ChemSolution.Controllers
             _context = context;
         }
 
-        // GET: api/Elements
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<Element>>> GetElements()
         {
             return await _context.Elements.ToListAsync();
         }
 
-        // GET: api/Elements/5
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<Element>> GetElement(int id)
         {
             var element = await _context.Elements.FindAsync(id);
@@ -42,9 +43,8 @@ namespace ChemSolution.Controllers
             return element;
         }
 
-        // PUT: api/Elements/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<IActionResult> PutElement(int id, Element element)
         {
             if (id != element.ElementId)
@@ -73,19 +73,17 @@ namespace ChemSolution.Controllers
             return NoContent();
         }
 
-        // POST: api/Elements
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<ActionResult<Element>> PostElement(Element element)
         {
-            _context.Elements.Add(element);
+            await _context.Elements.AddAsync(element);
             await _context.SaveChangesAsync();
-
             return CreatedAtAction("GetElement", new { id = element.ElementId }, element);
         }
 
-        // DELETE: api/Elements/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<IActionResult> DeleteElement(int id)
         {
             var element = await _context.Elements.FindAsync(id);

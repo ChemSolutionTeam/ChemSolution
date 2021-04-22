@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ChemSolution.Data;
 using ChemSolution.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ChemSolution.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class AchievementsController : ControllerBase
     {
@@ -21,15 +22,15 @@ namespace ChemSolution.Controllers
             _context = context;
         }
 
-        // GET: api/Achievements
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<Achievement>>> GetAchievements()
         {
             return await _context.Achievements.ToListAsync();
         }
 
-        // GET: api/Achievements/5
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<Achievement>> GetAchievement(int id)
         {
             var achievement = await _context.Achievements.FindAsync(id);
@@ -42,9 +43,9 @@ namespace ChemSolution.Controllers
             return achievement;
         }
 
-        // PUT: api/Achievements/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        
         [HttpPut("{id}")]
+        [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<IActionResult> PutAchievement(int id, Achievement achievement)
         {
             if (id != achievement.AchievementId)
@@ -73,19 +74,18 @@ namespace ChemSolution.Controllers
             return NoContent();
         }
 
-        // POST: api/Achievements
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<ActionResult<Achievement>> PostAchievement(Achievement achievement)
         {
-            _context.Achievements.Add(achievement);
+            await _context.Achievements.AddAsync(achievement);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetAchievement", new { id = achievement.AchievementId }, achievement);
         }
 
-        // DELETE: api/Achievements/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<IActionResult> DeleteAchievement(int id)
         {
             var achievement = await _context.Achievements.FindAsync(id);
