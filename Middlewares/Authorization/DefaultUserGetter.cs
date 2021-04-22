@@ -25,7 +25,7 @@ namespace ChemSolution.Middlewares.Authorization
                     var user = await curContext.Users.SingleOrDefaultAsync(u => u.UserEmail == login && u.Password == password);
                     if (user != null)
                     {
-                        return new JwtUser() {Login = user.UserEmail, Password = user.Password, Role = "User"};
+                        return new JwtUser() {Login = user.UserEmail, Password = user.Password, Role = user.Role};
                     }
                 }
             }

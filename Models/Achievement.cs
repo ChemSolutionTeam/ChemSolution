@@ -16,7 +16,9 @@ namespace ChemSolution.Models
         public int MoneyReward { get; set; }
         [Range(0, int.MaxValue)]
         public int RatingReward { get; set; }
+        [Range(0, int.MaxValue)]
         public int CountGoal { get; set; }
+        public string ImgAchievemen { set; get; }
         public int MaterialGroupId { get; set; }
         public MaterialGroup Condition { get; set; }
         public List<User> Users { set; get; } = new List<User>();
