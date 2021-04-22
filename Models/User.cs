@@ -20,6 +20,7 @@ namespace ChemSolution.Models
         public int Rating { set; get; }
         [Range(0, int.MaxValue)]
         public int Honesty { set; get; }
+        public string Role { set; get; } = Startup.Roles.User; 
         public List<BlogPost> BlogPosts { set; get; } = new List<BlogPost>();
         public List<Achievement> Achievement { set; get; } = new List<Achievement>();
         public List<Element> Elements { set; get; } = new List<Element>();
