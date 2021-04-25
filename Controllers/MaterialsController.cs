@@ -23,14 +23,12 @@ namespace ChemSolution.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult<IEnumerable<Material>>> GetMaterials()
         {
             return await _context.Materials.ToListAsync();
         }
 
         [HttpGet("{id}")]
-        [Authorize]
         public async Task<ActionResult<Material>> GetMaterial(int id)
         {
             var material = await _context.Materials.FindAsync(id);

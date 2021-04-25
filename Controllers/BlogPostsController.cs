@@ -23,14 +23,12 @@ namespace ChemSolution.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult<IEnumerable<BlogPost>>> GetBlogPosts()
         {
             return await _context.BlogPosts.ToListAsync();
         }
 
         [HttpGet("{id}")]
-        [Authorize]
         public async Task<ActionResult<BlogPost>> GetBlogPost(int id)
         {
             var blogPost = await _context.BlogPosts.FindAsync(id);

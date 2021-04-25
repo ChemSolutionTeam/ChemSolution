@@ -13,7 +13,7 @@ namespace ChemSolution.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [Authorize(Roles = Startup.Roles.Admin)]
+    
     public class MaterialGroupsController : ControllerBase
     {
         private readonly DataContext _context;
@@ -43,6 +43,7 @@ namespace ChemSolution.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<IActionResult> PutMaterialGroup(int id, MaterialGroup materialGroup)
         {
             if (id != materialGroup.MaterialGroupId)
@@ -72,6 +73,7 @@ namespace ChemSolution.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<ActionResult<MaterialGroup>> PostMaterialGroup(MaterialGroup materialGroup)
         {
             _context.MaterialGroups.Add(materialGroup);
@@ -81,6 +83,7 @@ namespace ChemSolution.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<IActionResult> DeleteMaterialGroup(int id)
         {
             var materialGroup = await _context.MaterialGroups.FindAsync(id);

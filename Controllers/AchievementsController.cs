@@ -23,14 +23,12 @@ namespace ChemSolution.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult<IEnumerable<Achievement>>> GetAchievements()
         {
             return await _context.Achievements.ToListAsync();
         }
 
         [HttpGet("{id}")]
-        [Authorize]
         public async Task<ActionResult<Achievement>> GetAchievement(int id)
         {
             var achievement = await _context.Achievements.FindAsync(id);

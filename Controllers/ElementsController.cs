@@ -23,14 +23,12 @@ namespace ChemSolution.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult<IEnumerable<Element>>> GetElements()
         {
             return await _context.Elements.ToListAsync();
         }
 
         [HttpGet("{id}")]
-        [Authorize]
         public async Task<ActionResult<Element>> GetElement(int id)
         {
             var element = await _context.Elements.FindAsync(id);

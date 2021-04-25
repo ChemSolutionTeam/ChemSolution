@@ -23,14 +23,12 @@ namespace ChemSolution.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<ActionResult<IEnumerable<Request>>> GetRequests()
         {
             return await _context.Requests.ToListAsync();
         }
 
         [HttpGet("{id}")]
-        [Authorize]
         public async Task<ActionResult<Request>> GetRequest(string id)
         {
             var request = await _context.Requests.FindAsync(id);
