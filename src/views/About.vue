@@ -5,12 +5,11 @@
   </div>
 </template>
 <script>
-
-import RegisterForm from "@/components/RegisterForm.vue";
+import RegisterForm from '@/components/RegisterForm.vue'
 export default {
-  name: "About",
+  name: 'About',
   components: {
     RegisterForm,
   },
-};
+}
 </script>
