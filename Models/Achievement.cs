@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ChemSolution.Models
 {
@@ -19,8 +20,8 @@ namespace ChemSolution.Models
         [Range(0, int.MaxValue)]
         public int CountGoal { get; set; }
         public string ImgAchievemen { set; get; }
-        public int MaterialGroupId { get; set; }
-        public MaterialGroup Condition { get; set; }
+        public int? MaterialGroupId { get; set; }
+        public MaterialGroup MaterialGroup { get; set; }
         public List<User> Users { set; get; } = new List<User>();
     }
 }

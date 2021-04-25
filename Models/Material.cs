@@ -19,7 +19,7 @@ namespace ChemSolution.Models
         public List<ResearchHistory> ResearchHistories { set; get; } = new List<ResearchHistory>();
 
         public MaterialGroup MaterialGroup { set; get; }
-        public int MaterialGroupId { set; get; }
+        public int? MaterialGroupId { set; get; }
 
     }
 }

@@ -3,14 +3,16 @@ using System;
 using ChemSolution.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ChemSolution.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210425115044_Fix7")]
+    partial class Fix7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -212,7 +214,7 @@ namespace ChemSolution.Migrations
                     b.Property<string>("Info")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("MaterialGroupId")
+                    b.Property<int>("MaterialGroupId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
@@ -269,7 +271,7 @@ namespace ChemSolution.Migrations
                     b.Property<string>("UserEmail")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("MaterialId")
+                    b.Property<int>("MaterialId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("DateTime")
@@ -317,7 +319,7 @@ namespace ChemSolution.Migrations
 
             modelBuilder.Entity("ChemSolution.Models.Valence", b =>
                 {
-                    b.Property<int?>("ElementId")
+                    b.Property<int>("ElementId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("ValenceVal")
@@ -360,11 +362,11 @@ namespace ChemSolution.Migrations
 
             modelBuilder.Entity("ChemSolution.Models.Achievement", b =>
                 {
-                    b.HasOne("ChemSolution.Models.MaterialGroup", "MaterialGroup")
+                    b.HasOne("ChemSolution.Models.MaterialGroup", "Condition")
                         .WithMany("Achievement")
                         .HasForeignKey("MaterialGroupId");
 
-                    b.Navigation("MaterialGroup");
+                    b.Navigation("Condition");
                 });
 
             modelBuilder.Entity("ChemSolution.Models.Element", b =>
@@ -397,7 +399,9 @@ namespace ChemSolution.Migrations
                 {
                     b.HasOne("ChemSolution.Models.MaterialGroup", "MaterialGroup")
                         .WithMany("Materials")
-                        .HasForeignKey("MaterialGroupId");
+                        .HasForeignKey("MaterialGroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("MaterialGroup");
                 });
