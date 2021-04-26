@@ -22,6 +22,8 @@ namespace ChemSolution
 {
     public class Startup
     {
+
+        private readonly string _AllowSpecificOrigins = "_AllowSpecificOrigins"; 
         public static class Roles
         {
             public const string Admin = "Admin";
@@ -37,7 +39,17 @@ namespace ChemSolution
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name:_AllowSpecificOrigins, builder =>
+                {
+                    builder.WithOrigins("http://localhost:8080", "https://localhost:8080")
+                        .AllowAnyOrigin()
+                        .AllowCredentials()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                } );
+            } );
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddCookie(cfg => { cfg.SlidingExpiration = true; })
                 .AddJwtBearer(options =>
@@ -99,6 +111,8 @@ namespace ChemSolution
 
             app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseCors(_AllowSpecificOrigins);
+            
             app.UseAuthentication();
             app.UseAuthorization();
 
