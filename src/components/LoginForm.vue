@@ -83,7 +83,7 @@
 <script>
 import BaseInput from '@/components/BaseInput.vue'
 import BaseCheck from '@/components/BaseCheck.vue'
-
+import apiService from '@/services/index.js'
 export default {
   name: 'LoginForm',
   components: {
@@ -108,6 +108,7 @@ export default {
       this.emailIsIncorrect = this.user.email !== 'a@g.com'
       this.passIsIncorrect = this.user.password !== '1234'
       console.log(this.user)
+      apiService.getToken('user@example.com', '1234567890')
     },
   },
 }
