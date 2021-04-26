@@ -44,10 +44,8 @@ namespace ChemSolution
                 options.AddPolicy(name:_AllowSpecificOrigins, builder =>
                 {
                     builder.WithOrigins("http://localhost:8080", "https://localhost:8080")
-                        .AllowAnyOrigin()
-                        .AllowCredentials()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader();
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
                 } );
             } );
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
