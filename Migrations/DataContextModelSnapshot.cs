@@ -248,6 +248,9 @@ namespace ChemSolution.Migrations
                     b.Property<DateTime>("DateTimeSended")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("Status")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Text")
                         .HasColumnType("TEXT");
 
