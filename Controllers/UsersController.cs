@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ChemSolution.Data;
 using ChemSolution.Models;
+using ChemSolution.Services;
 using Microsoft.AspNetCore.Authorization;
 
 namespace ChemSolution.Controllers
@@ -16,9 +17,11 @@ namespace ChemSolution.Controllers
     public class UsersController : ControllerBase
     {
         private readonly DataContext _context;
+        private readonly CheckFieldService _checkField;
 
-        public UsersController(DataContext context)
+        public UsersController(DataContext context, CheckFieldService checkField)
         {
+            _checkField = checkField;
             _context = context;
         }
 

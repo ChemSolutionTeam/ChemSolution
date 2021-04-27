@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ChemSolution.Data;
 using ChemSolution.Models;
+using ChemSolution.Services;
 using Microsoft.AspNetCore.Authorization;
 
 namespace ChemSolution.Controllers
@@ -16,9 +17,11 @@ namespace ChemSolution.Controllers
     public class RequestsController : ControllerBase
     {
         private readonly DataContext _context;
+        private readonly CheckFieldService _checkField;
 
-        public RequestsController(DataContext context)
+        public RequestsController(DataContext context, CheckFieldService checkField)
         {
+            _checkField = checkField;
             _context = context;
         }
 
@@ -45,12 +48,17 @@ namespace ChemSolution.Controllers
         [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<IActionResult> PutRequest(string id, Request request)
         {
-            if (id != request.UserEmail)
+            var tmpRequest = await _context.Requests.FindAsync(id);
+            if (tmpRequest != null)
             {
-                return BadRequest();
+                tmpRequest.Theme = _checkField.CheckModelField(tmpRequest.Theme, request.Theme);
+                tmpRequest.Text = _checkField.CheckModelField(tmpRequest.Text, request.Text);
+                tmpRequest.Status = _checkField.CheckModelField(tmpRequest.Status, request.Status);
             }
-
-            _context.Entry(request).State = EntityState.Modified;
+            else
+            {
+                return NotFound();
+            }
 
             try
             {

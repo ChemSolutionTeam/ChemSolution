@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ChemSolution.Data;
 using ChemSolution.Models;
+using ChemSolution.Services;
 using Microsoft.AspNetCore.Authorization;
 
 namespace ChemSolution.Controllers
@@ -16,10 +17,12 @@ namespace ChemSolution.Controllers
     public class AchievementsController : ControllerBase
     {
         private readonly DataContext _context;
+        private readonly CheckFieldService _checkField;
 
-        public AchievementsController(DataContext context)
+        public AchievementsController(DataContext context, CheckFieldService checkField)
         {
             _context = context;
+            _checkField = checkField;
         }
 
         [HttpGet]
@@ -46,12 +49,22 @@ namespace ChemSolution.Controllers
         [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<IActionResult> PutAchievement(int id, Achievement achievement)
         {
-            if (id != achievement.AchievementId)
+            
+            var tmpAchievement = await _context.Achievements.FindAsync(id);
+            
+            if (tmpAchievement != null)
             {
-                return BadRequest();
+                tmpAchievement.CountGoal = _checkField.CheckModelField(tmpAchievement.CountGoal, achievement.CountGoal);
+                tmpAchievement.Heading   = _checkField.CheckModelField(tmpAchievement.Heading, achievement.Heading);
+                tmpAchievement.Description = _checkField.CheckModelField(tmpAchievement.Description, achievement.Description);
+                tmpAchievement.ImgAchievemen = _checkField.CheckModelField(tmpAchievement.ImgAchievemen, achievement.ImgAchievemen);
+                tmpAchievement.MoneyReward = _checkField.CheckModelField(tmpAchievement.MoneyReward, achievement.MoneyReward);
+                tmpAchievement.RatingReward = _checkField.CheckModelField(tmpAchievement.RatingReward, achievement.RatingReward);
             }
-
-            _context.Entry(achievement).State = EntityState.Modified;
+            else
+            {
+                return NotFound();
+            }
 
             try
             {

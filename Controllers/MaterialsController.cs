@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ChemSolution.Data;
 using ChemSolution.Models;
+using ChemSolution.Services;
 using Microsoft.AspNetCore.Authorization;
 
 namespace ChemSolution.Controllers
@@ -16,10 +17,12 @@ namespace ChemSolution.Controllers
     public class MaterialsController : ControllerBase
     {
         private readonly DataContext _context;
+        private readonly CheckFieldService _checkField;
 
-        public MaterialsController(DataContext context)
+        public MaterialsController(DataContext context, CheckFieldService checkField)
         {
             _context = context;
+            _checkField = checkField;
         }
 
         [HttpGet]
@@ -45,12 +48,19 @@ namespace ChemSolution.Controllers
         [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<IActionResult> PutMaterial(int id, Material material)
         {
-            if (id != material.Id)
+            var tmpMaterial = await _context.Materials.FindAsync(id);
+            if (tmpMaterial != null)
             {
-                return BadRequest();
+                tmpMaterial.Image = _checkField.CheckModelField(tmpMaterial.Image, material.Image);
+                tmpMaterial.Formula = _checkField.CheckModelField(tmpMaterial.Formula, material.Image);
+                tmpMaterial.Name = _checkField.CheckModelField(tmpMaterial.Name, material.Name);
+                tmpMaterial.Info = _checkField.CheckModelField(tmpMaterial.Info, material.Info);
+            }
+            else
+            {
+                return NotFound();
             }
 
-            _context.Entry(material).State = EntityState.Modified;
 
             try
             {

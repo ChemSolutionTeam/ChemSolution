@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ChemSolution.Data;
 using ChemSolution.Models;
+using ChemSolution.Services;
 using Microsoft.AspNetCore.Authorization;
 
 namespace ChemSolution.Controllers
@@ -17,9 +18,11 @@ namespace ChemSolution.Controllers
     public class MaterialGroupsController : ControllerBase
     {
         private readonly DataContext _context;
+        private readonly CheckFieldService _checkField;
 
-        public MaterialGroupsController(DataContext context)
+        public MaterialGroupsController(DataContext context, CheckFieldService checkField)
         {
+            _checkField = checkField;
             _context = context;
         }
 
@@ -46,12 +49,17 @@ namespace ChemSolution.Controllers
         [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<IActionResult> PutMaterialGroup(int id, MaterialGroup materialGroup)
         {
-            if (id != materialGroup.MaterialGroupId)
+            var tmpMaterialGroup = await _context.MaterialGroups.FindAsync(id);
+            if (tmpMaterialGroup != null)
             {
-                return BadRequest();
-            }
 
-            _context.Entry(materialGroup).State = EntityState.Modified;
+                tmpMaterialGroup.GroupName = _checkField.CheckModelField(tmpMaterialGroup.GroupName, materialGroup.GroupName);
+
+            }
+            else
+            {
+                return NotFound();
+            }
 
             try
             {

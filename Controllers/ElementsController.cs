@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ChemSolution.Data;
 using ChemSolution.Models;
+using ChemSolution.Services;
 using Microsoft.AspNetCore.Authorization;
 
 namespace ChemSolution.Controllers
@@ -16,10 +17,12 @@ namespace ChemSolution.Controllers
     public class ElementsController : ControllerBase
     {
         private readonly DataContext _context;
+        private readonly CheckFieldService _checkField;
 
-        public ElementsController(DataContext context)
+        public ElementsController(DataContext context, CheckFieldService checkField)
         {
             _context = context;
+            _checkField = checkField;
         }
 
         [HttpGet]
@@ -45,12 +48,31 @@ namespace ChemSolution.Controllers
         [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<IActionResult> PutElement(int id, Element element)
         {
-            if (id != element.ElementId)
+            var tmpElement = await _context.Elements.FindAsync(id);
+            if (tmpElement != null)
             {
-                return BadRequest();
+                tmpElement.Symbol = _checkField.CheckModelField(tmpElement.Symbol, element.Symbol);
+                tmpElement.Name = _checkField.CheckModelField(tmpElement.Name, element.Name);
+                tmpElement.AtomicWeight = _checkField.CheckModelField(tmpElement.AtomicWeight, element.AtomicWeight);
+                tmpElement.ElectronQuantity = _checkField.CheckModelField(tmpElement.ElectronQuantity, element.ElectronQuantity);
+                tmpElement.ProtonQuantity = _checkField.CheckModelField(tmpElement.ProtonQuantity, element.ProtonQuantity);
+                tmpElement.NeutronQuantity = _checkField.CheckModelField(tmpElement.NeutronQuantity, element.NeutronQuantity);
+                tmpElement.AtomicRadius = _checkField.CheckModelField(tmpElement.AtomicRadius, element.AtomicRadius);
+                tmpElement.Electronegativity = _checkField.CheckModelField(tmpElement.Electronegativity, element.Electronegativity);
+                tmpElement.Category = _checkField.CheckModelField(tmpElement.Category, element.Category);
+                tmpElement.EnergyLevels = _checkField.CheckModelField(tmpElement.EnergyLevels, element.EnergyLevels);
+                tmpElement.MeltingTemperature = _checkField.CheckModelField(tmpElement.MeltingTemperature, element.MeltingTemperature);
+                tmpElement.BoilingTemperature = _checkField.CheckModelField(tmpElement.BoilingTemperature, element.BoilingTemperature);
+                tmpElement.IsLocked = _checkField.CheckModelField(tmpElement.IsLocked, element.IsLocked);
+                tmpElement.Info = _checkField.CheckModelField(tmpElement.Info, element.Info);
+                tmpElement.ImgSymbol = _checkField.CheckModelField(tmpElement.ImgSymbol, element.ImgSymbol);
+                tmpElement.ImgAtom = _checkField.CheckModelField(tmpElement.ImgAtom, element.ImgAtom);
+                tmpElement.Group = _checkField.CheckModelField(tmpElement.Group, element.Group);
             }
-
-            _context.Entry(element).State = EntityState.Modified;
+            else
+            {
+                return NotFound();
+            }
 
             try
             {

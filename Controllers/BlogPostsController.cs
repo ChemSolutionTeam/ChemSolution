@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ChemSolution.Data;
 using ChemSolution.Models;
+using ChemSolution.Services;
 using Microsoft.AspNetCore.Authorization;
 
 namespace ChemSolution.Controllers
@@ -16,9 +17,11 @@ namespace ChemSolution.Controllers
     public class BlogPostsController : ControllerBase
     {
         private readonly DataContext _context;
+        private readonly CheckFieldService _checkField;
 
-        public BlogPostsController(DataContext context)
+        public BlogPostsController(DataContext context, CheckFieldService checkField)
         {
+            _checkField = checkField;
             _context = context;
         }
 
@@ -45,12 +48,23 @@ namespace ChemSolution.Controllers
         [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<IActionResult> PutBlogPost(int id, BlogPost blogPost)
         {
-            if (id != blogPost.BlogPostId)
+            
+            var tmpBlogPost = await _context.BlogPosts.FindAsync(id);
+            if (tmpBlogPost != null)
             {
-                return BadRequest();
+
+                tmpBlogPost.Title = _checkField.CheckModelField(tmpBlogPost.Title, blogPost.Title);
+                tmpBlogPost.Category = _checkField.CheckModelField(tmpBlogPost.Category, blogPost.Category);
+                tmpBlogPost.Information = _checkField.CheckModelField(tmpBlogPost.Information, blogPost.Information);
+                tmpBlogPost.Image = _checkField.CheckModelField(tmpBlogPost.Image, blogPost.Image);
+                tmpBlogPost.IsLocked = _checkField.CheckModelField(tmpBlogPost.IsLocked, blogPost.IsLocked);
+
+            }
+            else
+            {
+                return NotFound();
             }
 
-            _context.Entry(blogPost).State = EntityState.Modified;
 
             try
             {
@@ -77,7 +91,6 @@ namespace ChemSolution.Controllers
         {
             _context.BlogPosts.Add(blogPost);
             await _context.SaveChangesAsync();
-
             return CreatedAtAction("GetBlogPost", new { id = blogPost.BlogPostId }, blogPost);
         }
 
