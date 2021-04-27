@@ -5,13 +5,13 @@ import 'Achievement.dart';
 class MaterialGroup extends Model {
   int materialGroupId;
   List<CS.Material> materials = [];
-  List<Achievement> achievements = [];
+  List<Achievement> achievement = [];
   String groupName;
 
   MaterialGroup({
     this.materialGroupId,
     this.materials,
-    this.achievements,
+    this.achievement,
     this.groupName,
   });
 
@@ -25,10 +25,10 @@ class MaterialGroup extends Model {
     });
     map['materials'] = materialsMaps;
     List<Map<String, dynamic>> achievementsMaps = [];
-    achievements.forEach((element) {
+    achievement.forEach((element) {
       achievementsMaps.add(element.toMap());
     });
-    map['achievements'] = achievementsMaps;
+    map['achievement'] = achievementsMaps;
     map['groupName'] = groupName;
     return map;
   }
@@ -39,8 +39,8 @@ class MaterialGroup extends Model {
     o['materials'].forEach((e) {
       mg.materials.add(CS.Material.fromObject(e));
     });
-    o['achievements'].forEach((e) {
-      mg.achievements.add(Achievement.fromObject(e));
+    o['achievement'].forEach((e) {
+      mg.achievement.add(Achievement.fromObject(e));
     });
     mg.groupName = o['groupName'];
     return mg;

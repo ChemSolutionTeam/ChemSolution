@@ -2,13 +2,14 @@ import 'package:chem_solution_mobile/models/Model.dart';
 import 'MaterialGroup.dart';
 import 'User.dart';
 
-class Achievement extends Model {
+class Achievement extends Model{
   int achievementId;
   String heading;
   String description;
   int moneyReward;
   int ratingReward;
   int countGoal;
+  String imgAchievemen;
   int materialGroupId;
   MaterialGroup condition;
   List<User> users = [];
@@ -22,7 +23,8 @@ class Achievement extends Model {
       this.countGoal,
       this.materialGroupId,
       this.condition,
-      this.users});
+      this.users,
+      this.imgAchievemen});
 
   @override
   Map<String, dynamic> toMap() {
@@ -33,6 +35,7 @@ class Achievement extends Model {
     map['moneyReward'] = moneyReward;
     map['ratingReward'] = ratingReward;
     map['countGoal'] = countGoal;
+    map['imgAchievemen'] = imgAchievemen;
     map['materialGroupId'] = materialGroupId;
     map['condition'] = condition.toMap();
     List<Map<String, dynamic>> usersMaps = [];
@@ -47,6 +50,7 @@ class Achievement extends Model {
     Achievement a = Achievement();
     a.achievementId = o['achievementId'];
     a.heading = o['heading'];
+    a.imgAchievemen = o['imgAchievemen'];
     a.description = o['description'];
     a.moneyReward = o['moneyReward'];
     a.ratingReward = o['ratingReward'];

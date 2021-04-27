@@ -12,9 +12,9 @@ class User extends Model {
   String userName;
   DateTime dateOfBirth;
   String password;
-  int balance;
-  int rating;
-  int honesty;
+  int balance=0;
+  int rating=0;
+  int honesty=100;
 
   List<BlogPost> blogPosts = [];
   List<Achievement> achievement = [];

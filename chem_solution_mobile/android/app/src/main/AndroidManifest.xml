@@ -1,7 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.chem_solution_mobile">
+    <!-- Required to fetch data from the internet. -->
+<uses-permission android:name="android.permission.INTERNET" /> <!-- This Line -->
    <application
         android:label="Chem Solution"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"

@@ -1,5 +1,9 @@
 import 'Model.dart';
 import 'User.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
+import 'package:chem_solution_mobile/main.dart';
 
 class BlogPost extends Model {
   int blogPostId;
@@ -51,7 +55,30 @@ class BlogPost extends Model {
     bp.image = o['image'];
     o['users'].forEach((e) {
       bp.users.add(User.fromObject(e));
-    });
+    }); 
     return bp;
+  }
+
+  static Future<BlogPost> fetchObject({@required String path}) async {
+    final response = await http.get(Uri.http(chemURL, path));
+    if (response.statusCode == 200) {
+      return BlogPost.fromObject(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed to load');
+    }
+  }
+
+  static Future<List<BlogPost>> fetchObjects({@required String path}) async {
+      final response = await http.get(Uri.http(chemURL, path));
+
+    if (response.statusCode == 200) {
+      List<BlogPost> list = [];
+      jsonDecode(response.body).forEach((e) {
+        list.add(BlogPost.fromObject(e));
+      });
+      return list;
+    } else {
+      throw Exception('Failed to load');
+    }
   }
 }
