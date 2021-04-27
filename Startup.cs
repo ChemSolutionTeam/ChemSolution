@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ChemSolution.Data;
 using ChemSolution.Middlewares.Authorization;
 using ChemSolution.Middlewares.Authorization.Settings;
+using ChemSolution.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -95,6 +96,10 @@ namespace ChemSolution
                     { jwtSecurityScheme, Array.Empty<string>() }
                 });
             });
+
+            services.AddCheckFieldService();
+            services.AddEmailService();
+            services.AddSecurityEmailService();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
