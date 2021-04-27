@@ -34,6 +34,7 @@ export default {
         .catch((e) => console.error(e))
     },
     postUser(user) {
+      user
       API.post('/Users')
         .then((resp) => {
           console.log(resp)
@@ -77,6 +78,7 @@ export default {
         })
     },
     postRequest(request) {
+      request
       API.post('/Requests')
         .then((resp) => {
           console.log(resp)
@@ -118,6 +120,7 @@ export default {
         })
     },
     postMaterial(material) {
+      material
       API.post('/Materials')
         .then((resp) => {
           console.log(resp)
@@ -136,6 +139,7 @@ export default {
         })
     },
     putMaterial(id) {
+      id
       //TODO PUT Material
     },
     deleteMaterial(id) {
@@ -159,6 +163,7 @@ export default {
         })
     },
     postMGroup(group) {
+      group
       API.post('/MaterialGroups')
         .then((resp) => {
           console.log(resp)
@@ -177,6 +182,7 @@ export default {
         })
     },
     putMGroup(id) {
+      id
       //TODO PUT MaterialGroup
     },
     deleteMGroup(id) {
@@ -200,6 +206,7 @@ export default {
         })
     },
     postElement(element) {
+      element
       API.post('/Elements')
         .then((resp) => {
           console.log(resp)
@@ -218,6 +225,7 @@ export default {
         })
     },
     putElement(id) {
+      id
       //TODO PUT Element
     },
     deleteElement(id) {
@@ -241,6 +249,7 @@ export default {
         })
     },
     postBlogPost(blogPost) {
+      blogPost
       API.post('/BlogPosts')
         .then((resp) => {
           console.log(resp)
@@ -259,6 +268,7 @@ export default {
         })
     },
     putBlogPost(id) {
+      id
       //TODO PUT BlogPosts
     },
     deleteBlogPost(id) {
@@ -282,6 +292,7 @@ export default {
         })
     },
     postAchievement(achievement) {
+      achievement
       API.post('/Achievements')
         .then((resp) => {
           console.log(resp)
@@ -300,6 +311,7 @@ export default {
         })
     },
     putAchievement(id) {
+      id
       //TODO PUT Achievements
     },
     deleteAchievement(id) {
