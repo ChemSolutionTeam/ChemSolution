@@ -108,7 +108,7 @@ export default {
       this.emailIsIncorrect = this.user.email !== 'a@g.com'
       this.passIsIncorrect = this.user.password !== '1234'
       console.log(this.user)
-      apiService.getToken('user@example.com', '1234567890')
+      apiService.getToken(this.user)
     },
   },
 }
