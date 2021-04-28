@@ -21,6 +21,7 @@
               type="password"
               placeholder="Уведіть пароль"
               :isMultiline="true"
+              @change="validatePass()"
               v-model="user.pass"
               :isIncorrect="passWrong"
               errorMassage="Пароль має містити 8 знаків, 1 цифру, 1 велику , 1 малу літери та 1 символ"
@@ -33,6 +34,7 @@
                 v-model="user.birthDate"
                 errorMassage="Уведіть правильну дату"
                 :isIncorrect="dateWrong"
+                @change="validateAge()"
               />
             </div>
           </div>
@@ -51,6 +53,7 @@
               placeholder="Уведіть пароль"
               :isMultiline="true"
               v-model="user.passRepeat"
+              @change="validatePassRepeat()"
               :isIncorrect="passDontMatch"
               errorMassage="Паролі не співпадають"
             ></BaseInput>
@@ -75,7 +78,8 @@
           <button
             id="sign-up"
             type="submit"
-            class="hover:text-csblack shadow-lg p-3 border border-grey-300 bg-csblue button-enter w-11/12 ml-3 m-5 focus:outline-none focus:ring-4 focus:ring-csgreen"
+            :disabled="!registerable"
+            class="hover:text-csblack disabled:opacity-25 shadow-lg p-3 border border-grey-300 bg-csblue button-enter w-11/12 ml-3 m-5 focus:outline-none focus:ring-4 focus:ring-csgreen"
           >
             Створити акаунт
           </button>
@@ -156,6 +160,21 @@ export default {
       dateWrong: false,
     }
   },
+  computed: {
+    registerable() {
+      return (
+        !this.passDontMatch &&
+        !this.passWrong &&
+        !this.dateWrong &&
+        this.user.agreeToTerms &&
+        this.user.isMyInfoTrue &&
+        this.user.email.length > 0 &&
+        this.user.username.length > 0 &&
+        this.user.pass.length > 0 &&
+        this.user.passRepeat.length > 0
+      )
+    },
+  },
   methods: {
     register() {
       //verification.
@@ -163,11 +182,6 @@ export default {
       this.validatePass()
       this.validatePassRepeat()
       this.validateAge()
-      if (this.dateWrong || this.passWrong || this.passDontMatch) {
-        // error
-      } else {
-        //register
-      }
     },
     validateAge() {
       let userYear = parseInt(this.user.birthDate.toString().split('-')[0])
@@ -183,7 +197,7 @@ export default {
       )
     },
     validatePassRepeat() {
-      this.passDontMatch = this.user.pass !== this.user.passRepeat
+      this.passDontMatch = this.user.pass != this.user.passRepeat
     },
   },
 }

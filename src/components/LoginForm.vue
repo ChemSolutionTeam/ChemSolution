@@ -12,7 +12,6 @@
           type="email"
           placeholder="Уведіть E-mail"
           v-model="user.email"
-          :isIncorrect="emailIsIncorrect"
         ></BaseInput>
         <BaseInput
           label="Пароль"
@@ -20,6 +19,7 @@
           placeholder="Уведіть пароль"
           v-model="user.password"
           :isIncorrect="passIsIncorrect"
+          errorMassage="Такої комбінації паролю та пошти не існує"
         ></BaseInput>
 
         <BaseCheck label="Запам'ятати мене" v-model="user.remember" />
@@ -99,16 +99,13 @@ export default {
         remember: false,
       },
       isShown: false,
-      emailIsIncorrect: false,
       passIsIncorrect: false,
     }
   },
   methods: {
     logIn() {
-      this.emailIsIncorrect = this.user.email !== 'a@g.com'
-      this.passIsIncorrect = this.user.password !== '1234'
       console.log(this.user)
-      apiService.getToken(this.user)
+      this.passIsIncorrect = !apiService.getToken(this.user)
     },
   },
 }
