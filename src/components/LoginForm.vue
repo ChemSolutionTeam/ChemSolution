@@ -84,6 +84,7 @@
 import BaseInput from '@/components/BaseInput.vue'
 import BaseCheck from '@/components/BaseCheck.vue'
 import apiService from '@/services/index.js'
+import storage from '../store/index'
 export default {
   name: 'LoginForm',
   components: {
@@ -105,7 +106,8 @@ export default {
   methods: {
     logIn() {
       console.log(this.user)
-      this.passIsIncorrect = !apiService.getToken(this.user)
+      apiService.getToken(this.user)
+      this.passIsIncorrect = storage.state.token.length === 0
     },
   },
 }

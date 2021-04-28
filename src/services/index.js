@@ -14,12 +14,10 @@ export default {
     API.post('/getjwt?email=' + user.email + '&password=' + user.password)
       .then((resp) => {
         storage.commit('setToken', resp.data.access_token)
-        console.log(resp.data.access_token)
-        return true
+        console.log(resp)
       })
       .catch((e) => {
-        console.error(e)
-        return false
+        console.info(e)
       })
   },
 
