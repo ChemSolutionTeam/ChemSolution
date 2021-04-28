@@ -91,7 +91,7 @@ export default {
     BaseInput,
     BaseCheck,
   },
-  emits: ['openRegister', 'openReset'],
+  emits: ['openRegister', 'openReset', 'login'],
   data() {
     return {
       user: {
@@ -104,10 +104,15 @@ export default {
     }
   },
   methods: {
-    logIn() {
-      console.log(this.user)
-      apiService.getToken(this.user)
-      this.passIsIncorrect = storage.state.token.length === 0
+    async logIn() {
+      await apiService.getToken(this.user).then(() => {
+        console.log(storage.state.token.length)
+        if (storage.state.token.length !== 0) {
+          this.$emit('login')
+        } else {
+          this.passIsIncorrect = true
+        }
+      })
     },
   },
 }

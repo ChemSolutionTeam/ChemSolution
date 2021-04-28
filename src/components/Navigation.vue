@@ -56,6 +56,7 @@
         @mouseover="isMouseOut = false"
         v-on:openRegister="closeLoginForm('register')"
         v-on:openReset="closeLoginForm('reset')"
+        v-on:login="closeLoginForm('login')"
         v-show="isLoginShown"
       />
     </transition>
@@ -137,7 +138,9 @@ export default {
         setTimeout(this.hideBG, 500)
         console.log('Close LoginForm')
       }
-      this.redirect(args)
+      if (args != 'login') {
+        this.redirect(args)
+      }
     },
     closeResetForm(args) {
       if (this.isMouseOut || args.length > 0) {

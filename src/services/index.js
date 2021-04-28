@@ -10,8 +10,8 @@ const API = axios.create({
 })
 export default {
   //Token queries
-  getToken(user) {
-    API.post('/getjwt?email=' + user.email + '&password=' + user.password)
+  async getToken(user) {
+    await API.post('/getjwt?email=' + user.email + '&password=' + user.password)
       .then((resp) => {
         storage.commit('setToken', resp.data.access_token)
         console.log(resp)
