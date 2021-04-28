@@ -12,26 +12,24 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ChemSolution.Controllers
 {
+
     [Route("[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
         private readonly DataContext _context;
         private readonly CheckFieldService _checkField;
-
         public UsersController(DataContext context, CheckFieldService checkField)
         {
             _checkField = checkField;
             _context = context;
         }
-
         [HttpGet]
         [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users.Select(u => ClearForbidetedInfo(u)).ToListAsync();
         }
-
         [HttpGet("{id}")]
         [Authorize]
         public async Task<ActionResult<User>> GetUser(string id)
@@ -42,10 +40,8 @@ namespace ChemSolution.Controllers
             {
                 return NotFound();
             }
-
-            return user;
+            return ClearForbidetedInfo(user);
         }
-
         [HttpPut("{id}&{key}")]
         [Authorize]
         public async Task<IActionResult> PutUser(string id,string key, User user)
@@ -57,9 +53,9 @@ namespace ChemSolution.Controllers
             var tmpUser = await _context.Users.FindAsync(user.UserEmail);
             if (tmpUser != null)
             {
-                tmpUser.UserName = user.UserName ?? tmpUser.UserName;
-                tmpUser.Password = user.Password ?? tmpUser.Password;
-                tmpUser.DateOfBirth = (user.DateOfBirth != default)?user.DateOfBirth:tmpUser.DateOfBirth;
+                tmpUser.UserName = _checkField.CheckModelField(tmpUser.UserName, user.UserName);
+                tmpUser.Password = _checkField.CheckModelField(tmpUser.Password, user.Password);
+                tmpUser.DateOfBirth = _checkField.CheckModelField(tmpUser.DateOfBirth, user.DateOfBirth);
             }
             else
             {
@@ -106,8 +102,6 @@ namespace ChemSolution.Controllers
             }
             return CreatedAtAction("GetUser", new { id = user.UserEmail }, user);
         }
-
-                
         [HttpDelete("{id}")]
         [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<IActionResult> DeleteUser(string id)
@@ -117,16 +111,20 @@ namespace ChemSolution.Controllers
             {
                 return NotFound();
             }
-
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();
-
             return NoContent();
         }
-
         private bool UserExists(string id)
         {
             return _context.Users.Any(e => e.UserEmail == id);
         }
+        private User ClearForbidetedInfo (User user)
+        {
+            user.Password = string.Empty;
+            return user;
+        }
     }
+    
+    
 }
