@@ -1,8 +1,9 @@
 <template>
-
   <div class="periodicTable">
     <div class="row">
-      <div class="column w-1/6 mt-6 text-left bg-white border-csblack border rounded">
+      <div
+        class="column w-1/6 mt-6 text-left bg-white border-csblack border rounded"
+      >
         <div class="container">
           <p>Element logo</p>
         </div>
@@ -10,22 +11,20 @@
           <p>Element info</p>
         </div>
       </div>
-      <div class="column w-9/12 pl-6 pr-6 p-3 pt-1 ml-2 mt-6 text-left bg-white border-csblack border rounded">
-
-      </div>
+      <div
+        class="column w-9/12 pl-6 pr-6 p-3 pt-1 ml-2 mt-6 text-left bg-white border-csblack border rounded"
+      ></div>
     </div>
-
   </div>
 </template>
 
 <script>
 export default {
-  name: "PeriodicTable"
+  name: 'PeriodicTable',
 }
 </script>
 
 <style>
-
 div {
   display: block;
 }
@@ -41,5 +40,4 @@ div {
   padding-right: 1px;
   z-index: 2;
 }
-
 </style>

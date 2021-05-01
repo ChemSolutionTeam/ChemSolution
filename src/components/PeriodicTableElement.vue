@@ -1,31 +1,35 @@
 <template>
   <div class="">
-    {{ elementSymbol }}
-    <br>
-    {{ elementName }}
+    {{ element.symbol }}
+    <br />
+    {{ element.name }}
   </div>
 </template>
 
 <script>
 export default {
-  data: {
-    elementNumber: {
+  props: {
+    number: {
       type: Number,
-      default: 55
+      default: 55,
     },
-    elementSymbol: {
-      type: String,
-      default: "Cs"
-    },
-    elementName: {
-      type: String,
-      default: "Цезій"
-    },
-    mas: {
-      type: Number,
-      default: 132.90
+  },
+  data() {
+    return {
+      element: this.getElement(this.number),
     }
-  }
+  },
+  methods: {
+    getElement(id) {
+      //Запрос в API
+
+      return {
+        number: id,
+        name: 'Цезій',
+        symbol: 'Cs',
+      }
+    },
+  },
 }
 </script>
 
