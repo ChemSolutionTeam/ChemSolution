@@ -26,6 +26,11 @@ const routes = [
     name: 'Inspect',
     component: () => import('../views/Inspect.vue'),
   },
+  {
+    path: '/periodicTable',
+    name: 'PeriodicTable',
+    component: () => import('../views/PeriodicTable.vue'),
+  },
 ]
 
 const router = createRouter({
