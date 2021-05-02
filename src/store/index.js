@@ -6,6 +6,8 @@ export default createStore({
       token: '',
       username: '',
       email: '',
+      currentPage: 'Home',
+      authorizeProgress: 0,
     }
   },
   mutations: {
@@ -15,6 +17,9 @@ export default createStore({
     setUser(state, user) {
       state.username = user.username
       state.email = user.email
+    },
+    setCurrentPage(state, page) {
+      state.currentPage = page
     },
   },
   actions: {},

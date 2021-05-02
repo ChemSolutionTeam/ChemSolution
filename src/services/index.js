@@ -14,6 +14,7 @@ export default {
     await API.post('/getjwt?email=' + user.email + '&password=' + user.password)
       .then((resp) => {
         storage.commit('setToken', resp.data.access_token)
+        storage.commit('setUser', resp.data.username)
         console.log(resp)
       })
       .catch((e) => {

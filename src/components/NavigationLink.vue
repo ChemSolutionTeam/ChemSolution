@@ -1,14 +1,16 @@
 <template>
   <a
-    :href="href"
-    class="block mt-4 lg:inline-block lg:mt-0 hover:text-cslightgreen mr-8"
-    :class="[{ 'text-csgreen': isCurrent }, { 'text-white': !isCurrent }]"
+    class="block mt-4 lg:inline-block lg:mt-0 hover:text-cslightgreen mr-8 cursor-pointer"
+    :class="[isCurrent ? 'text-csgreen animate-pulse' : 'text-white']"
+    @click="redirect()"
   >
     {{ label }}
   </a>
 </template>
 
 <script>
+import store from '../store/index'
+import router from '../router/index'
 export default {
   props: {
     label: {
@@ -17,11 +19,18 @@ export default {
     },
     href: {
       type: String,
-      default: 'default',
+      default: '',
     },
-    isCurrent: {
-      type: Boolean,
-      default: false,
+  },
+  computed: {
+    isCurrent() {
+      return this.label == store.state.currentPage
+    },
+  },
+  methods: {
+    redirect() {
+      store.commit('setCurrentPage', this.label)
+      router.push(this.href)
     },
   },
 }
