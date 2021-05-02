@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>21d28ac1-fd89-46ec-834b-28a4a2795bdb.SCHEMA:main</OriginalElement>
+  <nodes>
+    <node x="645.2857142857142" y="55.0">21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.MaterialGroups</node>
+    <node x="510.0" y="758.0">21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.ElementMaterials</node>
+    <node x="181.0" y="902.0">21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.__EFMigrationsHistory</node>
+    <node x="426.25" y="400.0">21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.Materials</node>
+    <node x="844.0" y="769.5">21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.AchievementUser</node>
+    <node x="45.25" y="444.5">21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.BlogPostUser</node>
+    <node x="426.0" y="902.0">21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.sqlite_sequence</node>
+    <node x="267.25" y="0.0">21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.Users</node>
+    <node x="614.5" y="257.0">21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.Elements</node>
+    <node x="887.5" y="389.0">21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.Achievements</node>
+    <node x="253.25" y="411.0">21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.Requests</node>
+    <node x="0.0" y="902.0">21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.sqlite_master</node>
+    <node x="202.75" y="758.0">21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.ResearchHistorys</node>
+    <node x="25.5" y="11.0">21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.BlogPosts</node>
+    <node x="690.0" y="769.5">21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.Valences</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.Achievements" target="21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.MaterialGroups">
+      <point x="0.0" y="-93.5" />
+      <point x="970.0" y="207.0" />
+      <point x="769.0357142857142" y="207.0" />
+      <point x="41.25" y="38.5" />
+    </edge>
+    <edge source="21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.ResearchHistorys" target="21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.Materials">
+      <point x="40.0" y="-49.5" />
+      <point x="322.75" y="733.0" />
+      <point x="467.5" y="733.0" />
+      <point x="-41.25" y="82.5" />
+    </edge>
+    <edge source="21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.Elements" target="21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.Users">
+      <point x="0.0" y="-225.5" />
+      <point x="709.5" y="227.0" />
+      <point x="354.75" y="227.0" />
+      <point x="25.0" y="93.5" />
+    </edge>
+    <edge source="21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.Requests" target="21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.Users">
+      <point x="0.0" y="-71.5" />
+      <point x="0.0" y="93.5" />
+    </edge>
+    <edge source="21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.AchievementUser" target="21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.Users">
+      <point x="-39.75" y="-38.0" />
+      <point x="883.75" y="733.0" />
+      <point x="877.0" y="733.0" />
+      <point x="877.0" y="217.0" />
+      <point x="379.75" y="217.0" />
+      <point x="50.0" y="93.5" />
+    </edge>
+    <edge source="21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.ElementMaterials" target="21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.Elements">
+      <point x="40.0" y="-49.5" />
+      <point x="630.0" y="733.0" />
+      <point x="662.0" y="733.0" />
+      <point x="-47.5" y="225.5" />
+    </edge>
+    <edge source="21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.ElementMaterials" target="21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.Materials">
+      <point x="-40.0" y="-49.5" />
+      <point x="41.25" y="82.5" />
+    </edge>
+    <edge source="21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.BlogPostUser" target="21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.Users">
+      <point x="46.75" y="-38.0" />
+      <point x="185.5" y="227.0" />
+      <point x="279.75" y="227.0" />
+      <point x="-50.0" y="93.5" />
+    </edge>
+    <edge source="21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.Valences" target="21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.Elements">
+      <point x="0.0" y="-38.0" />
+      <point x="47.5" y="225.5" />
+    </edge>
+    <edge source="21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.BlogPostUser" target="21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.BlogPosts">
+      <point x="-46.75" y="-38.0" />
+      <point x="0.0" y="82.5" />
+    </edge>
+    <edge source="21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.AchievementUser" target="21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.Achievements">
+      <point x="39.75" y="-38.0" />
+      <point x="963.25" y="733.0" />
+      <point x="970.0" y="733.0" />
+      <point x="0.0" y="93.5" />
+    </edge>
+    <edge source="21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.ResearchHistorys" target="21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.Users">
+      <point x="-40.0" y="-49.5" />
+      <point x="242.75" y="237.0" />
+      <point x="304.75" y="237.0" />
+      <point x="-25.0" y="93.5" />
+    </edge>
+    <edge source="21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.Materials" target="21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.MaterialGroups">
+      <point x="0.0" y="-82.5" />
+      <point x="508.75" y="237.0" />
+      <point x="686.5357142857142" y="237.0" />
+      <point x="-41.25" y="38.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.5413533834586466" x="527.0" y="522.0" />
+  <SelectedNodes>
+    <node>21d28ac1-fd89-46ec-834b-28a4a2795bdb.TABLE:main.Valences</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Key columns</Category>
+    <Category>Columns</Category>
+    <Category>Virtual foreign keys</Category>
+  </Categories>
+</Diagram>
+
