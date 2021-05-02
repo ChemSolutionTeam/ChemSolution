@@ -120,6 +120,7 @@ class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
             onTap: _onItemTapped,
           ),
         ),
+       
       ),
     );
   }

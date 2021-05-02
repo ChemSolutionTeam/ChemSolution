@@ -1,6 +1,7 @@
-import 'package:chem_solution_mobile/models/BlogPost.dart';
 import 'package:chem_solution_mobile/widgets/post_card.dart';
 import 'package:flutter/material.dart';
+import 'package:chem_solution_mobile/main.dart';
+
 
 class Informations extends StatefulWidget  {
   Informations({Key key}) : super(key: key);
@@ -16,62 +17,14 @@ class _InformationsState extends State<Informations> with SingleTickerProviderSt
   Animation<Offset> _offsetAnimationToLeft;
   Animation<Offset> _offsetAnimationToRight;
 
-  void _addBlogPost() {
-    List<BlogPost> temp = [
-      new BlogPost(
-        blogPostId: 1,
-        title: 'post1',
-        category: 'News',
-        image:
-            "https://www.innovationnewsnetwork.com/wp-content/uploads/2019/12/ST27-McGillU1-image-%C2%A9-iStock-Garsya.jpg",
-        information:
-            'information1\ninformation1\ninformation1\ninformation1\ninformation1\ninformation1\n',
-        isLocked: true,
-
-      ),
-      new BlogPost(
-          blogPostId: 2,
-          title: 'post2',
-          category: 'News',
-          image:
-              'https://res.cloudinary.com/grand-canyon-university/image/fetch/w_750,h_564,c_fill,g_faces/https://www.gcu.edu/sites/default/files/media/images/Blog/engineering-and-technology/chemistry-materials.jpg',
-          information: '''
-information2\ninformation2\ninformation2information2information2
-information2information2information2information2information2
-information2information2information2information2information2
-information2information2information2information2information2
-information2information2information2
-information2\ninformation2\ninformation2\ninformation2\n''',
-          isLocked: false,
-        ),
-      new BlogPost(
-          blogPostId: 3,
-          title: 'post3',
-          category: 'News',
-          image:
-              'https://images.newscientist.com/wp-content/uploads/2021/02/23162716/chemistry.jpg',
-          information:
-              'information3\ninformation3\ninformation3\ninformation3\ninformation3\ninformation3\n',
-          isLocked: false,
-         ),
-      new BlogPost(
-          blogPostId: 4,
-          title: 'post4',
-          category: 'News',
-          image:
-              'https://zamtutor.com/wp-content/uploads/2020/10/shutterstock_127915121.jpg',
-          information:
-              'information4\ninformation4\ninformation4\ninformation4\ninformation4\ninformation4\n',
-          isLocked: false,
-         ),
-    ];
-
-    temp.forEach((post) {
-      posts.add(BlogCard(post: post));
-      _key.currentState.insertItem(posts.length - 1);
+   void _addBlogPost() {
+    allPosts.forEach((post) {
+      if (post.category == 'facts') {
+        posts.add(BlogCard(post: post));
+        _key.currentState.insertItem(posts.length - 1);
+      }
     });
   }
-
 
   @override
   void initState() {

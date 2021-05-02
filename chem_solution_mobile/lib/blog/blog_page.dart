@@ -1,4 +1,3 @@
-import 'package:chem_solution_mobile/models/BlogPost.dart';
 import 'package:chem_solution_mobile/widgets/post_card.dart';
 import 'package:flutter/material.dart';
 import 'package:chem_solution_mobile/main.dart';

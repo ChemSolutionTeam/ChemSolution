@@ -16,7 +16,7 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
   Widget _card(BuildContext context, Color color, String text, Icon icon) {
     return Container(
-      padding: EdgeInsets.all(15),
+      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: Card(
         color: color,
         elevation: 5,
@@ -108,6 +108,12 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
     _controller.dispose();
   }
 
+  void refresh(){
+    setState(() {
+      
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     if (!autorised) {
@@ -120,7 +126,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
               position: _offsetAnimationToLeft,
               child: GestureDetector(
                 onTap: () {
-                  return alertDialogShow(context, autorisation(context), 400);
+                  return alertDialogShow(context, autorisation(context, refresh), 400);
                 },
                 child: _card(
                   context,
@@ -139,135 +145,136 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
     } else {
       return Container(
         alignment: Alignment.center,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+        child: Center(
+          child: ListView(
+            children: [
+                SlideTransition(
+                position: _offsetAnimationToRight,
+                child: GestureDetector(
+                  onTap: () {
+                     Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => MyProfile(),
+                      ),
+                    );
+                  },
+                  child: _card(
+                    context,
+                    Color(0xff1DCDFE),
+                    'Мій профіль',
+                    Icon(
+                      CommunityMaterialIcons.face_profile,
+                      color: Color(0xff2F455C),
+                    ),
+                  ),
+                ),
+              ),
               SlideTransition(
-              position: _offsetAnimationToRight,
-              child: GestureDetector(
-                onTap: () {
-                   Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => MyProfile(),
+                position: _offsetAnimationToLeft,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => LikedPosts(),
+                      ),
+                    );
+                  },
+                  child: _card(
+                    context,
+                    Colors.white,
+                    'Збережене',
+                    Icon(
+                      CommunityMaterialIcons.heart,
+                      color: Color(0xff21D0B2),
                     ),
-                  );
-                },
-                child: _card(
-                  context,
-                  Color(0xff1DCDFE),
-                  'Мій профіль',
-                  Icon(
-                    CommunityMaterialIcons.face_profile,
-                    color: Color(0xff2F455C),
                   ),
                 ),
               ),
-            ),
-            SlideTransition(
-              position: _offsetAnimationToLeft,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => LikedPosts(),
+                 SlideTransition(
+                position: _offsetAnimationToRight,
+                child: GestureDetector(
+                  onTap: () {
+                    /*
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => Materials(),
+                      ),
+                    ); */
+                  },
+                  child: _card(
+                    context,
+                    Color(0xff1DCDFE),
+                    'Досягнення',
+                    Icon(
+                      CommunityMaterialIcons.gold,
+                      color: Color(0xff2F455C),
                     ),
-                  );
-                },
-                child: _card(
-                  context,
-                  Colors.white,
-                  'Збережене',
-                  Icon(
-                    CommunityMaterialIcons.heart,
-                    color: Color(0xff21D0B2),
                   ),
                 ),
               ),
-            ),
-               SlideTransition(
-              position: _offsetAnimationToRight,
-              child: GestureDetector(
-                onTap: () {
-                  /*
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => Materials(),
-                    ),
-                  ); */
-                },
-                child: _card(
-                  context,
-                  Color(0xff1DCDFE),
-                  'Досягнення',
-                  Icon(
-                    CommunityMaterialIcons.gold,
-                    color: Color(0xff2F455C),
-                  ),
-                ),
-              ),
-            ),
-            SlideTransition(
-              position: _offsetAnimationToLeft,
-              child: GestureDetector(
-                onTap: () {
+              SlideTransition(
+                position: _offsetAnimationToLeft,
+                child: GestureDetector(
+                  onTap: () {
      /*
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => Materials(),
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => Materials(),
+                      ),
+                    ); */
+                  },
+                  child: _card(
+                    context,
+                    Colors.white,
+                    'Запити',
+                    Icon(
+                      Icons.request_page,
+                      color: Color(0xff21D0B2),
                     ),
-                  ); */
-                },
-                child: _card(
-                  context,
-                  Colors.white,
-                  'Запити',
-                  Icon(
-                    Icons.request_page,
-                    color: Color(0xff21D0B2),
                   ),
                 ),
               ),
-            ),
-         
-            SlideTransition(
-              position: _offsetAnimationToRight,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => Materials(),
+           
+              SlideTransition(
+                position: _offsetAnimationToRight,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => Materials(),
+                      ),
+                    );
+                  },
+                  child: _card(
+                    context,
+                    Color(0xff1DCDFE),
+                    'Відкриті речовини',
+                    Icon(
+                      CommunityMaterialIcons.molecule,
+                      color: Color(0xff2F455C),
                     ),
-                  );
-                },
-                child: _card(
-                  context,
-                  Color(0xff1DCDFE),
-                  'Відкриті речовини',
-                  Icon(
-                    CommunityMaterialIcons.molecule,
-                    color: Color(0xff2F455C),
                   ),
                 ),
               ),
-            ),
-            SlideTransition(
-              position: _offsetAnimationToLeft,
-              child: GestureDetector(
-                onTap: () {
-                  return alertDialogShow(context, _exitDialog(context), 200);
-                },
-                child: _card(
-                  context,
-                  Colors.white,
-                  'Вихід',
-                  Icon(
-                    CommunityMaterialIcons.exit_run,
-                    color: Color(0xff21D0B2),
+              SlideTransition(
+                position: _offsetAnimationToLeft,
+                child: GestureDetector(
+                  onTap: () {
+                    return alertDialogShow(context, _exitDialog(context), 200);
+                  },
+                  child: _card(
+                    context,
+                    Colors.white,
+                    'Вихід',
+                    Icon(
+                      CommunityMaterialIcons.exit_run,
+                      color: Color(0xff21D0B2),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
     }

@@ -12,9 +12,9 @@ class User extends Model {
   String userName;
   DateTime dateOfBirth;
   String password;
-  int balance=0;
-  int rating=0;
-  int honesty=100;
+  int balance = 0;
+  int rating = 0;
+  int honesty = 100;
 
   List<BlogPost> blogPosts = [];
   List<Achievement> achievement = [];
@@ -83,14 +83,6 @@ class User extends Model {
     return map;
   }
 
-/*
-  List<BlogPost> blogPosts = [];
-  List<Achievement> achievement = [];
-  List<CS.Element> elements = [];
-  List<Request> requests = [];
-  List<ResearchHistory> researchHistorys = [];
-  List<CSM.Material> materials = [];
- */
   static User fromObject(dynamic o) {
     User u = new User();
     u.userEmail = o['userEmail'];
@@ -120,4 +112,6 @@ class User extends Model {
     });
     return u;
   }
+
+ 
 }

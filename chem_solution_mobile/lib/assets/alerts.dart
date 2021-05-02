@@ -1,3 +1,5 @@
+import 'package:chem_solution_mobile/models/Autorisation.dart';
+import 'package:chem_solution_mobile/models/User.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
@@ -62,7 +64,7 @@ Future<Widget> alertDialogShow(
       pageBuilder: (context, animation1, animation2) {});
 }
 
-Widget autorisation(BuildContext context) {
+Widget autorisation(BuildContext context, Function() update) {
   String _email;
   String _password;
   final TextEditingController _emailEditingController =
@@ -70,6 +72,8 @@ Widget autorisation(BuildContext context) {
   final TextEditingController _passwordEditingController =
       TextEditingController(text: _password);
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool visible = false;
+
   return AlertDialog(
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(32.0))),
@@ -92,7 +96,6 @@ Widget autorisation(BuildContext context) {
             ListTile(
               leading: Text('Email     '),
               title: TextFormField(
-                  // initialValue: _title,
                   decoration: InputDecoration(hintText: "Уведіть email"),
                   controller: _emailEditingController,
                   validator: (String inValue) {
@@ -109,7 +112,7 @@ Widget autorisation(BuildContext context) {
             ListTile(
               leading: Text('Пароль'),
               title: TextFormField(
-                  // initialValue: _title,
+                  obscureText: !visible,
                   decoration: InputDecoration(hintText: "Уведіть пароль"),
                   controller: _passwordEditingController,
                   validator: (String inValue) {
@@ -129,7 +132,12 @@ Widget autorisation(BuildContext context) {
                   width: MediaQuery.of(context).size.width * 0.8,
                 ),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    var email = _emailEditingController.text;
+                    var password = _passwordEditingController.text;
+                    Autorisation.SignIn(email, password);
+                    Navigator.of(context).pop();
+                  },
                   child: Text(
                     'Увійти',
                     style: TextStyle(fontSize: 16),
