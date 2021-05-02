@@ -25,8 +25,8 @@
       class="w-full h-full block flex-grow lg:flex lg:items-center lg:mr-6 lg:ml-9 lg:w-auto"
     >
       <div class="text-lg lg:flex-grow flex justify-start">
-        <Link label="Home" />
-        <Link label="test" />
+        <Link label="Home" href="/" />
+        <Link label="Admin" href="admin" />
         <Link />
       </div>
       <div>
