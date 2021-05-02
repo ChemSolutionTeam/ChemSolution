@@ -32,12 +32,12 @@
       <div>
         <button
           class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-cslightgreen"
-          @click="openLoginForm()"
+          @click="openForm('login')"
         >
           Авторизуватися
         </button>
         <button
-          @click="openRegisterForm()"
+          @click="openForm('register')"
           class="inline-block ml-6 h-10 text-lg items-center bg-gradient-to-t from-csgreen to-cslightgreen px-4 py-2 leading-none border rounded text-csblack border-csgreen hover:border-transparent mt-4 lg:mt-0"
         >
           Зареєструватися
@@ -47,45 +47,45 @@
   </nav>
   <div
     class="inset-0 fixed sm:pt-2 md:pt-5 overflow-auto lg:pt-10 w-full h-full bg-csblack bg-opacity-50"
-    v-show="isLoginBackgroundShown"
-    @click="closeLoginForm"
+    v-show="isBackgroundShown == 'login'"
+    @click="closeForm('none')"
   >
     <transition name="bounce">
       <LoginForm
         @mouseleave="isMouseOut = true"
         @mouseover="isMouseOut = false"
-        v-on:openRegister="closeLoginForm('register')"
-        v-on:openReset="closeLoginForm('reset')"
-        v-on:login="closeLoginForm('login')"
-        v-show="isLoginShown"
+        v-on:openRegister="closeForm('register')"
+        v-on:openReset="closeForm('reset')"
+        v-on:login="closeForm('auth')"
+        v-show="isFormShow == 'login'"
       />
     </transition>
   </div>
   <div
     class="inset-0 fixed sm:pt-2 md:pt-5 overflow-auto lg:pt-10 w-full h-full bg-csblack bg-opacity-50"
-    v-show="isRegisterBackgroundShown"
-    @click="closeRegisterForm"
+    v-show="isBackgroundShown == 'register'"
+    @click="closeForm('none')"
   >
     <transition name="bounce">
       <RegisterForm
         @mouseleave="isMouseOut = true"
         @mouseover="isMouseOut = false"
-        v-show="isRegisterShown"
-        v-on:openLogin="closeRegisterForm('login')"
-        v-on:openReset="closeRegisterForm('reset')"
+        v-show="isFormShow == 'register'"
+        v-on:openLogin="closeForm('login')"
+        v-on:openReset="closeForm('reset')"
       />
     </transition>
   </div>
   <div
     class="inset-0 fixed sm:pt-2 md:pt-5 overflow-auto lg:pt-10 w-full h-full bg-csblack bg-opacity-50"
-    v-show="isResetBackgroundShown"
-    @click="closeResetForm"
+    v-show="isBackgroundShown == 'reset'"
+    @click="closeForm('none')"
   >
     <transition name="bounce">
       <ForgetPassForm
         @mouseleave="isMouseOut = true"
         @mouseover="isMouseOut = false"
-        v-show="isResetShown"
+        v-show="isFormShow == 'reset'"
       />
     </transition>
   </div>
@@ -104,80 +104,36 @@ export default {
   data() {
     return {
       isMouseOut: true,
-      isLoginShown: false,
-      isRegisterShown: false,
-      isResetShown: false,
-      isLoginBackgroundShown: false,
-      isRegisterBackgroundShown: false,
-      isResetBackgroundShown: false,
+      isFormShow: 'none',
+      isBackgroundShown: 'none',
     }
   },
   methods: {
     //Open forms
-    openLoginForm() {
-      console.log('Open LoginForm')
-      this.isLoginBackgroundShown = true
-      this.isLoginShown = true
-    },
-    openResetForm() {
-      console.log('Open ResetForm')
-      this.isResetBackgroundShown = true
-      this.isResetShown = true
-    },
-    openRegisterForm() {
-      console.log('Open LoginForm')
-      this.isRegisterBackgroundShown = true
-      this.isRegisterShown = true
+    openForm(form) {
+      this.isBackgroundShown = form
+      this.isFormShow = form
     },
 
     //Form Close
-
-    closeLoginForm(args) {
-      if (this.isMouseOut || args.length > 0) {
-        this.isLoginShown = false
-        setTimeout(this.hideBG, 500)
-        console.log('Close LoginForm')
+    closeForm(form) {
+      if (this.isMouseOut || form !== 'none') {
+        this.isFormShow = 'none'
+        this.hideBG(form)
       }
-      if (args != 'login') {
-        this.redirect(args)
+      if (form != 'auth') {
+        this.redirect(form)
       }
     },
-    closeResetForm(args) {
-      if (this.isMouseOut || args.length > 0) {
-        this.isResetShown = false
-        setTimeout(this.hideBG, 500)
-        console.log('Close ResetForm')
-      }
-      this.redirect(args)
-    },
-
-    closeRegisterForm(args) {
-      if (this.isMouseOut || args.length > 0) {
-        this.isRegisterShown = false
-        setTimeout(this.hideBG, 500)
-        console.log('Close RegisterForm')
-      }
-      this.redirect(args)
-    },
-    redirect(args) {
-      switch (args) {
-        case 'register':
-          setTimeout(this.openRegisterForm, 500)
-          break
-        case 'reset':
-          setTimeout(this.openResetForm, 500)
-          break
-        case 'login':
-          setTimeout(this.openLoginForm, 500)
-          break
-        default:
-          break
+    redirect(form) {
+      if (form != 'none') {
+        setTimeout(this.openForm(form), 500)
       }
     },
-    hideBG() {
-      this.isLoginBackgroundShown = false
-      this.isRegisterBackgroundShown = false
-      this.isResetBackgroundShown = false
+    hideBG(args) {
+      setTimeout(() => {
+        this.isBackgroundShown = args
+      }, 500)
     },
   },
 }
