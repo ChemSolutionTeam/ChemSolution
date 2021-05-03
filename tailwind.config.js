@@ -20,6 +20,7 @@ module.exports = {
       csgreen: '#21D0B2',
       cslightgreen: '#34F5C5',
       csblue: '#1DCDFE',
+      csbluewhite: '#EAF9FE',
       red: colors.red,
       teal: colors.teal,
       white: colors.white,
