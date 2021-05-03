@@ -48,7 +48,7 @@
         </p>
         <Button />
       </div>
-      <Logo class="w-4/5"></Logo>
+      <Logo class="w-4/5 max-w-4/5"></Logo>
     </div>
   </div>
   <svg
@@ -104,6 +104,12 @@ import Button from '../components/HomePageButtons'
 export default {
   name: 'Home',
   components: { Logo, Button },
+
+  data() {
+    return {}
+  },
+  computed: {},
+  methods: {},
 }
 </script>
 <style>

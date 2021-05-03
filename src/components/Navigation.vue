@@ -1,6 +1,7 @@
 <template>
+  <BackToTopButton :isShown="toTop" />
   <nav
-    class="top-0 flex items-center justify-between flex-wrap bg-csblack p-5 m-auto shadow-2xl fixed w-full"
+    class="top-0 z-20 flex items-center justify-between flex-wrap bg-csblack p-5 m-auto shadow-2xl fixed w-full"
   >
     <div
       class="hover:animate-spin transform md:scale-50 lg:scale-100 flex items-center flex-shrink-0 text-white ml-3 mr-6"
@@ -97,15 +98,35 @@ import LoginForm from '../components/LoginForm.vue'
 import RegisterForm from '../components/RegisterForm.vue'
 import ForgetPassForm from '../components/ForgetPassForm.vue'
 import Logo from '../components/Logo.vue'
+import BackToTopButton from '../components/BackToTopButton.vue'
 
 export default {
   name: 'Navigation',
-  components: { Link, LoginForm, RegisterForm, ForgetPassForm, Logo },
+  components: {
+    Link,
+    LoginForm,
+    RegisterForm,
+    ForgetPassForm,
+    Logo,
+    BackToTopButton,
+  },
+  computed: {
+    toTop() {
+      return this.scroll.y > 200
+    },
+  },
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll)
+  },
   data() {
     return {
       isMouseOut: true,
       isFormShow: 'none',
       isBackgroundShown: 'none',
+      scroll: {
+        timer: 0,
+        y: 0,
+      },
     }
   },
   methods: {
@@ -134,6 +155,14 @@ export default {
       setTimeout(() => {
         this.isBackgroundShown = args
       }, 500)
+    },
+    handleScroll() {
+      if (this.scroll.timer) return
+      this.scroll.timer = setTimeout(() => {
+        this.scroll.y = window.scrollY
+        clearTimeout(this.scroll.timer)
+        this.scroll.timer = 0
+      }, 100)
     },
   },
 }
