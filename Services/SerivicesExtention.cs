@@ -20,7 +20,7 @@ namespace ChemSolution.Services
         }
         public static void AddSecurityEmailService(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddSingleton<EmailService>();
+            serviceCollection.AddSingleton<SecurityEmailService>();
         }
     }
 }

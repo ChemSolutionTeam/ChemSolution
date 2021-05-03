@@ -13,50 +13,31 @@ namespace ChemSolution.Services
 {
     public class SecurityEmailService
     {
-
-        private readonly List<string> _securityCodes = new List<string>();
-
+        private readonly Dictionary<string, (string email, string newPassword)> _securityCodeDictionary = new Dictionary<string, (string, string)>();
         private readonly EmailService _emailService;
-
-        private readonly ILogger<SecurityEmailService> _logger;
-
-        private readonly DataContext _context;
-
-        public SecurityEmailService(EmailService emailService, DataContext context,
-            ILogger<SecurityEmailService> logger)
+        public (string email, string newPassword) GetInfobyCode(string code)
         {
-            _logger = logger;
-            _emailService = emailService;
-            _context = context;
-        }
-
-        public bool CheckCode(string code)
-        {
-            if (_securityCodes.Contains(code))
+            if (_securityCodeDictionary.ContainsKey(code))
             {
-                _securityCodes.Remove(code);
-                return true;
+                var tmp = _securityCodeDictionary[code];
+                _securityCodeDictionary.Remove(code);
+                return tmp;
             }
-
-            return false;
+            return (email:null, newPassword:null);
         }
-
-        public async Task ChangePassword(string email, string newPassword)
+        public SecurityEmailService()
         {
-            if (await _context.Users.FindAsync(email) != null)
+            _emailService = new EmailService();
+        }
+        public async Task ChangePassword(DataContext context, string email, string newPassword)
+        {
+            if (await context.Users.FindAsync(email) != null)
             {
-                string code = PasswordGenerator.Generate(length: 10, allowed: Sets.Alphanumerics);
-                try
-                {
-                    string message = $"Link: <a href={code}></a>";
-                    await _emailService.SendEmailAsync(email, "Change password in ChemSolution", message);
-                    _securityCodes.Add(code);
-                    _logger.LogInformation($"Success ChangePassword for user: {email}");
-                }
-                catch
-                {
-                    _logger.LogError($"Error in ChangePassword for user: {email}");
-                }
+                string code;
+                while (_securityCodeDictionary.ContainsKey( code = PasswordGenerator.Generate(length: 10, allowed: Sets.Alphanumerics) )) { }
+                string message = $"Link: <a href=https://localhost:5001/UserSecurity/SetPassword?code={code}></a>";
+                //await _emailService.SendEmailAsync(email, "Change password in ChemSolution", message);
+                _securityCodeDictionary[code] = (email: email, newPassword: newPassword);
             }
 
         }
