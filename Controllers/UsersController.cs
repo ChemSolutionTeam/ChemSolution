@@ -24,37 +24,35 @@ namespace ChemSolution.Controllers
             _checkField = checkField;
             _context = context;
         }
-        [HttpGet]
+        [HttpGet("all")]
         [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             return await _context.Users.Select(u => ClearForbidetedInfo(u)).ToListAsync();
         }
-        [HttpGet("{id}")]
+        
+        [HttpGet]
         [Authorize]
-        public async Task<ActionResult<User>> GetUser(string id)
+        public async Task<ActionResult<User>> GetUser()
         {
+            var id = User.Identity?.Name;
             var user = await _context.Users.FindAsync(id);
-
             if (user == null)
             {
                 return NotFound();
             }
             return ClearForbidetedInfo(user);
         }
-        [HttpPut("{id}&{key}")]
+        [HttpPut]
         [Authorize]
-        public async Task<IActionResult> PutUser(string id,string key, User user)
+        public async Task<IActionResult> PutUser( User user )
         {
-            if (id != user.UserEmail)
-            {
-                return BadRequest();
-            }
-            var tmpUser = await _context.Users.FindAsync(user.UserEmail);
+            var id = User.Identity?.Name;
+           
+            var tmpUser = await _context.Users.FindAsync(id);
             if (tmpUser != null)
             {
                 tmpUser.UserName = _checkField.CheckModelField(tmpUser.UserName, user.UserName);
-                tmpUser.Password = _checkField.CheckModelField(tmpUser.Password, user.Password);
                 tmpUser.DateOfBirth = _checkField.CheckModelField(tmpUser.DateOfBirth, user.DateOfBirth);
             }
             else
@@ -79,8 +77,7 @@ namespace ChemSolution.Controllers
 
             return NoContent();
         }
-
-       
+        
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
@@ -119,12 +116,10 @@ namespace ChemSolution.Controllers
         {
             return _context.Users.Any(e => e.UserEmail == id);
         }
-        private User ClearForbidetedInfo (User user)
+        private static User ClearForbidetedInfo (User user)
         {
             user.Password = string.Empty;
             return user;
         }
     }
-    
-    
 }
