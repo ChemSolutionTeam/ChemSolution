@@ -1,13 +1,15 @@
 <template>
-  <title>{{ title }}</title>
-  <h1 class="text-5xl">Welcome to Admin Panel</h1>
-  <div class="flex">
-    <AdminCard
-      label="Добавить вещество"
-      path="home"
-      image="https://i.imgur.com/bAaiGiu.jpeg"
-    />
-    <AdminCard />
+  <div class="p-40">
+    <title>{{ title }}</title>
+    <h1 class="text-5xl">Welcome to Admin Panel</h1>
+    <div class="flex">
+      <AdminCard
+        label="Добавить вещество"
+        path="home"
+        image="https://i.imgur.com/bAaiGiu.jpeg"
+      />
+      <AdminCard />
+    </div>
   </div>
 </template>
 
