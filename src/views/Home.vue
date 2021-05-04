@@ -129,14 +129,20 @@
       </div>
     </div>
   </div>
+  <Footer />
 </template>
 <script>
 import Logo from '../components/Logo'
 import Button from '../components/HomePageButtons'
+import Footer from '../components/Footer'
 
 export default {
   name: 'Home',
-  components: { Logo, Button },
+  components: {
+    Logo,
+    Button,
+    Footer,
+  },
   emits: ['showForm'],
   data() {
     return {}
