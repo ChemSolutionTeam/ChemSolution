@@ -41,7 +41,7 @@ namespace ChemSolution.Controllers
             return NotFound();
         }
 
-        [HttpPost("SetPassword/{code}")]
+        [HttpGet("SetPassword/{code}")]
         public async Task<IActionResult> SetPassword(string code)
         {
             var info = _securityEmailService.GetInfobyCode(code);
