@@ -5,7 +5,7 @@
   >
     <div class="flex flex-row w-full">
       <div class="text-center items-center py-36">
-        <h1 class="text-5xl transform scale-150">ChemSolution</h1>
+        <h1 class="text-8xl transform m-6 px-10">ChemSolution</h1>
         <p class="text-4xl text-center m-6 px-10">
           Відкрий для себе кросплатформенний сервіс дослідження хімічних сполук
           із можливістю оффлайн доступом до інформації.
@@ -40,15 +40,18 @@
     class="bg-csbluewhite h-5/6 px-40 py-5 text-csblack justify-items-start text-left"
   >
     <div class="flex flex-row w-full">
+      <img
+        src="https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg"
+        class="h-full my-36 m-3 rounded-3xl border-csblue border-2 transform duration-300 ease-in-out hover:scale-105"
+      />
       <div class="text-center items-center py-36">
-        <h1 class="text-5xl z-0">ChemSolution</h1>
+        <h1 class="text-5xl z-0 m-3 px-10">ChemSolution</h1>
         <p class="text-4xl m-3 px-10">
-          Відкрий для себе кросплатформенний сервіс дослідження хімічних сполук
-          із можливістю оффлайн доступом до інформації.
+          Інтерактивна хімічна лабораторія дозволяє користувачу вивчати хімічні
+          сполуки, шляхом комбінування відповідних атомів між собою.
         </p>
-        <Button />
+        <Button label="До хімічної лабораторії" />
       </div>
-      <Logo class="w-4/5 max-w-4/5"></Logo>
     </div>
   </div>
   <svg
@@ -68,14 +71,18 @@
   >
     <div class="flex flex-row w-full">
       <div class="text-center items-center py-36">
-        <h1 class="text-5xl">ChemSolution</h1>
+        <h1 class="text-5xl m-3 px-10">ChemSolution</h1>
         <p class="text-4xl m-3 px-10">
-          Відкрий для себе кросплатформенний сервіс дослідження хімічних сполук
-          із можливістю оффлайн доступом до інформації.
+          Періодична система хімічних елементів є графічним виразом періодичного
+          закону. Долучіться до світу хімії за допомогою періодичної системи
+          хімічних елементів.
         </p>
-        <Button />
+        <Button label="До періодичної системи" />
       </div>
-      <Logo class="w-4/5"></Logo>
+      <img
+        src="https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg"
+        class="h-full m-3 my-36 rounded-3xl border-csblue border-2 transform duration-300 ease-in-out hover:scale-105"
+      />
     </div>
   </div>
   <svg
@@ -96,6 +103,28 @@
 	h-60c-60,0-180,0-300,0s-240,0-360,0s-240,0-360,0s-240,0-300,0H0V0z"
     />
   </svg>
+
+  <div
+    id="block4"
+    class="bg-csbluewhite h-5/6 px-40 py-5 text-csblack justify-items-start text-left"
+  >
+    <div class="flex flex-row w-full">
+      <img
+        src="https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg"
+        class="h-full my-36 m-3 rounded-3xl border-csblue border-2 transform duration-300 ease-in-out hover:scale-105"
+      />
+      <div class="text-center items-center py-36">
+        <h1 class="text-5xl z-0 m-3 px-10">ChemSolution</h1>
+        <p class="text-4xl m-3 px-10">
+          Зареєструйтеся для використання усіх можливостей ChemSolution.
+        </p>
+        <div class="flex my-10">
+          <Button label="Авторизуватися" white="true" @click="auth()" />
+          <Button label="Зареєструватися" />
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 import Logo from '../components/Logo'
@@ -109,7 +138,9 @@ export default {
     return {}
   },
   computed: {},
-  methods: {},
+  methods: {
+    auth() {},
+  },
 }
 </script>
 <style>
