@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:chem_solution_mobile/models/User.dart';
 import 'package:http/http.dart' as http;
 import 'package:chem_solution_mobile/main.dart';
 
@@ -9,7 +10,6 @@ abstract class Autorisation {
       String result = match.group(0);
       return result.substring(4, result.length - 2);
     } catch (ex) {
-      //throw new Exception(ex);
       print(ex);
     }
   }
@@ -29,6 +29,7 @@ abstract class Autorisation {
             value: getInfo(Utf8Codec().decode(response.bodyBytes),
                 RegExp(r'n":"(\S)+",')));
         autorised = true;
+        setUser();
       } catch (ex) {
         print(ex);
         autorised = false;
@@ -42,5 +43,9 @@ abstract class Autorisation {
         Utf8Codec().decode(response.bodyBytes), RegExp(r'n":"(\S)+",')));
     print(getInfo(
         Utf8Codec().decode(response.bodyBytes), RegExp(r'e":"(\S)+"\}')));
+  }
+
+  static Future<void> setUser() async {
+    currentUser = await User.fetchObject();
   }
 }

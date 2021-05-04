@@ -1,3 +1,4 @@
+import 'package:chem_solution_mobile/models/Autorisation.dart';
 import 'package:chem_solution_mobile/models/User.dart';
 import 'package:chem_solution_mobile/screens/home_screen.dart';
 import 'package:chem_solution_mobile/screens/splash_screen.dart';
@@ -10,7 +11,15 @@ final storage = FlutterSecureStorage();
 User currentUser;
 
 void main() async {
-  autorised = false;
+  try {
+    await Autorisation.setUser();
+    autorised = true;
+  } on Exception catch (ex) {
+    print(ex);
+    autorised = false;
+  }
+
+  print(autorised);
   runApp(ChemApp());
 }
 

@@ -60,6 +60,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
         FlatButton(
             onPressed: () {
               autorised = false;
+              storage.delete(key: 'token');
               refresh();
               Navigator.of(context).pop();
             },

@@ -1,7 +1,11 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:chem_solution_mobile/models/Element.dart' as CS;
 import 'package:chem_solution_mobile/models/Model.dart';
 import 'package:chem_solution_mobile/models/Material.dart' as CSM;
-
+import 'package:http/http.dart' as http;
+import 'package:chem_solution_mobile/main.dart';
 import 'BlogPost.dart';
 import 'Achievement.dart';
 import 'Request.dart';
@@ -10,7 +14,7 @@ import 'ResearchHistory.dart';
 class User extends Model {
   String userEmail;
   String userName;
-  DateTime dateOfBirth;
+  String dateOfBirth;
   String password;
   int balance = 0;
   int rating = 0;
@@ -38,6 +42,22 @@ class User extends Model {
     this.userEmail,
     this.userName,
   });
+
+  DateTime get birthday {
+    RegExp regex = new RegExp(r'(\d{4})-(\d{2})-(\d{2})');
+    Match match = regex.firstMatch(dateOfBirth);
+    return DateTime(
+      int.parse(match.group(1)),
+      int.parse(match.group(2)),
+      int.parse(match.group(3)),
+    );
+  }
+
+  String get birthdayToString {
+    String day = '${birthday.day}'.padLeft(2, '0');
+    String month = '${birthday.month}'.padLeft(2, '0');
+    return '${day}:${month}:${birthday.year}';
+  }
 
   @override
   Map<String, dynamic> toMap() {
@@ -113,5 +133,20 @@ class User extends Model {
     return u;
   }
 
- 
+  static Future<User> fetchObject() async {
+    try {
+      String token = await storage.read(key: 'token');
+
+      final response = await http.get(Uri.http(chemURL, "Users"),
+          headers: {HttpHeaders.authorizationHeader: 'Bearer $token'});
+
+      if (response.statusCode == 200) {
+        return User.fromObject(jsonDecode(response.body));
+      } else {
+        throw Exception('Failed to load');
+      }
+    } catch (ex) {
+      throw Exception('There are no token');
+    }
+  }
 }

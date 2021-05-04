@@ -1,6 +1,8 @@
 import 'package:chem_solution_mobile/assets/alerts.dart';
+import 'package:chem_solution_mobile/models/User.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:chem_solution_mobile/main.dart';
 
 class MyProfile extends StatefulWidget {
   MyProfile({Key key}) : super(key: key);
@@ -15,10 +17,6 @@ class _MyProfileState extends State<MyProfile> {
       padding: EdgeInsets.all(15),
       child: ListTile(
         leading:
-            /* Icon(
-          data,
-          color: Color(0xff21D0B2),
-        ), */
             icon,
         title: Text(
           title,
@@ -32,7 +30,7 @@ class _MyProfileState extends State<MyProfile> {
           style: TextStyle(
               color: Color(0xff2F455C),
               fontWeight: FontWeight.w400,
-              fontSize: 30),
+              fontSize: 25),
         ),
       ),
     );
@@ -68,38 +66,38 @@ class _MyProfileState extends State<MyProfile> {
                     color: Color(0xff21D0B2),
                   ),
                   'Логін',
-                  'login'),
+                  currentUser.userName),
               _tile(
                   Icon(
                     Icons.mail,
                     color: Color(0xff21D0B2),
                   ),
                   'Електронна пошта',
-                  'blabla@nure.ua'),
+                  currentUser.userEmail),
               _tile(
                   Icon(
                     Icons.cake,
                     color: Color(0xff21D0B2),
                   ),
                   'Дата народження',
-                  '18.12.2000'),
+                  currentUser.birthdayToString),
               //must add needed icons
               _tile(
                   Image.asset(
-        'assets/images/AtomCoinGreen.png',
-        width: 30.0,
-        height: 30.0,
-      ),
+                    'assets/images/AtomCoinGreen.png',
+                    width: 30.0,
+                    height: 30.0,
+                  ),
                   'Баланс',
-                  '2000'),
+                  '${currentUser.balance}'),
               _tile(
-                 Image.asset(
-        'assets/images/Trophy.png',
-        width: 30.0,
-        height: 30.0,
-      ),
+                  Image.asset(
+                    'assets/images/Trophy.png',
+                    width: 30.0,
+                    height: 30.0,
+                  ),
                   'Рейтинг',
-                  '2000'),
+                  '${currentUser.rating}'),
             ],
           ),
         ),
