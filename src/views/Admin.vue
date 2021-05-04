@@ -1,5 +1,5 @@
 <template>
-  <div class="p-40">
+  <div>
     <title>{{ title }}</title>
     <h1 class="text-5xl">Welcome to Admin Panel</h1>
     <div class="flex">
