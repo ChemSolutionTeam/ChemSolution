@@ -119,8 +119,12 @@
           Зареєструйтеся для використання усіх можливостей ChemSolution.
         </p>
         <div class="flex my-10">
-          <Button label="Авторизуватися" white="true" @click="auth()" />
-          <Button label="Зареєструватися" />
+          <Button
+            white="true"
+            label="Авторизуватися"
+            @click="openForm('login')"
+          />
+          <Button label="Зареєструватися" @click="openForm('register')" />
         </div>
       </div>
     </div>
@@ -133,13 +137,15 @@ import Button from '../components/HomePageButtons'
 export default {
   name: 'Home',
   components: { Logo, Button },
-
+  emits: ['showForm'],
   data() {
     return {}
   },
   computed: {},
   methods: {
-    auth() {},
+    openForm(args) {
+      this.$emit('showForm', args)
+    },
   },
 }
 </script>
