@@ -32,6 +32,11 @@ const routes = [
     component: () => import('../views/PeriodicTable.vue'),
   },
   {
+    path: '/periodicTableDemo',
+    name: 'PeriodicTableDemo',
+    component: () => import('../views/PeriodicTableDemo.vue'),
+  },
+  {
     path: '/404',
     name: 'NotFound',
     component: () => import('../views/NotFound.vue'),

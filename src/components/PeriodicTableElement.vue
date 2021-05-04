@@ -1,9 +1,5 @@
 <template>
-  <div class="">
-    {{ element.symbol }}
-    <br />
-    {{ element.name }}
-  </div>
+  <td id={{number}} title={{name}}><sup>{{ number }}</sup>{{ symbol }}</td>
 </template>
 
 <script>
