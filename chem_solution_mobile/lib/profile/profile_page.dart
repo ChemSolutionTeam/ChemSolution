@@ -59,6 +59,8 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
         // ignore: deprecated_member_use
         FlatButton(
             onPressed: () {
+              autorised = false;
+              refresh();
               Navigator.of(context).pop();
             },
             child: Text(
@@ -108,10 +110,8 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
     _controller.dispose();
   }
 
-  void refresh(){
-    setState(() {
-      
-    });
+  void refresh() {
+    setState(() {});
   }
 
   @override
@@ -122,11 +122,12 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-           SlideTransition(
+            SlideTransition(
               position: _offsetAnimationToLeft,
               child: GestureDetector(
                 onTap: () {
-                  return alertDialogShow(context, autorisation(context, refresh), 400);
+                  return alertDialogShow(
+                      context, autorisation(context, refresh), 400);
                 },
                 child: _card(
                   context,
@@ -148,11 +149,11 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
         child: Center(
           child: ListView(
             children: [
-                SlideTransition(
+              SlideTransition(
                 position: _offsetAnimationToRight,
                 child: GestureDetector(
                   onTap: () {
-                     Navigator.of(context).push(
+                    Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => MyProfile(),
                       ),
@@ -190,7 +191,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                   ),
                 ),
               ),
-                 SlideTransition(
+              SlideTransition(
                 position: _offsetAnimationToRight,
                 child: GestureDetector(
                   onTap: () {
@@ -216,7 +217,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                 position: _offsetAnimationToLeft,
                 child: GestureDetector(
                   onTap: () {
-     /*
+                    /*
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => Materials(),
@@ -234,7 +235,6 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                   ),
                 ),
               ),
-           
               SlideTransition(
                 position: _offsetAnimationToRight,
                 child: GestureDetector(

@@ -1,6 +1,6 @@
+import 'package:chem_solution_mobile/models/BlogPost.dart';
 import 'package:chem_solution_mobile/widgets/post_card.dart';
 import 'package:flutter/material.dart';
-import 'package:chem_solution_mobile/main.dart';
 
 class Blogs extends StatefulWidget {
   Blogs({Key key}) : super(key: key);
@@ -17,7 +17,9 @@ class _BlogsState extends State<Blogs> with SingleTickerProviderStateMixin {
   Animation<Offset> _offsetAnimationToLeft;
   Animation<Offset> _offsetAnimationToRight;
 
-  void _addBlogPost() {
+  void _addBlogPost() async {
+    List<BlogPost> allPosts = await BlogPost.fetchObjects(path: 'BlogPosts');
+    allPosts = allPosts.reversed.toList();
     allPosts.forEach((post) {
       if (post.category == 'news') {
         posts.add(BlogCard(post: post));

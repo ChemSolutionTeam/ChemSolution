@@ -1,3 +1,4 @@
+import 'package:chem_solution_mobile/assets/toasts.dart';
 import 'package:chem_solution_mobile/models/BlogPost.dart';
 import 'package:chem_solution_mobile/widgets/post_info.dart';
 import 'package:flutter/cupertino.dart';
@@ -31,43 +32,6 @@ class _BlogCardState extends State<BlogCard> {
     fToast.init(context);
   }
 
-  _showToast(String msg, Color back, Color text, IconData icon) {
-    Widget toast = Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25.0),
-        color: back,
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            icon,
-            color: text,
-          ),
-          SizedBox(
-            width: 12.0,
-          ),
-          Text(
-            msg,
-            style: TextStyle(color: text),
-          ),
-        ],
-      ),
-    );
-
-    // Custom Toast Position
-    fToast.showToast(
-        child: toast,
-        toastDuration: Duration(milliseconds: 700),
-        positionedToastBuilder: (context, child) {
-          return Positioned(
-            child: child,
-            bottom: MediaQuery.of(context).size.height * 0.1,
-            left: MediaQuery.of(context).size.width * 0.2,
-          );
-        });
-  }
 
   _BlogCardState(this.post);
 
@@ -145,7 +109,7 @@ class _BlogCardState extends State<BlogCard> {
                           //'${post.liked.toString()}',
                           style: TextStyle(
                             color:
-                                !post.isLocked ? _colorNonLocked : _colorLocked,
+                                !post.isLocked || autorised ? _colorNonLocked : _colorLocked,
                           ),
                         ),
                         onTapDown: (details) {
@@ -168,7 +132,7 @@ class _BlogCardState extends State<BlogCard> {
                           });
                         },
                         onTap: () {
-                          if (post.isLocked) {
+                          if (post.isLocked && !autorised) {
                             return alertDialogShow(
                                 context, createDialog(context, 'детального перегляду інформації'), 200);
                           } else {
@@ -193,17 +157,19 @@ class _BlogCardState extends State<BlogCard> {
                            //   post.liked = !post.liked;
                             });
                             if (post.liked(null)) {
-                              _showToast(
+                              showToast(
                                   'Додано до обраних',
                                   Colors.greenAccent,
                                   Color(0xff005c05),
-                                  CommunityMaterialIcons.check);
+                                  CommunityMaterialIcons.check,
+                                  fToast);
                             } else {
-                              _showToast(
+                              showToast(
                                   'Видалено з обраних',
                                   Colors.redAccent,
                                   Color(0xff590000),
-                                  CommunityMaterialIcons.close);
+                                  CommunityMaterialIcons.close,
+                                  fToast);
                             }
                           } else{
                              return alertDialogShow(

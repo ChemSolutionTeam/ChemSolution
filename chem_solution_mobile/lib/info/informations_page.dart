@@ -1,23 +1,25 @@
+import 'package:chem_solution_mobile/models/BlogPost.dart';
 import 'package:chem_solution_mobile/widgets/post_card.dart';
 import 'package:flutter/material.dart';
-import 'package:chem_solution_mobile/main.dart';
 
-
-class Informations extends StatefulWidget  {
+class Informations extends StatefulWidget {
   Informations({Key key}) : super(key: key);
 
   @override
   _InformationsState createState() => _InformationsState();
 }
 
-class _InformationsState extends State<Informations> with SingleTickerProviderStateMixin  {
+class _InformationsState extends State<Informations>
+    with SingleTickerProviderStateMixin {
   List<Widget> posts = [];
   final GlobalKey<AnimatedListState> _key = new GlobalKey<AnimatedListState>();
   AnimationController _controller;
   Animation<Offset> _offsetAnimationToLeft;
   Animation<Offset> _offsetAnimationToRight;
 
-   void _addBlogPost() {
+  Future<void> _addBlogPost() async {
+    List<BlogPost> allPosts = await BlogPost.fetchObjects(path: 'BlogPosts');
+    allPosts = allPosts.reversed.toList();
     allPosts.forEach((post) {
       if (post.category == 'facts') {
         posts.add(BlogCard(post: post));
@@ -34,10 +36,10 @@ class _InformationsState extends State<Informations> with SingleTickerProviderSt
       vsync: this,
     );
     _controller.forward();
-     _offsetAnimationToLeft = Tween<Offset>(
+    _offsetAnimationToLeft = Tween<Offset>(
       begin: Offset(1, 0),
       end: const Offset(0, 0), //easeInOut
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.elasticInOut)); 
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.elasticInOut));
     _offsetAnimationToRight = Tween<Offset>(
       begin: const Offset(-1, 0),
       end: Offset(0, 0),
@@ -47,12 +49,11 @@ class _InformationsState extends State<Informations> with SingleTickerProviderSt
     });
   }
 
-   @override
+  @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +63,7 @@ class _InformationsState extends State<Informations> with SingleTickerProviderSt
         shrinkWrap: true,
         itemBuilder: (context, index, animation) {
           return SlideTransition(
-         position: index % 2 == 0
+            position: index % 2 == 0
                 ? _offsetAnimationToLeft
                 : _offsetAnimationToRight,
             child: posts[index],

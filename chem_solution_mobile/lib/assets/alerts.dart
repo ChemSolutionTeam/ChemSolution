@@ -1,8 +1,8 @@
 import 'package:chem_solution_mobile/models/Autorisation.dart';
-import 'package:chem_solution_mobile/models/User.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:chem_solution_mobile/main.dart';
 
 Widget createDialog(BuildContext context, String value) {
   return AlertDialog(
@@ -74,6 +74,16 @@ Widget autorisation(BuildContext context, Function() update) {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool visible = false;
 
+  void getCorrect() {
+    if (autorised) {
+      update();
+      Navigator.of(context).pop();
+    } else {
+      _emailEditingController.text = '';
+      _passwordEditingController.text = '';
+    }
+  }
+
   return AlertDialog(
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(32.0))),
@@ -135,8 +145,7 @@ Widget autorisation(BuildContext context, Function() update) {
                   onPressed: () async {
                     var email = _emailEditingController.text;
                     var password = _passwordEditingController.text;
-                    Autorisation.SignIn(email, password);
-                    Navigator.of(context).pop();
+                    Autorisation.signIn(email, password, getCorrect);
                   },
                   child: Text(
                     'Увійти',
