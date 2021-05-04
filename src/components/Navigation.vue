@@ -46,67 +46,18 @@
       </div>
     </div>
   </nav>
-  <div
-    class="inset-0 z-20 fixed sm:pt-2 md:pt-5 overflow-auto lg:pt-10 w-full h-full bg-csblack bg-opacity-50"
-    v-show="isBackgroundShown == 'login'"
-    @click="closeForm('none')"
-  >
-    <transition name="bounce">
-      <LoginForm
-        @mouseleave="isMouseOut = true"
-        @mouseover="isMouseOut = false"
-        v-on:openRegister="closeForm('register')"
-        v-on:openReset="closeForm('reset')"
-        v-on:login="closeForm('auth')"
-        v-show="isFormShow == 'login'"
-      />
-    </transition>
-  </div>
-  <div
-    class="inset-0 z-20 fixed sm:pt-2 md:pt-5 overflow-auto lg:pt-10 w-full h-full bg-csblack bg-opacity-50"
-    v-show="isBackgroundShown == 'register'"
-    @click="closeForm('none')"
-  >
-    <transition name="bounce">
-      <RegisterForm
-        @mouseleave="isMouseOut = true"
-        @mouseover="isMouseOut = false"
-        v-show="isFormShow == 'register'"
-        v-on:openLogin="closeForm('login')"
-        v-on:openReset="closeForm('reset')"
-      />
-    </transition>
-  </div>
-  <div
-    class="inset-0 z-20 fixed sm:pt-2 md:pt-5 overflow-auto lg:pt-10 w-full h-full bg-csblack bg-opacity-50"
-    v-show="isBackgroundShown == 'reset'"
-    @click="closeForm('none')"
-  >
-    <transition name="bounce">
-      <ForgetPassForm
-        @mouseleave="isMouseOut = true"
-        @mouseover="isMouseOut = false"
-        v-show="isFormShow == 'reset'"
-      />
-    </transition>
-  </div>
 </template>
 
 <script>
 import Link from '../components/NavigationLink.vue'
-import LoginForm from '../components/LoginForm.vue'
-import RegisterForm from '../components/RegisterForm.vue'
-import ForgetPassForm from '../components/ForgetPassForm.vue'
 import Logo from '../components/Logo.vue'
 import BackToTopButton from '../components/BackToTopButton.vue'
 
 export default {
   name: 'Navigation',
+  emits: ['showForm'],
   components: {
     Link,
-    LoginForm,
-    RegisterForm,
-    ForgetPassForm,
     Logo,
     BackToTopButton,
   },
@@ -120,9 +71,6 @@ export default {
   },
   data() {
     return {
-      isMouseOut: true,
-      isFormShow: 'none',
-      isBackgroundShown: 'none',
       scroll: {
         timer: 0,
         y: 0,
@@ -130,31 +78,8 @@ export default {
     }
   },
   methods: {
-    //Open forms
-    openForm(form) {
-      this.isBackgroundShown = form
-      this.isFormShow = form
-    },
-
-    //Form Close
-    closeForm(form) {
-      if (this.isMouseOut || form !== 'none') {
-        this.isFormShow = 'none'
-        this.hideBG(form)
-      }
-      if (form != 'auth') {
-        this.redirect(form)
-      }
-    },
-    redirect(form) {
-      if (form != 'none') {
-        setTimeout(this.openForm(form), 500)
-      }
-    },
-    hideBG(args) {
-      setTimeout(() => {
-        this.isBackgroundShown = args
-      }, 500)
+    openForm(args) {
+      this.$emit('showForm', args)
     },
     handleScroll() {
       if (this.scroll.timer) return
