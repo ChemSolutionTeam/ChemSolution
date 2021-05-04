@@ -30,7 +30,6 @@ namespace ChemSolution.Controllers
         {
             return await _context.Users.Select(u => ClearForbidetedInfo(u)).ToListAsync();
         }
-        
         [HttpGet]
         [Authorize]
         public async Task<ActionResult<User>> GetUser()
@@ -112,6 +111,61 @@ namespace ChemSolution.Controllers
             await _context.SaveChangesAsync();
             return NoContent();
         }
+
+        [HttpPost("liked/add/{postId}")]
+        [Authorize]
+        public async Task<IActionResult> AddLikedPost(int postId)
+        {
+            User user = await _context.Users.FindAsync(User.Identity?.Name);
+            if (user != null)
+            {
+                BlogPost post = await _context.BlogPosts.FindAsync(postId);
+                if (post != null)
+                {
+                    try
+                    {
+                        user.BlogPosts.Add(post);
+                        await _context.SaveChangesAsync();
+                        return Ok();
+                    }
+                    catch(Exception e)
+                    {
+                        return Conflict();
+                    }
+                }
+                return BadRequest();
+            }
+            return Unauthorized();
+        }
+
+        [HttpPost("liked/remove/{postId}")]
+        [Authorize]
+        public async Task<IActionResult> RemoveLikedPost(int postId)
+        {
+            User user = await _context.Users
+                .Include(p => p.BlogPosts)
+                .FirstAsync(u => u.UserEmail == User.Identity.Name);
+            if (user != null)
+            {
+                BlogPost post = await _context.BlogPosts.FindAsync(postId);
+                if (post != null)
+                {
+                    try
+                    {
+                        user.BlogPosts.Remove(post);
+                        await _context.SaveChangesAsync();
+                        return Ok();
+                    }
+                    catch (Exception e)
+                    {
+                        return Conflict();
+                    }
+                }
+                return BadRequest();
+            }
+            return Unauthorized();
+        }
+        
         private bool UserExists(string id)
         {
             return _context.Users.Any(e => e.UserEmail == id);
