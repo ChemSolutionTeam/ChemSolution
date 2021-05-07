@@ -27,7 +27,7 @@
     >
       <div class="text-lg lg:flex-grow flex justify-start">
         <Link label="Home" href="/" />
-        <Link label="Admin" href="admin" />
+        <Link label="Admin" href="/admin" />
         <Link />
       </div>
       <div>

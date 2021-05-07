@@ -22,9 +22,9 @@ const routes = [
     component: () => import('../views/Admin.vue'),
   },
   {
-    path: '/admin/inspect',
-    name: 'Inspect',
-    component: () => import('../views/Inspect.vue'),
+    path: '/admin/elements',
+    name: 'Elements',
+    component: () => import('../views/Element/Inspect.vue'),
   },
   {
     path: '/periodicTable',

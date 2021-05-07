@@ -1,6 +1,6 @@
 <template>
   <div
-    @click="redirect(this.path)"
+    @click="redirect()"
     class="shadow-xl hover:border-csgreen border-4 border-opacity-25 border-csblack w-1/5 m-5 rounded-xl h-full cursor-pointer"
   >
     <img :src="image" class="rounded-2xl p-3 pb-0 rounded-b-none" />
@@ -13,11 +13,13 @@
 </template>
 
 <script>
+import router from '@/router/index'
+
 export default {
   props: {
     path: {
       type: String,
-      default: 'error',
+      default: '404',
     },
     label: {
       type: String,
@@ -30,8 +32,8 @@ export default {
     },
   },
   methods: {
-    redirect(path) {
-      alert(path)
+    redirect() {
+      router.push(this.path)
     },
   },
 }
