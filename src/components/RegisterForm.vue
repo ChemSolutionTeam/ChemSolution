@@ -135,7 +135,7 @@
 import BaseInput from '@/components/BaseInput.vue'
 import BaseCheck from '@/components/BaseCheck.vue'
 import Logo from '@/components/Logo.vue'
-
+import Validation from '@/services/validation.js'
 export default {
   name: 'RegisterForm',
   components: {
@@ -179,25 +179,12 @@ export default {
     register() {
       //verification.
 
-      this.validatePass()
-      this.validatePassRepeat()
-      this.validateAge()
-    },
-    validateAge() {
-      let userYear = parseInt(this.user.birthDate.toString().split('-')[0])
-      let currentYear = new Date().getFullYear()
-      this.dateWrong =
-        userYear < currentYear - 120 || userYear > currentYear - 3
-    },
-    validatePass() {
-      this.passWrong = !this.user.pass.match(
-        new RegExp(
-          '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})'
-        )
+      this.passWrong = Validation.pass(this.user.pass)
+      this.passDontMatch = Validation.passRepeat(
+        this.user.pass,
+        this.user.passRepeat
       )
-    },
-    validatePassRepeat() {
-      this.passDontMatch = this.user.pass != this.user.passRepeat
+      this.dateWrong = Validation.age(this.user.birthDate)
     },
   },
 }
