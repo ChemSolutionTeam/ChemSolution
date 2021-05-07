@@ -179,12 +179,12 @@ export default {
     register() {
       //verification.
 
-      this.passWrong = Validation.pass(this.user.pass)
-      this.passDontMatch = Validation.passRepeat(
+      this.passWrong = !Validation.pass(this.user.pass)
+      this.passDontMatch = !Validation.passRepeat(
         this.user.pass,
         this.user.passRepeat
       )
-      this.dateWrong = Validation.age(this.user.birthDate)
+      this.dateWrong = !Validation.age(this.user.birthDate)
     },
   },
 }
