@@ -18,29 +18,43 @@ namespace ChemSolution.Controllers
     public class UsersController : ControllerBase
     {
         private readonly DataContext _context;
-        private readonly CheckFieldService _checkField;
-        public UsersController(DataContext context, CheckFieldService checkField)
+        private readonly CheckPropertiesService _checkProperties;
+        public UsersController(DataContext context, CheckPropertiesService checkProperties)
         {
-            _checkField = checkField;
+            _checkProperties = checkProperties;
             _context = context;
         }
         [HttpGet("all")]
         [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _context.Users.Select(u => ClearForbidetedInfo(u)).ToListAsync();
+            return await _context.Users
+                .Include(p => p.BlogPosts)
+                .Include(p => p.Requests)
+                .Include(p => p.ResearchHistorys)
+                .Include(p => p.Elements)
+                .Include(p => p.Achievement)
+                .Select(u => _checkProperties
+                    .PrepareModelForJson(ClearForbidetedInfo(u))).ToListAsync();
         }
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<User>> GetUser()
+        public async Task<JsonResult> GetUser()
         {
             var id = User.Identity?.Name;
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.Users
+                .Include(p=>p.BlogPosts)
+                .Include(p => p.Requests)
+                .Include(p=>p.ResearchHistorys)
+                .Include(p=>p.Elements)
+                .Include(p=>p.Achievement)
+                .FirstAsync(u=>u.UserEmail == id);
             if (user == null)
             {
-                return NotFound();
+                return new JsonResult(null);
             }
-            return ClearForbidetedInfo(user);
+            _checkProperties.PrepareModelForJson(user);
+            return new JsonResult(ClearForbidetedInfo(user));
         }
         [HttpPut]
         [Authorize]
@@ -51,8 +65,8 @@ namespace ChemSolution.Controllers
             var tmpUser = await _context.Users.FindAsync(id);
             if (tmpUser != null)
             {
-                tmpUser.UserName = _checkField.CheckModelField(tmpUser.UserName, user.UserName);
-                tmpUser.DateOfBirth = _checkField.CheckModelField(tmpUser.DateOfBirth, user.DateOfBirth);
+                tmpUser.UserName = _checkProperties.CheckModelProperty(tmpUser.UserName, user.UserName);
+                tmpUser.DateOfBirth = _checkProperties.CheckModelProperty(tmpUser.DateOfBirth, user.DateOfBirth);
             }
             else
             {
@@ -175,5 +189,6 @@ namespace ChemSolution.Controllers
             user.Password = string.Empty;
             return user;
         }
+        
     }
 }
