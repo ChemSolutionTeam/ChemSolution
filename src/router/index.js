@@ -24,7 +24,20 @@ const routes = [
   {
     path: '/admin/elements',
     name: 'Elements',
-    component: () => import('../views/Element/Inspect.vue'),
+    component: () => import('../views/Admin/Element/Inspect.vue'),
+  },
+  {
+    path: '/admin/elements/edit/:id',
+    name: 'Elements Edit',
+    component: () => import('../views/Admin/Element/Edit.vue'),
+    props: {
+      id: true,
+    },
+  },
+  {
+    path: '/admin/elements/create',
+    name: 'Elements Create',
+    component: () => import('../views/Admin/Element/Create.vue'),
   },
   {
     path: '/periodicTable',

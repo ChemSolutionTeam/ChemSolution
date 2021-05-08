@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div>
     <h1 class="text-5xl">Elements Inspect page</h1>
 
     <Button label="Go Back" class="w-2/12" @click="goBack()" />
@@ -111,6 +111,11 @@
                 class="py-1 hover:text-csgreen cursor-pointer px-6 text-center border-csgreen border-b-4"
               >
                 Valences
+              </th>
+              <th
+                class="py-1 hover:text-csgreen cursor-pointer px-1 text-center border-csgreen border-b-4"
+              >
+                Actions
               </th>
             </tr>
           </thead>
@@ -224,6 +229,24 @@
                   {{ valence }}
                 </p>
               </td>
+              <td
+                class="border border-t-0 px-5 border-csgreen whitespace-nowrap"
+              >
+                <div class="flex justify-end">
+                  <button
+                    class="px-4 focus:outline-none focus:ring focus:ring-offset-2 focus:ring-csgreen shadow-md bg-gradient-to-tr from-csgreen to-cslightgreen w-full p-1 m-1 border rounded-xl"
+                    @click="edit(element)"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    @click="remove(element)"
+                    class="focus:outline-none focus:ring focus:ring-offset-2 focus:ring-red-300 shadow-md bg-gradient-to-tr from-red-400 to-red-500 text-white w-full p-1 m-1 border rounded-xl"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -235,6 +258,7 @@
 <script>
 import Button from '@/components/HomePageButtons.vue'
 import router from '@/router/index'
+import apiService from '@/services/index'
 
 export default {
   name: 'Inspect',
@@ -243,6 +267,18 @@ export default {
     goBack() {
       router.push('/admin')
     },
+    edit(element) {
+      element
+      router.push('/admin/elements/edit/' + element.elementId)
+    },
+    delete(element) {
+      alert(element)
+    },
+  },
+  mounted() {
+    let elements = apiService.getElements()
+    if (elements == null || elements == undefined) return
+    else this.elements = elements
   },
   data() {
     return {

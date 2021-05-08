@@ -4,6 +4,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      width: {
+        two: '200%',
+      },
       keyframes: {
         wiggle: {
           '0%, 100%': { transform: 'rotate(-3deg)' },
@@ -21,6 +24,7 @@ module.exports = {
       cslightgreen: '#34F5C5',
       csblue: '#1DCDFE',
       csbluewhite: '#EAF9FE',
+
       red: colors.red,
       teal: colors.teal,
       white: colors.white,
@@ -29,6 +33,45 @@ module.exports = {
       indigo: colors.indigo,
       grey: colors.gray,
       gray: colors.gray,
+      transparent: colors.transparent,
+
+      tAlkalineEarthMetal: {
+        light: '#f59a23',
+        dark: '#ab6b18',
+      },
+      tAlkaliMetal: {
+        light: '#b8741a',
+        dark: '#805112',
+      },
+      tTransitionMetal: {
+        light: '#87131e',
+        dark: '#5e0d15',
+      },
+      tLanthanoid: {
+        light: '#cccc00',
+        dark: '#888800',
+      },
+      tActinoid: {
+        light: '#cc66b0',
+        dark: '#8e477b',
+      },
+      tMetalloid: {
+        light: '#21d0b2',
+        dark: '#17917c',
+      },
+      tPostTransitionMetal: {
+        light: '#1dcdfe',
+        dark: '#148fb1',
+      },
+      tNobleGas: {
+        light: '#8400ff',
+        dark: '#5c00b2',
+      },
+      tReactiveNonMetal: {
+        light: '#a1c768',
+        dark: '#657c41',
+      },
+      tUnknown: '#696969',
     },
   },
   variants: {
