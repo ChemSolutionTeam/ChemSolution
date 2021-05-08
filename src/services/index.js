@@ -216,6 +216,7 @@ export default {
     API.get('/Elements')
       .then((resp) => {
         console.log(resp)
+        return resp.data
       })
       .catch((e) => {
         console.error(e)
@@ -240,8 +241,8 @@ export default {
         console.error(e)
       })
   },
-  putElement(id) {
-    id
+  putElement(element) {
+    alert(element)
     //TODO PUT Element
   },
   deleteElement(id) {
