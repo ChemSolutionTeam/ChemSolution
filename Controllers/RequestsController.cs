@@ -17,11 +17,11 @@ namespace ChemSolution.Controllers
     public class RequestsController : ControllerBase
     {
         private readonly DataContext _context;
-        private readonly CheckFieldService _checkField;
+        private readonly CheckPropertiesService _checkProperties;
 
-        public RequestsController(DataContext context, CheckFieldService checkField)
+        public RequestsController(DataContext context, CheckPropertiesService checkProperties)
         {
-            _checkField = checkField;
+            _checkProperties = checkProperties;
             _context = context;
         }
 
@@ -51,9 +51,9 @@ namespace ChemSolution.Controllers
             var tmpRequest = await _context.Requests.FindAsync(id);
             if (tmpRequest != null)
             {
-                tmpRequest.Theme = _checkField.CheckModelField(tmpRequest.Theme, request.Theme);
-                tmpRequest.Text = _checkField.CheckModelField(tmpRequest.Text, request.Text);
-                tmpRequest.Status = _checkField.CheckModelField(tmpRequest.Status, request.Status);
+                tmpRequest.Theme = _checkProperties.CheckModelProperty(tmpRequest.Theme, request.Theme);
+                tmpRequest.Text = _checkProperties.CheckModelProperty(tmpRequest.Text, request.Text);
+                tmpRequest.Status = _checkProperties.CheckModelProperty(tmpRequest.Status, request.Status);
             }
             else
             {

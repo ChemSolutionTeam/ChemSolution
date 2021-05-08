@@ -17,12 +17,12 @@ namespace ChemSolution.Controllers
     public class MaterialsController : ControllerBase
     {
         private readonly DataContext _context;
-        private readonly CheckFieldService _checkField;
+        private readonly CheckPropertiesService _checkProperties;
 
-        public MaterialsController(DataContext context, CheckFieldService checkField)
+        public MaterialsController(DataContext context, CheckPropertiesService checkProperties)
         {
             _context = context;
-            _checkField = checkField;
+            _checkProperties = checkProperties;
         }
 
         [HttpGet]
@@ -51,10 +51,10 @@ namespace ChemSolution.Controllers
             var tmpMaterial = await _context.Materials.FindAsync(id);
             if (tmpMaterial != null)
             {
-                tmpMaterial.Image = _checkField.CheckModelField(tmpMaterial.Image, material.Image);
-                tmpMaterial.Formula = _checkField.CheckModelField(tmpMaterial.Formula, material.Image);
-                tmpMaterial.Name = _checkField.CheckModelField(tmpMaterial.Name, material.Name);
-                tmpMaterial.Info = _checkField.CheckModelField(tmpMaterial.Info, material.Info);
+                tmpMaterial.Image = _checkProperties.CheckModelProperty(tmpMaterial.Image, material.Image);
+                tmpMaterial.Formula = _checkProperties.CheckModelProperty(tmpMaterial.Formula, material.Image);
+                tmpMaterial.Name = _checkProperties.CheckModelProperty(tmpMaterial.Name, material.Name);
+                tmpMaterial.Info = _checkProperties.CheckModelProperty(tmpMaterial.Info, material.Info);
             }
             else
             {

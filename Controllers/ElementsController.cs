@@ -17,12 +17,12 @@ namespace ChemSolution.Controllers
     public class ElementsController : ControllerBase
     {
         private readonly DataContext _context;
-        private readonly CheckFieldService _checkField;
+        private readonly CheckPropertiesService _checkProperties;
 
-        public ElementsController(DataContext context, CheckFieldService checkField)
+        public ElementsController(DataContext context, CheckPropertiesService checkProperties)
         {
             _context = context;
-            _checkField = checkField;
+            _checkProperties = checkProperties;
         }
 
         [HttpGet]
@@ -51,23 +51,23 @@ namespace ChemSolution.Controllers
             var tmpElement = await _context.Elements.FindAsync(id);
             if (tmpElement != null)
             {
-                tmpElement.Symbol = _checkField.CheckModelField(tmpElement.Symbol, element.Symbol);
-                tmpElement.Name = _checkField.CheckModelField(tmpElement.Name, element.Name);
-                tmpElement.AtomicWeight = _checkField.CheckModelField(tmpElement.AtomicWeight, element.AtomicWeight);
-                tmpElement.ElectronQuantity = _checkField.CheckModelField(tmpElement.ElectronQuantity, element.ElectronQuantity);
-                tmpElement.ProtonQuantity = _checkField.CheckModelField(tmpElement.ProtonQuantity, element.ProtonQuantity);
-                tmpElement.NeutronQuantity = _checkField.CheckModelField(tmpElement.NeutronQuantity, element.NeutronQuantity);
-                tmpElement.AtomicRadius = _checkField.CheckModelField(tmpElement.AtomicRadius, element.AtomicRadius);
-                tmpElement.Electronegativity = _checkField.CheckModelField(tmpElement.Electronegativity, element.Electronegativity);
-                tmpElement.Category = _checkField.CheckModelField(tmpElement.Category, element.Category);
-                tmpElement.EnergyLevels = _checkField.CheckModelField(tmpElement.EnergyLevels, element.EnergyLevels);
-                tmpElement.MeltingTemperature = _checkField.CheckModelField(tmpElement.MeltingTemperature, element.MeltingTemperature);
-                tmpElement.BoilingTemperature = _checkField.CheckModelField(tmpElement.BoilingTemperature, element.BoilingTemperature);
-                tmpElement.IsLocked = _checkField.CheckModelField(tmpElement.IsLocked, element.IsLocked);
-                tmpElement.Info = _checkField.CheckModelField(tmpElement.Info, element.Info);
-                tmpElement.ImgSymbol = _checkField.CheckModelField(tmpElement.ImgSymbol, element.ImgSymbol);
-                tmpElement.ImgAtom = _checkField.CheckModelField(tmpElement.ImgAtom, element.ImgAtom);
-                tmpElement.Group = _checkField.CheckModelField(tmpElement.Group, element.Group);
+                tmpElement.Symbol = _checkProperties.CheckModelProperty(tmpElement.Symbol, element.Symbol);
+                tmpElement.Name = _checkProperties.CheckModelProperty(tmpElement.Name, element.Name);
+                tmpElement.AtomicWeight = _checkProperties.CheckModelProperty(tmpElement.AtomicWeight, element.AtomicWeight);
+                tmpElement.ElectronQuantity = _checkProperties.CheckModelProperty(tmpElement.ElectronQuantity, element.ElectronQuantity);
+                tmpElement.ProtonQuantity = _checkProperties.CheckModelProperty(tmpElement.ProtonQuantity, element.ProtonQuantity);
+                tmpElement.NeutronQuantity = _checkProperties.CheckModelProperty(tmpElement.NeutronQuantity, element.NeutronQuantity);
+                tmpElement.AtomicRadius = _checkProperties.CheckModelProperty(tmpElement.AtomicRadius, element.AtomicRadius);
+                tmpElement.Electronegativity = _checkProperties.CheckModelProperty(tmpElement.Electronegativity, element.Electronegativity);
+                tmpElement.Category = _checkProperties.CheckModelProperty(tmpElement.Category, element.Category);
+                tmpElement.EnergyLevels = _checkProperties.CheckModelProperty(tmpElement.EnergyLevels, element.EnergyLevels);
+                tmpElement.MeltingTemperature = _checkProperties.CheckModelProperty(tmpElement.MeltingTemperature, element.MeltingTemperature);
+                tmpElement.BoilingTemperature = _checkProperties.CheckModelProperty(tmpElement.BoilingTemperature, element.BoilingTemperature);
+                tmpElement.IsLocked = _checkProperties.CheckModelProperty(tmpElement.IsLocked, element.IsLocked);
+                tmpElement.Info = _checkProperties.CheckModelProperty(tmpElement.Info, element.Info);
+                tmpElement.ImgSymbol = _checkProperties.CheckModelProperty(tmpElement.ImgSymbol, element.ImgSymbol);
+                tmpElement.ImgAtom = _checkProperties.CheckModelProperty(tmpElement.ImgAtom, element.ImgAtom);
+                tmpElement.Group = _checkProperties.CheckModelProperty(tmpElement.Group, element.Group);
             }
             else
             {

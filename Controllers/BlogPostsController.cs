@@ -17,11 +17,11 @@ namespace ChemSolution.Controllers
     public class BlogPostsController : ControllerBase
     {
         private readonly DataContext _context;
-        private readonly CheckFieldService _checkField;
+        private readonly CheckPropertiesService _checkProperties;
 
-        public BlogPostsController(DataContext context, CheckFieldService checkField)
+        public BlogPostsController(DataContext context, CheckPropertiesService checkProperties)
         {
-            _checkField = checkField;
+            _checkProperties = checkProperties;
             _context = context;
         }
 
@@ -53,11 +53,11 @@ namespace ChemSolution.Controllers
             if (tmpBlogPost != null)
             {
 
-                tmpBlogPost.Title = _checkField.CheckModelField(tmpBlogPost.Title, blogPost.Title);
-                tmpBlogPost.Category = _checkField.CheckModelField(tmpBlogPost.Category, blogPost.Category);
-                tmpBlogPost.Information = _checkField.CheckModelField(tmpBlogPost.Information, blogPost.Information);
-                tmpBlogPost.Image = _checkField.CheckModelField(tmpBlogPost.Image, blogPost.Image);
-                tmpBlogPost.IsLocked = _checkField.CheckModelField(tmpBlogPost.IsLocked, blogPost.IsLocked);
+                tmpBlogPost.Title = _checkProperties.CheckModelProperty(tmpBlogPost.Title, blogPost.Title);
+                tmpBlogPost.Category = _checkProperties.CheckModelProperty(tmpBlogPost.Category, blogPost.Category);
+                tmpBlogPost.Information = _checkProperties.CheckModelProperty(tmpBlogPost.Information, blogPost.Information);
+                tmpBlogPost.Image = _checkProperties.CheckModelProperty(tmpBlogPost.Image, blogPost.Image);
+                tmpBlogPost.IsLocked = _checkProperties.CheckModelProperty(tmpBlogPost.IsLocked, blogPost.IsLocked);
 
             }
             else

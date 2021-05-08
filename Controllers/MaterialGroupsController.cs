@@ -18,11 +18,11 @@ namespace ChemSolution.Controllers
     public class MaterialGroupsController : ControllerBase
     {
         private readonly DataContext _context;
-        private readonly CheckFieldService _checkField;
+        private readonly CheckPropertiesService _checkProperties;
 
-        public MaterialGroupsController(DataContext context, CheckFieldService checkField)
+        public MaterialGroupsController(DataContext context, CheckPropertiesService checkProperties)
         {
-            _checkField = checkField;
+            _checkProperties = checkProperties;
             _context = context;
         }
 
@@ -53,7 +53,7 @@ namespace ChemSolution.Controllers
             if (tmpMaterialGroup != null)
             {
 
-                tmpMaterialGroup.GroupName = _checkField.CheckModelField(tmpMaterialGroup.GroupName, materialGroup.GroupName);
+                tmpMaterialGroup.GroupName = _checkProperties.CheckModelProperty(tmpMaterialGroup.GroupName, materialGroup.GroupName);
 
             }
             else

@@ -17,12 +17,12 @@ namespace ChemSolution.Controllers
     public class AchievementsController : ControllerBase
     {
         private readonly DataContext _context;
-        private readonly CheckFieldService _checkField;
+        private readonly CheckPropertiesService _checkProperties;
 
-        public AchievementsController(DataContext context, CheckFieldService checkField)
+        public AchievementsController(DataContext context, CheckPropertiesService checkProperties)
         {
             _context = context;
-            _checkField = checkField;
+            _checkProperties = checkProperties;
         }
 
         [HttpGet]
@@ -54,12 +54,12 @@ namespace ChemSolution.Controllers
             
             if (tmpAchievement != null)
             {
-                tmpAchievement.CountGoal = _checkField.CheckModelField(tmpAchievement.CountGoal, achievement.CountGoal);
-                tmpAchievement.Heading   = _checkField.CheckModelField(tmpAchievement.Heading, achievement.Heading);
-                tmpAchievement.Description = _checkField.CheckModelField(tmpAchievement.Description, achievement.Description);
-                tmpAchievement.ImgAchievemen = _checkField.CheckModelField(tmpAchievement.ImgAchievemen, achievement.ImgAchievemen);
-                tmpAchievement.MoneyReward = _checkField.CheckModelField(tmpAchievement.MoneyReward, achievement.MoneyReward);
-                tmpAchievement.RatingReward = _checkField.CheckModelField(tmpAchievement.RatingReward, achievement.RatingReward);
+                tmpAchievement.CountGoal = _checkProperties.CheckModelProperty(tmpAchievement.CountGoal, achievement.CountGoal);
+                tmpAchievement.Heading   = _checkProperties.CheckModelProperty(tmpAchievement.Heading, achievement.Heading);
+                tmpAchievement.Description = _checkProperties.CheckModelProperty(tmpAchievement.Description, achievement.Description);
+                tmpAchievement.ImgAchievemen = _checkProperties.CheckModelProperty(tmpAchievement.ImgAchievemen, achievement.ImgAchievemen);
+                tmpAchievement.MoneyReward = _checkProperties.CheckModelProperty(tmpAchievement.MoneyReward, achievement.MoneyReward);
+                tmpAchievement.RatingReward = _checkProperties.CheckModelProperty(tmpAchievement.RatingReward, achievement.RatingReward);
             }
             else
             {

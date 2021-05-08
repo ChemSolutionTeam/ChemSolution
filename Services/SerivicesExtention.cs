@@ -11,7 +11,7 @@ namespace ChemSolution.Services
 
         public static void AddCheckFieldService(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddTransient<CheckFieldService>();
+            serviceCollection.AddTransient<CheckPropertiesService>();
         }
 
         public static void AddEmailService(this IServiceCollection serviceCollection)
