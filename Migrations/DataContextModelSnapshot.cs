@@ -66,6 +66,10 @@ namespace ChemSolution.Migrations
                     b.Property<string>("ImgAchievemen")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("ImgAchivement")
+                        .HasMaxLength(250)
+                        .HasColumnType("TEXT");
+
                     b.Property<int?>("MaterialGroupId")
                         .HasColumnType("INTEGER");
 

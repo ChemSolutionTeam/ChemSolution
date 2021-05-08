@@ -11,6 +11,8 @@ namespace ChemSolution.Models
         public int AchievementId { get; set; }
         [StringLength(50, MinimumLength = 5)]
         public string Heading { get; set; }
+        [StringLength(250, MinimumLength = 1)]
+        public string ImgAchivement { set; get; }
         [StringLength(100, MinimumLength = 1)]
         public string Description { get; set; }
         [Range(0, int.MaxValue)]
