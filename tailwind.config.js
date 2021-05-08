@@ -4,6 +4,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      width: {
+        two: '200%',
+      },
       keyframes: {
         wiggle: {
           '0%, 100%': { transform: 'rotate(-3deg)' },
@@ -30,6 +33,7 @@ module.exports = {
       indigo: colors.indigo,
       grey: colors.gray,
       gray: colors.gray,
+      transparent: colors.transparent,
 
       tAlkalineEarthMetal: {
         light: '#f59a23',
