@@ -4,7 +4,7 @@
   <!-- <router-link to="/">Home</router-link> | -->
   <!-- <router-link to="/about">About</router-link> -->
   <!-- </div> -->
-  <router-view v-on:showForm="openForm($event)" class="mt-40" />
+  <router-view v-on:showForm="openForm($event)" class="pt-40" />
   <div
     class="inset-0 z-20 fixed sm:pt-2 md:pt-5 overflow-auto lg:pt-10 w-full h-full bg-csblack bg-opacity-50"
     v-show="isBackgroundShown == 'login'"
