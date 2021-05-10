@@ -55,7 +55,7 @@ class _MaterialCardState extends State<MaterialCard>
               children: [
                 rowInfo('Назва: ', '${material.name}'),
                 rowInfo('Формула: ', '${material.formula}'),
-                rowInfo('Клас: ', '${material.materialGroup}'),
+                rowInfo('Клас: ', '${material.materialGroup.groupName}'),
               ],
             ),
             100),

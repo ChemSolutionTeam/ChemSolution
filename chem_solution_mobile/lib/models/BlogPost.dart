@@ -1,9 +1,14 @@
+import 'dart:io';
+
+import 'package:chem_solution_mobile/assets/toasts.dart';
+import 'package:chem_solution_mobile/models/Autorisation.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:chem_solution_mobile/main.dart';
 import 'Model.dart';
 import 'User.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:chem_solution_mobile/main.dart';
 
 class BlogPost extends Model {
   int blogPostId;
@@ -14,6 +19,7 @@ class BlogPost extends Model {
   String image;
   List<User> users = [];
 
+
   BlogPost(
       {this.blogPostId,
       this.title,
@@ -21,11 +27,16 @@ class BlogPost extends Model {
       this.information,
       this.isLocked,
       this.image,
-      this.users});
+      this.users,
+      });
 
-  bool liked(User user) {
+  bool like(User user) {
     if (user == null) return false;
-    return user.blogPosts.indexOf(this) > -1;
+    if (user.blogPosts == null) return false;
+    for (int i = 0; i < user.blogPosts.length; i++) {
+      if (user.blogPosts[i].blogPostId == this.blogPostId) return true;
+    }
+    return false;
   }
 
   @override
@@ -53,23 +64,32 @@ class BlogPost extends Model {
     bp.information = o['information'];
     bp.isLocked = o['isLocked'];
     bp.image = o['image'];
+    /* List<User> u = [];
     o['users'].forEach((e) {
-      bp.users.add(User.fromObject(e));
-    }); 
+      u.add(User.fromObject(e));
+    });
+    bp.users = u; */
+
     return bp;
   }
 
+  // ignore: missing_return
   static Future<BlogPost> fetchObject({@required String path}) async {
-    final response = await http.get(Uri.http(chemURL, path));
-    if (response.statusCode == 200) {
-      return BlogPost.fromObject(jsonDecode(response.body));
-    } else {
-      throw Exception('Failed to load');
+    try {
+      final response = await http.get(Uri.http(chemURL, path));
+      if (response.statusCode == 200) {
+        return BlogPost.fromObject(jsonDecode(response.body));
+      } else {
+        throw Exception('Failed to load');
+      }
+    } catch (ex) {
+      showToast('Помилка підключення', Colors.redAccent, Color(0xff590000),
+          Icons.error, FToast());
     }
   }
 
   static Future<List<BlogPost>> fetchObjects({@required String path}) async {
-      final response = await http.get(Uri.http(chemURL, path));
+    final response = await http.get(Uri.http(chemURL, path));
 
     if (response.statusCode == 200) {
       List<BlogPost> list = [];
@@ -80,5 +100,29 @@ class BlogPost extends Model {
     } else {
       throw Exception('Failed to load');
     }
+  }
+
+  Future<bool> addToLiked(User user) async {
+    String token = await storage.read(key: 'token');
+
+    final response = await http.post(
+        Uri.http(chemURL, 'Users/liked/add/${this.blogPostId}'),
+        headers: {HttpHeaders.authorizationHeader: 'Bearer $token'});
+
+    print(Uri.http(chemURL, 'Users/liked/add/${this.blogPostId}'));
+    Autorisation.setUser();
+    return response.statusCode == 200;
+  }
+
+  Future<bool> removeFromLiked(User user) async {
+    String token = await storage.read(key: 'token');
+
+    final response = await http.post(
+        Uri.http(chemURL, 'Users/liked/remove/${this.blogPostId}'),
+        headers: {HttpHeaders.authorizationHeader: 'Bearer $token'});
+    Autorisation.setUser();
+    print(Uri.http(chemURL, 'Users/liked/remove/${this.blogPostId}'));
+
+    return response.statusCode == 200;
   }
 }

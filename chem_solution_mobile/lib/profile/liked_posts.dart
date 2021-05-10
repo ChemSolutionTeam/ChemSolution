@@ -1,9 +1,8 @@
 import 'dart:core';
-import 'package:chem_solution_mobile/models/BlogPost.dart';
 import 'package:chem_solution_mobile/widgets/post_card.dart';
 import 'package:chem_solution_mobile/widgets/search_field.dart';
 import 'package:flutter/material.dart';
-import 'package:chem_solution_mobile/models/User.dart';
+import 'package:chem_solution_mobile/main.dart';
 
 class LikedPosts extends StatefulWidget {
   LikedPosts({Key key}) : super(key: key);
@@ -23,7 +22,7 @@ class _LikedPostsState extends State<LikedPosts>
   Animation<Offset> _offsetAnimationToRight;
 
   void _addBlogPost() {
-    User user = User(blogPosts: [
+    /* User user = User(blogPosts: [
       new BlogPost(
         blogPostId: 1,
         title: 'post1',
@@ -70,7 +69,8 @@ information2\ninformation2\ninformation2\ninformation2\n''',
         isLocked: false,
       ),
     ]);
-    user.blogPosts.forEach((post) {
+  */
+    currentUser.blogPosts.forEach((post) {
       posts.add(BlogCard(post: post));
       _key.currentState.insertItem(posts.length - 1);
     });

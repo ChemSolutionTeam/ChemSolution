@@ -1,8 +1,10 @@
+import 'package:chem_solution_mobile/assets/toasts.dart';
 import 'package:chem_solution_mobile/models/Autorisation.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:chem_solution_mobile/main.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 Widget createDialog(BuildContext context, String value) {
   return AlertDialog(
@@ -61,6 +63,7 @@ Future<Widget> alertDialogShow(
       barrierDismissible: true,
       barrierLabel: '',
       context: context,
+      // ignore: missing_return
       pageBuilder: (context, animation1, animation2) {});
 }
 
@@ -145,7 +148,12 @@ Widget autorisation(BuildContext context, Function() update) {
                   onPressed: () async {
                     var email = _emailEditingController.text;
                     var password = _passwordEditingController.text;
+                    try{
                     Autorisation.signIn(email, password, getCorrect);
+                    } catch (ex){
+                      showToast('Помилка підключення', Colors.redAccent, Color(0xff590000),
+          Icons.error, FToast());
+                    }
                   },
                   child: Text(
                     'Увійти',

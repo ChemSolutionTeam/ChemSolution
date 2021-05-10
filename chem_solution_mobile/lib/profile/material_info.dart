@@ -22,7 +22,7 @@ class MaterialInfo extends StatelessWidget {
           ),
           info('Назва: ', '${material.name}'),
           info('Формула: ', '${material.formula}'),
-          info('Клас: ', '${material.materialGroup}'),
+          info('Клас: ', '${material.materialGroup.groupName}'),
           info('Загальна інформація:', ''),
           info('', '\n${material.info}'),
         ],

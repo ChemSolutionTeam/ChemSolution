@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:chem_solution_mobile/models/Element.dart' as CS;
 import 'package:chem_solution_mobile/models/Model.dart';
 import 'package:chem_solution_mobile/models/Material.dart' as CSM;
@@ -56,7 +55,7 @@ class User extends Model {
   String get birthdayToString {
     String day = '${birthday.day}'.padLeft(2, '0');
     String month = '${birthday.month}'.padLeft(2, '0');
-    return '${day}:${month}:${birthday.year}';
+    return '$day:$month:${birthday.year}';
   }
 
   @override
@@ -112,27 +111,47 @@ class User extends Model {
     u.balance = o['balance'];
     u.rating = o['rating'];
     u.honesty = o['honesty'];
+
+    List<BlogPost> bps = [];
     o['blogPosts'].forEach((element) {
-      u.blogPosts.add(BlogPost.fromObject(element));
+      bps.add(BlogPost.fromObject(element));
     });
+    u.blogPosts = bps;
+
+    List<Achievement> a = [];
     o['achievement'].forEach((element) {
-      u.achievement.add(Achievement.fromObject(element));
+      a.add(Achievement.fromObject(element));
     });
+    u.achievement = a;
+
+    List<CS.Element> e = [];
     o['elements'].forEach((element) {
-      u.elements.add(CS.Element.fromObject(element));
+      e.add(CS.Element.fromObject(element));
     });
+    u.elements = e;
+
+    List<Request> r = [];
     o['requests'].forEach((element) {
-      u.requests.add(Request.fromObject(element));
+      r.add(Request.fromObject(element));
     });
+    u.requests = r;
+
+    List<ResearchHistory> rs = [];
     o['researchHistorys'].forEach((element) {
-      u.researchHistorys.add(ResearchHistory.fromObject(element));
+      rs.add(ResearchHistory.fromObject(element));
     });
+    u.researchHistorys = rs;
+
+    List<CSM.Material> m = [];
     o['materials'].forEach((element) {
-      u.materials.add(CSM.Material.fromObject(element));
+      m.add(CSM.Material.fromObject(element));
     });
+    u.materials = m;
+
     return u;
   }
 
+  // ignore: missing_return
   static Future<User> fetchObject() async {
     try {
       String token = await storage.read(key: 'token');
@@ -141,12 +160,14 @@ class User extends Model {
           headers: {HttpHeaders.authorizationHeader: 'Bearer $token'});
 
       if (response.statusCode == 200) {
+        autorised = true;
         return User.fromObject(jsonDecode(response.body));
       } else {
+        autorised = false;
         throw Exception('Failed to load');
       }
     } catch (ex) {
-      throw Exception('There are no token');
+      autorised = false;
     }
   }
 }

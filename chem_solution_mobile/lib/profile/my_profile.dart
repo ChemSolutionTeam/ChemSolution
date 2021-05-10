@@ -1,5 +1,4 @@
 import 'package:chem_solution_mobile/assets/alerts.dart';
-import 'package:chem_solution_mobile/models/User.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:chem_solution_mobile/main.dart';

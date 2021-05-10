@@ -26,7 +26,7 @@ class _MaterialsState extends State<Materials>
       new CS.Material(
         id: 1,
         image:
-            'https://lh3.googleusercontent.com/proxy/mo5YkbgOTkcb-5VOl3iYSchHP8JijvWSznG7OItQOdjTg5cpm0THdCSYXq-aRipP_ozX9kTKhSgTqk6E_65abunjlraDDUA2X6z7_uT1YvrkcoZTrdrSVYdFIH6xO2YNkFTVaTWvxMTenee2jjNH0_LOOqBR98ac0rPEY6_15y5CG2osC2Q4',
+             'https://img02.flagma.ua/photo/sernaya-kislota-40-sirchana-kislota-h2so4-16359806_big.jpg',
         formula: 'Ca(OH)2',
         name: 'Кальцій гідроксид',
         info: 'бла бла',

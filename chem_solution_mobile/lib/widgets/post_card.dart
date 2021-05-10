@@ -13,11 +13,14 @@ class BlogCard extends StatefulWidget {
   BlogCard({Key key, @required this.post}) : super(key: key);
 
   @override
-  _BlogCardState createState() => _BlogCardState(post);
+  _BlogCardState createState() => _BlogCardState(post: post);
 }
 
 class _BlogCardState extends State<BlogCard> {
   BlogPost post;
+  bool liked;
+  _BlogCardState({this.post});
+
   Color _colorLocked = Colors.blueGrey;
   Color _colorNonLocked = Color(0xff1dcdfe);
   Color _colorCard = Colors.white;
@@ -30,10 +33,8 @@ class _BlogCardState extends State<BlogCard> {
     super.initState();
     fToast = FToast();
     fToast.init(context);
+    liked = post.like(currentUser);
   }
-
-
-  _BlogCardState(this.post);
 
   @override
   Widget build(BuildContext context) {
@@ -106,10 +107,10 @@ class _BlogCardState extends State<BlogCard> {
                       GestureDetector(
                         child: Text(
                           'Детальніше...',
-                          //'${post.liked.toString()}',
                           style: TextStyle(
-                            color:
-                                !post.isLocked || autorised ? _colorNonLocked : _colorLocked,
+                            color: !post.isLocked || autorised
+                                ? _colorNonLocked
+                                : _colorLocked,
                           ),
                         ),
                         onTapDown: (details) {
@@ -134,7 +135,10 @@ class _BlogCardState extends State<BlogCard> {
                         onTap: () {
                           if (post.isLocked && !autorised) {
                             return alertDialogShow(
-                                context, createDialog(context, 'детального перегляду інформації'), 200);
+                                context,
+                                createDialog(
+                                    context, 'детального перегляду інформації'),
+                                200);
                           } else {
                             Navigator.of(context).push(
                               MaterialPageRoute(
@@ -143,37 +147,43 @@ class _BlogCardState extends State<BlogCard> {
                                 ),
                               ),
                             );
-                          } 
+                          }
                         },
                       ),
                       GestureDetector(
                         child: Icon(
-                          post.liked(null) ? Icons.favorite : Icons.favorite_border,
-                          color: post.liked(null) ? _colorLike : null,
+                          // post.liked(currentUser)
+                          liked ? Icons.favorite : Icons.favorite_border,
+                          color:
+                              //post.liked(currentUser)
+                              liked ? _colorLike : null,
                         ),
-                        onTap: () {
+                        onTap: () async {
                           if (autorised) {
-                            setState(() {
-                           //   post.liked = !post.liked;
-                            });
-                            if (post.liked(null)) {
-                              showToast(
-                                  'Додано до обраних',
-                                  Colors.greenAccent,
-                                  Color(0xff005c05),
-                                  CommunityMaterialIcons.check,
-                                  fToast);
-                            } else {
+                            if (/*post.liked(currentUser)*/ liked) {
+                              await post.removeFromLiked(currentUser);
                               showToast(
                                   'Видалено з обраних',
                                   Colors.redAccent,
                                   Color(0xff590000),
                                   CommunityMaterialIcons.close,
                                   fToast);
+                            } else {
+                              await post.addToLiked(currentUser);
+
+                              showToast(
+                                  'Додано до обраних',
+                                  Colors.greenAccent,
+                                  Color(0xff005c05),
+                                  CommunityMaterialIcons.check,
+                                  fToast);
                             }
-                          } else{
-                             return alertDialogShow(
-                                context, createDialog(context, 'збереження поста'), 200);
+                            setState(() {
+                              liked = !liked;
+                            });
+                          } else {
+                            return alertDialogShow(context,
+                                createDialog(context, 'збереження поста'), 200);
                           }
                         },
                       )
