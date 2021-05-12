@@ -2,7 +2,11 @@
   <div>
     <h1 class="font-bold text-csblack text-5xl">
       Видалити:
-      <span class="text-red-500">{{ element.name }}</span>
+      <span
+        class="bg-gradient-to-tr bg-clip-text from-purple-400 to-red-500"
+        style="color: transparent"
+        >{{ element.name }}</span
+      >
     </h1>
     <div class="justify-items-center grid">
       <div class="w-2/3 flex">

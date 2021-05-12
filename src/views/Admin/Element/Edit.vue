@@ -2,11 +2,20 @@
   <div>
     <h1 class="font-bold text-csblack text-5xl">
       Редагувати:
-      <span class="text-csgreen">{{ element.name }}</span>
+      <span
+        class="bg-clip-text bg-gradient-to-tr from-yellow-300 to-pink-600"
+        style="color: transparent"
+        >{{ element.name }}</span
+      >
     </h1>
     <div class="justify-items-center grid">
       <div class="w-2/3 flex">
-        <Button label="Зберігти" class="w-1/2" @click="submit()" />
+        <Button
+          label="Зберігти"
+          isYellow="true"
+          class="w-1/2"
+          @click="submit()"
+        />
         <Button
           label="Повернутися"
           class="w-1/2"
@@ -15,7 +24,7 @@
         />
       </div>
       <div
-        class="w-1/2 m-8 bg-gradient-to-tr from-cslightgreen via-csgreen to-csblue rounded-3xl transform sm:-rotate-3"
+        class="w-1/2 m-8 bg-gradient-to-tr from-yellow-300 to-pink-600 rounded-3xl transform sm:-rotate-3"
       >
         <div
           class="transform rotate-3 bg-white p-5 rounded-3xl shadow-xl border-csblack border-2"
