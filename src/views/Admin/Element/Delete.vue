@@ -2,7 +2,7 @@
   <div>
     <h1 class="font-bold text-csblack text-5xl">
       Видалити:
-      <span class="text-csgreen">{{ element.name }}</span>
+      <span class="text-red-500">{{ element.name }}</span>
     </h1>
     <div class="justify-items-center grid">
       <div class="w-2/3 flex">
@@ -20,95 +20,103 @@
         />
       </div>
       <div
-        class="w-1/2 p-5 m-4 rounded-3xl shadow-lg border-cslightgreen border-2"
+        class="w-1/2 m-8 bg-gradient-to-tr from-purple-300 to-red-500 rounded-3xl transform sm:-rotate-3"
       >
-        <BaseInput label="Символ" v-model="element.symbol" isDisabled="true" />
-        <BaseInput label="Назва" v-model="element.name" isDisabled="true" />
-        <BaseInput
-          label="Атомна маса"
-          v-model="element.atomicWeight"
-          type="number"
-          step="0.01"
-          isDisabled="true"
-        />
-        <BaseInput
-          label="Кількість електронів"
-          v-model="element.electronQuantity"
-          type="number"
-          isDisabled="true"
-        />
-        <BaseInput
-          label="Кількість протонів"
-          type="number"
-          v-model="element.protonQuantity"
-          isDisabled="true"
-        />
-        <BaseInput
-          label="Кількість нейтронів"
-          v-model="element.neutronQuantity"
-          type="number"
-          isDisabled="true"
-        />
-        <BaseInput
-          label="Радіус атома"
-          v-model="element.atomicRadius"
-          type="number"
-          step="0.01"
-          isDisabled="true"
-        />
-        <BaseInput
-          label="Електронегативність"
-          v-model="element.electronegativity"
-          type="number"
-          step="0.01"
-          isDisabled="true"
-        />
-        <BaseInput
-          label="Категорія"
-          v-model="element.category"
-          isDisabled="true"
-        />
-        <BaseInput
-          label="Енергетичні рівні"
-          v-model="element.energyLevels"
-          isDisabled="true"
-        />
-        <BaseInput
-          label="Температура плавління"
-          v-model="element.meltingTemperature"
-          type="number"
-          step="0.01"
-          isDisabled="true"
-        />
-        <BaseInput
-          label="Температура кипіння"
-          v-model="element.boilingTemperature"
-          type="number"
-          step="0.01"
-          isDisabled="true"
-        />
-        <BaseCheck
-          label="Заблоковано"
-          v-model="element.isLocked"
-          big="true"
-          isDisabled="true"
-        />
-        <BaseTextArea
-          label="Інформація"
-          v-model="element.info"
-          isDisabled="true"
-        />
-        <BaseInput
-          label="Зображення символу"
-          v-model="element.imgSymbol"
-          isDisabled="true"
-        />
-        <BaseInput
-          label="Зображення атому"
-          v-model="element.imgAtom"
-          isDisabled="true"
-        />
-        <BaseInput label="Група" v-model="element.group" isDisabled="true" />
+        <div
+          class="transform rotate-3 bg-white p-5 rounded-3xl shadow-xl border-csblack border-2"
+        >
+          <BaseInput
+            label="Символ"
+            v-model="element.symbol"
+            isDisabled="true"
+          />
+          <BaseInput label="Назва" v-model="element.name" isDisabled="true" />
+          <BaseInput
+            label="Атомна маса"
+            v-model="element.atomicWeight"
+            type="number"
+            step="0.01"
+            isDisabled="true"
+          />
+          <BaseInput
+            label="Кількість електронів"
+            v-model="element.electronQuantity"
+            type="number"
+            isDisabled="true"
+          />
+          <BaseInput
+            label="Кількість протонів"
+            type="number"
+            v-model="element.protonQuantity"
+            isDisabled="true"
+          />
+          <BaseInput
+            label="Кількість нейтронів"
+            v-model="element.neutronQuantity"
+            type="number"
+            isDisabled="true"
+          />
+          <BaseInput
+            label="Радіус атома"
+            v-model="element.atomicRadius"
+            type="number"
+            step="0.01"
+            isDisabled="true"
+          />
+          <BaseInput
+            label="Електронегативність"
+            v-model="element.electronegativity"
+            type="number"
+            step="0.01"
+            isDisabled="true"
+          />
+          <BaseInput
+            label="Категорія"
+            v-model="element.category"
+            isDisabled="true"
+          />
+          <BaseInput
+            label="Енергетичні рівні"
+            v-model="element.energyLevels"
+            isDisabled="true"
+          />
+          <BaseInput
+            label="Температура плавління"
+            v-model="element.meltingTemperature"
+            type="number"
+            step="0.01"
+            isDisabled="true"
+          />
+          <BaseInput
+            label="Температура кипіння"
+            v-model="element.boilingTemperature"
+            type="number"
+            step="0.01"
+            isDisabled="true"
+          />
+          <BaseCheck
+            label="Заблоковано"
+            v-model="element.isLocked"
+            big="true"
+            isDisabled="true"
+          />
+          <BaseTextArea
+            label="Інформація"
+            v-model="element.info"
+            isDisabled="true"
+          />
+          <BaseInput
+            label="Зображення символу"
+            v-model="element.imgSymbol"
+            isDisabled="true"
+          />
+          <BaseInput
+            label="Зображення атому"
+            v-model="element.imgAtom"
+            isDisabled="true"
+          />
+          <BaseInput label="Група" v-model="element.group" isDisabled="true" />
+        </div>
       </div>
     </div>
   </div>
