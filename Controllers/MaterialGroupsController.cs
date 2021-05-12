@@ -36,7 +36,6 @@ namespace ChemSolution.Controllers
         public async Task<ActionResult<MaterialGroup>> GetMaterialGroup(int id)
         {
             var materialGroup = await _context.MaterialGroups.FindAsync(id);
-
             if (materialGroup == null)
             {
                 return NotFound();
@@ -52,9 +51,7 @@ namespace ChemSolution.Controllers
             var tmpMaterialGroup = await _context.MaterialGroups.FindAsync(id);
             if (tmpMaterialGroup != null)
             {
-
-                tmpMaterialGroup.GroupName = _checkProperties.CheckModelProperty(tmpMaterialGroup.GroupName, materialGroup.GroupName);
-
+                _checkProperties.CheckModelProperties(tmpMaterialGroup, materialGroup);
             }
             else
             {

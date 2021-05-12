@@ -28,19 +28,23 @@ namespace ChemSolution.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Element>>> GetElements()
         {
-            return await _context.Elements.ToListAsync();
+            return await _context.Elements
+                .Include(p=>p.Materials)
+                .Select(e=>_checkProperties.PrepareModelForJson(e))
+                .ToListAsync();
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Element>> GetElement(int id)
         {
-            var element = await _context.Elements.FindAsync(id);
-
+            var element = await _context.Elements
+                .Include(p => p.Materials)
+                .FirstAsync(e=> e.ElementId == id);
             if (element == null)
             {
                 return NotFound();
             }
-
+            _checkProperties.PrepareModelForJson(element);
             return element;
         }
 
@@ -51,23 +55,7 @@ namespace ChemSolution.Controllers
             var tmpElement = await _context.Elements.FindAsync(id);
             if (tmpElement != null)
             {
-                tmpElement.Symbol = _checkProperties.CheckModelProperty(tmpElement.Symbol, element.Symbol);
-                tmpElement.Name = _checkProperties.CheckModelProperty(tmpElement.Name, element.Name);
-                tmpElement.AtomicWeight = _checkProperties.CheckModelProperty(tmpElement.AtomicWeight, element.AtomicWeight);
-                tmpElement.ElectronQuantity = _checkProperties.CheckModelProperty(tmpElement.ElectronQuantity, element.ElectronQuantity);
-                tmpElement.ProtonQuantity = _checkProperties.CheckModelProperty(tmpElement.ProtonQuantity, element.ProtonQuantity);
-                tmpElement.NeutronQuantity = _checkProperties.CheckModelProperty(tmpElement.NeutronQuantity, element.NeutronQuantity);
-                tmpElement.AtomicRadius = _checkProperties.CheckModelProperty(tmpElement.AtomicRadius, element.AtomicRadius);
-                tmpElement.Electronegativity = _checkProperties.CheckModelProperty(tmpElement.Electronegativity, element.Electronegativity);
-                tmpElement.Category = _checkProperties.CheckModelProperty(tmpElement.Category, element.Category);
-                tmpElement.EnergyLevels = _checkProperties.CheckModelProperty(tmpElement.EnergyLevels, element.EnergyLevels);
-                tmpElement.MeltingTemperature = _checkProperties.CheckModelProperty(tmpElement.MeltingTemperature, element.MeltingTemperature);
-                tmpElement.BoilingTemperature = _checkProperties.CheckModelProperty(tmpElement.BoilingTemperature, element.BoilingTemperature);
-                tmpElement.IsLocked = _checkProperties.CheckModelProperty(tmpElement.IsLocked, element.IsLocked);
-                tmpElement.Info = _checkProperties.CheckModelProperty(tmpElement.Info, element.Info);
-                tmpElement.ImgSymbol = _checkProperties.CheckModelProperty(tmpElement.ImgSymbol, element.ImgSymbol);
-                tmpElement.ImgAtom = _checkProperties.CheckModelProperty(tmpElement.ImgAtom, element.ImgAtom);
-                tmpElement.Group = _checkProperties.CheckModelProperty(tmpElement.Group, element.Group);
+               _checkProperties.CheckModelProperties(tmpElement, element);
             }
             else
             {

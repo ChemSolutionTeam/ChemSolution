@@ -51,16 +51,12 @@ namespace ChemSolution.Controllers
             var tmpMaterial = await _context.Materials.FindAsync(id);
             if (tmpMaterial != null)
             {
-                tmpMaterial.Image = _checkProperties.CheckModelProperty(tmpMaterial.Image, material.Image);
-                tmpMaterial.Formula = _checkProperties.CheckModelProperty(tmpMaterial.Formula, material.Image);
-                tmpMaterial.Name = _checkProperties.CheckModelProperty(tmpMaterial.Name, material.Name);
-                tmpMaterial.Info = _checkProperties.CheckModelProperty(tmpMaterial.Info, material.Info);
+              _checkProperties.CheckModelProperties(tmpMaterial, material);
             }
             else
             {
                 return NotFound();
             }
-
 
             try
             {

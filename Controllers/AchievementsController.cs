@@ -28,7 +28,8 @@ namespace ChemSolution.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Achievement>>> GetAchievements()
         {
-            return await _context.Achievements.ToListAsync();
+            return await _context.Achievements
+                .ToListAsync();
         }
 
         [HttpGet("{id}")]
@@ -54,12 +55,7 @@ namespace ChemSolution.Controllers
             
             if (tmpAchievement != null)
             {
-                tmpAchievement.CountGoal = _checkProperties.CheckModelProperty(tmpAchievement.CountGoal, achievement.CountGoal);
-                tmpAchievement.Heading   = _checkProperties.CheckModelProperty(tmpAchievement.Heading, achievement.Heading);
-                tmpAchievement.Description = _checkProperties.CheckModelProperty(tmpAchievement.Description, achievement.Description);
-                tmpAchievement.ImgAchievemen = _checkProperties.CheckModelProperty(tmpAchievement.ImgAchievemen, achievement.ImgAchievemen);
-                tmpAchievement.MoneyReward = _checkProperties.CheckModelProperty(tmpAchievement.MoneyReward, achievement.MoneyReward);
-                tmpAchievement.RatingReward = _checkProperties.CheckModelProperty(tmpAchievement.RatingReward, achievement.RatingReward);
+              _checkProperties.CheckModelProperties(tmpAchievement, achievement);
             }
             else
             {

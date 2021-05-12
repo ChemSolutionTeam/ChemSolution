@@ -12,6 +12,23 @@ namespace ChemSolution.Services
     public class CheckPropertiesService
     {
         public T CheckModelProperty<T>(T oldValue, T newValue) where T : IComparable =>  ( (newValue?.CompareTo(default(T)) ?? 0) == 0) ? oldValue: newValue;
+
+
+        public void CheckModelProperties<T>(T oldModel, T newModel)
+        {
+            Type modelType = typeof(T);
+            foreach (var propertyInfo in modelType.GetProperties())
+            {
+                Type tmpType = Type.GetType(propertyInfo.PropertyType.ToString(), true, false);
+                if (tmpType.GetInterfaces().All(i => i.Name != "IList"))
+                {
+                    dynamic oldData =propertyInfo.GetValue(oldModel);
+                    dynamic newData =  propertyInfo.GetValue(newModel);
+                    propertyInfo.SetValue( oldModel , CheckModelProperty(oldData, newData) );
+                }
+            }
+        }
+
         private void ClearLists(object obj)
         {
             Type objType = obj.GetType();

@@ -28,7 +28,8 @@ namespace ChemSolution.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Request>>> GetRequests()
         {
-            return await _context.Requests.ToListAsync();
+            return await _context.Requests
+                .ToListAsync();
         }
 
         [HttpGet("{id}")]
@@ -51,9 +52,7 @@ namespace ChemSolution.Controllers
             var tmpRequest = await _context.Requests.FindAsync(id);
             if (tmpRequest != null)
             {
-                tmpRequest.Theme = _checkProperties.CheckModelProperty(tmpRequest.Theme, request.Theme);
-                tmpRequest.Text = _checkProperties.CheckModelProperty(tmpRequest.Text, request.Text);
-                tmpRequest.Status = _checkProperties.CheckModelProperty(tmpRequest.Status, request.Status);
+                _checkProperties.CheckModelProperties(tmpRequest, request);
             }
             else
             {

@@ -53,11 +53,7 @@ namespace ChemSolution.Controllers
             if (tmpBlogPost != null)
             {
 
-                tmpBlogPost.Title = _checkProperties.CheckModelProperty(tmpBlogPost.Title, blogPost.Title);
-                tmpBlogPost.Category = _checkProperties.CheckModelProperty(tmpBlogPost.Category, blogPost.Category);
-                tmpBlogPost.Information = _checkProperties.CheckModelProperty(tmpBlogPost.Information, blogPost.Information);
-                tmpBlogPost.Image = _checkProperties.CheckModelProperty(tmpBlogPost.Image, blogPost.Image);
-                tmpBlogPost.IsLocked = _checkProperties.CheckModelProperty(tmpBlogPost.IsLocked, blogPost.IsLocked);
+               _checkProperties.CheckModelProperties(tmpBlogPost, blogPost);
 
             }
             else
