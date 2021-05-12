@@ -35,6 +35,14 @@ const routes = [
     },
   },
   {
+    path: '/admin/elements/delete/:id',
+    name: 'Elements Delete',
+    component: () => import('../views/Admin/Element/Delete.vue'),
+    props: {
+      id: true,
+    },
+  },
+  {
     path: '/admin/elements/create',
     name: 'Elements Create',
     component: () => import('../views/Admin/Element/Create.vue'),

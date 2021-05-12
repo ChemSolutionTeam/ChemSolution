@@ -19,6 +19,8 @@
         v-bind="$attrs"
         type="checkbox"
         :checked="modelValue"
+        :disabled="isDisabled"
+        :class="[isDisabled ? 'bg-csblack bg-opacity-10' : ' bg-white']"
         @change="$emit('update:modelValue', $event.target.checked)"
         class="focus:animate-pulse focus:ring-cslightgreen text-csgreen bg-red-300 bg-opacity-20 focus:border-csgreen border-csblack-300 focus:outline-none focus:ring-4 focus:ring-opacity-20 text-lg h-10 w-3/5 border-2 border-csblack rounded-2xl mr-5 pr-0 px-3 py-1 text-center"
       />
@@ -45,6 +47,10 @@ export default {
       default: false,
     },
     big: {
+      type: Boolean,
+      default: false,
+    },
+    isDisabled: {
       type: Boolean,
       default: false,
     },

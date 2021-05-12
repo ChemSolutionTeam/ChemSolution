@@ -26,6 +26,9 @@ module.exports = {
       csbluewhite: '#EAF9FE',
 
       red: colors.red,
+      amber: colors.amber,
+      orange: colors.orange,
+      pink: colors.pink,
       teal: colors.teal,
       white: colors.white,
       green: colors.green,
@@ -34,6 +37,7 @@ module.exports = {
       grey: colors.gray,
       gray: colors.gray,
       transparent: colors.transparent,
+      purple: colors.purple,
 
       tAlkalineEarthMetal: {
         light: '#f59a23',
