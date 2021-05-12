@@ -22,6 +22,11 @@ const routes = [
     component: () => import('../views/Admin.vue'),
   },
   {
+    path: '/workspace',
+    name: 'Workspace',
+    component: () => import('../views/Workspace.vue'),
+  },
+  {
     path: '/admin/elements',
     name: 'Elements',
     component: () => import('../views/Admin/Element/Inspect.vue'),
