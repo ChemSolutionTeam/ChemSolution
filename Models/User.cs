@@ -15,11 +15,11 @@ namespace ChemSolution.Models
         [StringLength(50,MinimumLength = 8)]
         public string Password { set; get; }
         [Range(0, int.MaxValue)] 
-        public int Balance { set; get; }
+        public int? Balance { set; get; }
         [Range(0, int.MaxValue)]
-        public int Rating { set; get; }
+        public int? Rating { set; get; }
         [Range(0, int.MaxValue)]
-        public int Honesty { set; get; }
+        public int? Honesty { set; get; }
         public string Role { set; get; } = Startup.Roles.User; 
         public List<BlogPost> BlogPosts { set; get; } = new List<BlogPost>();
         public List<Achievement> Achievement { set; get; } = new List<Achievement>();

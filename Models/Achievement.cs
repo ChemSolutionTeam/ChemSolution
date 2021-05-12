@@ -16,11 +16,11 @@ namespace ChemSolution.Models
         [StringLength(100, MinimumLength = 1)]
         public string Description { get; set; }
         [Range(0, int.MaxValue)]
-        public int MoneyReward { get; set; }
+        public int? MoneyReward { get; set; }
         [Range(0, int.MaxValue)]
-        public int RatingReward { get; set; }
+        public int? RatingReward { get; set; }
         [Range(0, int.MaxValue)]
-        public int CountGoal { get; set; }
+        public int? CountGoal { get; set; }
         public string ImgAchievemen { set; get; }
         public int? MaterialGroupId { get; set; }
         public MaterialGroup MaterialGroup { get; set; }

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ChemSolution.Data;
 using ChemSolution.Models;
+using ChemSolution.Models.BufferModels.RequestModels;
+using ChemSolution.Models.BufferModels.ResponseModels;
 using ChemSolution.Services;
 using Microsoft.AspNetCore.Authorization;
 
@@ -84,7 +86,7 @@ namespace ChemSolution.Controllers
             _context.Materials.Add(material);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetMaterial", new { id = material.Id }, material);
+            return CreatedAtAction("GetMaterial", new { id = material.MaterialId }, material);
         }
 
         [HttpDelete("{id}")]
@@ -105,7 +107,59 @@ namespace ChemSolution.Controllers
         [Authorize(Roles = Startup.Roles.Admin)]
         private bool MaterialExists(int id)
         {
-            return _context.Materials.Any(e => e.Id == id);
+            return _context.Materials.Any(e => e.MaterialId == id);
         }
+
+        [HttpPost("Search")]
+        [Authorize]
+        public async Task<IActionResult> Search(SearchMaterialRequest searchRequest)
+        {
+            bool IsEquals(Material material)
+            {
+                var tmpU1 = material.ElementMaterials
+                    .Select(e => (ElementId: e.ElementId, Amount: e.Amount))
+                    .ToList();
+                var tmpU2 = searchRequest.Value
+                    .Select(rm => (ElementId: rm.ElementId, Amount: rm.Amount))
+                    .ToList();
+                return !tmpU1.Except(tmpU2).Any();
+            }
+            Material material = _context.Materials
+                .Include(p => p.ElementMaterials)
+                .AsEnumerable()
+                .SingleOrDefault(m => IsEquals(m));
+            if (material != null)
+            {
+                User user = _context.Users
+                    .Include( u=> u.ResearchHistorys)
+                    .SingleOrDefault(u => u.UserEmail == User.Identity.Name);
+                if (user != null)
+                {
+                    bool isNew = user.ResearchHistorys.SingleOrDefault(m => m.MaterialId == material.MaterialId) == null;
+                    if(isNew) {
+                        user.ResearchHistorys.Add(
+                        new ResearchHistory()
+                        {
+                            UserEmail = user.UserEmail,
+                            MaterialId = material.MaterialId,
+                            Material = material,
+                            DateTime = DateTime.Today
+                        });
+                        await _context.SaveChangesAsync();
+                    }
+                    return new JsonResult(new SearchMaterialResponse()
+                    {
+                        ResultMaterialId = material.MaterialId,
+                        IsNew = isNew
+                    });
+                }
+                else
+                {
+                    return Unauthorized();
+                }
+            }
+            return NotFound();
+        }
+        
     }
 }
