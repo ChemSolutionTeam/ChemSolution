@@ -2,7 +2,10 @@
   <div>
     <h1 class="font-bold text-csblack text-5xl">
       Створення елементу:
-      <span class="text-csgreen">{{ element.name }}</span>
+      <span
+        class="from-cslightgreen via-csgreen to-csblue bg-clip-text bg-gradient-to-tr"
+        >{{ element.name }}</span
+      >
     </h1>
     <div class="justify-items-center grid">
       <div class="w-2/3 flex">

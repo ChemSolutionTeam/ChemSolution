@@ -24,8 +24,8 @@ export default {
 
   //User queries
   //Регистрация
-  postUser(user) {
-    API.post(
+  async postUser(user) {
+    await API.post(
       '/Users',
       {
         userEmail: user.email,
@@ -40,9 +40,14 @@ export default {
       }
     )
       .then((resp) => {
-        console.log(resp)
+        if (resp) {
+          return 'Success'
+        }
       })
-      .catch((e) => console.error(e))
+      .catch((e) => {
+        console.error(e)
+        return 'Fail'
+      })
   },
   getUsers() {
     API.get('/Users', {
@@ -216,7 +221,8 @@ export default {
     API.get('/Elements')
       .then((resp) => {
         console.log(resp)
-        return resp.data
+        let data = resp.data
+        if (data.length !== 0) return data
       })
       .catch((e) => {
         console.error(e)
