@@ -130,12 +130,14 @@ namespace ChemSolution.Controllers
                 .SingleOrDefault(m => IsEquals(m));
             if (material != null)
             {
-                User user = _context.Users
+                 User user = await _context.Users
                     .Include( u=> u.ResearchHistorys)
-                    .SingleOrDefault(u => u.UserEmail == User.Identity.Name);
+                    .Include(u=>u.Achievement)
+                    .SingleOrDefaultAsync(u => u.UserEmail == User.Identity.Name);
                 if (user != null)
                 {
                     bool isNew = user.ResearchHistorys.SingleOrDefault(m => m.MaterialId == material.MaterialId) == null;
+                    var achievementsId = new List<int>();
                     if(isNew) {
                         user.ResearchHistorys.Add(
                         new ResearchHistory()
@@ -146,11 +148,13 @@ namespace ChemSolution.Controllers
                             DateTime = DateTime.Today
                         });
                         await _context.SaveChangesAsync();
+                        achievementsId = await ComplateAchivmentsAsync(user);
                     }
                     return new JsonResult(new SearchMaterialResponse()
                     {
                         ResultMaterialId = material.MaterialId,
-                        IsNew = isNew
+                        IsNew = isNew,
+                        NewAchievementsId = achievementsId
                     });
                 }
                 else
@@ -159,6 +163,34 @@ namespace ChemSolution.Controllers
                 }
             }
             return NotFound();
+        }
+        
+        private async Task<List<int>> ComplateAchivmentsAsync (User user)
+        {
+            var tmpU1 = user.Materials.GroupBy(u => u.MaterialGroupId)
+                .Select(ug => (Key: ug.Key, Amount: (int?) ug.Count()  )).ToList();
+            var tmpU2 = _context.Achievements.AsEnumerable()
+                .Select(a => (Key: a.MaterialGroupId, Amount: a.CountGoal)).ToList();
+            var res = tmpU1.Intersect(tmpU2);
+
+            var achievementsId = new List<int>();
+            
+            foreach (var tmp in res)
+            {
+                var tmpAchievement =
+                    await _context.Achievements.SingleOrDefaultAsync(a => a.MaterialGroupId == tmp.Key && a.CountGoal == tmp.Amount);
+                if (tmpAchievement != null)
+                {
+                    if (!user.Achievement.Contains(tmpAchievement))
+                    {
+                        achievementsId.Add(tmpAchievement.AchievementId);
+                        user.Achievement.Add(tmpAchievement);
+                    }
+                }
+            }
+            await _context.SaveChangesAsync();
+
+            return achievementsId;
         }
         
     }
