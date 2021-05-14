@@ -239,13 +239,9 @@ export default {
       })
   },
   getElement(id) {
-    API.get('/Elements/' + id)
-      .then((resp) => {
-        console.log(resp)
-      })
-      .catch((e) => {
-        console.error(e)
-      })
+    return API.get('/Elements/' + id).catch((e) => {
+      console.error(e)
+    })
   },
   putElement(element) {
     alert(element)

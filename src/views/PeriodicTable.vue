@@ -2,17 +2,21 @@
   <div class="periodicTable">
     <div class="row">
       <div
-        class="column mt-32 w-1/6 text-left bg-white border-csblack border rounded"
+          class="column mt-32 w-1/6 text-left bg-white rounded sidebar"
       >
-        <div class="container pl-6">
-          <p>Element logo</p>
+        <div id="elementLogo" class="reactiveNonMetal">
+          <b>1</b>
+          <abbr>H</abbr>
+          <em>Гідроген</em>n
         </div>
         <div class="container bg-csblack text-white pl-6 pr-6 p-3 pt-1">
           <p>Element info</p>
         </div>
+
+
       </div>
       <div
-        class="column mt-32 w-9/12 pr-5 pb-5 ml-2 text-left bg-csblack border-csblack border rounded text-white"
+          class="column mt-32 w-9/12 pr-5 pb-5 ml-2 text-left bg-csblack rounded text-white"
       >
         <table id="periodic">
           <tr id="periods">
@@ -38,7 +42,9 @@
           </tr>
           <tr id="p1">
             <td class="groupCell">1</td>
-            <td id="H" class="reactiveNonMetal" title="Hydrogen">
+            <td @click="getData(1)" id="H"
+                class="bg-tReactiveNonMetal-light hover:scale-105
+                 font-bold border-tReactiveNonMetal-light transform duration-300 ease-in-out" title="Hydrogen">
               <sup>1</sup>H
             </td>
             <td class="empty" colspan="16"></td>
@@ -46,7 +52,8 @@
           </tr>
           <tr id="p2">
             <td class="groupCell">2</td>
-            <td id="Li" class="alkaliMetal cell" title="Lithium">
+            <td id="Li"
+                class="alkaliMetal hover:scale-105 transform duration-300 ease-in-out" title="Lithium">
               <sup>3</sup>Li
             </td>
             <td id="Be" class="alkalineEarthMetal cell" title="Beryllium">
@@ -444,12 +451,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'PeriodicTable',
-}
-</script>
-
 <style type="text/css">
 #periodic {
   margin: 2px;
@@ -470,7 +471,6 @@ export default {
 }
 
 #periodic tr td {
-  background-color: transparent;
   width: 70px;
   height: 70px;
   cursor: pointer;
@@ -482,6 +482,25 @@ export default {
   #periodic tr td {
     border-width: 2px;
   }
+}
+
+.sidebar {
+  flex-direction: column;
+  flex-shrink: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+
+#elementLogo {
+  margin-bottom: 10px;
+  color: white;
+  font-size: 2.8em;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border-color: #a1c768;
+  background: #a1c768;
+  font-weight: bolder;
 }
 
 #periodic tr td.empty {
@@ -642,3 +661,27 @@ export default {
   transform: scale(1.05, 1.05);
 }
 </style>
+
+<script>
+import apiService from '@/services/index.js'
+
+export default {
+  name: 'PeriodicTable',
+  data() {
+    return {
+      element: {}
+    }
+  },
+  methods: {
+    getData(id) {
+      apiService.getElement(id).then((resp) => {
+        console.log(resp.data)
+        this.element = resp.data
+      })
+    },
+  }
+
+}
+
+
+</script>
