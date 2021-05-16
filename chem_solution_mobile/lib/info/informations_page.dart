@@ -3,14 +3,19 @@ import 'package:chem_solution_mobile/widgets/post_card.dart';
 import 'package:flutter/material.dart';
 
 class Informations extends StatefulWidget {
-  Informations({Key key}) : super(key: key);
+  String search;
+  Informations({Key key, this.search}) : super(key: key);
 
   @override
-  _InformationsState createState() => _InformationsState();
+  _InformationsState createState() => _InformationsState(search);
 }
 
 class _InformationsState extends State<Informations>
     with SingleTickerProviderStateMixin {
+  String search;
+
+  _InformationsState(this.search);
+
   List<Widget> posts = [];
   final GlobalKey<AnimatedListState> _key = new GlobalKey<AnimatedListState>();
   AnimationController _controller;
@@ -22,8 +27,12 @@ class _InformationsState extends State<Informations>
     allPosts = allPosts.reversed.toList();
     allPosts.forEach((post) {
       if (post.category == 'facts') {
-        posts.add(BlogCard(post: post));
-        _key.currentState.insertItem(posts.length - 1);
+        if ((search != null || search != '') &&
+            (post.title.indexOf(search) > -1 ||
+                post.information.indexOf(search) > -1)) {
+          posts.add(BlogCard(post: post));
+          _key.currentState.insertItem(posts.length - 1);
+        }
       }
     });
   }

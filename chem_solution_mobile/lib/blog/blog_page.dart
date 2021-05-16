@@ -3,13 +3,16 @@ import 'package:chem_solution_mobile/widgets/post_card.dart';
 import 'package:flutter/material.dart';
 
 class Blogs extends StatefulWidget {
-  Blogs({Key key}) : super(key: key);
+  String search;
+  Blogs({Key key, this.search}) : super(key: key);
 
   @override
-  _BlogsState createState() => _BlogsState();
+  BlogsState createState() => BlogsState(search);
 }
 
-class _BlogsState extends State<Blogs> with SingleTickerProviderStateMixin {
+class BlogsState extends State<Blogs> with SingleTickerProviderStateMixin {
+  String search;
+  BlogsState(this.search);
   List<Widget> posts = [];
 
   final GlobalKey<AnimatedListState> _key = new GlobalKey<AnimatedListState>();
@@ -22,22 +25,17 @@ class _BlogsState extends State<Blogs> with SingleTickerProviderStateMixin {
     allPosts = allPosts.reversed.toList();
     allPosts.forEach((post) {
       if (post.category == 'news') {
-        posts.add(BlogCard(post: post));
-        _key.currentState.insertItem(posts.length - 1);
+        if ((search != null || search != '') &&
+            (post.title.indexOf(search) > -1 ||
+                post.information.indexOf(search) > -1)) {
+          posts.add(BlogCard(post: post));
+          _key.currentState.insertItem(posts.length - 1);
+        }
       }
     });
   }
 
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
+  void getAnimation() {
     _controller = AnimationController(
       duration: const Duration(milliseconds: 1250),
       vsync: this,
@@ -54,6 +52,18 @@ class _BlogsState extends State<Blogs> with SingleTickerProviderStateMixin {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _addBlogPost();
     });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getAnimation();
   }
 
   @override

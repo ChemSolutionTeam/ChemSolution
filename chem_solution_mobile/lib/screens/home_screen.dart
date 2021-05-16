@@ -16,13 +16,24 @@ class ChemSolutionWidget extends StatefulWidget {
 class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
   int _selectedIndex = 0;
   bool _isSearch = false;
+  String searchValue;
+  static List<Widget> _widgetOptions;
 
-  static List<Widget> _widgetOptions = <Widget>[
-    Elements(),
-    Blogs(),
-    Informations(),
-    Profile()
-  ];
+  void getOptions() {
+    _widgetOptions = <Widget>[
+      Elements(),
+      Blogs(search: searchValue),
+      Informations(search: searchValue),
+      Profile()
+    ];
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    searchValue = '';
+    getOptions();
+  }
 
   static List<String> _searchItems = [
     'Введіть назву елемент',
@@ -32,6 +43,7 @@ class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
 
   void _onItemTapped(int index) {
     setState(() {
+      getOptions();
       _selectedIndex = index;
       _checkSearch();
     });
@@ -80,6 +92,12 @@ class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
                         fontSize: 24.0),
                   )
                 : TextField(
+                    onSubmitted: (value) {
+                      setState(() {
+                        searchValue = value;
+                        getOptions();
+                      });
+                    },
                     style: TextStyle(
                       color: Color(0xff1dcdfe),
                     ),
@@ -91,6 +109,8 @@ class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
                     onPressed: () {
                       setState(() {
                         _isSearch = !_isSearch;
+                        searchValue = '';
+                        getOptions();
                       });
                     },
                     icon: searchIcon(_isSearch),
@@ -120,7 +140,6 @@ class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
             onTap: _onItemTapped,
           ),
         ),
-       
       ),
     );
   }
