@@ -114,7 +114,7 @@ namespace ChemSolution.Controllers
         [Authorize]
         public async Task<IActionResult> Search(SearchMaterialRequest searchRequest)
         {
-            bool IsEquals(Material material)
+            bool IsEqual(Material material)
             {
                 var tmpU1 = material.ElementMaterials
                     .Select(e => (ElementId: e.ElementId, Amount: e.Amount))
@@ -124,10 +124,11 @@ namespace ChemSolution.Controllers
                     .ToList();
                 return !tmpU1.Except(tmpU2).Any();
             }
+            
             Material material = _context.Materials
                 .Include(p => p.ElementMaterials)
                 .AsEnumerable()
-                .SingleOrDefault(m => IsEquals(m));
+                .SingleOrDefault(m => IsEqual(m));
             if (material != null)
             {
                  User user = await _context.Users
@@ -184,6 +185,8 @@ namespace ChemSolution.Controllers
                     if (!user.Achievement.Contains(tmpAchievement))
                     {
                         achievementsId.Add(tmpAchievement.AchievementId);
+                        user.Balance += tmpAchievement.MoneyReward ?? 0;
+                        user.Rating += tmpAchievement.RatingReward ?? 0;
                         user.Achievement.Add(tmpAchievement);
                     }
                 }

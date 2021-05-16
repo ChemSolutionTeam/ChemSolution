@@ -52,7 +52,7 @@ namespace ChemSolution.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("CountGoal")
+                    b.Property<int?>("CountGoal")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
@@ -73,10 +73,10 @@ namespace ChemSolution.Migrations
                     b.Property<int?>("MaterialGroupId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("MoneyReward")
+                    b.Property<int?>("MoneyReward")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("RatingReward")
+                    b.Property<int?>("RatingReward")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("AchievementId");
@@ -112,35 +112,48 @@ namespace ChemSolution.Migrations
                     b.ToTable("BlogPosts");
                 });
 
+            modelBuilder.Entity("ChemSolution.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("ChemSolution.Models.Element", b =>
                 {
                     b.Property<int>("ElementId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("AtomicRadius")
+                    b.Property<double?>("AtomicRadius")
                         .HasColumnType("REAL");
 
-                    b.Property<double>("AtomicWeight")
+                    b.Property<double?>("AtomicWeight")
                         .HasColumnType("REAL");
 
-                    b.Property<int>("BoilingTemperature")
+                    b.Property<int?>("BoilingTemperature")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Category")
-                        .HasMaxLength(50)
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("ElectronQuantity")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("Electronegativity")
+                    b.Property<int?>("ElectronQuantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double?>("Electronegativity")
                         .HasColumnType("REAL");
 
-                    b.Property<int>("EnergyLevels")
+                    b.Property<int?>("EnergyLevels")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Group")
+                    b.Property<int?>("Group")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ImgAtom")
@@ -152,32 +165,29 @@ namespace ChemSolution.Migrations
                     b.Property<string>("Info")
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("IsLocked")
+                    b.Property<bool?>("IsLocked")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("MeltingTemperature")
+                    b.Property<int?>("MeltingTemperature")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("NeutronQuantity")
+                    b.Property<int?>("NeutronQuantity")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ProtonQuantity")
+                    b.Property<int?>("ProtonQuantity")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Symbol")
                         .HasMaxLength(5)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("UserEmail")
-                        .HasColumnType("TEXT");
-
                     b.HasKey("ElementId");
 
-                    b.HasIndex("UserEmail");
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Elements");
                 });
@@ -202,7 +212,7 @@ namespace ChemSolution.Migrations
 
             modelBuilder.Entity("ChemSolution.Models.Material", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("MaterialId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -223,7 +233,7 @@ namespace ChemSolution.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("MaterialId");
 
                     b.HasIndex("MaterialGroupId");
 
@@ -252,7 +262,7 @@ namespace ChemSolution.Migrations
                     b.Property<DateTime>("DateTimeSended")
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("Status")
+                    b.Property<bool?>("Status")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Text")
@@ -294,20 +304,20 @@ namespace ChemSolution.Migrations
                     b.Property<string>("UserEmail")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Balance")
+                    b.Property<int?>("Balance")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Honesty")
+                    b.Property<int?>("Honesty")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Password")
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Rating")
+                    b.Property<int?>("Rating")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Role")
@@ -333,6 +343,21 @@ namespace ChemSolution.Migrations
                     b.HasKey("ElementId", "ValenceVal");
 
                     b.ToTable("Valences");
+                });
+
+            modelBuilder.Entity("ElementUser", b =>
+                {
+                    b.Property<int>("ElementsElementId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("UsersUserEmail")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ElementsElementId", "UsersUserEmail");
+
+                    b.HasIndex("UsersUserEmail");
+
+                    b.ToTable("ElementUser");
                 });
 
             modelBuilder.Entity("AchievementUser", b =>
@@ -376,9 +401,13 @@ namespace ChemSolution.Migrations
 
             modelBuilder.Entity("ChemSolution.Models.Element", b =>
                 {
-                    b.HasOne("ChemSolution.Models.User", null)
+                    b.HasOne("ChemSolution.Models.Category", "Category")
                         .WithMany("Elements")
-                        .HasForeignKey("UserEmail");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("ChemSolution.Models.ElementMaterial", b =>
@@ -448,6 +477,26 @@ namespace ChemSolution.Migrations
                     b.Navigation("Element");
                 });
 
+            modelBuilder.Entity("ElementUser", b =>
+                {
+                    b.HasOne("ChemSolution.Models.Element", null)
+                        .WithMany()
+                        .HasForeignKey("ElementsElementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ChemSolution.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UsersUserEmail")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ChemSolution.Models.Category", b =>
+                {
+                    b.Navigation("Elements");
+                });
+
             modelBuilder.Entity("ChemSolution.Models.Element", b =>
                 {
                     b.Navigation("ElementMaterials");
@@ -471,8 +520,6 @@ namespace ChemSolution.Migrations
 
             modelBuilder.Entity("ChemSolution.Models.User", b =>
                 {
-                    b.Navigation("Elements");
-
                     b.Navigation("Requests");
 
                     b.Navigation("ResearchHistorys");

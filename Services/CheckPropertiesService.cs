@@ -39,6 +39,11 @@ namespace ChemSolution.Services
                 {
                     propertyInfo.SetValue(obj, null);
                 }
+
+                if (tmp.Name == "User")
+                {
+                    propertyInfo.SetValue(obj, null);
+                }
             }
         }
 
