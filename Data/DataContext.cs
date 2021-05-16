@@ -15,7 +15,7 @@ namespace ChemSolution.Data
         public DbSet<Request> Requests  { get; set; }
         public DbSet<ResearchHistory> ResearchHistories { set; get; }
         public DbSet<Valence> Valences  { get; set; }
-
+        public DbSet<Category> Categories { get; set; }
         public DataContext(DbContextOptions<DataContext> options)
             : base(options)
         {

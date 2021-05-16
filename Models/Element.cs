@@ -24,8 +24,6 @@ namespace ChemSolution.Models
         public  double?  AtomicRadius { get; set; }
         [Range(0, double.MaxValue)]
         public  double?  Electronegativity { get; set; }
-        [StringLength(50, MinimumLength = 3)]
-        public string Category { get; set; }
         [Range(0, int.MaxValue)]
         public int? EnergyLevels { get; set; }
         [Range(0, int.MaxValue)]
@@ -38,6 +36,8 @@ namespace ChemSolution.Models
         public string ImgAtom { get; set; }
         [Range(0, int.MaxValue)]
         public int? Group { get; set; }
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
         public List<ElementMaterial> ElementMaterials { set; get; } = new List<ElementMaterial>();
         public List<Material> Materials { get; set; } = new List<Material>();
         public List<Valence> Valences { get; set; } = new List<Valence>();
