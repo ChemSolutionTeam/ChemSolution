@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ChemSolution.Models
 {
     public class Element
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Required]
         public int ElementId { get; set; }
         [StringLength(5, MinimumLength = 1)]
         public string Symbol { get; set; }
