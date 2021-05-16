@@ -63,10 +63,7 @@ namespace ChemSolution.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("ImgAchievemen")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ImgAchivement")
+                    b.Property<string>("ImgAchievement")
                         .HasMaxLength(250)
                         .HasColumnType("TEXT");
 
@@ -129,7 +126,6 @@ namespace ChemSolution.Migrations
             modelBuilder.Entity("ChemSolution.Models.Element", b =>
                 {
                     b.Property<int>("ElementId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<double?>("AtomicRadius")
@@ -262,7 +258,7 @@ namespace ChemSolution.Migrations
                     b.Property<DateTime>("DateTimeSended")
                         .HasColumnType("TEXT");
 
-                    b.Property<bool?>("Status")
+                    b.Property<int>("StatusId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Text")
@@ -275,6 +271,8 @@ namespace ChemSolution.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("UserEmail", "DateTimeSended");
+
+                    b.HasIndex("StatusId");
 
                     b.HasIndex("UserEmail1");
 
@@ -297,6 +295,20 @@ namespace ChemSolution.Migrations
                     b.HasIndex("MaterialId");
 
                     b.ToTable("ResearchHistorys");
+                });
+
+            modelBuilder.Entity("ChemSolution.Models.Status", b =>
+                {
+                    b.Property<int>("StatusId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("StatusName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("StatusId");
+
+                    b.ToTable("Status");
                 });
 
             modelBuilder.Entity("ChemSolution.Models.User", b =>
@@ -440,9 +452,17 @@ namespace ChemSolution.Migrations
 
             modelBuilder.Entity("ChemSolution.Models.Request", b =>
                 {
+                    b.HasOne("ChemSolution.Models.Status", "Status")
+                        .WithMany("Requests")
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ChemSolution.Models.User", "User")
                         .WithMany("Requests")
                         .HasForeignKey("UserEmail1");
+
+                    b.Navigation("Status");
 
                     b.Navigation("User");
                 });
@@ -516,6 +536,11 @@ namespace ChemSolution.Migrations
                     b.Navigation("Achievement");
 
                     b.Navigation("Materials");
+                });
+
+            modelBuilder.Entity("ChemSolution.Models.Status", b =>
+                {
+                    b.Navigation("Requests");
                 });
 
             modelBuilder.Entity("ChemSolution.Models.User", b =>
