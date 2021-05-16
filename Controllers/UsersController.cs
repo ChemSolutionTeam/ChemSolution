@@ -110,7 +110,7 @@ namespace ChemSolution.Controllers
                     throw;
                 }
             }
-            return CreatedAtAction("GetUser", new { id = user.UserEmail }, user);
+            return CreatedAtAction("GetUser", new { id = user.UserEmail }, ClearForbidetedInfo(user));
         }
         [HttpDelete("{id}")]
         [Authorize(Roles = Startup.Roles.Admin)]
