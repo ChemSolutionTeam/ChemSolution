@@ -118,6 +118,12 @@ class User extends Model {
     });
     u.blogPosts = bps;
 
+      /*  List<ResearchHistory> rs = [];
+    o['researchHistorys'].forEach((element) {
+      rs.add(ResearchHistory.fromObject(element));
+    });
+    u.researchHistorys = rs;
+
     List<Achievement> a = [];
     o['achievement'].forEach((element) {
       a.add(Achievement.fromObject(element));
@@ -136,17 +142,13 @@ class User extends Model {
     });
     u.requests = r;
 
-    List<ResearchHistory> rs = [];
-    o['researchHistorys'].forEach((element) {
-      rs.add(ResearchHistory.fromObject(element));
-    });
-    u.researchHistorys = rs;
+
 
     List<CSM.Material> m = [];
     o['materials'].forEach((element) {
       m.add(CSM.Material.fromObject(element));
     });
-    u.materials = m;
+    u.materials = m; */
 
     return u;
   }

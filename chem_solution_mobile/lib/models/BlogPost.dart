@@ -19,16 +19,15 @@ class BlogPost extends Model {
   String image;
   List<User> users = [];
 
-
-  BlogPost(
-      {this.blogPostId,
-      this.title,
-      this.category,
-      this.information,
-      this.isLocked,
-      this.image,
-      this.users,
-      });
+  BlogPost({
+    this.blogPostId,
+    this.title,
+    this.category,
+    this.information,
+    this.isLocked,
+    this.image,
+    this.users,
+  });
 
   bool like(User user) {
     if (user == null) return false;
@@ -104,25 +103,32 @@ class BlogPost extends Model {
 
   Future<bool> addToLiked(User user) async {
     String token = await storage.read(key: 'token');
+    try {
+      final response = await http.post(
+          Uri.http(chemURL, 'Users/liked/add/${this.blogPostId}'),
+          headers: {HttpHeaders.authorizationHeader: 'Bearer $token'});
 
-    final response = await http.post(
-        Uri.http(chemURL, 'Users/liked/add/${this.blogPostId}'),
-        headers: {HttpHeaders.authorizationHeader: 'Bearer $token'});
-
-    print(Uri.http(chemURL, 'Users/liked/add/${this.blogPostId}'));
-    Autorisation.setUser();
-    return response.statusCode == 200;
+      print(Uri.http(chemURL, 'Users/liked/add/${this.blogPostId}'));
+      Autorisation.setUser();
+      return response.statusCode == 200;
+    } catch (ex) {
+      print(ex);
+    }
   }
 
   Future<bool> removeFromLiked(User user) async {
     String token = await storage.read(key: 'token');
 
-    final response = await http.post(
-        Uri.http(chemURL, 'Users/liked/remove/${this.blogPostId}'),
-        headers: {HttpHeaders.authorizationHeader: 'Bearer $token'});
-    Autorisation.setUser();
-    print(Uri.http(chemURL, 'Users/liked/remove/${this.blogPostId}'));
+    try {
+      final response = await http.post(
+          Uri.http(chemURL, 'Users/liked/remove/${this.blogPostId}'),
+          headers: {HttpHeaders.authorizationHeader: 'Bearer $token'});
+      Autorisation.setUser();
+      print(Uri.http(chemURL, 'Users/liked/remove/${this.blogPostId}'));
 
-    return response.statusCode == 200;
+      return response.statusCode == 200;
+    } catch (ex) {
+      print(ex);
+    }
   }
 }

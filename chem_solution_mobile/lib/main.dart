@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 bool autorised;
-//final String chemURL = '192.168.0.103:5001';
-final String chemURL = '192.168.1.10:5001';
+final String chemURL = '192.168.0.104:5001';
+//final String chemURL = '192.168.1.10:5001';
 final storage = FlutterSecureStorage();
 User currentUser;
 
