@@ -11,7 +11,8 @@ namespace ChemSolution.Models
         public DateTime DateTimeSended { set; get; }
         public string Theme { set; get; }
         public string Text { set; get; }
-        public bool? Status { set; get; }
+        public int StatusId { get; set; }
+        public Status Status { get; set; }
         public User User { set; get; }
     }
 }
