@@ -9,9 +9,9 @@ class Achievement extends Model{
   int moneyReward;
   int ratingReward;
   int countGoal;
-  String imgAchievemen;
+  String imgAchievement;
   int materialGroupId;
-  MaterialGroup condition;
+  MaterialGroup materialGroup;
   List<User> users = [];
 
   Achievement(
@@ -22,9 +22,9 @@ class Achievement extends Model{
       this.ratingReward,
       this.countGoal,
       this.materialGroupId,
-      this.condition,
+      this.materialGroup,
       this.users,
-      this.imgAchievemen});
+      this.imgAchievement});
 
   @override
   Map<String, dynamic> toMap() {
@@ -35,9 +35,9 @@ class Achievement extends Model{
     map['moneyReward'] = moneyReward;
     map['ratingReward'] = ratingReward;
     map['countGoal'] = countGoal;
-    map['imgAchievemen'] = imgAchievemen;
+    map['imgAchievement'] = imgAchievement;
     map['materialGroupId'] = materialGroupId;
-    map['condition'] = condition.toMap();
+    map['materialGroup'] = materialGroup.toMap();
     List<Map<String, dynamic>> usersMaps = [];
     users.forEach((element) {
       usersMaps.add(element.toMap());
@@ -50,13 +50,13 @@ class Achievement extends Model{
     Achievement a = Achievement();
     a.achievementId = o['achievementId'];
     a.heading = o['heading'];
-    a.imgAchievemen = o['imgAchievemen'];
+    a.imgAchievement = o['imgAchievement'];
     a.description = o['description'];
     a.moneyReward = o['moneyReward'];
     a.ratingReward = o['ratingReward'];
     a.countGoal = o['countGoal'];
     a.materialGroupId = o['materialGroupId'];
-    a.condition = MaterialGroup.fromObject(o['condition']);
+    a.materialGroup = MaterialGroup.fromObject(o['materialGroup']);
     o['users'].forEach((element) {
       a.users.add(User.fromObject(element));
     });

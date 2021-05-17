@@ -15,6 +15,10 @@ class BlogsState extends State<Blogs> with SingleTickerProviderStateMixin {
   BlogsState(this.search);
   List<Widget> posts = [];
 
+  printValue(String value) {
+    print(value);
+  }
+
   final GlobalKey<AnimatedListState> _key = new GlobalKey<AnimatedListState>();
   AnimationController _controller;
   Animation<Offset> _offsetAnimationToLeft;

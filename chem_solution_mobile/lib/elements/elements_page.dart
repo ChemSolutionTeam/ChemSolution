@@ -1,6 +1,8 @@
 import 'package:chem_solution_mobile/elements/element_card.dart';
+import 'package:chem_solution_mobile/models/Category.dart' as CSC;
 import 'package:chem_solution_mobile/models/Element.dart' as CS;
 import 'package:chem_solution_mobile/models/Valence.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class Elements extends StatefulWidget {
@@ -25,7 +27,7 @@ class _ElementsState extends State<Elements>
           elementId: 1,
           symbol: 'H',
           name: 'Гідроген',
-          category: 'Неметали',
+          category: CSC.Category(categoryName: 'Неметали'),
           atomicWeight: 1.008,
           valences: [Valence(valenceVal: 1)],
           isLocked: false,
@@ -37,7 +39,7 @@ class _ElementsState extends State<Elements>
           elementId: 2,
           symbol: 'He',
           name: 'Гелій',
-          category: 'Благородні гази',
+          category: CSC.Category(categoryName: 'Благородні гази'),
           atomicWeight: 2.0026,
           isLocked: false,
           valences: [Valence(valenceVal: 2)],

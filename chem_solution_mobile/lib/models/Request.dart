@@ -1,4 +1,5 @@
 import 'package:chem_solution_mobile/models/Model.dart';
+import 'package:chem_solution_mobile/models/Status.dart';
 import 'User.dart';
 
 class Request extends Model {
@@ -7,6 +8,8 @@ class Request extends Model {
   String theme;
   String text;
   User user;
+  int statusId;
+  Status status;
 
   Request({
     this.dateTimeSended,
@@ -14,6 +17,8 @@ class Request extends Model {
     this.theme,
     this.user,
     this.userEmail,
+    this.statusId,
+    this.status,
   });
 
   @override
@@ -24,6 +29,8 @@ class Request extends Model {
     map['theme'] = theme;
     map['text'] = text;
     map['user'] = user.toMap();
+    map['statusId'] = statusId;
+    map['status'] = status.toMap();
     return map;
   }
 
@@ -34,6 +41,8 @@ class Request extends Model {
     r.theme = o['theme'];
     r.user = User.fromObject(o['user']);
     r.userEmail = o['userEmail'];
+    r.statusId = o['statusId'];
+    r.status = Status.fromObject(o['status']);
     return r;
   }
 }

@@ -1,3 +1,5 @@
+import 'package:chem_solution_mobile/models/Category.dart';
+import 'package:chem_solution_mobile/models/ElementMaterial.dart';
 import 'package:chem_solution_mobile/models/Material.dart' as CS;
 import 'User.dart';
 import 'Valence.dart';
@@ -8,12 +10,9 @@ class Element extends Model {
   String symbol;
   String name;
   double atomicWeight;
-  int electronQuantity;
-  int protonQuantity;
   int neutronQuantity;
   double atomicRadius;
   double electronegativity;
-  String category;
   int energyLevels;
   double meltingTemperature;
   double boilingTemperature;
@@ -22,18 +21,22 @@ class Element extends Model {
   String imgSymbol;
   String imgAtom;
   int group;
+  int categoryId;
+  Category category;
 
   List<User> users = [];
   List<CS.Material> materials = [];
   List<Valence> valences = [];
+  List<ElementMaterial> elementMaterials = [];
+
+  int get electronQuantity => elementId;
+  int get protonQuantity => elementId;
 
   Element(
       {this.elementId,
       this.symbol,
       this.name,
       this.atomicWeight,
-      this.electronQuantity,
-      this.protonQuantity,
       this.neutronQuantity,
       this.atomicRadius,
       this.electronegativity,
@@ -46,9 +49,11 @@ class Element extends Model {
       this.imgAtom,
       this.group,
       this.imgSymbol,
+      this.categoryId,
       this.users,
       this.materials,
-      this.valences});
+      this.valences,
+      this.elementMaterials});
 
   String getValence() {
     String _valence = '';
@@ -92,12 +97,11 @@ class Element extends Model {
     map['symbol'] = symbol;
     map['name'] = name;
     map['atomicWeight'] = atomicWeight;
-    map['electronQuantity'] = electronQuantity;
-    map['protonQuantity'] = protonQuantity;
     map['neutronQuantity'] = neutronQuantity;
     map['atomicRadius'] = atomicRadius;
     map['electronegativity'] = electronegativity;
-    map['category'] = category;
+    map['category'] = category.toMap();
+    map['categoryId'] = categoryId;
     map['energyLevels'] = energyLevels;
     map['meltingTemperature'] = meltingTemperature;
     map['boilingTemperature'] = boilingTemperature;
@@ -121,7 +125,13 @@ class Element extends Model {
       valencesMaps.add(element.toMap());
     });
 
-    map['valences'] = valences;
+    map['valences'] = valencesMaps;
+
+    List<Map<String, dynamic>> elementMaterialsMaps = [];
+    elementMaterials.forEach((element) {
+      elementMaterialsMaps.add(element.toMap());
+    });
+    map['elementMaterials'] = elementMaterials;
     return map;
   }
 
@@ -131,12 +141,11 @@ class Element extends Model {
     e.symbol = o['symbol'];
     e.name = o['name'];
     e.atomicWeight = o['atomicWeight'];
-    e.electronQuantity = o['electronQuantity'];
-    e.protonQuantity = o['protonQuantity'];
     e.neutronQuantity = o['neutronQuantity'];
     e.atomicRadius = o['atomicRadius'];
     e.electronegativity = o['electronegativity'];
-    e.category = o['category'];
+    e.category = Category.fromObject(o['category']);
+    e.categoryId = o['categoryId'];
     e.energyLevels = o['energyLevels'];
     e.meltingTemperature = o['meltingTemperature'];
     e.boilingTemperature = o['boilingTemperature'];
@@ -146,16 +155,20 @@ class Element extends Model {
     e.group = o['group'];
     e.imgSymbol = o['imgSymbol'];
 
-    o['users'].forEach((e) {
-      e.users.add(User.fromObject(e));
+    o['users'].forEach((el) {
+      e.users.add(User.fromObject(el));
     });
 
-    o['materials'].forEach((e) {
-      e.materials.add(CS.Material.fromObject(e));
+    o['materials'].forEach((el) {
+      e.materials.add(CS.Material.fromObject(el));
     });
 
-    o['valences'].forEach((e) {
-      e.valences.add(Valence.fromObject(e));
+    o['valences'].forEach((el) {
+      e.valences.add(Valence.fromObject(el));
+    });
+
+    o['elementMaterials'].forEach((el) {
+      e.elementMaterials.add(ElementMaterial.fromObject(el));
     });
     return e;
   }

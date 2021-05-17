@@ -19,10 +19,15 @@ class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
   String searchValue;
   static List<Widget> _widgetOptions;
 
+  GlobalKey<BlogsState> blogState = new GlobalKey<BlogsState>();
+
   void getOptions() {
     _widgetOptions = <Widget>[
       Elements(),
-      Blogs(search: searchValue),
+      Blogs(
+        search: searchValue,
+        key: blogState,
+      ),
       Informations(search: searchValue),
       Profile()
     ];
@@ -96,6 +101,7 @@ class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
                       setState(() {
                         searchValue = value;
                         getOptions();
+                        blogState.currentState.printValue(value);
                       });
                     },
                     style: TextStyle(

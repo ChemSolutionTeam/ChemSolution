@@ -24,7 +24,7 @@ class ElementInfo extends StatelessWidget {
           info('Протони: ', element.protonQuantity.toString()),
           info('Нейтрони: ', element.neutronQuantity.toString()),
           info('Електронегативність: ', element.electronegativity.toString()),
-          info('Категорія: ', element.category),
+          info('Категорія: ', element.category.categoryName),
           info('Енергетичні рівні: ', element.energyLevels.toString()),
           info('Температура кипіння: ', element.boilingTemperature.toString()),
           info(

@@ -66,7 +66,7 @@ class _ElementCardState extends State<ElementCard> {
                 rowInfo('Порядковий номер: ', '${element.elementId}'),
                 rowInfo('Позначення: ', '${element.symbol}'),
                 rowInfo('Назва: ', '${element.name}'),
-                rowInfo('Категорія: ', '${element.category}'),
+                rowInfo('Категорія: ', '${element.category.categoryName}'),
                 rowInfo('Атомна маса: ', '${element.atomicWeight}'),
                 rowInfo('Валентність: ', '${element.getValence()}'),
               ],
