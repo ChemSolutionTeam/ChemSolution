@@ -17,10 +17,6 @@ namespace ChemSolution.Models
         [Range(0, double.MaxValue)]
         public double? AtomicWeight { get; set; }
         [Range(0, int.MaxValue)]
-        public int? ElectronQuantity { get; set; }
-        [Range(0, int.MaxValue)]
-        public int? ProtonQuantity { get; set; }
-        [Range(0, int.MaxValue)]
         public int? NeutronQuantity { get; set; }
         [Range(0, double.MaxValue)]
         public  double?  AtomicRadius { get; set; }

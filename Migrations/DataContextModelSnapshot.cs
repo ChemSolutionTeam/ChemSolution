@@ -140,9 +140,6 @@ namespace ChemSolution.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("ElectronQuantity")
-                        .HasColumnType("INTEGER");
-
                     b.Property<double?>("Electronegativity")
                         .HasColumnType("REAL");
 
@@ -172,9 +169,6 @@ namespace ChemSolution.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("NeutronQuantity")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("ProtonQuantity")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Symbol")
