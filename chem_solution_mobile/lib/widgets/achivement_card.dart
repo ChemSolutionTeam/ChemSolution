@@ -1,3 +1,4 @@
+import 'package:chem_solution_mobile/assets/colors.dart';
 import 'package:chem_solution_mobile/models/Achievement.dart';
 import 'package:flutter/material.dart';
 
@@ -17,8 +18,18 @@ class AchivementCard extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: ListTile(
             leading: Image.network(achievement.imgAchievement),
-            title: Text(achievement.heading),
-            subtitle: Text(achievement.description),
+            title: Text(
+              achievement.heading,
+              style: TextStyle(
+                  color: themeDark, fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            subtitle: Text(
+              achievement.description,
+              style: TextStyle(
+                color: themeDark,
+                fontSize: 16,
+              ),
+            ),
           ),
         ),
       ),
