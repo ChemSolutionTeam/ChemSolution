@@ -165,8 +165,8 @@ class _BlogCardState extends State<BlogCard> {
                               await post.removeFromLiked(currentUser);
                               showToast(
                                   'Видалено з обраних',
-                                  Colors.redAccent,
-                                  Color(0xff590000),
+                                  themeRed,
+                                  themeDarkRed,
                                   CommunityMaterialIcons.close,
                                   fToast);
                             } else {
@@ -175,7 +175,7 @@ class _BlogCardState extends State<BlogCard> {
                               showToast(
                                   'Додано до обраних',
                                   Colors.greenAccent,
-                                  Color(0xff005c05),
+                                  themeDarkGreen,
                                   CommunityMaterialIcons.check,
                                   fToast);
                             }

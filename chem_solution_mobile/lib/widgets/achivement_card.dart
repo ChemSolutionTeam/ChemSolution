@@ -2,6 +2,7 @@ import 'package:chem_solution_mobile/assets/colors.dart';
 import 'package:chem_solution_mobile/models/Achievement.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class AchivementCard extends StatelessWidget {
   Achievement achievement;
   AchivementCard({Key key, this.achievement}) : super(key: key);

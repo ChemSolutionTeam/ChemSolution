@@ -1,6 +1,6 @@
 import 'dart:io';
-
 import 'package:chem_solution_mobile/assets/toasts.dart';
+import 'package:chem_solution_mobile/assets/colors.dart';
 import 'package:chem_solution_mobile/models/Autorisation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:chem_solution_mobile/main.dart';
@@ -82,7 +82,7 @@ class BlogPost extends Model {
         throw Exception('Failed to load');
       }
     } catch (ex) {
-      showToast('Помилка підключення', Colors.redAccent, Color(0xff590000),
+      showToast('Помилка підключення', themeRed, themeDarkRed,
           Icons.error, FToast());
     }
   }

@@ -2,6 +2,7 @@ import 'package:chem_solution_mobile/models/BlogPost.dart';
 import 'package:chem_solution_mobile/widgets/post_card.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class Blogs extends StatefulWidget {
   String search;
   Blogs({Key key, this.search}) : super(key: key);

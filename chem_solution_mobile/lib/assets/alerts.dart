@@ -149,8 +149,8 @@ Widget autorisation(BuildContext context, Function() update) {
                     try {
                       Autorisation.signIn(email, password, getCorrect);
                     } catch (ex) {
-                      showToast('Помилка підключення', Colors.redAccent,
-                          Color(0xff590000), Icons.error, FToast());
+                      showToast('Помилка підключення', themeRed,
+                          themeDarkRed, Icons.error, FToast());
                     }
                   },
                   child: Text(

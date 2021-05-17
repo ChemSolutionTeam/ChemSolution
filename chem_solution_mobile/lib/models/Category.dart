@@ -18,6 +18,7 @@ class Category extends Model {
       el.add(element.toMap());
     });
     map['elements'] = el;
+    return map;
   }
 
   static Category fromObject(dynamic o) {
