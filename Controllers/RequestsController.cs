@@ -79,27 +79,33 @@ namespace ChemSolution.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = Startup.Roles.User)]
+        [Authorize]
         public async Task<ActionResult<Request>> PostRequest(Request request)
         {
-            _context.Requests.Add(request);
-            try
+            var user = await _context.Users.FindAsync(User.Identity?.Name);
+            if (user != null)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (RequestExists(request.UserEmail))
+                _context.Requests.Add(request);
+                user.Requests.Add(request);
+                try
                 {
-                    return Conflict();
+                    await _context.SaveChangesAsync();
                 }
-                else
+                catch (DbUpdateException)
                 {
-                    throw;
+                    if (RequestExists(request.UserEmail))
+                    {
+                        return Conflict();
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
-            }
 
-            return CreatedAtAction("GetRequest", new { id = request.UserEmail }, request);
+                return Ok();
+            }
+            return NotFound();
         }
 
         [HttpDelete("{id}")]
