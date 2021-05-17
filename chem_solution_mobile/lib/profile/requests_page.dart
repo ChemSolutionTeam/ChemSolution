@@ -1,6 +1,7 @@
 import 'package:chem_solution_mobile/widgets/request_card.dart';
 import 'package:flutter/material.dart';
 import 'package:chem_solution_mobile/assets/colors.dart';
+import 'package:chem_solution_mobile/main.dart';
 import 'package:chem_solution_mobile/models/Request.dart' as CS;
 
 class RequestsPage extends StatefulWidget {
@@ -20,28 +21,7 @@ class _RequestsPageState extends State<RequestsPage>
   Animation<Offset> _offsetAnimationToRight;
 
   void _addRequests() {
-    List<CS.Request> temp = [
-      CS.Request(
-        theme: 'бла бла бла',
-        text: 'бла бла бла',
-        statusId: 1,
-        dateTimeSended: '2021-05-12',
-      ),
-      CS.Request(
-        theme: 'бла бла бла',
-        text: 'бла бла бла',
-        statusId: 2,
-        dateTimeSended: '2021-05-12',
-      ),
-      CS.Request(
-        theme: 'бла бла бла',
-        text: 'бла бла бла',
-        statusId: 3,
-        dateTimeSended: '2021-05-12',
-      ),
-    ];
-
-    temp.forEach((element) {
+     currentUser.requests.forEach((element) {
       requests.add(RequestCard(request: element));
       _key.currentState.insertItem(requests.length - 1);
     });

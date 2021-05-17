@@ -26,11 +26,11 @@ class Status extends Model {
     s.statusId = o['statusId'];
     s.statusName = o['statusName'];
 
-    List<Request> r = [];
+   /* List<Request> r = [];
     o['requests'].forEach((el) {
       r.add(Request.fromObject(el));
     });
-    s.requests = r;
+    s.requests = r; */
     return s;
   }
 }

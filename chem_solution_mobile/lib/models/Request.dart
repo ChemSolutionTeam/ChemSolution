@@ -58,7 +58,7 @@ class Request extends Model {
     r.dateTimeSended = o['dateTimeSended'];
     r.text = o['text'];
     r.theme = o['theme'];
-    r.user = User.fromObject(o['user']);
+  //  r.user = User.fromObject(o['user']);
     r.userEmail = o['userEmail'];
     r.statusId = o['statusId'];
     r.status = Status.fromObject(o['status']);

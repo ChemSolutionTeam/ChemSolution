@@ -118,7 +118,13 @@ class User extends Model {
     });
     u.blogPosts = bps;
 
-      /*  List<ResearchHistory> rs = [];
+    List<Request> r = [];
+    o['requests'].forEach((element) {
+      r.add(Request.fromObject(element));
+    });
+    u.requests = r;
+
+    /*  List<ResearchHistory> rs = [];
     o['researchHistorys'].forEach((element) {
       rs.add(ResearchHistory.fromObject(element));
     });
@@ -136,11 +142,6 @@ class User extends Model {
     });
     u.elements = e;
 
-    List<Request> r = [];
-    o['requests'].forEach((element) {
-      r.add(Request.fromObject(element));
-    });
-    u.requests = r;
 
 
 
