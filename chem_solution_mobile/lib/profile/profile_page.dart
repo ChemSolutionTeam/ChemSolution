@@ -2,6 +2,7 @@ import 'package:chem_solution_mobile/profile/achivements_page.dart';
 import 'package:chem_solution_mobile/profile/liked_posts.dart';
 import 'package:chem_solution_mobile/profile/materials_page.dart';
 import 'package:chem_solution_mobile/profile/my_profile.dart';
+import 'package:chem_solution_mobile/profile/requests_page.dart';
 import 'package:flutter/material.dart';
 import 'package:chem_solution_mobile/main.dart';
 import 'package:community_material_icon/community_material_icon.dart';
@@ -220,13 +221,12 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
               SlideTransition(
                 position: _offsetAnimationToLeft,
                 child: GestureDetector(
-                  onTap: () {
-                    /*
+                  onTap: () {                    
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => Materials(),
+                        builder: (context) => RequestsPage(),
                       ),
-                    ); */
+                    ); 
                   },
                   child: _card(
                     context,
