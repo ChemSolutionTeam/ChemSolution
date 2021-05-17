@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:chem_solution_mobile/main.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'colors.dart';
 
 Widget createDialog(BuildContext context, String value) {
   return AlertDialog(
@@ -12,14 +13,14 @@ Widget createDialog(BuildContext context, String value) {
     title: Text(
       'Увага!',
       style: TextStyle(
-        color: Color(0xff2F455C),
+        color: themeDark,
         fontWeight: FontWeight.bold,
       ),
     ),
     content: Text(
       'Для $value необхідно авторизуватися. Зробити це зараз?',
       style: TextStyle(
-        color: Color(0xff2F455C),
+        color: themeDark,
       ),
     ),
     actions: [
@@ -39,8 +40,7 @@ Widget createDialog(BuildContext context, String value) {
         },
         child: Text(
           'Так',
-          style:
-              TextStyle(color: Color(0xff1DCDFE), fontWeight: FontWeight.w700),
+          style: TextStyle(color: themeBlue, fontWeight: FontWeight.w700),
         ),
       ),
     ],
@@ -102,9 +102,7 @@ Widget autorisation(BuildContext context, Function() update) {
               'Авторизація',
               textAlign: TextAlign.center,
               style: TextStyle(
-                  color: Color(0xff2F455C),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 32),
+                  color: themeDark, fontWeight: FontWeight.bold, fontSize: 32),
             ),
             ListTile(
               leading: Text('Email     '),
@@ -148,11 +146,11 @@ Widget autorisation(BuildContext context, Function() update) {
                   onPressed: () async {
                     var email = _emailEditingController.text;
                     var password = _passwordEditingController.text;
-                    try{
-                    Autorisation.signIn(email, password, getCorrect);
-                    } catch (ex){
-                      showToast('Помилка підключення', Colors.redAccent, Color(0xff590000),
-          Icons.error, FToast());
+                    try {
+                      Autorisation.signIn(email, password, getCorrect);
+                    } catch (ex) {
+                      showToast('Помилка підключення', Colors.redAccent,
+                          Color(0xff590000), Icons.error, FToast());
                     }
                   },
                   child: Text(
@@ -164,7 +162,7 @@ Widget autorisation(BuildContext context, Function() update) {
                       EdgeInsets.symmetric(vertical: 15, horizontal: 30),
                     ),
                     backgroundColor:
-                        MaterialStateProperty.all<Color>(Color(0xff1DCDFE)),
+                        MaterialStateProperty.all<Color>(themeBlue),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
@@ -175,7 +173,7 @@ Widget autorisation(BuildContext context, Function() update) {
             ),
             Padding(padding: EdgeInsets.only(top: 15)),
             Divider(
-              color: Color(0xff2F455C),
+              color: themeDark,
               thickness: 1,
               indent: MediaQuery.of(context).size.width * 0.05,
               endIndent: MediaQuery.of(context).size.width * 0.05,
@@ -250,7 +248,7 @@ Widget autorisation(BuildContext context, Function() update) {
             ),
             Padding(padding: EdgeInsets.only(top: 15)),
             Divider(
-              color: Color(0xff2F455C),
+              color: themeDark,
               thickness: 1,
               indent: MediaQuery.of(context).size.width * 0.05,
               endIndent: MediaQuery.of(context).size.width * 0.05,
@@ -262,7 +260,7 @@ Widget autorisation(BuildContext context, Function() update) {
               },
               child: Text(
                 'Забули пароль?',
-                style: TextStyle(color: Color(0xff2F455C), fontSize: 16),
+                style: TextStyle(color: themeDark, fontSize: 16),
               ),
             ),
             TextButton(
@@ -271,7 +269,7 @@ Widget autorisation(BuildContext context, Function() update) {
               },
               child: Text(
                 'Створити акаунт',
-                style: TextStyle(color: Color(0xff2F455C), fontSize: 16),
+                style: TextStyle(color: themeDark, fontSize: 16),
               ),
             ),
           ],
@@ -287,13 +285,11 @@ void toBrowser(BuildContext context, String link, String title) {
       builder: (context) => WebviewScaffold(
         url: link,
         appBar: new AppBar(
-          backgroundColor: Color(0xff2F455C),
+          backgroundColor: themeDark,
           title: new Text(
             title,
             style: TextStyle(
-                color: Color(0xff21D0B2),
-                fontSize: 20,
-                fontWeight: FontWeight.w500),
+                color: themeGreen, fontSize: 20, fontWeight: FontWeight.w500),
           ),
         ),
       ),

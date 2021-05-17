@@ -3,6 +3,8 @@ import 'package:chem_solution_mobile/widgets/post_card.dart';
 import 'package:chem_solution_mobile/widgets/search_field.dart';
 import 'package:flutter/material.dart';
 import 'package:chem_solution_mobile/main.dart';
+import 'package:chem_solution_mobile/assets/colors.dart';
+
 
 class LikedPosts extends StatefulWidget {
   LikedPosts({Key key}) : super(key: key);
@@ -114,21 +116,21 @@ information2\ninformation2\ninformation2\ninformation2\n''',
       child: Scaffold(
         backgroundColor: Color(0xffEBFAFF),
         appBar: AppBar(
-          backgroundColor: Color(0xff2F455C),
+          backgroundColor: themeDark,
           title: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: ListTile(
               title: _isSearch
                   ? TextField(
                       style: TextStyle(
-                        color: Color(0xff1dcdfe),
+                        color: themeBlue,
                       ),
                       decoration: searchDecor('Введіть інформацію'),
                     )
                   : Text(
                       'Збережене',
                       style: TextStyle(
-                          color: Color(0xff21D0B2),
+                          color: themeGreen,
                           fontSize: 24,
                           fontWeight: FontWeight.bold),
                     ),

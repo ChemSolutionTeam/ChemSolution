@@ -3,6 +3,7 @@ import 'package:chem_solution_mobile/models/MaterialGroup.dart';
 import 'package:chem_solution_mobile/profile/material_card.dart';
 import 'package:chem_solution_mobile/widgets/search_field.dart';
 import 'package:flutter/material.dart';
+import 'package:chem_solution_mobile/assets/colors.dart';
 
 class Materials extends StatefulWidget {
   Materials({Key key}) : super(key: key);
@@ -95,19 +96,19 @@ class _MaterialsState extends State<Materials>
       child: Scaffold(
         backgroundColor: Color(0xffEBFAFF),
         appBar: new AppBar(
-          backgroundColor: Color(0xff2F455C),
+          backgroundColor: themeDark,
           title: ListTile(
             title: _isSearch
                 ? TextField(
                     style: TextStyle(
-                      color: Color(0xff1dcdfe),
+                      color: themeBlue,
                     ),
                     decoration: searchDecor('Введіть речовину'),
                   )
                 : Text(
                     'Відкриті речовини',
                     style: TextStyle(
-                        color: Color(0xff21D0B2),
+                        color: themeGreen,
                         fontSize: 20,
                         fontWeight: FontWeight.bold),
                   ),

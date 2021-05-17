@@ -2,6 +2,7 @@ import 'package:chem_solution_mobile/assets/alerts.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:chem_solution_mobile/main.dart';
+import 'package:chem_solution_mobile/assets/colors.dart';
 
 class MyProfile extends StatefulWidget {
   MyProfile({Key key}) : super(key: key);
@@ -20,14 +21,14 @@ class _MyProfileState extends State<MyProfile> {
         title: Text(
           title,
           style: TextStyle(
-              color: Color(0xff2F455C),
+              color: themeDark,
               fontWeight: FontWeight.w700,
               fontSize: 20),
         ),
         subtitle: Text(
           subtitle,
           style: TextStyle(
-              color: Color(0xff2F455C),
+              color: themeDark,
               fontWeight: FontWeight.w400,
               fontSize: 25),
         ),
@@ -46,11 +47,11 @@ class _MyProfileState extends State<MyProfile> {
       child: Scaffold(
         backgroundColor: Color(0xffEBFAFF),
         appBar: new AppBar(
-          backgroundColor: Color(0xff2F455C),
+          backgroundColor: themeDark,
           title: new Text(
             'Мій профіль',
             style: TextStyle(
-                color: Color(0xff21D0B2),
+                color: themeGreen,
                 fontSize: 24,
                 fontWeight: FontWeight.bold),
           ),
@@ -62,21 +63,21 @@ class _MyProfileState extends State<MyProfile> {
               _tile(
                   Icon(
                     CommunityMaterialIcons.face_profile,
-                    color: Color(0xff21D0B2),
+                    color: themeGreen,
                   ),
                   'Логін',
                   currentUser.userName),
               _tile(
                   Icon(
                     Icons.mail,
-                    color: Color(0xff21D0B2),
+                    color: themeGreen,
                   ),
                   'Електронна пошта',
                   currentUser.userEmail),
               _tile(
                   Icon(
                     Icons.cake,
-                    color: Color(0xff21D0B2),
+                    color: themeGreen,
                   ),
                   'Дата народження',
                   currentUser.birthdayToString),
@@ -101,7 +102,7 @@ class _MyProfileState extends State<MyProfile> {
           ),
         ),
         bottomNavigationBar: BottomAppBar(
-          color: Color(0xff2F455C),
+          color: themeDark,
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
             child: Row(
@@ -114,7 +115,7 @@ class _MyProfileState extends State<MyProfile> {
                   },
                   child: Text(
                     'Редагувати',
-                    style: TextStyle(color: Color(0xff21D0B2), fontSize: 20),
+                    style: TextStyle(color: themeGreen, fontSize: 20),
                   ),
                 ),
               ],

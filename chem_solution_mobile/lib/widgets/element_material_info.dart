@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:chem_solution_mobile/assets/colors.dart';
 
 Widget scaffoldInfo(BuildContext context, String title, Column column){
    return GestureDetector(
@@ -11,12 +11,12 @@ Widget scaffoldInfo(BuildContext context, String title, Column column){
       child: Scaffold(
         backgroundColor: Color(0xffEBFAFF),
         appBar: AppBar(
-          backgroundColor: Color(0xff2F455C),
+          backgroundColor: themeDark,
           title: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: Text(title,
                 style: TextStyle(
-                    color: Color(0xff21D0B2),
+                    color: themeGreen,
                     fontWeight: FontWeight.bold,
                     fontSize: 24.0)),
           ),
@@ -40,7 +40,7 @@ Widget scaffoldInfo(BuildContext context, String title, Column column){
             Text(
               title,
               style: TextStyle(
-                color: Color(0xff2F455C),
+                color: themeDark,
                 fontSize: 16.0,
                 fontWeight: FontWeight.w700
               ),
@@ -48,7 +48,7 @@ Widget scaffoldInfo(BuildContext context, String title, Column column){
             Text(
               info,
               style: TextStyle(
-                color: Color(0xff2F455C),
+                color: themeDark,
                 fontSize: 16.0,
               ),
             ),

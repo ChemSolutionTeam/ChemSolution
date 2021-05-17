@@ -5,6 +5,7 @@ import 'package:chem_solution_mobile/profile/profile_page.dart';
 import 'package:chem_solution_mobile/widgets/search_field.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:chem_solution_mobile/assets/colors.dart';
 
 class ChemSolutionWidget extends StatefulWidget {
   ChemSolutionWidget({Key key}) : super(key: key);
@@ -79,7 +80,7 @@ class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
       child: Scaffold(
         backgroundColor: Color(0xffEBFAFF),
         appBar: AppBar(
-          backgroundColor: Color(0xff2F455C),
+          backgroundColor: themeDark,
           title: ListTile(
             leading: _isSearch
                 ? null
@@ -92,7 +93,7 @@ class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
                 ? Text(
                     'ChemSolution',
                     style: TextStyle(
-                        color: Color(0xff21D0B2),
+                        color: themeGreen,
                         fontWeight: FontWeight.bold,
                         fontSize: 24.0),
                   )
@@ -105,7 +106,7 @@ class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
                       });
                     },
                     style: TextStyle(
-                      color: Color(0xff1dcdfe),
+                      color: themeBlue,
                     ),
                     decoration: searchDecor(_searchItems[_selectedIndex]),
                   ),
@@ -125,7 +126,7 @@ class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
         ),
         body: _widgetOptions.elementAt(_selectedIndex),
         bottomNavigationBar: Theme(
-          data: Theme.of(context).copyWith(canvasColor: Color(0xff2F455C)),
+          data: Theme.of(context).copyWith(canvasColor: themeDark),
           child: BottomNavigationBar(
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
@@ -141,7 +142,7 @@ class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
                   label: 'Мій профіль'),
             ],
             currentIndex: _selectedIndex,
-            selectedItemColor: Color(0xff21D0B2),
+            selectedItemColor: themeGreen,
             unselectedItemColor: Color(0xffEBFAFF),
             onTap: _onItemTapped,
           ),

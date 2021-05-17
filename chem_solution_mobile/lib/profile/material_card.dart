@@ -2,6 +2,8 @@ import 'package:chem_solution_mobile/models/Material.dart' as CS;
 import 'package:chem_solution_mobile/profile/material_info.dart';
 import 'package:chem_solution_mobile/widgets/element_material_card.dart';
 import 'package:flutter/material.dart';
+import 'package:chem_solution_mobile/assets/colors.dart';
+
 
 class MaterialCard extends StatefulWidget {
   final CS.Material material;
@@ -30,7 +32,7 @@ class _MaterialCardState extends State<MaterialCard>
         },
          onLongPressStart: (_){
             setState(() {
-            _colorCard = Color(0xff1dcdfe);
+            _colorCard = themeBlue;
           });
         },
         onLongPressEnd: (_){
@@ -40,7 +42,7 @@ class _MaterialCardState extends State<MaterialCard>
         },
         onTapDown: (details) {
           setState(() {
-            _colorCard = Color(0xff21D0B2);
+            _colorCard = themeGreen;
           });
         },
         onTapUp: (details) {

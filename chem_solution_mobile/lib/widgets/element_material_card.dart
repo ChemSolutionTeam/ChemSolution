@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:chem_solution_mobile/assets/colors.dart';
 
 Widget rowInfo(String name, String value) {
   return Wrap(
@@ -7,14 +8,14 @@ Widget rowInfo(String name, String value) {
       Container(
         child: Text(
           name,
-          style: TextStyle(color: Color(0xff2F455C), fontSize: 16),
+          style: TextStyle(color: themeDark, fontSize: 16),
         ),
       ),
       Container(
           child: Text(
         value,
         style: TextStyle(
-            color: Color(0xff2F455C),
+            color: themeDark,
             fontSize: 16,
             fontWeight: FontWeight.bold),
       )),

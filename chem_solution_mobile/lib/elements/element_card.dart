@@ -4,6 +4,8 @@ import 'package:chem_solution_mobile/models/Element.dart' as CS;
 import 'package:chem_solution_mobile/widgets/element_material_card.dart';
 import 'package:flutter/material.dart';
 import 'package:chem_solution_mobile/assets/alerts.dart';
+import 'package:chem_solution_mobile/assets/colors.dart';
+
 
 class ElementCard extends StatefulWidget {
   final CS.Element element;
@@ -26,7 +28,7 @@ class _ElementCardState extends State<ElementCard> {
       child: GestureDetector(
         onLongPressStart: (_){
             setState(() {
-            _colorCard = Color(0xff1dcdfe);
+            _colorCard = themeBlue;
           });
         },
         onLongPressEnd: (_){
@@ -36,7 +38,7 @@ class _ElementCardState extends State<ElementCard> {
         },
          onTapDown: (details) {
           setState(() {
-            _colorCard = Color(0xff21D0B2);
+            _colorCard = themeGreen;
           });
         },
         onTapUp: (details) {

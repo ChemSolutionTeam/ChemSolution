@@ -1,3 +1,4 @@
+import 'package:chem_solution_mobile/profile/achivements_page.dart';
 import 'package:chem_solution_mobile/profile/liked_posts.dart';
 import 'package:chem_solution_mobile/profile/materials_page.dart';
 import 'package:chem_solution_mobile/profile/my_profile.dart';
@@ -5,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:chem_solution_mobile/main.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:chem_solution_mobile/assets/alerts.dart';
+import 'package:chem_solution_mobile/assets/colors.dart';
+
 
 class Profile extends StatefulWidget {
   Profile({Key key}) : super(key: key);
@@ -29,7 +32,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
             children: [
               Text(
                 text,
-                style: TextStyle(color: Color(0xff2F455C), fontSize: 20),
+                style: TextStyle(color: themeDark, fontSize: 20),
               ),
               icon,
             ],
@@ -45,14 +48,14 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
       title: Text(
         'Увага!',
         style: TextStyle(
-          color: Color(0xff2F455C),
+          color: themeDark,
           fontWeight: FontWeight.bold,
         ),
       ),
       content: Text(
         'Ви точно хочете вийти?',
         style: TextStyle(
-          color: Color(0xff2F455C),
+          color: themeDark,
         ),
       ),
       actions: [
@@ -76,7 +79,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
           child: Text(
             'Ні',
             style: TextStyle(
-                color: Color(0xff1DCDFE), fontWeight: FontWeight.w700),
+                color: themeBlue, fontWeight: FontWeight.w700),
           ),
         ),
       ],
@@ -132,11 +135,11 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                 },
                 child: _card(
                   context,
-                  Color(0xff1DCDFE),
+                  themeBlue,
                   'Авторизуватися',
                   Icon(
                     Icons.verified_user,
-                    color: Color(0xff2F455C),
+                    color: themeDark,
                   ),
                 ),
               ),
@@ -162,11 +165,11 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                   },
                   child: _card(
                     context,
-                    Color(0xff1DCDFE),
+                    themeBlue,
                     'Мій профіль',
                     Icon(
                       CommunityMaterialIcons.face_profile,
-                      color: Color(0xff2F455C),
+                      color: themeDark,
                     ),
                   ),
                 ),
@@ -187,7 +190,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                     'Збережене',
                     Icon(
                       CommunityMaterialIcons.heart,
-                      color: Color(0xff21D0B2),
+                      color: themeGreen,
                     ),
                   ),
                 ),
@@ -196,20 +199,20 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                 position: _offsetAnimationToRight,
                 child: GestureDetector(
                   onTap: () {
-                    /*
+                    
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => Materials(),
+                        builder: (context) => AchivementsPage(),
                       ),
-                    ); */
+                    ); 
                   },
                   child: _card(
                     context,
-                    Color(0xff1DCDFE),
+                    themeBlue,
                     'Досягнення',
                     Icon(
                       CommunityMaterialIcons.gold,
-                      color: Color(0xff2F455C),
+                      color: themeDark,
                     ),
                   ),
                 ),
@@ -231,7 +234,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                     'Запити',
                     Icon(
                       Icons.request_page,
-                      color: Color(0xff21D0B2),
+                      color: themeGreen,
                     ),
                   ),
                 ),
@@ -248,11 +251,11 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                   },
                   child: _card(
                     context,
-                    Color(0xff1DCDFE),
+                    themeBlue,
                     'Відкриті речовини',
                     Icon(
                       CommunityMaterialIcons.molecule,
-                      color: Color(0xff2F455C),
+                      color: themeDark,
                     ),
                   ),
                 ),
@@ -269,7 +272,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                     'Вихід',
                     Icon(
                       CommunityMaterialIcons.exit_run,
-                      color: Color(0xff21D0B2),
+                      color: themeGreen,
                     ),
                   ),
                 ),

@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:chem_solution_mobile/assets/alerts.dart';
 import 'package:chem_solution_mobile/main.dart';
+import 'package:chem_solution_mobile/assets/colors.dart';
 
 class BlogCard extends StatefulWidget {
   final BlogPost post;
@@ -22,9 +23,9 @@ class _BlogCardState extends State<BlogCard> {
   _BlogCardState({this.post});
 
   Color _colorLocked = Colors.blueGrey;
-  Color _colorNonLocked = Color(0xff1dcdfe);
+  Color _colorNonLocked = themeBlue;
   Color _colorCard = Colors.white;
-  Color _colorLike = Color(0xff21D0B2);
+  Color _colorLike = themeGreen;
 
   FToast fToast;
 
@@ -43,30 +44,30 @@ class _BlogCardState extends State<BlogCard> {
       child: GestureDetector(
         onLongPressStart: (_) {
           setState(() {
-            _colorNonLocked = Color(0xff2F455C);
-            _colorCard = Color(0xff1dcdfe);
-            _colorLike = Color(0xff2F455C);
+            _colorNonLocked = themeDark;
+            _colorCard = themeBlue;
+            _colorLike = themeDark;
           });
         },
         onLongPressEnd: (_) {
           setState(() {
-            _colorNonLocked = Color(0xff1dcdfe);
+            _colorNonLocked = themeBlue;
             _colorCard = Colors.white;
-            _colorLike = Color(0xff21D0B2);
+            _colorLike = themeGreen;
           });
         },
         onTapDown: (details) {
           setState(() {
             _colorNonLocked = Color(0xff28acd1);
-            _colorCard = Color(0xff21D0B2);
+            _colorCard = themeGreen;
             _colorLike = Color(0xff28acd1);
           });
         },
         onTapUp: (details) {
           setState(() {
-            _colorNonLocked = Color(0xff1dcdfe);
+            _colorNonLocked = themeBlue;
             _colorCard = Colors.white;
-            _colorLike = Color(0xff21D0B2);
+            _colorLike = themeGreen;
           });
         },
         child: Card(
@@ -93,7 +94,7 @@ class _BlogCardState extends State<BlogCard> {
                         '${post.title}',
                         style: TextStyle(
                             fontSize: 20.0,
-                            color: Color(0xff2F455C),
+                            color: themeDark,
                             fontWeight: FontWeight.w400),
                       ),
                     ),
@@ -116,9 +117,9 @@ class _BlogCardState extends State<BlogCard> {
                         onTapDown: (details) {
                           setState(() {
                             if (post.isLocked) {
-                              _colorLocked = Color(0xff21D0B2);
+                              _colorLocked = themeGreen;
                             } else {
-                              _colorNonLocked = Color(0xff21D0B2);
+                              _colorNonLocked = themeGreen;
                             }
                           });
                         },
@@ -128,7 +129,7 @@ class _BlogCardState extends State<BlogCard> {
                             if (post.isLocked) {
                               _colorLocked = Colors.blueGrey;
                             } else {
-                              _colorNonLocked = Color(0xff1dcdfe);
+                              _colorNonLocked = themeBlue;
                             }
                           });
                         },

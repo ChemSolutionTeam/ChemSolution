@@ -1,5 +1,6 @@
 import 'package:chem_solution_mobile/models/BlogPost.dart';
 import 'package:flutter/material.dart';
+import 'package:chem_solution_mobile/assets/colors.dart';
 
 class PostInfo extends StatelessWidget {
   final BlogPost post;
@@ -16,12 +17,12 @@ class PostInfo extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Color(0xffEBFAFF),
         appBar: AppBar(
-          backgroundColor: Color(0xff2F455C),
+          backgroundColor: themeDark,
           title: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: Text(post.title,
                 style: TextStyle(
-                    color: Color(0xff21D0B2),
+                    color: themeGreen,
                     fontWeight: FontWeight.bold,
                     fontSize: 24.0)),
           ),
@@ -42,7 +43,7 @@ class PostInfo extends StatelessWidget {
                   child: Text(
                     post.information,
                     style: TextStyle(
-                      color: Color(0xff2F455C),
+                      color: themeDark,
                       fontSize: 16.0,
                     ),
                   ),
