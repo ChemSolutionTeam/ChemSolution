@@ -45,6 +45,7 @@ namespace ChemSolution.Controllers
             var user = await _context.Users
                 .Include(p=>p.BlogPosts)
                 .Include(p => p.Requests)
+                .ThenInclude(r=> r.Status)
                 .Include(p=>p.ResearchHistorys)
                 .Include(p=>p.Elements)
                 .Include(p=>p.Achievement)

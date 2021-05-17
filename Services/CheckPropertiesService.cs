@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ChemSolution.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Internal;
 using Org.BouncyCastle.Utilities.IO.Pem;
@@ -39,11 +40,19 @@ namespace ChemSolution.Services
                 {
                     propertyInfo.SetValue(obj, null);
                 }
-
+                
                 if (tmp.Name == "User")
                 {
                     propertyInfo.SetValue(obj, null);
                 }
+                
+                if (propertyInfo.Name == "Status")
+                {
+                    var tmpStatus = (Status) propertyInfo.GetValue(obj);
+                    tmpStatus.Requests = null;
+                    propertyInfo.SetValue(obj, tmpStatus);
+                }
+                
             }
         }
 
