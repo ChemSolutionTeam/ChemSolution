@@ -64,42 +64,42 @@
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
-                {{ achievements.achievementId }}
+                {{ achievement.achievementId }}
               </td>
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
-                {{ achievements.heading }}
+                {{ achievement.heading }}
               </td>
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
-                {{ achievements.imgAchievement }}
+                {{ achievement.imgAchievement }}
               </td>
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
-                {{ achievements.description }}
+                {{ achievement.description }}
               </td>
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
-                {{ achievements.moneyReward }}
+                {{ achievement.moneyReward }}
               </td>
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
-                {{ achievements.ratingReward }}
+                {{ achievement.ratingReward }}
               </td>
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
-                {{ achievements.countGoal }}
+                {{ achievement.countGoal }}
               </td>
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
-                {{ achievements.materialGroup }}
+                {{ achievement.materialGroup }}
               </td>
 
               <td
@@ -153,7 +153,7 @@ export default {
     },
   },
   mounted() {
-    let achievements = apiService.getMaterials()
+    let achievements = apiService.getAchievements()
     if (achievements == null || achievements == undefined) return
     else this.achievements = achievements
   },

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h1 class="text-5xl">Achievements Inspect page</h1>
+    <h1 class="text-5xl">BlogPosts Inspect page</h1>
 
-    <Button label="Додати досягнення" class="w-3/12" @click="create()" />
+    <Button label="Додати пост" class="w-3/12" @click="create()" />
     <Button label="Повернутися" class="w-3/12" @click="goBack()" white="true" />
 
     <!-- <div>TODO Search</div> -->
@@ -21,85 +21,65 @@
               <th
                 class="py-1 hover:text-csgreen cursor-pointer px-6 text-center border-csgreen border-b-4"
               >
-                Heading
+                Title
               </th>
               <th
                 class="py-1 hover:text-csgreen cursor-pointer px-6 text-center border-csgreen border-b-4"
               >
-                ImgAchievement
+                Category
               </th>
               <th
                 class="py-1 hover:text-csgreen cursor-pointer px-6 text-center border-csgreen border-b-4"
               >
-                Description
+                Information
               </th>
               <th
                 class="py-1 hover:text-csgreen cursor-pointer px-6 text-center border-csgreen border-b-4"
               >
-                MoneyReward
+                Image
               </th>
               <th
                 class="py-1 hover:text-csgreen cursor-pointer px-6 text-center border-csgreen border-b-4"
               >
-                RatingReward
-              </th>
-              <th
-                class="py-1 hover:text-csgreen cursor-pointer px-6 text-center border-csgreen border-b-4"
-              >
-                CountGoal
-              </th>
-              <th
-                class="py-1 hover:text-csgreen cursor-pointer px-6 text-center border-csgreen border-b-4"
-              >
-                MaterialGroup
+                IsLocked
               </th>
             </tr>
           </thead>
           <tbody class="text-csblack">
             <tr
               class="hover:bg-gray-100"
-              v-for="(achievement, index) in achievements"
+              v-for="(blogpost, index) in blogposts"
               :key="index"
             >
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
-                {{ achievements.achievementId }}
+                {{ blogpost.blogPostId }}
               </td>
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
-                {{ achievements.heading }}
+                {{ blogpost.title }}
               </td>
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
-                {{ achievements.imgAchievement }}
+                {{ blogpost.сategory }}
               </td>
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
-                {{ achievements.description }}
+                {{ blogpost.information }}
               </td>
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
-                {{ achievements.moneyReward }}
+                {{ blogpost.image }}
               </td>
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
-                {{ achievements.ratingReward }}
-              </td>
-              <td
-                class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
-              >
-                {{ achievements.countGoal }}
-              </td>
-              <td
-                class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
-              >
-                {{ achievements.materialGroup }}
+                {{ blogpost.isLocked }}
               </td>
 
               <td
@@ -108,12 +88,12 @@
                 <div class="flex justify-end">
                   <button
                     class="px-4 focus:outline-none focus:ring focus:ring-offset-2 focus:ring-csgreen shadow-md bg-gradient-to-tr from-csgreen to-cslightgreen w-full p-1 m-1 border rounded-xl"
-                    @click="edit(achievement)"
+                    @click="edit(blogpost)"
                   >
                     Edit
                   </button>
                   <button
-                    @click="remove(achievement)"
+                    @click="remove(blogpost)"
                     class="focus:outline-none focus:ring focus:ring-offset-2 focus:ring-red-300 shadow-md bg-gradient-to-tr from-red-400 to-red-500 text-white w-full p-1 m-1 border rounded-xl"
                   >
                     Remove
@@ -140,28 +120,28 @@ export default {
     goBack() {
       router.push('/admin')
     },
-    edit(achievement) {
-      achievement
-      router.push('/admin/achievements/edit/' + achievement.achievementId)
+    edit(blogpost) {
+      blogpost
+      router.push('/admin/blogposts/edit/' + blogpost.blogPostId)
     },
-    remove(achievement) {
-      achievement
-      router.push('/admin/achievements/delete/' + achievement.achievementId)
+    remove(blogpost) {
+      blogpost
+      router.push('/admin/blogposts/delete/' + blogpost.blogPostId)
     },
     create() {
-      router.push('/admin/achievements/create/')
+      router.push('/admin/blogposts/create/')
     },
   },
   mounted() {
-    let achievements = apiService.getMaterials()
-    if (achievements == null || achievements == undefined) return
-    else this.achievements = achievements
+    let blogposts = apiService.getBlogPosts()
+    if (blogposts == null || blogposts == undefined) return
+    else this.blogposts = blogposts
   },
   data() {
     return {
-      achievements: [
+      blogposts: [
         {
-          achievementId: 1,
+          blogPostsId: 1,
         },
       ],
     }

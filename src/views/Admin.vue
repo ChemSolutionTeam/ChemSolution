@@ -18,6 +18,11 @@
         path="/admin/achievements"
         image="https://www.thoughtco.com/thmb/XuJo7-P3gRDQshW69iFDNkFdS1U=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-545286316-433dd345105e4c6ebe4cdd8d2317fdaa.jpg"
       />
+      <AdminCard
+        label="Пости"
+        path="/admin/blogposts"
+        image="https://www.njit.edu/sites/default/files/styles/16_9_banner/public/major_images/chemistry-phd.jpg?itok=qETVgslD"
+      />
       <AdminCard image="https://i.imgur.com/bAaiGiu.jpeg" />
     </div>
   </div>
