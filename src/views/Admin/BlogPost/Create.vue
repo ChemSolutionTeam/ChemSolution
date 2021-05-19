@@ -65,7 +65,7 @@ import Button from '@/components/HomePageButtons'
 import router from '../../../router'
 
 export default {
-  name: 'ElementCreate',
+  name: 'BlogPostCreate',
   components: {
     BaseInput,
     Button,
@@ -74,7 +74,7 @@ export default {
   },
   methods: {
     submit() {
-      apiService.getBlogPost(this.blogpost)
+      apiService.postBlogPost(this.blogpost)
     },
     goBack() {
       router.push('/admin/blogposts')
