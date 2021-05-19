@@ -94,7 +94,7 @@ export default {
       apiService.putElement(this.material)
     },
     goBack() {
-      router.push('/admin/material')
+      router.push('/admin/materials')
     },
   },
   data() {

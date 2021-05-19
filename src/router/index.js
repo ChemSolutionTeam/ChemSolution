@@ -78,6 +78,34 @@ const routes = [
     name: 'Achievements Create',
     component: () => import('../views/Admin/Achievement/Create.vue'),
   },
+
+  {
+    path: '/admin/materials',
+    name: 'Materials',
+    component: () => import('../views/Admin/Material/Inspect.vue'),
+  },
+  {
+    path: '/admin/materials/edit/:id',
+    name: 'Materials Edit',
+    component: () => import('../views/Admin/Material/Edit.vue'),
+    props: {
+      id: true,
+    },
+  },
+  {
+    path: '/admin/materials/delete/:id',
+    name: 'Materials Delete',
+    component: () => import('../views/Admin/Material/Delete.vue'),
+    props: {
+      id: true,
+    },
+  },
+  {
+    path: '/admin/materials/create',
+    name: 'Materials Create',
+    component: () => import('../views/Admin/Material/Create.vue'),
+  },
+
   {
     path: '/periodicTable',
     name: 'PeriodicTable',

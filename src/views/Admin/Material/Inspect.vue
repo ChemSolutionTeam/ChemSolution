@@ -124,11 +124,11 @@ export default {
     },
     edit(material) {
       material
-      router.push('/admin/elements/edit/' + material.elementId)
+      router.push('/admin/materials/edit/' + material.elementId)
     },
     delete(material) {
       material
-      router.push('/admin/elements/delete/' + material.elementId)
+      router.push('/admin/materials/delete/' + material.elementId)
     },
   },
   mounted() {

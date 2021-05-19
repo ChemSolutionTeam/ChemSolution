@@ -77,7 +77,7 @@ export default {
       apiService.putMaterial(this.material)
     },
     goBack() {
-      router.push('/admin/material')
+      router.push('/admin/materials')
     },
   },
   data() {
