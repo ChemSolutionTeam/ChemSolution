@@ -107,6 +107,33 @@ const routes = [
   },
 
   {
+    path: '/admin/blogposts',
+    name: 'BlogPosts',
+    component: () => import('../views/Admin/BlogPost/Inspect.vue'),
+  },
+  {
+    path: '/admin/blogposts/edit/:id',
+    name: 'BlogPosts Edit',
+    component: () => import('../views/Admin/BlogPost/Edit.vue'),
+    props: {
+      id: true,
+    },
+  },
+  {
+    path: '/admin/blogposts/delete/:id',
+    name: 'BlogPosts Delete',
+    component: () => import('../views/Admin/BlogPost/Delete.vue'),
+    props: {
+      id: true,
+    },
+  },
+  {
+    path: '/admin/blogposts/create',
+    name: 'BlogPosts Create',
+    component: () => import('../views/Admin/BlogPost/Create.vue'),
+  },
+
+  {
     path: '/periodicTable',
     name: 'PeriodicTable',
     component: () => import('../views/PeriodicTable.vue'),
