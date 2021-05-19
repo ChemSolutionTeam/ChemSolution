@@ -6,7 +6,9 @@
       <!-- Search -->
       <div class="flex flex-wrap w-full text-xl mb-10">
         <i class="fas fa-search mx-3 self-center scale-125 transform w-1/12" />
-        <input class="w-10/12 border-csblack border rounded-xl" />
+        <input
+          class="w-10/12 border-csblack border rounded-xl outline-none px-5"
+        />
       </div>
       <div class="overflow-y-auto h-5/6">
         <ElementChooser
