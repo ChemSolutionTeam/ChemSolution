@@ -13,6 +13,11 @@
         path="/admin/materials"
         image="https://www.innovationnewsnetwork.com/wp-content/uploads/2019/12/ST27-McGillU1-image-%C2%A9-iStock-Garsya.jpg"
       />
+      <AdminCard
+        label="Досягнення"
+        path="/admin/achievements"
+        image="https://www.thoughtco.com/thmb/XuJo7-P3gRDQshW69iFDNkFdS1U=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-545286316-433dd345105e4c6ebe4cdd8d2317fdaa.jpg"
+      />
       <AdminCard image="https://i.imgur.com/bAaiGiu.jpeg" />
     </div>
   </div>
