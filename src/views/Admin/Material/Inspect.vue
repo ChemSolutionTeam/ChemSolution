@@ -1,8 +1,9 @@
 <template>
   <div>
-    <h1 class="text-5xl">Elements Inspect page</h1>
+    <h1 class="text-5xl">Materials Inspect page</h1>
 
-    <Button label="Go Back" class="w-2/12" @click="goBack()" />
+    <Button label="Додати речовину" class="w-3/12" @click="create()" />
+    <Button label="Повернутися" class="w-3/12" @click="goBack()" white="true" />
 
     <!-- <div>TODO Search</div> -->
     <div class="flex flex-wrap mx-3 my-5">
@@ -124,11 +125,14 @@ export default {
     },
     edit(material) {
       material
-      router.push('/admin/materials/edit/' + material.elementId)
+      router.push('/admin/materials/edit/' + material.id)
     },
-    delete(material) {
+    remove(material) {
       material
-      router.push('/admin/materials/delete/' + material.elementId)
+      router.push('/admin/materials/delete/' + material.id)
+    },
+    create() {
+      router.push('/admin/materials/create/')
     },
   },
   mounted() {
@@ -138,7 +142,15 @@ export default {
   },
   data() {
     return {
-      materials: [],
+      materials: [
+        {
+          id: 1,
+          image: '1111',
+          formula: '2222',
+          name: '1212',
+          info: '122',
+        },
+      ],
     }
   },
 }
