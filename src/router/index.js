@@ -53,6 +53,32 @@ const routes = [
     component: () => import('../views/Admin/Element/Create.vue'),
   },
   {
+    path: '/admin/achievements',
+    name: 'Achievements',
+    component: () => import('../views/Admin/Achievement/Inspect.vue'),
+  },
+  {
+    path: '/admin/achievements/edit/:id',
+    name: 'Achievements Edit',
+    component: () => import('../views/Admin/Achievement/Edit.vue'),
+    props: {
+      id: true,
+    },
+  },
+  {
+    path: '/admin/achievements/delete/:id',
+    name: 'Achievements Delete',
+    component: () => import('../views/Admin/Achievement/Delete.vue'),
+    props: {
+      id: true,
+    },
+  },
+  {
+    path: '/admin/achievements/create',
+    name: 'Achievements Create',
+    component: () => import('../views/Admin/Achievement/Create.vue'),
+  },
+  {
     path: '/periodicTable',
     name: 'PeriodicTable',
     component: () => import('../views/PeriodicTable.vue'),
