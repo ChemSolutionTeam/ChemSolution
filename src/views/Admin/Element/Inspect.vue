@@ -2,7 +2,8 @@
   <div>
     <h1 class="text-5xl">Elements Inspect page</h1>
 
-    <Button label="Go Back" class="w-2/12" @click="goBack()" />
+    <Button label="Додати елемент" class="w-3/12" @click="create()" />
+    <Button label="Повернутися" class="w-3/12" @click="goBack()" white="true" />
 
     <!-- <div>TODO Search</div> -->
     <div class="flex flex-wrap mx-3 my-5">
@@ -270,6 +271,13 @@ export default {
     edit(element) {
       element
       router.push('/admin/elements/edit/' + element.elementId)
+    },
+    remove(element) {
+      element
+      router.push('/admin/elements/delete/' + element.elementId)
+    },
+    create() {
+      router.push('/admin/elements/create/')
     },
     delete(element) {
       alert(element)
