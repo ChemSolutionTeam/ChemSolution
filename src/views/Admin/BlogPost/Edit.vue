@@ -5,7 +5,7 @@
       <span
         class="bg-clip-text bg-gradient-to-tr from-yellow-300 to-pink-600"
         style="color: transparent"
-        >{{ achievement.heading }}</span
+        >{{ blogpost.title }}</span
       >
     </h1>
     <div class="justify-items-center grid">
@@ -30,47 +30,31 @@
           class="transform rotate-3 bg-white p-5 rounded-3xl shadow-xl border-csblack border-2"
         >
           <BaseInput
-            label="Назва досягнення"
-            v-model="achievement.heading"
-            placeholder="Уведіть назву досягнення"
+            label="Заголовок"
+            v-model="blogpost.title"
+            placeholder="Уведіть заголовок"
           />
-
           <BaseInput
-            label="Зображення"
-            v-model="achievement.imgAchievement"
-            placeholder="Уведіть зображення досягнення"
+            label="Категорія"
+            v-model="blogpost.сategory"
+            placeholder="Уведіть категорію"
           />
 
           <BaseTextArea
-            label="Опис"
-            v-model="achievement.description"
-            placeholder="Уведіть опис"
+            label="Інформація"
+            v-model="blogpost.information"
+            placeholder="Уведіть інформацію"
+          />
+          <BaseInput
+            label="Зображення"
+            v-model="blogpost.image"
+            placeholder="Уведіть зображення"
           />
 
-          <BaseInput
-            label="Грошова винагорода"
-            v-model="achievement.moneyReward"
-            type="number"
-            placeholder="Уведіть грошову винагороду"
-          />
-
-          <BaseInput
-            label="Рейтинг"
-            v-model="achievement.ratingReward"
-            type="number"
-            placeholder="Уведіть рейтингову винагороду"
-          />
-          <BaseInput
-            label="Кількість елементів"
-            v-model="achievement.countGoal"
-            type="number"
-            placeholder="Уведіть кількість зібраних елементів"
-          />
-
-          <BaseInput
-            label="Група елементів"
-            v-model="achievement.materialGroup"
-            placeholder="Уведіть групу елементів"
+          <BaseCheck
+            label="Заблоковано"
+            v-model="blogpost.isLocked"
+            big="true"
           />
         </div>
       </div>
@@ -82,13 +66,15 @@
 import apiService from '@/services/index'
 import BaseInput from '@/components/BaseInput'
 import BaseTextArea from '@/components/BaseTextArea'
+import BaseCheck from '@/components/BaseCheck'
 import Button from '@/components/HomePageButtons'
 import router from '../../../router'
 export default {
-  name: 'AchievementEdit',
+  name: 'BlogPostEdit',
   components: {
     BaseInput,
     Button,
+    BaseCheck,
     BaseTextArea,
   },
   computed: {
@@ -98,26 +84,22 @@ export default {
     },
   },
   mounted() {
-    let achievement = apiService.getAchievement(this.id)
-    if (achievement != null && achievement != undefined) {
-      this.achievement = achievement
+    let blogpost = apiService.getBlogPost(this.id)
+    if (blogpost != null && blogpost != undefined) {
+      this.blogpost = blogpost
     }
   },
   methods: {
     submit() {
-      apiService.putAchievement(this.achievement)
+      apiService.putBlogPost(this.blogpost)
     },
     goBack() {
-      router.push('/admin/achievements')
+      router.push('/admin/blogposts')
     },
   },
   data() {
     return {
-      achievement: {
-        heading: '121',
-        imgAchievement: '121',
-        description: '222',
-      },
+      blogpost: {},
     }
   },
 }
