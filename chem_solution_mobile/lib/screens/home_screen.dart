@@ -2,6 +2,7 @@ import 'package:chem_solution_mobile/blog/blog_page.dart';
 import 'package:chem_solution_mobile/elements/elements_page.dart';
 import 'package:chem_solution_mobile/info/informations_page.dart';
 import 'package:chem_solution_mobile/profile/profile_page.dart';
+import 'package:chem_solution_mobile/widgets/post_card.dart';
 import 'package:chem_solution_mobile/widgets/search_field.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
@@ -17,27 +18,25 @@ class ChemSolutionWidget extends StatefulWidget {
 class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
   int _selectedIndex = 0;
   bool _isSearch = false;
-  String searchValue;
+  String searchValue = '';
   static List<Widget> _widgetOptions;
-
-  GlobalKey<BlogsState> blogState = new GlobalKey<BlogsState>();
+  final blogKey = GlobalKey<BlogsState>();
 
   void getOptions() {
     _widgetOptions = <Widget>[
       Elements(),
       Blogs(
         search: searchValue,
-        key: blogState,
+        key: blogKey,
       ),
       Informations(search: searchValue),
-      Profile()
+      Profile(),
     ];
   }
 
   @override
   void initState() {
     super.initState();
-    searchValue = '';
     getOptions();
   }
 
@@ -100,9 +99,10 @@ class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
                 : TextField(
                     onSubmitted: (value) {
                       setState(() {
+                        print ('LENGTH ${blogKey.currentState.posts.length}');
                         searchValue = value;
+                        blogKey.currentState.getSearch(searchValue);
                         getOptions();
-                        blogState.currentState.printValue(value);
                       });
                     },
                     style: TextStyle(
@@ -117,6 +117,7 @@ class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
                       setState(() {
                         _isSearch = !_isSearch;
                         searchValue = '';
+                        blogKey.currentState.getSearch(searchValue);
                         getOptions();
                       });
                     },

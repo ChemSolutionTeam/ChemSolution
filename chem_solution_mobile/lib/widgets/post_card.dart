@@ -29,6 +29,7 @@ class _BlogCardState extends State<BlogCard> {
 
   FToast fToast;
 
+
   @override
   void initState() {
     super.initState();
