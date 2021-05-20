@@ -6,20 +6,29 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class Elements extends StatefulWidget {
-  Elements({Key key}) : super(key: key);
+  String search;
+  Elements({Key key, this.search}) : super(key: key);
 
   @override
-  _ElementsState createState() => _ElementsState();
+  ElementsState createState() => ElementsState(search);
 }
 
-class _ElementsState extends State<Elements>
+class ElementsState extends State<Elements>
     with SingleTickerProviderStateMixin {
+  String search = '';
+  ElementsState(this.search);
   List<Widget> elements = [];
   final GlobalKey<AnimatedListState> _key = new GlobalKey<AnimatedListState>();
 
   AnimationController _controller;
   Animation<Offset> _offsetAnimationToLeft;
   Animation<Offset> _offsetAnimationToRight;
+
+  void getSearch(String value) {
+    setState(() {
+      search = value;
+    });
+  }
 
   void _addElements() {
     List<CS.Element> temp = [

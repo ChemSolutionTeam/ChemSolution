@@ -21,15 +21,38 @@ class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
   String searchValue = '';
   static List<Widget> _widgetOptions;
   final blogKey = GlobalKey<BlogsState>();
+  final infoKey = GlobalKey<InformationsState>();
+  final elementKey = GlobalKey<ElementsState>();
+
+  void goSearch() {
+    switch (_selectedIndex) {
+      case 0:
+        elementKey.currentState.getSearch(searchValue);
+        break;
+      case 1:
+        blogKey.currentState.getSearch(searchValue);
+        break;
+      case 2:
+        infoKey.currentState.getSearch(searchValue);
+        break;
+      default:
+        break;
+    }
+  }
 
   void getOptions() {
     _widgetOptions = <Widget>[
-      Elements(),
+      Elements(
+        search: searchValue,
+      ),
       Blogs(
         search: searchValue,
         key: blogKey,
       ),
-      Informations(search: searchValue),
+      Informations(
+        search: searchValue,
+        key: infoKey,
+      ),
       Profile(),
     ];
   }
@@ -99,9 +122,8 @@ class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
                 : TextField(
                     onSubmitted: (value) {
                       setState(() {
-                        print ('LENGTH ${blogKey.currentState.posts.length}');
                         searchValue = value;
-                        blogKey.currentState.getSearch(searchValue);
+                        goSearch();
                         getOptions();
                       });
                     },
@@ -117,7 +139,7 @@ class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
                       setState(() {
                         _isSearch = !_isSearch;
                         searchValue = '';
-                        blogKey.currentState.getSearch(searchValue);
+                        goSearch();
                         getOptions();
                       });
                     },
