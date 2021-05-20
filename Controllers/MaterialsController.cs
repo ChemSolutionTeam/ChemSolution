@@ -110,8 +110,7 @@ namespace ChemSolution.Controllers
             return _context.Materials.Any(e => e.MaterialId == id);
         }
 
-        [HttpPost("Search")]
-        [Authorize]
+        [HttpPost("search")]
         public async Task<IActionResult> Search(SearchMaterialRequest searchRequest)
         {
             bool IsEqual(Material material)
@@ -158,10 +157,12 @@ namespace ChemSolution.Controllers
                         NewAchievementsId = achievementsId
                     });
                 }
-                else
-                {
-                    return Unauthorized();
-                }
+                return new JsonResult(new SearchMaterialResponse()
+                    {
+                        ResultMaterialId = material.MaterialId,
+                        IsNew = true,
+                        NewAchievementsId = null
+                    });
             }
             return NotFound();
         }
