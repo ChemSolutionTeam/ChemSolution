@@ -91,7 +91,7 @@ namespace ChemSolution.Controllers
 
             return NoContent();
         }
-        
+
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
@@ -180,7 +180,11 @@ namespace ChemSolution.Controllers
             }
             return Unauthorized();
         }
-        
+        [HttpGet("rating")]
+        public  ActionResult<IEnumerable<User>> GetRating()
+        {
+            return _context.Users.OrderByDescending(u => u.Rating).ToList();
+        }
         private bool UserExists(string id)
         {
             return _context.Users.Any(e => e.UserEmail == id);
@@ -190,6 +194,5 @@ namespace ChemSolution.Controllers
             user.Password = string.Empty;
             return user;
         }
-        
     }
 }
