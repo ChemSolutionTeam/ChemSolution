@@ -25,6 +25,7 @@ class ChemApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'ChemSolution',
       home: SplashScreen(nextRoute: '/Home'),
       routes: routes,

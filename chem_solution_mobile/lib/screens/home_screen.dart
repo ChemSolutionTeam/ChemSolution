@@ -2,7 +2,6 @@ import 'package:chem_solution_mobile/blog/blog_page.dart';
 import 'package:chem_solution_mobile/elements/elements_page.dart';
 import 'package:chem_solution_mobile/info/informations_page.dart';
 import 'package:chem_solution_mobile/profile/profile_page.dart';
-import 'package:chem_solution_mobile/widgets/post_card.dart';
 import 'package:chem_solution_mobile/widgets/search_field.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +43,7 @@ class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
     _widgetOptions = <Widget>[
       Elements(
         search: searchValue,
+        key: elementKey,
       ),
       Blogs(
         search: searchValue,
@@ -139,7 +139,9 @@ class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
                       setState(() {
                         _isSearch = !_isSearch;
                         searchValue = '';
-                        goSearch();
+                        if (!_isSearch) {
+                          goSearch();
+                        }
                         getOptions();
                       });
                     },

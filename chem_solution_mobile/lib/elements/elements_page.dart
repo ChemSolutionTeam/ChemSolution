@@ -2,6 +2,7 @@ import 'package:chem_solution_mobile/elements/element_card.dart';
 import 'package:chem_solution_mobile/models/Category.dart' as CSC;
 import 'package:chem_solution_mobile/models/Element.dart' as CS;
 import 'package:chem_solution_mobile/models/Valence.dart';
+import 'package:chem_solution_mobile/widgets/nothing_find.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -18,20 +19,50 @@ class ElementsState extends State<Elements>
   String search = '';
   ElementsState(this.search);
   List<Widget> elements = [];
+  List<CS.Element> allElements = [];
+  List<CS.Element> filterElements = [];
   final GlobalKey<AnimatedListState> _key = new GlobalKey<AnimatedListState>();
 
   AnimationController _controller;
   Animation<Offset> _offsetAnimationToLeft;
   Animation<Offset> _offsetAnimationToRight;
 
+  bool _condition(CS.Element e) {
+    return ('${e.elementId}'.indexOf(search) > -1) ||
+        ('${e.symbol.toLowerCase()}'.indexOf(search.toLowerCase()) > -1) ||
+        ('${e.name.toLowerCase()}'.indexOf(search.toLowerCase()) > -1) ||
+        ('${e.category.categoryName}'.indexOf(search.toLowerCase()) > -1);
+  }
+
+  void ifEmptyElements() {
+    if (elements == null || elements.length == 0) {
+      elements.add(NothingFind());
+      _key.currentState.insertItem(0);
+    }
+  }
+
   void getSearch(String value) {
     setState(() {
       search = value;
+      for (int i = 0; i < elements.length; i++) {
+        _key.currentState.removeItem(0, (context, animation) => null);
+      }
+      filterElements = [];
+      elements = [];
+      allElements.forEach((post) {
+        if (_condition(post)) filterElements.add(post);
+      });
+      filterElements = filterElements.reversed.toList();
+      for (int i = 0; i < filterElements.length; i++) {
+        elements.insert(0, ElementCard(element: filterElements[i]));
+        _key.currentState.insertItem(0);
+      }
+      ifEmptyElements();
     });
   }
 
   void _addElements() {
-    List<CS.Element> temp = [
+    allElements = [
       new CS.Element(
           elementId: 1,
           symbol: 'H',
@@ -58,10 +89,14 @@ class ElementsState extends State<Elements>
               'https://indicator.ru/thumb/2250x0/filters:quality(75):no_upscale()/imgs/2019/08/13/13/3515247/3d8071dc86532a650e3f0b457b02f5ef4ef18f5d.jpg'),
     ];
 
-    temp.forEach((element) {
-      elements.add(ElementCard(element: element));
-      _key.currentState.insertItem(elements.length - 1);
+    allElements.forEach((element) {
+      if ((search != null || search != '') && _condition(element)) {
+        filterElements.add(element);
+        elements.add(ElementCard(element: element));
+        _key.currentState.insertItem(elements.length - 1);
+      }
     });
+    ifEmptyElements();
   }
 
   @override
