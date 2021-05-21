@@ -84,6 +84,7 @@ Widget autorisation(BuildContext context, Function() update) {
     } else {
       _emailEditingController.text = '';
       _passwordEditingController.text = '';
+      _formKey.currentState.validate();
     }
   }
 
@@ -111,7 +112,7 @@ Widget autorisation(BuildContext context, Function() update) {
                   controller: _emailEditingController,
                   validator: (String inValue) {
                     if (inValue.length == 0) {
-                      return "Please enter a email";
+                      return "Перевірте дані про пошту";
                     } else if (inValue.lastIndexOf('@') == -1) {
                       return "Please enter a correct email";
                     }
@@ -128,7 +129,7 @@ Widget autorisation(BuildContext context, Function() update) {
                   controller: _passwordEditingController,
                   validator: (String inValue) {
                     if (inValue.length == 0) {
-                      return "Please enter a email";
+                      return "Перевірте дані про пароль";
                     } else if (inValue.lastIndexOf('@') == -1) {
                       return "Please enter a correct email";
                     }
@@ -149,8 +150,8 @@ Widget autorisation(BuildContext context, Function() update) {
                     try {
                       Autorisation.signIn(email, password, getCorrect);
                     } catch (ex) {
-                      showToast('Помилка підключення', themeRed,
-                          themeDarkRed, Icons.error, FToast());
+                      showToast('Помилка підключення', themeRed, themeDarkRed,
+                          Icons.error, FToast());
                     }
                   },
                   child: Text(
