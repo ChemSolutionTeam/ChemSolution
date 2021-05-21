@@ -1,6 +1,7 @@
 import 'package:chem_solution_mobile/models/Material.dart' as CS;
 import 'package:chem_solution_mobile/models/MaterialGroup.dart';
 import 'package:chem_solution_mobile/profile/material_card.dart';
+import 'package:chem_solution_mobile/widgets/nothing_find.dart';
 import 'package:chem_solution_mobile/widgets/search_field.dart';
 import 'package:flutter/material.dart';
 import 'package:chem_solution_mobile/assets/colors.dart';
@@ -14,7 +15,10 @@ class Materials extends StatefulWidget {
 
 class _MaterialsState extends State<Materials>
     with SingleTickerProviderStateMixin {
-  List<Widget> _materials = [];
+  String search = '';
+  List<CS.Material> allMaterials = [];
+  List<CS.Material> filterMaterials = [];
+  List<Widget> materials = [];
   bool _isSearch = false;
   final GlobalKey<AnimatedListState> _key = new GlobalKey<AnimatedListState>();
 
@@ -22,12 +26,49 @@ class _MaterialsState extends State<Materials>
   Animation<Offset> _offsetAnimationToLeft;
   Animation<Offset> _offsetAnimationToRight;
 
+  bool _condition(CS.Material material) {
+    return material.name.toLowerCase().indexOf(search.toLowerCase()) > -1 ||
+        material.formula.toLowerCase().indexOf(search.toLowerCase()) > -1 ||
+        material.materialGroup.groupName
+                .toLowerCase()
+                .indexOf(search.toLowerCase()) >
+            -1 ||
+        material.info.toLowerCase().indexOf(search.toLowerCase()) > -1;
+  }
+
+  void ifEmptyMaterials() {
+    if (materials == null || materials.length == 0) {
+      materials.add(NothingFind());
+      _key.currentState.insertItem(0);
+    }
+  }
+
+  void getSearch(String value) {
+    setState(() {
+      search = value;
+      for (int i = 0; i < materials.length; i++) {
+        _key.currentState.removeItem(0, (context, animation) => null);
+      }
+      filterMaterials = [];
+      materials = [];
+      allMaterials.forEach((material) {
+        if (_condition(material)) filterMaterials.add(material);
+      });
+      filterMaterials = filterMaterials.reversed.toList();
+      for (int i = 0; i < filterMaterials.length; i++) {
+        materials.insert(0, MaterialCard(material: filterMaterials[i]));
+        _key.currentState.insertItem(0);
+      }
+      ifEmptyMaterials();
+    });
+  }
+
   void _addMaterials() {
-    List<CS.Material> temp = [
+    allMaterials = [
       new CS.Material(
         id: 1,
         image:
-             'https://img02.flagma.ua/photo/sernaya-kislota-40-sirchana-kislota-h2so4-16359806_big.jpg',
+            'https://img02.flagma.ua/photo/sernaya-kislota-40-sirchana-kislota-h2so4-16359806_big.jpg',
         formula: 'Ca(OH)2',
         name: 'Кальцій гідроксид',
         info: 'бла бла',
@@ -52,10 +93,15 @@ class _MaterialsState extends State<Materials>
       ),
     ];
 
-    temp.forEach((element) {
-      _materials.add(MaterialCard(material: element));
-      _key.currentState.insertItem(_materials.length - 1);
+    allMaterials.forEach((element) {
+      if ((search != null || search != '') && _condition(element)) {
+        materials.add(MaterialCard(material: element));
+        _key.currentState.insertItem(materials.length - 1);
+        filterMaterials.add(element);
+      }
     });
+
+    ifEmptyMaterials();
   }
 
   @override
@@ -100,6 +146,9 @@ class _MaterialsState extends State<Materials>
           title: ListTile(
             title: _isSearch
                 ? TextField(
+                    onSubmitted: (value) {
+                      getSearch(value);
+                    },
                     style: TextStyle(
                       color: themeBlue,
                     ),
@@ -116,6 +165,9 @@ class _MaterialsState extends State<Materials>
               onPressed: () {
                 setState(() {
                   _isSearch = !_isSearch;
+                  if (!_isSearch) {
+                    getSearch('');
+                  }
                 });
               },
               icon: searchIcon(_isSearch),
@@ -131,10 +183,10 @@ class _MaterialsState extends State<Materials>
                 position: index % 2 == 0
                     ? _offsetAnimationToLeft
                     : _offsetAnimationToRight,
-                child: _materials[index],
+                child: materials[index],
               );
             },
-            initialItemCount: _materials.length,
+            initialItemCount: materials.length,
           ),
         ),
       ),
