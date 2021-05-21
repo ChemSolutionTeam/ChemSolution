@@ -25,8 +25,10 @@ class InformationsState extends State<Informations>
   AnimationController _controller;
   Animation<Offset> _offsetAnimationToLeft;
   Animation<Offset> _offsetAnimationToRight;
-  bool _condition(BlogPost post) => (post.title.indexOf(search) > -1 ||
-      post.information.indexOf(search) > -1);
+
+  bool _condition(BlogPost post) =>
+      (post.title.toLowerCase().indexOf(search.toLowerCase()) > -1 ||
+        (post.information.toLowerCase().indexOf(search.toLowerCase()))>-1);
 
   void getSearch(String value) {
     setState(() {

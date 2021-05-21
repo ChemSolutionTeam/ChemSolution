@@ -27,9 +27,9 @@ class _LikedPostsState extends State<LikedPosts>
   Animation<Offset> _offsetAnimationToRight;
 
   bool _condition(BlogPost post) =>
-      (post.title.indexOf(search) > -1 ||
-          post.information.indexOf(search) > -1) ||
-      (post.category.indexOf(search) > -1);
+      (post.title.toLowerCase().indexOf(search.toLowerCase()) > -1 ||
+          post.information.toLowerCase().indexOf(search.toLowerCase()) > -1) ||
+      (post.category.toLowerCase().indexOf(search.toLowerCase()) > -1);
 
   void ifEmptyPosts() {
     if (posts == null || posts.length == 0) {
