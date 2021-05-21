@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:chem_solution_mobile/assets/alerts.dart';
 import 'package:chem_solution_mobile/assets/colors.dart';
 
-
 class ElementCard extends StatefulWidget {
   final CS.Element element;
   ElementCard({Key key, @required this.element}) : super(key: key);
@@ -20,23 +19,22 @@ class _ElementCardState extends State<ElementCard> {
   Color _colorCard = Colors.white;
   _ElementCardState(this.element);
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(20, 10, 20, 0),      
+      padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
       child: GestureDetector(
-        onLongPressStart: (_){
-            setState(() {
+        onLongPressStart: (_) {
+          setState(() {
             _colorCard = themeBlue;
           });
         },
-        onLongPressEnd: (_){
-           setState(() {
+        onLongPressEnd: (_) {
+          setState(() {
             _colorCard = Colors.white;
           });
         },
-         onTapDown: (details) {
+        onTapDown: (details) {
           setState(() {
             _colorCard = themeGreen;
           });
@@ -54,10 +52,10 @@ class _ElementCardState extends State<ElementCard> {
               ),
             );
           } else {
-            return alertDialogShow(context, createDialog(context, 'детального перегляду інформації'), 200);
+            return alertDialogShow(context,
+                createDialog(context, 'детального перегляду інформації'), 200);
           }
         },
-       
         child: cardElementMaterial(
             element.imgSymbol,
             _colorCard,

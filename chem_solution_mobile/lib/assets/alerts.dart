@@ -36,7 +36,12 @@ Widget createDialog(BuildContext context, String value) {
       // ignore: deprecated_member_use
       FlatButton(
         onPressed: () {
-          Navigator.of(context).pop();
+          alertDialogShow(
+              context,
+              autorisation(context, () {
+                Navigator.of(context).pop();
+              }),
+              400);
         },
         child: Text(
           'Так',
@@ -79,8 +84,8 @@ Widget autorisation(BuildContext context, Function() update) {
 
   void getCorrect() {
     if (autorised) {
-      update();
       Navigator.of(context).pop();
+      update();
     } else {
       _emailEditingController.text = '';
       _passwordEditingController.text = '';

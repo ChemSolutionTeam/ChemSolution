@@ -9,7 +9,6 @@ import 'package:community_material_icon/community_material_icon.dart';
 import 'package:chem_solution_mobile/assets/alerts.dart';
 import 'package:chem_solution_mobile/assets/colors.dart';
 
-
 class Profile extends StatefulWidget {
   Profile({Key key}) : super(key: key);
 
@@ -65,6 +64,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
             onPressed: () {
               autorised = false;
               storage.delete(key: 'token');
+              currentUser = null;
               refresh();
               Navigator.of(context).pop();
             },
@@ -79,8 +79,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
           },
           child: Text(
             'Ні',
-            style: TextStyle(
-                color: themeBlue, fontWeight: FontWeight.w700),
+            style: TextStyle(color: themeBlue, fontWeight: FontWeight.w700),
           ),
         ),
       ],
@@ -200,12 +199,11 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                 position: _offsetAnimationToRight,
                 child: GestureDetector(
                   onTap: () {
-                    
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => AchivementsPage(),
                       ),
-                    ); 
+                    );
                   },
                   child: _card(
                     context,
@@ -221,12 +219,12 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
               SlideTransition(
                 position: _offsetAnimationToLeft,
                 child: GestureDetector(
-                  onTap: () {                    
+                  onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => RequestsPage(),
                       ),
-                    ); 
+                    );
                   },
                   child: _card(
                     context,
