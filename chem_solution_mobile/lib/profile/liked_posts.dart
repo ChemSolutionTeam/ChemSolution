@@ -1,10 +1,11 @@
 import 'dart:core';
+import 'package:chem_solution_mobile/models/BlogPost.dart';
+import 'package:chem_solution_mobile/widgets/nothing_find.dart';
 import 'package:chem_solution_mobile/widgets/post_card.dart';
 import 'package:chem_solution_mobile/widgets/search_field.dart';
 import 'package:flutter/material.dart';
 import 'package:chem_solution_mobile/main.dart';
 import 'package:chem_solution_mobile/assets/colors.dart';
-
 
 class LikedPosts extends StatefulWidget {
   LikedPosts({Key key}) : super(key: key);
@@ -15,13 +16,47 @@ class LikedPosts extends StatefulWidget {
 
 class _LikedPostsState extends State<LikedPosts>
     with SingleTickerProviderStateMixin {
+  String search = '';
   List<Widget> posts = [];
+  List<BlogPost> filterPosts = [];
   bool _isSearch = false;
 
   final GlobalKey<AnimatedListState> _key = new GlobalKey<AnimatedListState>();
   AnimationController _controller;
   Animation<Offset> _offsetAnimationToLeft;
   Animation<Offset> _offsetAnimationToRight;
+
+  bool _condition(BlogPost post) =>
+      (post.title.indexOf(search) > -1 ||
+          post.information.indexOf(search) > -1) ||
+      (post.category.indexOf(search) > -1);
+
+  void ifEmptyPosts() {
+    if (posts == null || posts.length == 0) {
+      posts.add(NothingFind());
+      _key.currentState.insertItem(0);
+    }
+  }
+
+  void getSearch(String value) {
+    setState(() {
+      search = value;
+      for (int i = 0; i < posts.length; i++) {
+        _key.currentState.removeItem(0, (context, animation) => null);
+      }
+      filterPosts = [];
+      posts = [];
+      currentUser.blogPosts.forEach((post) {
+        if (_condition(post)) filterPosts.add(post);
+      });
+      filterPosts = filterPosts.reversed.toList();
+      for (int i = 0; i < filterPosts.length; i++) {
+        posts.insert(0, BlogCard(post: filterPosts[i]));
+        _key.currentState.insertItem(0);
+      }
+      ifEmptyPosts();
+    });
+  }
 
   void _addBlogPost() {
     /* User user = User(blogPosts: [
@@ -72,10 +107,15 @@ information2\ninformation2\ninformation2\ninformation2\n''',
       ),
     ]);
   */
+
     currentUser.blogPosts.forEach((post) {
-      posts.add(BlogCard(post: post));
-      _key.currentState.insertItem(posts.length - 1);
+      if ((search != null || search != '') && _condition(post)) {
+        posts.add(BlogCard(post: post));
+        filterPosts.add(post);
+        _key.currentState.insertItem(posts.length - 1);
+      }
     });
+    ifEmptyPosts();
   }
 
   @override
@@ -122,6 +162,9 @@ information2\ninformation2\ninformation2\ninformation2\n''',
             child: ListTile(
               title: _isSearch
                   ? TextField(
+                      onSubmitted: (value) {
+                        getSearch(value);
+                      },
                       style: TextStyle(
                         color: themeBlue,
                       ),
@@ -138,6 +181,9 @@ information2\ninformation2\ninformation2\ninformation2\n''',
                 onPressed: () {
                   setState(() {
                     _isSearch = !_isSearch;
+                    if (!_isSearch) {
+                      getSearch('');
+                    }
                   });
                 },
                 icon: searchIcon(_isSearch),
