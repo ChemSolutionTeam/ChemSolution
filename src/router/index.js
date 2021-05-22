@@ -53,6 +53,87 @@ const routes = [
     component: () => import('../views/Admin/Element/Create.vue'),
   },
   {
+    path: '/admin/achievements',
+    name: 'Achievements',
+    component: () => import('../views/Admin/Achievement/Inspect.vue'),
+  },
+  {
+    path: '/admin/achievements/edit/:id',
+    name: 'Achievements Edit',
+    component: () => import('../views/Admin/Achievement/Edit.vue'),
+    props: {
+      id: true,
+    },
+  },
+  {
+    path: '/admin/achievements/delete/:id',
+    name: 'Achievements Delete',
+    component: () => import('../views/Admin/Achievement/Delete.vue'),
+    props: {
+      id: true,
+    },
+  },
+  {
+    path: '/admin/achievements/create',
+    name: 'Achievements Create',
+    component: () => import('../views/Admin/Achievement/Create.vue'),
+  },
+
+  {
+    path: '/admin/materials',
+    name: 'Materials',
+    component: () => import('../views/Admin/Material/Inspect.vue'),
+  },
+  {
+    path: '/admin/materials/edit/:id',
+    name: 'Materials Edit',
+    component: () => import('../views/Admin/Material/Edit.vue'),
+    props: {
+      id: true,
+    },
+  },
+  {
+    path: '/admin/materials/delete/:id',
+    name: 'Materials Delete',
+    component: () => import('../views/Admin/Material/Delete.vue'),
+    props: {
+      id: true,
+    },
+  },
+  {
+    path: '/admin/materials/create',
+    name: 'Materials Create',
+    component: () => import('../views/Admin/Material/Create.vue'),
+  },
+
+  {
+    path: '/admin/blogposts',
+    name: 'BlogPosts',
+    component: () => import('../views/Admin/BlogPost/Inspect.vue'),
+  },
+  {
+    path: '/admin/blogposts/edit/:id',
+    name: 'BlogPosts Edit',
+    component: () => import('../views/Admin/BlogPost/Edit.vue'),
+    props: {
+      id: true,
+    },
+  },
+  {
+    path: '/admin/blogposts/delete/:id',
+    name: 'BlogPosts Delete',
+    component: () => import('../views/Admin/BlogPost/Delete.vue'),
+    props: {
+      id: true,
+    },
+  },
+  {
+    path: '/admin/blogposts/create',
+    name: 'BlogPosts Create',
+    component: () => import('../views/Admin/BlogPost/Create.vue'),
+  },
+
+  {
     path: '/periodicTable',
     name: 'PeriodicTable',
     component: () => import('../views/PeriodicTable.vue'),

@@ -1,15 +1,15 @@
 <template>
   <li>
     <!--Find better way to show achievements-->
-    <img src="{{achievement.achievementPicture}}" class="pl-10 w-10 h-10 float-left">
-    <p class="pl-20 float-left">{{ achievement.heading }}</p>
+    <img src="{{achievement.achievementPicture}}" class="icons-achievement pl-10 float-left">
+    <p class="achievement-text pl-20 float-left">{{ achievement.heading }}</p>
     <div style="float: right;">
     <!-- CHANGE PATH TO IMAGE -->
-    <img src="coin.png" class="pl-10 w-10 h-10 float-left">
-    <p class="pl-20 float-left">{{achievement.moneyReward}}</p>
+    <img src="coin.png" class="icons-achievement pl-10 float-left">
+    <p class="achievement-text pl-20 float-left">{{achievement.moneyReward}}</p>
     <!-- CHANGE PATH TO IMAGE -->
-    <img src="rating.png" class="pl-10 w-10 h-10 float-left">
-      <p class="pl-20 float-left">{{achievement.ratingReward}}</p>
+    <img src="rating.png" class="icons-achievement pl-10 float-left">
+      <p class="achievement-text pl-20 float-left">{{achievement.ratingReward}}</p>
     </div>
   </li>
   <br>

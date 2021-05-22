@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h1 class="text-5xl">Materials Inspect page</h1>
+    <h1 class="text-5xl">Achievements Inspect page</h1>
 
-    <Button label="Додати речовину" class="w-3/12" @click="create()" />
+    <Button label="Додати досягнення" class="w-3/12" @click="create()" />
     <Button label="Повернутися" class="w-3/12" @click="goBack()" white="true" />
 
     <!-- <div>TODO Search</div> -->
@@ -21,68 +21,85 @@
               <th
                 class="py-1 hover:text-csgreen cursor-pointer px-6 text-center border-csgreen border-b-4"
               >
-                Image
+                Heading
               </th>
               <th
                 class="py-1 hover:text-csgreen cursor-pointer px-6 text-center border-csgreen border-b-4"
               >
-                Formula
+                ImgAchievement
               </th>
               <th
                 class="py-1 hover:text-csgreen cursor-pointer px-6 text-center border-csgreen border-b-4"
               >
-                Name
+                Description
               </th>
               <th
                 class="py-1 hover:text-csgreen cursor-pointer px-6 text-center border-csgreen border-b-4"
               >
-                Info
+                MoneyReward
               </th>
               <th
                 class="py-1 hover:text-csgreen cursor-pointer px-6 text-center border-csgreen border-b-4"
               >
-                Elements
+                RatingReward
+              </th>
+              <th
+                class="py-1 hover:text-csgreen cursor-pointer px-6 text-center border-csgreen border-b-4"
+              >
+                CountGoal
+              </th>
+              <th
+                class="py-1 hover:text-csgreen cursor-pointer px-6 text-center border-csgreen border-b-4"
+              >
+                MaterialGroup
               </th>
             </tr>
           </thead>
           <tbody class="text-csblack">
             <tr
               class="hover:bg-gray-100"
-              v-for="(material, index) in materials"
+              v-for="(achievement, index) in achievements"
               :key="index"
             >
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
-                {{ material.id }}
+                {{ achievement.achievementId }}
               </td>
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
-                {{ material.image }}
+                {{ achievement.heading }}
               </td>
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
-                {{ material.formula }}
+                {{ achievement.imgAchievement }}
               </td>
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
-                {{ material.name }}
+                {{ achievement.description }}
               </td>
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
-                {{ material.info }}
+                {{ achievement.moneyReward }}
               </td>
-
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
-                <p v-for="(element, index) in material.elements" :key="index">
-                  {{ element }}
-                </p>
+                {{ achievement.ratingReward }}
+              </td>
+              <td
+                class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
+              >
+                {{ achievement.countGoal }}
+              </td>
+              <td
+                class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
+              >
+                {{ achievement.materialGroup }}
               </td>
 
               <td
@@ -91,12 +108,12 @@
                 <div class="flex justify-end">
                   <button
                     class="px-4 focus:outline-none focus:ring focus:ring-offset-2 focus:ring-csgreen shadow-md bg-gradient-to-tr from-csgreen to-cslightgreen w-full p-1 m-1 border rounded-xl"
-                    @click="edit(material)"
+                    @click="edit(achievement)"
                   >
                     Edit
                   </button>
                   <button
-                    @click="remove(material)"
+                    @click="remove(achievement)"
                     class="focus:outline-none focus:ring focus:ring-offset-2 focus:ring-red-300 shadow-md bg-gradient-to-tr from-red-400 to-red-500 text-white w-full p-1 m-1 border rounded-xl"
                   >
                     Remove
@@ -123,32 +140,28 @@ export default {
     goBack() {
       router.push('/admin')
     },
-    edit(material) {
-      material
-      router.push('/admin/materials/edit/' + material.id)
+    edit(achievement) {
+      achievement
+      router.push('/admin/achievements/edit/' + achievement.achievementId)
     },
-    remove(material) {
-      material
-      router.push('/admin/materials/delete/' + material.id)
+    remove(achievement) {
+      achievement
+      router.push('/admin/achievements/delete/' + achievement.achievementId)
     },
     create() {
-      router.push('/admin/materials/create/')
+      router.push('/admin/achievements/create/')
     },
   },
   mounted() {
-    let materials = apiService.getMaterials()
-    if (materials == null || materials == undefined) return
-    else this.materials = materials
+    let achievements = apiService.getAchievements()
+    if (achievements == null || achievements == undefined) return
+    else this.achievements = achievements
   },
   data() {
     return {
-      materials: [
+      achievements: [
         {
-          id: 1,
-          image: '1111',
-          formula: '2222',
-          name: '1212',
-          info: '122',
+          achievementId: 1,
         },
       ],
     }

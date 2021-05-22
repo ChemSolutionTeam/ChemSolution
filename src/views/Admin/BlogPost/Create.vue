@@ -1,10 +1,10 @@
 <template>
   <div>
     <h1 class="font-bold text-csblack text-5xl">
-      Створення матеріалу:
+      Створення посту:
       <span
         class="from-cslightgreen via-csgreen to-csblue bg-clip-text bg-gradient-to-tr"
-        >{{ material.name }}</span
+        >{{ blogpost.title }}</span
       >
     </h1>
     <div class="justify-items-center grid">
@@ -24,31 +24,31 @@
           class="transform rotate-3 bg-white p-5 rounded-3xl shadow-xl border-csblack border-2"
         >
           <BaseInput
-            label="ID"
-            v-model="material.id"
-            type="number"
-            placeholder="Уведіть ID"
+            label="Заголовок"
+            v-model="blogpost.title"
+            placeholder="Уведіть заголовок"
           />
           <BaseInput
-            label="Формула"
-            v-model="material.formula"
-            placeholder="Уведіть символ"
-          />
-          <BaseInput
-            label="Зображення"
-            v-model="material.image"
-            placeholder="Уведіть символ"
-          />
-          <BaseInput
-            label="Назва"
-            v-model="material.name"
-            placeholder="Уведіть назву"
+            label="Категорія"
+            v-model="blogpost.сategory"
+            placeholder="Уведіть категорію"
           />
 
           <BaseTextArea
             label="Інформація"
-            v-model="material.info"
+            v-model="blogpost.information"
             placeholder="Уведіть інформацію"
+          />
+          <BaseInput
+            label="Зображення"
+            v-model="blogpost.image"
+            placeholder="Уведіть зображення"
+          />
+
+          <BaseCheck
+            label="Заблоковано"
+            v-model="blogpost.isLocked"
+            big="true"
           />
         </div>
       </div>
@@ -59,30 +59,30 @@
 <script>
 import apiService from '@/services/index'
 import BaseInput from '@/components/BaseInput'
-// import BaseCheck from '@/components/BaseCheck'
+import BaseCheck from '@/components/BaseCheck'
 import BaseTextArea from '@/components/BaseTextArea'
 import Button from '@/components/HomePageButtons'
 import router from '../../../router'
 
 export default {
-  name: 'MaterialCreate',
+  name: 'BlogPostCreate',
   components: {
     BaseInput,
     Button,
-
+    BaseCheck,
     BaseTextArea,
   },
   methods: {
     submit() {
-      apiService.putMaterial(this.material)
+      apiService.postBlogPost(this.blogpost)
     },
     goBack() {
-      router.push('/admin/materials')
+      router.push('/admin/blogposts')
     },
   },
   data() {
     return {
-      material: {},
+      blogpost: {},
     }
   },
 }

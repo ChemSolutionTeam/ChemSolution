@@ -1,9 +1,8 @@
 <template>
   <div>
-    <h1 class="text-5xl">Materials Inspect page</h1>
+    <h1 class="text-5xl">Request Inspect page</h1>
 
-    <Button label="Додати речовину" class="w-3/12" @click="create()" />
-    <Button label="Повернутися" class="w-3/12" @click="goBack()" white="true" />
+    <Button label="Go Back" class="w-2/12" @click="goBack()" />
 
     <!-- <div>TODO Search</div> -->
     <div class="flex flex-wrap mx-3 my-5">
@@ -16,32 +15,37 @@
               <th
                 class="py-1 hover:text-csgreen cursor-pointer px-6 text-center border-csgreen border-b-4"
               >
-                Id
+                Email
               </th>
               <th
                 class="py-1 hover:text-csgreen cursor-pointer px-6 text-center border-csgreen border-b-4"
               >
-                Image
+                DateTime
               </th>
               <th
                 class="py-1 hover:text-csgreen cursor-pointer px-6 text-center border-csgreen border-b-4"
               >
-                Formula
+                Theme
               </th>
               <th
                 class="py-1 hover:text-csgreen cursor-pointer px-6 text-center border-csgreen border-b-4"
               >
-                Name
+                Text
               </th>
               <th
                 class="py-1 hover:text-csgreen cursor-pointer px-6 text-center border-csgreen border-b-4"
               >
-                Info
+                Status Id
               </th>
               <th
                 class="py-1 hover:text-csgreen cursor-pointer px-6 text-center border-csgreen border-b-4"
               >
-                Elements
+                Status
+              </th>
+              <th
+                class="py-1 hover:text-csgreen cursor-pointer px-6 text-center border-csgreen border-b-4"
+              >
+                Actions
               </th>
             </tr>
           </thead>
@@ -54,35 +58,27 @@
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
-                {{ material.id }}
+                {{ request.userEmail }}
               </td>
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
-                {{ material.image }}
+                {{ request.dateTimeSended }}
               </td>
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
-                {{ material.formula }}
+                {{ request.theme }}
               </td>
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
-                {{ material.name }}
+                {{ request.statusId }}
               </td>
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
-                {{ material.info }}
-              </td>
-
-              <td
-                class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
-              >
-                <p v-for="(element, index) in material.elements" :key="index">
-                  {{ element }}
-                </p>
+                {{ request.status }}
               </td>
 
               <td
@@ -91,15 +87,15 @@
                 <div class="flex justify-end">
                   <button
                     class="px-4 focus:outline-none focus:ring focus:ring-offset-2 focus:ring-csgreen shadow-md bg-gradient-to-tr from-csgreen to-cslightgreen w-full p-1 m-1 border rounded-xl"
-                    @click="edit(material)"
+                    @click="confirm(request)"
                   >
-                    Edit
+                    Confirm
                   </button>
                   <button
-                    @click="remove(material)"
+                    @click="reject(request)"
                     class="focus:outline-none focus:ring focus:ring-offset-2 focus:ring-red-300 shadow-md bg-gradient-to-tr from-red-400 to-red-500 text-white w-full p-1 m-1 border rounded-xl"
                   >
-                    Remove
+                    Reject
                   </button>
                 </div>
               </td>
@@ -125,14 +121,11 @@ export default {
     },
     edit(material) {
       material
-      router.push('/admin/materials/edit/' + material.id)
+      router.push('/admin/elements/edit/' + material.elementId)
     },
-    remove(material) {
+    delete(material) {
       material
-      router.push('/admin/materials/delete/' + material.id)
-    },
-    create() {
-      router.push('/admin/materials/create/')
+      router.push('/admin/elements/delete/' + material.elementId)
     },
   },
   mounted() {
@@ -142,15 +135,7 @@ export default {
   },
   data() {
     return {
-      materials: [
-        {
-          id: 1,
-          image: '1111',
-          formula: '2222',
-          name: '1212',
-          info: '122',
-        },
-      ],
+      materials: [],
     }
   },
 }

@@ -1,9 +1,9 @@
 <template>
   <li>
-    <p class="float-left font-semibold pl-5">01:</p>
-    <p class="float-left">{{rating.userName}}</p>
+    <p class="rating-text float-left font-semibold pl-5">01:</p>
+    <p class="rating-text float-left">{{rating.userName}}</p>
     <div style="float: right;">
-      <p class="pl-20 float-left pr-5" >{{rating.numberInRating}}</p>
+      <p class="rating-text pl-20 float-left pr-5" >{{rating.numberInRating}}</p>
     </div>
   </li>
 </template>

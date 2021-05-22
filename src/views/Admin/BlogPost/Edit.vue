@@ -5,7 +5,7 @@
       <span
         class="bg-clip-text bg-gradient-to-tr from-yellow-300 to-pink-600"
         style="color: transparent"
-        >{{ material.name }}</span
+        >{{ blogpost.title }}</span
       >
     </h1>
     <div class="justify-items-center grid">
@@ -30,31 +30,31 @@
           class="transform rotate-3 bg-white p-5 rounded-3xl shadow-xl border-csblack border-2"
         >
           <BaseInput
-            label="ID"
-            v-model="material.id"
-            type="number"
-            placeholder="Уведіть ID"
+            label="Заголовок"
+            v-model="blogpost.title"
+            placeholder="Уведіть заголовок"
           />
           <BaseInput
-            label="Формула"
-            v-model="material.formula"
-            placeholder="Уведіть символ"
-          />
-          <BaseInput
-            label="Зображення"
-            v-model="material.image"
-            placeholder="Уведіть символ"
-          />
-          <BaseInput
-            label="Назва"
-            v-model="material.name"
-            placeholder="Уведіть назву"
+            label="Категорія"
+            v-model="blogpost.сategory"
+            placeholder="Уведіть категорію"
           />
 
           <BaseTextArea
             label="Інформація"
-            v-model="material.info"
+            v-model="blogpost.information"
             placeholder="Уведіть інформацію"
+          />
+          <BaseInput
+            label="Зображення"
+            v-model="blogpost.image"
+            placeholder="Уведіть зображення"
+          />
+
+          <BaseCheck
+            label="Заблоковано"
+            v-model="blogpost.isLocked"
+            big="true"
           />
         </div>
       </div>
@@ -66,15 +66,15 @@
 import apiService from '@/services/index'
 import BaseInput from '@/components/BaseInput'
 import BaseTextArea from '@/components/BaseTextArea'
-// import BaseCheck from '@/components/BaseCheck'
+import BaseCheck from '@/components/BaseCheck'
 import Button from '@/components/HomePageButtons'
 import router from '../../../router'
 export default {
-  name: 'ElementEdit',
+  name: 'BlogPostEdit',
   components: {
     BaseInput,
     Button,
-
+    BaseCheck,
     BaseTextArea,
   },
   computed: {
@@ -84,28 +84,22 @@ export default {
     },
   },
   mounted() {
-    let material = apiService.getMaterial(this.id)
-    if (material != null && material != undefined) {
-      this.material = material
+    let blogpost = apiService.getBlogPost(this.id)
+    if (blogpost != null && blogpost != undefined) {
+      this.blogpost = blogpost
     }
   },
   methods: {
     submit() {
-      apiService.putElement(this.material)
+      apiService.putBlogPost(this.blogpost)
     },
     goBack() {
-      router.push('/admin/materials')
+      router.push('/admin/blogposts')
     },
   },
   data() {
     return {
-      material: {
-        id: 0,
-        image: 'string',
-        formula: 'string',
-        name: 'string',
-        info: 'string',
-      },
+      blogpost: {},
     }
   },
 }
