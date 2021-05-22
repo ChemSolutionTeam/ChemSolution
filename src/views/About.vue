@@ -6,6 +6,7 @@
 </template>
 <script>
 import RegisterForm from '@/components/RegisterForm.vue'
+
 export default {
   name: 'About',
   components: {
@@ -13,3 +14,7 @@ export default {
   },
 }
 </script>
+
+
+// width = 1vw;
+// height = 1vw;

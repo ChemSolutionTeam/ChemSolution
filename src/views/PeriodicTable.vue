@@ -1,23 +1,8 @@
 <template>
-  <div class="periodicTable">
+  <div class="periodicTable mt-20">
     <div class="row">
-      <div
-          class="column mt-32 w-1/6 text-left bg-white rounded sidebar"
-      >
-        <div id="elementLogo" class="reactiveNonMetal">
-          <b>1</b>
-          <abbr>H</abbr>
-          <em>Гідроген</em>n
-        </div>
-        <div class="container bg-csblack text-white pl-6 pr-6 p-3 pt-1">
-          <p>Element info</p>
-        </div>
-
-
-      </div>
-      <div
-          class="column mt-32 w-9/12 pr-5 pb-5 ml-2 text-left bg-csblack rounded text-white"
-      >
+      <ElementInfoTable/>
+      <div class="column mt-20 mb-10 pb-4 ml-1 bg-csblack rounded text-white">
         <table id="periodic">
           <tr id="periods">
             <td class="periodCell"></td>
@@ -43,12 +28,11 @@
           <tr id="p1">
             <td class="groupCell">1</td>
             <td @click="getData(1)" id="H"
-                class="bg-tReactiveNonMetal-light hover:scale-105
-                 font-bold border-tReactiveNonMetal-light transform duration-300 ease-in-out" title="Hydrogen">
+                class="reactiveNonMetal cell" title="Hydrogen">
               <sup>1</sup>H
             </td>
             <td class="empty" colspan="16"></td>
-            <td id="He" class="nobleGas" title="Helium"><sup>2</sup>He</td>
+            <td id="He" class="nobleGas cell" title="Helium"><sup>2</sup>He</td>
           </tr>
           <tr id="p2">
             <td class="groupCell">2</td>
@@ -449,11 +433,60 @@
       </div>
     </div>
   </div>
+  <Footer/>
 </template>
+
+<script>
+import ElementInfoTable from '../components/ElementInfoTable'
+import Footer from '../components/Footer'
+import apiService from '@/services/index.js'
+
+export default {
+  name: 'PeriodicTable',
+  data() {
+    return {
+      element: {},
+      defaultElement: {
+        atomicRadius: 454.59,
+        atomicWeight: 1.008,
+        boilingTemperature: 607,
+        category: "Неметали",
+        electronQuantity: 588,
+        electronegativity: 511.1,
+        elementId: 1,
+        energyLevels: 0,
+        group: 1,
+        meltingTemperature: 1,
+        name: "Гідроген",
+        neutronQuantity: 733,
+        protonQuantity: 936,
+        symbol: "H",
+        valency: 1,
+      }
+    }
+  },
+  components: {
+    Footer,
+    ElementInfoTable
+  },
+  methods: {
+    getData(id) {
+      apiService.getElement(id).then((resp) => {
+        console.log(resp.data)
+        this.element = resp.data
+      }).then(this.ElementInfoTable.props.element = this.element)
+
+    },
+  }
+}
+
+
+</script>
 
 <style type="text/css">
 #periodic {
-  margin: 2px;
+  margin-left: auto;
+  margin-right: auto;
   border-collapse: separate;
   border-spacing: 3px;
 }
@@ -471,9 +504,8 @@
 }
 
 #periodic tr td {
-  width: 70px;
-  height: 70px;
-  cursor: pointer;
+  width: 3.5vw;
+  height: 3.5vw;
   border-width: 3px;
   border-spacing: 6px;
 }
@@ -484,24 +516,43 @@
   }
 }
 
-.sidebar {
-  flex-direction: column;
-  flex-shrink: 0;
-  min-width: 0;
-  overflow: hidden;
-}
-
 #elementLogo {
+  border-width: 0.5vw;
+  background: #a1c768;
+  border-color: #657c41;
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: 10px;
+  padding: 0.3vw;
   color: white;
-  font-size: 2.8em;
+  font-weight: bold;
+  width: 10vw;
+  height: 10vw;
+  position: relative;
   display: flex;
   flex-direction: column;
-  min-width: 0;
-  border-color: #a1c768;
-  background: #a1c768;
-  font-weight: bolder;
+  justify-content: space-between;
+  line-height: 1;
 }
+
+#elementLogo .number {
+  font-size: 2vw;
+  color: white;
+}
+
+#elementLogo .symbol {
+  font-size: 3vw;
+  color: white;
+}
+
+#elementInfo {
+  width: 18vw;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  font-size: 0.8vw;
+}
+
 
 #periodic tr td.empty {
   background-color: transparent;
@@ -511,17 +562,17 @@
 }
 
 #periodic tr.spacer td {
-  height: 20px;
+  height: 4vw;
 }
 
 #periodic tr td sup {
-  font-size: 11px;
+  font-size: 0.5vw;
   display: block;
   text-align: center;
 }
 
 #periodic tr td {
-  font-size: 22px;
+  font-size: 1.2vw;
   text-align: center;
   position: relative;
 }
@@ -587,7 +638,7 @@
 }
 
 #periodic tr td.legend {
-  font-size: 16px;
+  font-size: 0.8vw;
   text-align: center;
   position: relative;
 }
@@ -638,50 +689,53 @@
 }
 
 #periodic tr td.periodCell {
-  width: 70px;
-  height: 70px;
+  width: 3.5vw;
+  height: 3.5vw;
   cursor: auto;
   border: transparent;
   background: transparent;
 }
 
 #periodic tr td.groupCell {
-  width: 70px;
-  height: 70px;
+  width: 3.5vw;
+  height: 3.5vw;
   cursor: auto;
   border: transparent;
   background: transparent;
 }
 
 .cell {
+  cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
 
 .cell:hover {
   transform: scale(1.05, 1.05);
 }
-</style>
 
-<script>
-import apiService from '@/services/index.js'
-
-export default {
-  name: 'PeriodicTable',
-  data() {
-    return {
-      element: {}
-    }
-  },
-  methods: {
-    getData(id) {
-      apiService.getElement(id).then((resp) => {
-        console.log(resp.data)
-        this.element = resp.data
-      })
-    },
-  }
-
+.tooltip {
+  position: relative;
+  display: inline-block;
 }
 
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 6.5vw;
+  background-color: #21d0b2;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
 
-</script>
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  left: 105%;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+</style>
+
