@@ -70,7 +70,7 @@
         <p class="text-left">Температура плавління:</p>
       </div>
       <div class="p-1 float-right text-right font-bold tooltip">
-        <p id="infoMelting" class="text-right text-red-500">Недоступно</p>
+        <p id="infoMelting" class="text-right text-red-500"> Недоступно </p>
         <span class="tooltiptext">Авторизуйтесь</span>
       </div>
       <div class="p-1 float-left w-8/12">
@@ -108,46 +108,68 @@ export default {
   },
   props: {
     element: {
-      type: Object,
-      default: function () {
-        return {
-          atomicRadius: 454.59,
-          atomicWeight: 1.008,
-          boilingTemperature: 607,
-          category: "Неметали",
-          electronQuantity: 588,
-          electronegativity: 511.1,
-          elementId: 1,
-          energyLevels: 0,
-          group: 1,
-          meltingTemperature: 1,
-          name: "Гідроген",
-          neutronQuantity: 733,
-          protonQuantity: 936,
-          symbol: "H",
-          valency: 1,
-        }
+      atomicRadius: {
+        type: Number,
+        default: 454.59
+      },
+      atomicWeight: {
+        type: Number,
+        default: 1.008
+      },
+      boilingTemperature: {
+        type: Number,
+        default: 607
+      },
+      category: {
+        type: String,
+        default: "Неметали"
+      },
+      electronQuantity: {
+        type: Number,
+        default: 588
+      },
+      electronegativity: {
+        type: Number,
+        default: 511.1
+      },
+      elementId: {
+        type: Number,
+        default: 1
+      },
+      energyLevels: {
+        type: Number,
+        default: 0
+      },
+      group: {
+        type: Number,
+        default: 1
+      },
+      meltingTemperature: {
+        type: Number,
+        default: 1
+      },
+      name: {
+        type: String,
+        default: "Гідроген"
+      },
+      neutronQuantity: {
+        type: Number,
+        default: 733
+      },
+      protonQuantity: {
+        type: Number,
+        default: 936
+      },
+      symbol: {
+        type: String,
+        default: "H"
+      },
+      valency: {
+        type: Number,
+        default: 1
       }
-    }
+    },
   },
-  methods: {
-    /*setInfo(data) {
-      this.element.elementId = data.elementId
-      this.element.atomicRadius = data.atomicRadius
-      this.element.atomicWeight = data.atomicWeight
-      this.element.symbol = data.symbol
-      this.element.name = data.name
-      this.element.boilingTemperature = data.boilingTemperature
-      this.element.category = data.category
-      this.element.electronegativity = data.electronegativity
-      this.element.electronQuantity = data.electronegativity
-      this.element.energyLevels = data.energyLevels
-      this.element.group = data.group
-      this.element.meltingTemperature = data.meltingTemperature
-      this.element.neutronQuantity = data.neutronQuantity
-      this.element.protonQuantity = data.protonQuantity
-      this.element.valency = data.valencies[0]*/
-  }
 }
 </script>
 
