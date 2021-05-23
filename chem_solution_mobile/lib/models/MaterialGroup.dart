@@ -4,14 +4,14 @@ import 'Achievement.dart';
 
 class MaterialGroup extends Model {
   int materialGroupId;
-  List<CS.Material> materials = [];
-  List<Achievement> achievement = [];
+ // List<CS.Material> materials = [];
+  //List<Achievement> achievement = [];
   String groupName;
 
   MaterialGroup({
     this.materialGroupId,
-    this.materials,
-    this.achievement,
+    //this.materials,
+    //this.achievement,
     this.groupName,
   });
 
@@ -19,7 +19,7 @@ class MaterialGroup extends Model {
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = new Map<String, dynamic>();
     map['materialGroupId'] = materialGroupId;
-    List<Map<String, dynamic>> materialsMaps = [];
+ /*   List<Map<String, dynamic>> materialsMaps = [];
     materials.forEach((element) {
       materialsMaps.add(element.toMap());
     });
@@ -28,7 +28,7 @@ class MaterialGroup extends Model {
     achievement.forEach((element) {
       achievementsMaps.add(element.toMap());
     });
-    map['achievement'] = achievementsMaps;
+    map['achievement'] = achievementsMaps; */
     map['groupName'] = groupName;
     return map;
   }
@@ -36,12 +36,12 @@ class MaterialGroup extends Model {
   static MaterialGroup fromObject(dynamic o) {
     MaterialGroup mg = new MaterialGroup();
     mg.materialGroupId = o['materialGroupId'];
-    o['materials'].forEach((e) {
+  /*  o['materials'].forEach((e) {
       mg.materials.add(CS.Material.fromObject(e));
     });
     o['achievement'].forEach((e) {
       mg.achievement.add(Achievement.fromObject(e));
-    });
+    }); */
     mg.groupName = o['groupName'];
     return mg;
   }

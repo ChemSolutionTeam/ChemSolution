@@ -102,7 +102,7 @@ class User extends Model {
     return map;
   }
 
-  static User fromObject(dynamic o) {
+  static Future<User> fromObject(dynamic o) async {
     User u = new User();
     u.userEmail = o['userEmail'];
     u.userName = o['userName'];
@@ -136,22 +136,17 @@ class User extends Model {
     });
     u.elements = e;
 
-    /*  List<ResearchHistory> rs = [];
+    List<ResearchHistory> rs = [];
     o['researchHistorys'].forEach((element) {
-      rs.add(ResearchHistory.fromObject(element));
+      rs.add(ResearchHistory(materialId: element['materialId']));
     });
-    u.researchHistorys = rs; 
-
-    
-
-
-
+    u.researchHistorys = rs;
 
     List<CSM.Material> m = [];
-    o['materials'].forEach((element) {
-      m.add(CSM.Material.fromObject(element));
-    });
-    u.materials = m; */
+    for (ResearchHistory elem in u.researchHistorys) {
+      m.add(await CSM.Material.fetchObject(path: '${elem.materialId}'));
+    }
+     u.materials = m;
 
     return u;
   }

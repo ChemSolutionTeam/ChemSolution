@@ -1,3 +1,4 @@
+import 'package:chem_solution_mobile/main.dart';
 import 'package:chem_solution_mobile/models/Material.dart' as CS;
 import 'package:chem_solution_mobile/models/MaterialGroup.dart';
 import 'package:chem_solution_mobile/profile/material_card.dart';
@@ -63,8 +64,8 @@ class _MaterialsState extends State<Materials>
     });
   }
 
-  void _addMaterials() {
-    allMaterials = [
+  Future<void> _addMaterials() {
+    /*  allMaterials = [
       new CS.Material(
         id: 1,
         image:
@@ -92,6 +93,9 @@ class _MaterialsState extends State<Materials>
         materialGroup: MaterialGroup(groupName: 'Кислотні оксиди'),
       ),
     ];
+*/
+
+    allMaterials = currentUser.materials;
 
     allMaterials.forEach((element) {
       if ((search != null || search != '') && _condition(element)) {

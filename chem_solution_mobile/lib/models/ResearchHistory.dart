@@ -6,14 +6,14 @@ class ResearchHistory extends Model {
   String userEmail;
   int materialId;
   CS.Material material;
-  User user;
+ // User user;
   DateTime dateTime;
 
   ResearchHistory({
     this.dateTime,
     this.material,
     this.materialId,
-    this.user,
+   // this.user,
     this.userEmail,
   });
 
@@ -23,7 +23,7 @@ class ResearchHistory extends Model {
     map['userEmail'] = userEmail;
     map['materialId'] = materialId;
     map['material'] = material.toMap();
-    map['user'] = user.toMap();
+   // map['user'] = user.toMap();
     map['dateTime'] = dateTime;
     return map;
   }
@@ -33,7 +33,7 @@ class ResearchHistory extends Model {
     rh.dateTime=o['dateTime'];
     rh.material=CS.Material.fromObject(o['material']);
     rh.materialId=o['materialId'];
-    rh.user=User.fromObject(o['user']);
+  //  rh.user=User.fromObject(o['user']);
     rh.userEmail=o['userEmail'];
     return rh;
   }
