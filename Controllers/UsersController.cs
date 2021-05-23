@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ChemSolution.Data;
 using ChemSolution.Models;
 using ChemSolution.Services;
+using ChemSolution.Services.CheckProperties;
 using Microsoft.AspNetCore.Authorization;
 
 namespace ChemSolution.Controllers
@@ -28,14 +29,21 @@ namespace ChemSolution.Controllers
         [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _context.Users
+            return _context.Users
                 .Include(p => p.BlogPosts)
                 .Include(p => p.Requests)
                 .Include(p => p.ResearchHistorys)
                 .Include(p => p.Elements)
                 .Include(p => p.Achievement)
+                .AsEnumerable()
                 .Select(u => _checkProperties
-                    .PrepareModelForJson(ClearForbidetedInfo(u))).ToListAsync();
+                    .PrepareModelForJson(ClearForbidetedInfo(u), new ClearOptions()
+                    {
+                        ClearInLinkedList = new Dictionary<string, string[]>()
+                        {
+                            {"All", new []{"User"}}
+                        }
+                    })).ToList();
         }
         [HttpGet]
         [Authorize]
@@ -54,7 +62,13 @@ namespace ChemSolution.Controllers
             {
                 return new JsonResult(null);
             }
-            _checkProperties.PrepareModelForJson(user);
+            _checkProperties.PrepareModelForJson(user, new ClearOptions()
+            {
+                ClearInLinkedList = new Dictionary<string, string[]>()
+                {
+                    {"All", new []{"User"}}
+                }
+            });
             return new JsonResult(ClearForbidetedInfo(user));
         }
         [HttpPut]

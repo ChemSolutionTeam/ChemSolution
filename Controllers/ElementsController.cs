@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ChemSolution.Data;
 using ChemSolution.Models;
 using ChemSolution.Services;
+using ChemSolution.Services.CheckProperties;
 using Microsoft.AspNetCore.Authorization;
 
 namespace ChemSolution.Controllers
@@ -24,16 +25,38 @@ namespace ChemSolution.Controllers
             _context = context;
             _checkProperties = checkProperties;
         }
+        
+        
+        private Element SetCategory(Element el)
+        {
+            var category =  _context.Categories.Find(el.CategoryId);
+            category.Elements = null;
+            el.Category = category;
+            return el;
+        }
+        
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Element>>> GetElements()
         {
-            return await _context.Elements
-                .Include(p=>p.Materials)
-                .Select(e=>_checkProperties.PrepareModelForJson(e))
-                .ToListAsync();
+            
+            return _context.Elements
+                .Include(p => p.Materials)
+                .Include(p=> p.Valences)
+                .AsEnumerable()
+                .Select(e => _checkProperties.PrepareModelForJson(e, new ClearOptions()
+                {
+                    ClearInModel = new[] {"Category"},
+                    ClearInLinkedList = new Dictionary<string, string[]>()
+                    {
+                        {"Materials", new[] {"MaterialGroup"}},
+                        {"ElementMaterials", new[] {"Material", "Element"}},
+                        {"Valences", new []{"Element"}}
+                    }
+                }))
+                .Select(e=>SetCategory(e))
+                .ToList();
         }
-
         [HttpGet("{id}")]
         public async Task<ActionResult<Element>> GetElement(int id)
         {
@@ -44,8 +67,16 @@ namespace ChemSolution.Controllers
             {
                 return NotFound();
             }
-            _checkProperties.PrepareModelForJson(element);
-            return element;
+            return SetCategory(_checkProperties.PrepareModelForJson(element, new ClearOptions()
+            {
+                ClearInModel = new[] {"Category"},
+                ClearInLinkedList = new Dictionary<string, string[]>()
+                {
+                    {"Materials", new[] {"MaterialGroup"}},
+                    {"ElementMaterials", new[] {"Material", "Element"}},
+                    {"Valences", new []{"Element"}}
+                }
+            }));
         }
 
         [HttpPut("{id}")]
