@@ -184,7 +184,6 @@ class Element extends Model {
       v.add(Valence.fromObject(el));
     });
     e.valences = v;
-    print(e.valences.length);
 
     return e;
   }

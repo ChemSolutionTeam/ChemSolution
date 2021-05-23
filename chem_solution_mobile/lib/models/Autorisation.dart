@@ -37,10 +37,7 @@ abstract class Autorisation {
         autorised = false;
       }
       update();
-      print(autorised);
-      print(getInfo(
-          Utf8Codec().decode(response.bodyBytes), RegExp(r'n":"(\S)+",')));
-    } catch (ex) {
+   } catch (ex) {
       throw Exception(ex);
     }
   }

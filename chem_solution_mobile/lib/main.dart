@@ -13,7 +13,6 @@ User currentUser;
 
 void main() async {
   await Autorisation.setUser();
-  print(autorised);
   runApp(ChemApp());
 }
 
