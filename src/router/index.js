@@ -156,7 +156,7 @@ const routes = [
   {
     path: '/userRequests',
     name: 'UserRequests',
-    component: () => import('../components/RequestsForm.vue'),
+    component: () => import('../components/UserRequests.vue'),
   },
 ]
 
