@@ -61,8 +61,8 @@ class ElementsState extends State<Elements>
     });
   }
 
-  void _addElements() {
-    allElements = [
+  Future<void> _addElements() async {
+    /*  allElements = [
       new CS.Element(
           elementId: 1,
           symbol: 'H',
@@ -88,7 +88,9 @@ class ElementsState extends State<Elements>
           imgAtom:
               'https://indicator.ru/thumb/2250x0/filters:quality(75):no_upscale()/imgs/2019/08/13/13/3515247/3d8071dc86532a650e3f0b457b02f5ef4ef18f5d.jpg'),
     ];
+*/
 
+    allElements = await CS.Element.fetchObjects(path: 'Elements');
     allElements.forEach((element) {
       if ((search != null || search != '') && _condition(element)) {
         filterElements.add(element);

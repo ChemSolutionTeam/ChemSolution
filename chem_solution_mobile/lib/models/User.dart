@@ -134,9 +134,7 @@ class User extends Model {
     o['researchHistorys'].forEach((element) {
       rs.add(ResearchHistory.fromObject(element));
     });
-    u.researchHistorys = rs;
-
- 
+    u.researchHistorys = rs; 
 
     List<CS.Element> e = [];
     o['elements'].forEach((element) {

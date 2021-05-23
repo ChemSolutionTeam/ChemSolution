@@ -3,11 +3,11 @@ import 'package:chem_solution_mobile/models/Model.dart';
 
 class Valence extends Model {
   int elementId;
-  CS.Element element;
+//  CS.Element element;
   int valenceVal;
 
   Valence({
-    this.element,
+    //  this.element,
     this.elementId,
     this.valenceVal,
   });
@@ -16,14 +16,14 @@ class Valence extends Model {
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = new Map<String, dynamic>();
     map['elementId'] = elementId;
-    map['element'] = element.toMap();
+    //  map['element'] = element.toMap();
     map['valenceVal'] = valenceVal;
     return map;
   }
 
   static Valence fromObject(dynamic o) {
     Valence v = new Valence();
-    v.element = CS.Element.fromObject(o['element']);
+    //   v.element = CS.Element.fromObject(o['element']);
     v.elementId = o['elementId'];
     v.valenceVal = o['valenceVal'];
     return v;

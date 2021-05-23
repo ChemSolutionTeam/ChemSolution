@@ -1,9 +1,14 @@
+import 'dart:convert';
+
+import 'package:chem_solution_mobile/main.dart';
 import 'package:chem_solution_mobile/models/Category.dart';
 import 'package:chem_solution_mobile/models/ElementMaterial.dart';
 import 'package:chem_solution_mobile/models/Material.dart' as CS;
+import 'package:flutter/material.dart';
 import 'User.dart';
 import 'Valence.dart';
 import 'Model.dart';
+import 'package:http/http.dart' as http;
 
 class Element extends Model {
   int elementId;
@@ -11,11 +16,11 @@ class Element extends Model {
   String name;
   double atomicWeight;
   int neutronQuantity;
-  double atomicRadius;
-  double electronegativity;
+  int atomicRadius;
+  dynamic electronegativity;
   int energyLevels;
-  double meltingTemperature;
-  double boilingTemperature;
+  int meltingTemperature;
+  int boilingTemperature;
   bool isLocked;
   String info;
   String imgSymbol;
@@ -24,36 +29,37 @@ class Element extends Model {
   int categoryId;
   Category category;
 
-  List<User> users = [];
-  List<CS.Material> materials = [];
+  // List<User> users = [];
+  // List<CS.Material> materials = [];
   List<Valence> valences = [];
-  List<ElementMaterial> elementMaterials = [];
+  // List<ElementMaterial> elementMaterials = [];
 
   int get electronQuantity => elementId;
   int get protonQuantity => elementId;
 
-  Element(
-      {this.elementId,
-      this.symbol,
-      this.name,
-      this.atomicWeight,
-      this.neutronQuantity,
-      this.atomicRadius,
-      this.electronegativity,
-      this.category,
-      this.energyLevels,
-      this.meltingTemperature,
-      this.boilingTemperature,
-      this.isLocked,
-      this.info,
-      this.imgAtom,
-      this.group,
-      this.imgSymbol,
-      this.categoryId,
-      this.users,
-      this.materials,
-      this.valences,
-      this.elementMaterials});
+  Element({
+    this.elementId,
+    this.symbol,
+    this.name,
+    this.atomicWeight,
+    this.neutronQuantity,
+    this.atomicRadius,
+    this.electronegativity,
+    this.category,
+    this.energyLevels,
+    this.meltingTemperature,
+    this.boilingTemperature,
+    this.isLocked,
+    this.info,
+    this.imgAtom,
+    this.group,
+    this.imgSymbol,
+    this.categoryId,
+    //  this.users,
+    // this.materials,
+    this.valences,
+    //   this.elementMaterials,
+  });
 
   String getValence() {
     String _valence = '';
@@ -110,7 +116,7 @@ class Element extends Model {
     map['imgAtom'] = imgAtom;
     map['group'] = group;
     map['imgSymbol'] = imgSymbol;
-    List<Map<String, dynamic>> usersMaps = [];
+    /*   List<Map<String, dynamic>> usersMaps = [];
     users.forEach((element) {
       usersMaps.add(element.toMap());
     });
@@ -120,6 +126,13 @@ class Element extends Model {
       materialsMaps.add(element.toMap());
     });
     map['materials'] = materialsMaps;
+
+ List<Map<String, dynamic>> elementMaterialsMaps = [];
+    elementMaterials.forEach((element) {
+      elementMaterialsMaps.add(element.toMap());
+    });
+    map['elementMaterials'] = elementMaterials; */
+
     List<Map<String, dynamic>> valencesMaps = [];
     valences.forEach((element) {
       valencesMaps.add(element.toMap());
@@ -127,11 +140,6 @@ class Element extends Model {
 
     map['valences'] = valencesMaps;
 
-    List<Map<String, dynamic>> elementMaterialsMaps = [];
-    elementMaterials.forEach((element) {
-      elementMaterialsMaps.add(element.toMap());
-    });
-    map['elementMaterials'] = elementMaterials;
     return map;
   }
 
@@ -155,21 +163,38 @@ class Element extends Model {
     e.group = o['group'];
     e.imgSymbol = o['imgSymbol'];
 
-    o['users'].forEach((el) {
+    /*  o['users'].forEach((el) {
       e.users.add(User.fromObject(el));
     });
 
-    o['materials'].forEach((el) {
-      e.materials.add(CS.Material.fromObject(el));
+    o['materials'].forEach((el) async {
+      e.materials.add(await CS.Material.fromObject(el));
     });
-
-    o['valences'].forEach((el) {
-      e.valences.add(Valence.fromObject(el));
-    });
-
-    o['elementMaterials'].forEach((el) {
+ o['elementMaterials'].forEach((el) {
       e.elementMaterials.add(ElementMaterial.fromObject(el));
+    }); */
+
+    List<Valence> v = [];
+    o['valences'].forEach((el) {
+      v.add(Valence.fromObject(el));
     });
+    e.valences = v;
+    print(e.valences.length);
+
     return e;
+  }
+
+  static Future<List<Element>> fetchObjects({@required String path}) async {
+    final response = await http.get(Uri.http(chemURL, path));
+
+    if (response.statusCode == 200) {
+      List<Element> list = [];
+      jsonDecode(response.body).forEach((e) {
+        list.add(Element.fromObject(e));
+      });
+      return list;
+    } else {
+      throw Exception('Failed to load');
+    }
   }
 }
