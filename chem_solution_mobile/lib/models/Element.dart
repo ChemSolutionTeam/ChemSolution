@@ -96,6 +96,13 @@ class Element extends Model {
     return _valence;
   }
 
+  bool unlocked(User user) {
+    for (Element el in user.elements) {
+      if (el.elementId == this.elementId) return true;
+    }
+    return false;
+  }
+
   @override
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = new Map<String, dynamic>();

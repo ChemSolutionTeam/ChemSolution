@@ -7,6 +7,37 @@ import 'package:chem_solution_mobile/main.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'colors.dart';
 
+Widget createAttention(BuildContext context){
+  return AlertDialog(
+    elevation: 24,
+    title: Text(
+      'Увага!',
+      style: TextStyle(
+        color: themeDark,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+    content: Text(
+      'Для перегляду інформації про елемент необхідно його придбати',
+      style: TextStyle(
+        color: themeDark,
+      ),
+    ),
+    actions: [
+      // ignore: deprecated_member_use
+      FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: Text(
+            'ОК',
+            style: TextStyle(color: themeBlue),
+          )),
+      // ignore: deprecated_member_us
+    ],
+  );
+}
+
 Widget createDialog(BuildContext context, String value) {
   return AlertDialog(
     elevation: 24,

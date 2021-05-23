@@ -44,13 +44,18 @@ class _ElementCardState extends State<ElementCard> {
         },
         onTap: () {
           if (autorised) {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => ElementInfo(
-                  element: element,
+            if (!element.isLocked || element.unlocked(currentUser)) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => ElementInfo(
+                    element: element,
+                  ),
                 ),
-              ),
-            );
+              );
+            } else {
+              return alertDialogShow(context,
+                createAttention(context), 200);
+            }
           } else {
             return alertDialogShow(context,
                 createDialog(context, 'детального перегляду інформації'), 200);
