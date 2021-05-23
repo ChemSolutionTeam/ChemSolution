@@ -153,6 +153,11 @@ const routes = [
     name: 'UserPageDemo',
     component: () => import('../views/UserPageDemo.vue'),
   },
+  {
+    path: '/userRequests',
+    name: 'UserRequests',
+    component: () => import('../components/RequestsForm.vue'),
+  },
 ]
 
 const router = createRouter({

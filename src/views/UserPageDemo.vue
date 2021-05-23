@@ -94,8 +94,6 @@
 </template>
 
 <script>
-import apiService from '@/services/index.js'
-
 export default {
 name: 'UserPageDemo',
     data() {
@@ -103,14 +101,7 @@ name: 'UserPageDemo',
     element: {}
   }
 },
-methods: {
-  getData(id) {
-    apiService.getAchievement(id).then((resp) => {
-      console.log(resp.data)
-      this.element = resp.data
-    })
-  },
-}
+methods: {}
 }
 </script>
 
