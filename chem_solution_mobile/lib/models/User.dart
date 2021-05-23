@@ -124,17 +124,19 @@ class User extends Model {
     });
     u.requests = r;
 
+    List<Achievement> a = [];
+    o['achievement'].forEach((element) {
+      a.add(Achievement.fromObject(element));
+    });
+    u.achievement = a;
+
     /*  List<ResearchHistory> rs = [];
     o['researchHistorys'].forEach((element) {
       rs.add(ResearchHistory.fromObject(element));
     });
     u.researchHistorys = rs;
 
-    List<Achievement> a = [];
-    o['achievement'].forEach((element) {
-      a.add(Achievement.fromObject(element));
-    });
-    u.achievement = a;
+ 
 
     List<CS.Element> e = [];
     o['elements'].forEach((element) {

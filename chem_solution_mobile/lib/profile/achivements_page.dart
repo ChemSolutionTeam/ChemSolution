@@ -1,8 +1,8 @@
+import 'package:chem_solution_mobile/main.dart';
 import 'package:chem_solution_mobile/models/Achievement.dart';
 import 'package:chem_solution_mobile/widgets/achivement_card.dart';
 import 'package:flutter/material.dart';
 import 'package:chem_solution_mobile/assets/colors.dart';
-
 
 class AchivementsPage extends StatefulWidget {
   AchivementsPage({Key key}) : super(key: key);
@@ -21,7 +21,7 @@ class _AchivementsPageState extends State<AchivementsPage>
   Animation<Offset> _offsetAnimationToRight;
 
   void _addAchivements() {
-    List<Achievement> temp = [
+    /*   List<Achievement> temp = [
       Achievement(
         imgAchievement:
             'http://files.school-collection.edu.ru/dlrstore/ac425a5f-377f-5f58-14f1-2aff690e960c/index.files/image002.jpg',
@@ -34,7 +34,9 @@ class _AchivementsPageState extends State<AchivementsPage>
         heading: 'Перша кислота',
         description: 'Була відкрита перша кислота',
       ),
-    ];
+    ]; */
+
+    List<Achievement> temp = currentUser.achievement;
 
     temp.forEach((element) {
       achivements.add(AchivementCard(achievement: element));
@@ -72,24 +74,22 @@ class _AchivementsPageState extends State<AchivementsPage>
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-       onHorizontalDragEnd: (DragEndDetails details) {
+      onHorizontalDragEnd: (DragEndDetails details) {
         if (details.primaryVelocity > 0) {
           Navigator.of(context).pop();
         }
       },
       child: Scaffold(
-           backgroundColor: Color(0xffEBFAFF),
+        backgroundColor: Color(0xffEBFAFF),
         appBar: new AppBar(
           backgroundColor: themeDark,
           title: new Text(
             'Мої досягнення',
             style: TextStyle(
-                color: themeGreen,
-                fontSize: 24,
-                fontWeight: FontWeight.bold),
+                color: themeGreen, fontSize: 24, fontWeight: FontWeight.bold),
           ),
         ),
-         body: Container(
+        body: Container(
           child: AnimatedList(
             key: _key,
             shrinkWrap: true,
@@ -99,7 +99,7 @@ class _AchivementsPageState extends State<AchivementsPage>
                     ? _offsetAnimationToLeft
                     : _offsetAnimationToRight,
                 child: achivements[index],
-              );              
+              );
             },
             initialItemCount: achivements.length,
           ),

@@ -2,7 +2,7 @@ import 'package:chem_solution_mobile/models/Model.dart';
 import 'MaterialGroup.dart';
 import 'User.dart';
 
-class Achievement extends Model{
+class Achievement extends Model {
   int achievementId;
   String heading;
   String description;
@@ -12,7 +12,7 @@ class Achievement extends Model{
   String imgAchievement;
   int materialGroupId;
   MaterialGroup materialGroup;
-  List<User> users = [];
+  // List<User> users = [];
 
   Achievement(
       {this.achievementId,
@@ -23,7 +23,7 @@ class Achievement extends Model{
       this.countGoal,
       this.materialGroupId,
       this.materialGroup,
-      this.users,
+      //  this.users,
       this.imgAchievement});
 
   @override
@@ -38,11 +38,11 @@ class Achievement extends Model{
     map['imgAchievement'] = imgAchievement;
     map['materialGroupId'] = materialGroupId;
     map['materialGroup'] = materialGroup.toMap();
-    List<Map<String, dynamic>> usersMaps = [];
+    /*  List<Map<String, dynamic>> usersMaps = [];
     users.forEach((element) {
       usersMaps.add(element.toMap());
     });
-    map['users'] = usersMaps;
+    map['users'] = usersMaps; */
     return map;
   }
 
@@ -56,10 +56,13 @@ class Achievement extends Model{
     a.ratingReward = o['ratingReward'];
     a.countGoal = o['countGoal'];
     a.materialGroupId = o['materialGroupId'];
-    a.materialGroup = MaterialGroup.fromObject(o['materialGroup']);
-    o['users'].forEach((element) {
+   
+    /*  
+    
+    a.materialGroup = MaterialGroup.fromObject(o['materialGroup']); */
+    /*  o['users'].forEach((element) {
       a.users.add(User.fromObject(element));
-    });
+    }); */
     return a;
   }
 }
