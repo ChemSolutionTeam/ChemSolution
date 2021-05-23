@@ -3,6 +3,7 @@ import 'package:chem_solution_mobile/widgets/nothing_find.dart';
 import 'package:chem_solution_mobile/widgets/post_card.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class Informations extends StatefulWidget {
   String search;
   Informations({Key key, this.search}) : super(key: key);

@@ -1,6 +1,5 @@
 import 'package:chem_solution_mobile/models/Model.dart';
 import 'MaterialGroup.dart';
-import 'User.dart';
 
 class Achievement extends Model {
   int achievementId;

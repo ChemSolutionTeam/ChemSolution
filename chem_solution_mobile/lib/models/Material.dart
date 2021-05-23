@@ -3,13 +3,9 @@ import 'dart:convert';
 import 'package:chem_solution_mobile/assets/colors.dart';
 import 'package:chem_solution_mobile/assets/toasts.dart';
 import 'package:chem_solution_mobile/main.dart';
-import 'package:chem_solution_mobile/models/Element.dart' as CS;
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'ElementMaterial.dart';
 import 'Model.dart';
-import 'User.dart';
-import 'ResearchHistory.dart';
 import 'MaterialGroup.dart';
 import 'package:http/http.dart' as http;
 

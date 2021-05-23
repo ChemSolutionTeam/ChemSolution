@@ -101,6 +101,7 @@ class BlogPost extends Model {
     }
   }
 
+  // ignore: missing_return
   Future<bool> addToLiked(User user) async {
     String token = await storage.read(key: 'token');
     try {
@@ -116,6 +117,7 @@ class BlogPost extends Model {
     }
   }
 
+  // ignore: missing_return
   Future<bool> removeFromLiked(User user) async {
     String token = await storage.read(key: 'token');
 

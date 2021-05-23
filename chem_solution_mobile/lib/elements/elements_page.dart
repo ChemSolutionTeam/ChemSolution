@@ -1,11 +1,10 @@
 import 'package:chem_solution_mobile/elements/element_card.dart';
-import 'package:chem_solution_mobile/models/Category.dart' as CSC;
 import 'package:chem_solution_mobile/models/Element.dart' as CS;
-import 'package:chem_solution_mobile/models/Valence.dart';
 import 'package:chem_solution_mobile/widgets/nothing_find.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class Elements extends StatefulWidget {
   String search;
   Elements({Key key, this.search}) : super(key: key);

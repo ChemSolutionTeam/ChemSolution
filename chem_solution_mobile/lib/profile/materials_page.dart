@@ -1,6 +1,5 @@
 import 'package:chem_solution_mobile/main.dart';
 import 'package:chem_solution_mobile/models/Material.dart' as CS;
-import 'package:chem_solution_mobile/models/MaterialGroup.dart';
 import 'package:chem_solution_mobile/profile/material_card.dart';
 import 'package:chem_solution_mobile/widgets/nothing_find.dart';
 import 'package:chem_solution_mobile/widgets/search_field.dart';
@@ -64,7 +63,7 @@ class _MaterialsState extends State<Materials>
     });
   }
 
-  Future<void> _addMaterials() {
+  void _addMaterials() {
     /*  allMaterials = [
       new CS.Material(
         id: 1,

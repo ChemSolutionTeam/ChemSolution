@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'package:chem_solution_mobile/main.dart';
 import 'package:chem_solution_mobile/models/Category.dart';
-import 'package:chem_solution_mobile/models/ElementMaterial.dart';
-import 'package:chem_solution_mobile/models/Material.dart' as CS;
 import 'package:flutter/material.dart';
 import 'User.dart';
 import 'Valence.dart';

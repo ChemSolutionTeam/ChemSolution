@@ -1,5 +1,4 @@
 import 'package:chem_solution_mobile/models/Model.dart';
-import 'package:chem_solution_mobile/models/Request.dart';
 
 class Status extends Model {
   int statusId;

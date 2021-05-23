@@ -2,7 +2,6 @@ import 'package:chem_solution_mobile/widgets/request_card.dart';
 import 'package:flutter/material.dart';
 import 'package:chem_solution_mobile/assets/colors.dart';
 import 'package:chem_solution_mobile/main.dart';
-import 'package:chem_solution_mobile/models/Request.dart' as CS;
 
 class RequestsPage extends StatefulWidget {
   RequestsPage({Key key}) : super(key: key);

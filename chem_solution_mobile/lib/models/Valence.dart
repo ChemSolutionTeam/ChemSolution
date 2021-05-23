@@ -1,4 +1,3 @@
-import 'package:chem_solution_mobile/models/Element.dart' as CS;
 import 'package:chem_solution_mobile/models/Model.dart';
 
 class Valence extends Model {

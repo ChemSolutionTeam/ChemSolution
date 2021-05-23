@@ -3,6 +3,7 @@ import 'package:chem_solution_mobile/models/Request.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class RequestCard extends StatefulWidget {
   Request request;
   RequestCard({Key key, this.request}) : super(key: key);
