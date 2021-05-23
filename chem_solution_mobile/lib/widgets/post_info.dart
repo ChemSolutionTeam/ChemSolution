@@ -27,29 +27,31 @@ class PostInfo extends StatelessWidget {
                     fontSize: 24.0)),
           ),
         ),
-        body: Container(
-          child: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.only(bottom: 20.0),
-                child: Image.network(
-                  post.image,
-                  fit: BoxFit.fitWidth,
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.all(20.0),
-                child: Flexible(
-                  child: Text(
-                    post.information,
-                    style: TextStyle(
-                      color: themeDark,
-                      fontSize: 16.0,
-                    ),
+        body: SingleChildScrollView(
+          child: Container(
+            child: Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.only(bottom: 20.0),
+                  child: Image.network(
+                    post.image,
+                    fit: BoxFit.fitWidth,
                   ),
                 ),
-              )
-            ],
+                Container(
+                  padding: EdgeInsets.all(20.0),
+                  child: Flexible(
+                    child: Text(
+                      post.information,
+                      style: TextStyle(
+                        color: themeDark,
+                        fontSize: 16.0,
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

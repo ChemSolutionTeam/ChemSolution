@@ -31,7 +31,8 @@ class ElementsState extends State<Elements>
     return ('${e.elementId}'.indexOf(search) > -1) ||
         ('${e.symbol.toLowerCase()}'.indexOf(search.toLowerCase()) > -1) ||
         ('${e.name.toLowerCase()}'.indexOf(search.toLowerCase()) > -1) ||
-        ('${e.category.categoryName}'.indexOf(search.toLowerCase()) > -1);
+        ('${e.category.categoryName}'.indexOf(search.toLowerCase()) > -1) ||
+        ('${e.info}'.indexOf(search.toLowerCase()) > -1);
   }
 
   void ifEmptyElements() {
