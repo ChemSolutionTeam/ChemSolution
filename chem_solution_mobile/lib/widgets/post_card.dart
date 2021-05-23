@@ -29,6 +29,12 @@ class _BlogCardState extends State<BlogCard> {
 
   FToast fToast;
 
+  void changeLike(bool state) {
+    setState(() {
+      liked = state;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -115,7 +121,7 @@ class _BlogCardState extends State<BlogCard> {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => PostInfo(
-                                post: post,
+                                post: post, like: changeLike
                               ),
                             ),
                           );
@@ -160,7 +166,7 @@ class _BlogCardState extends State<BlogCard> {
                       },
                       onTap: () async {
                         if (autorised) {
-                          if (/*post.liked(currentUser)*/ liked) {
+                          if (liked) {
                             await post.removeFromLiked(currentUser);
                             showToast(
                                 'Видалено з обраних',

@@ -109,7 +109,6 @@ class BlogPost extends Model {
           Uri.http(chemURL, 'Users/liked/add/${this.blogPostId}'),
           headers: {HttpHeaders.authorizationHeader: 'Bearer $token'});
 
-      print(Uri.http(chemURL, 'Users/liked/add/${this.blogPostId}'));
       Autorisation.setUser();
       return response.statusCode == 200;
     } catch (ex) {
@@ -126,7 +125,6 @@ class BlogPost extends Model {
           Uri.http(chemURL, 'Users/liked/remove/${this.blogPostId}'),
           headers: {HttpHeaders.authorizationHeader: 'Bearer $token'});
       Autorisation.setUser();
-      print(Uri.http(chemURL, 'Users/liked/remove/${this.blogPostId}'));
 
       return response.statusCode == 200;
     } catch (ex) {

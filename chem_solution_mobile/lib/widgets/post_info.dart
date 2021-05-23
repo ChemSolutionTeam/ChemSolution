@@ -1,10 +1,34 @@
+import 'package:chem_solution_mobile/assets/toasts.dart';
+import 'package:chem_solution_mobile/main.dart';
 import 'package:chem_solution_mobile/models/BlogPost.dart';
+import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:chem_solution_mobile/assets/colors.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-class PostInfo extends StatelessWidget {
+class PostInfo extends StatefulWidget {
   final BlogPost post;
-  const PostInfo({Key key, @required this.post}) : super(key: key);
+  final Function(bool) like;
+  const PostInfo({Key key, @required this.post, this.like}) : super(key: key);
+
+  @override
+  _PostInfoState createState() => _PostInfoState(post: post, like: like);
+}
+
+class _PostInfoState extends State<PostInfo> {
+  BlogPost post;
+  Function(bool) like;
+  _PostInfoState({this.post, this.like});
+  bool liked;
+  FToast fToast;
+
+  @override
+  void initState() {
+    super.initState();
+    fToast = FToast();
+    fToast.init(context);
+    liked = post.like(currentUser);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +39,40 @@ class PostInfo extends StatelessWidget {
         }
       },
       child: Scaffold(
+        floatingActionButton: autorised
+            ? FloatingActionButton(
+                backgroundColor: themeBlue,
+                child: Icon(
+                  // post.liked(currentUser)
+                  liked ? Icons.favorite : Icons.favorite_border,
+                  color:
+                      //post.liked(currentUser)
+                      liked ? themeDarkGreen : null,
+                ),
+                onPressed: () async {
+                  if (liked) {
+                    await post.removeFromLiked(currentUser);
+                    showToast('Видалено з обраних', themeRed, themeDarkRed,
+                        CommunityMaterialIcons.close, fToast);
+                  } else {
+                    await post.addToLiked(currentUser);
+
+                    showToast('Додано до обраних', Colors.greenAccent,
+                        themeDarkGreen, CommunityMaterialIcons.check, fToast);
+                  }
+                  setState(() {
+                    liked = !liked;
+                  });
+                  like(liked);
+                },
+              )
+            : null,
         backgroundColor: Color(0xffEBFAFF),
         appBar: AppBar(
           backgroundColor: themeDark,
           title: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
-            child: Text(post.title,
+            child: Text(widget.post.title,
                 style: TextStyle(
                     color: themeGreen,
                     fontWeight: FontWeight.bold,
@@ -34,7 +86,7 @@ class PostInfo extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.only(bottom: 20.0),
                   child: Image.network(
-                    post.image,
+                    widget.post.image,
                     fit: BoxFit.fitWidth,
                   ),
                 ),
@@ -42,7 +94,7 @@ class PostInfo extends StatelessWidget {
                   padding: EdgeInsets.all(20.0),
                   child: Flexible(
                     child: Text(
-                      post.information,
+                      widget.post.information,
                       style: TextStyle(
                         color: themeDark,
                         fontSize: 16.0,
