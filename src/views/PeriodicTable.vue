@@ -1,5 +1,5 @@
 <template>
-  <div class="periodicTable mt-20">
+  <div class="periodicTable mt-20 h-screen">
     <div class="row">
       <ElementInfoTable
           v-bind:element="this.element"

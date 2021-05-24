@@ -1,14 +1,14 @@
 <template>
-  <div class="bg-csblack mt-0 h-screen">
+  <div class="bg-csblack mt-20 h-screen">
     <div class="row">
-      <div class="column w-8/12">
+      <div class="column mt-20 w-8/12">
         <div
-          class="user-info w-11/12 bg-csblack text-white mb-20 border border-csblack block overflow-hidden"
+            class="user-info w-11/12 bg-csblack text-white mb-20 border border-csblack block overflow-hidden"
         >
           <a href="">
             <img
-              src="button-for-request.png"
-              class="pl-10 w-20 h-20 float-left"
+                src="button-for-request.png"
+                class="pl-10 w-20 h-20 float-left"
             />
           </a>
           <p class="text-7xl font-semibold">Звичайний учень</p>
@@ -40,17 +40,17 @@
         </div>
       </div>
 
-      <div class="column w-4/12">
+      <div class="column mt-20 w-4/12">
         <div
-          class="scroll-rating border border-csblack mr-10 rounded-3xl bg-white text-csblack h-full block overflow-hidden"
+            class="scroll-rating border border-csblack mr-10 rounded-3xl bg-white text-csblack h-full block overflow-hidden"
         >
-          <img src="cupImage.png" class="w-10 h-10 pl-20 float-left" />
+          <img src="cupImage.png" class="w-10 h-10 pl-20 float-left"/>
           <p class="text-4xl font-semibold">Рейтинг</p>
 
           <table class="text-left">
             <tr>
               <td class="w-5/6">
-              <p style="display: inline" class="rating-text font-semibold pl-5">01:</p>
+                <p style="display: inline" class="rating-text font-semibold pl-5">01:</p>
               <p style="display: inline" class="nickname-text">Наріман Намазов</p>
               </td>
               <td class="w-1/6">
@@ -85,16 +85,21 @@
       </div>
     </div>
   </div>
+  <Footer/>
 </template>
 
 <script>
 import apiService from "@/services";
+import Footer from '../components/Footer';
 
 export default {
   data() {
     return {
       achievements: []
     }
+  },
+  components: {
+    Footer
   },
   created() {
     apiService.getAchievements().then(resp => this.achievements = resp.data)
