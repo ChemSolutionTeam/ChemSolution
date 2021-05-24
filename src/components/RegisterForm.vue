@@ -6,15 +6,15 @@
       class="box self-center pl-12 p-3 pb-16 text-left w-full bg-white border-csblack shadow-2xl border rounded-lg"
     >
       <form @submit.prevent="register()">
-        <div class="column w-8/12 mt-4">
+        <div class="column w-7/12 mt-4">
           <h3 class="text-4xl text-center heading pb-5">Реєстрація</h3>
           <div class="column w-6/12">
             <BaseInput
-              label="Email"
-              type="email"
-              placeholder="Уведіть E-mail"
-              :isMultiline="true"
-              v-model="user.email"
+                label="Email"
+                type="email"
+                placeholder="Уведіть E-mail"
+                :isMultiline="true"
+                v-model="user.email"
             />
             <BaseInput
               label="Пароль"
