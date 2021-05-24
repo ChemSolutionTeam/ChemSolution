@@ -1,6 +1,6 @@
 <template>
   <div class="column mt-20 mb-10 w-1/5 rounded">
-    <div id="elementLogo" class="reactiveNonMetal">
+    <div id="elementLogo" class="infoTable" :style="{ 'backgroundColor': bgColor, 'borderColor': borderColor }">
       <p class="number"> {{ element.elementId }} </p>
       <p class="symbol">{{ element.symbol }}</p>
       <p class="name">{{ element.name }}</p>
@@ -94,11 +94,10 @@
         <p id="infoNeutrons" class="text-right text-red-500">Недоступно</p>
         <span class="tooltiptext">Авторизуйтесь</span>
       </div>
-
     </div>
-
-
   </div>
+
+
 </template>
 
 <script>
@@ -169,10 +168,13 @@ export default {
         default: 1
       }
     },
-  },
+    bgColor: {
+      default: "#a1c768",
+    },
+    borderColor: {
+      default: "#657c41"
+    }
+  }
 }
 </script>
 
-<style scoped>
-
-</style>
