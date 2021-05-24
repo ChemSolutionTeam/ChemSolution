@@ -15,34 +15,28 @@
         </div>
 
         <div
-          class="scroll-achievements ml-10 w-11/12 bg-white text-csblack border border-csblack rounded-3xl block overflow-hidden"
+            class="scroll-achievements ml-10 w-11/12 bg-white text-csblack border border-csblack rounded-3xl block overflow-hidden"
         >
-          <p class="text-5xl font-semibold text-center">Досягнення</p>
-          <ol class="text-left text-4xl">
-            <li>
-              <img src="list-marker.png" class="icons-achievement pl-10 float-left" />
-              <p class="achievement-text pl-10 float-left">13 мільйонів джоулей</p>
-              <div style="float: right">
-                <img src="coin.png" class="icons-achievement pl-10 float-left" />
-                <p class="achievement-text pl-20 float-left">25</p>
-                <img src="rating.png" class=" icons-achievement pl-10 float-left" />
-                <p class="achievement-text pl-20 float-left pr-5">25</p>
+          <p class="text-5xl font-semibold text-center mb-4">Досягнення</p>
+          <hr>
+          <ol class="text-left text-4xl mt-4">
+            <li v-for="achievement in achievements" :key="achievement.achievementId">
+              <div class="row">
+                <span class="column w-7/12 ml-5 achievement-text">
+                  <img src="{{achievement.imgAchievement}}" class="icons-achievement mr-3 float-left"/>
+                  {{ achievement.heading }}
+                </span>
+                <span class="column w-2/12 mr-1 achievement-text">
+                  <img src="coin.png" class="icons-achievement float-left mr-1"/>
+                  {{ achievement.moneyReward }}
+                  </span>
+                <span class="column w-2/12 mr-1 achievement-text">
+                  <img src="rating.png" class="icons-achievement float-left mr-1"/>
+                  {{ achievement.ratingReward }}
+                </span>
               </div>
             </li>
-            <br />
-            <li>
-              <img src="list-marker.png" class="icons-achievement pl-10 float-left" />
-              <p class="achievement-text pl-10 float-left">13 мільйонів джоулей</p>
-              <div style="float: right">
-                <img src="coin.png" class="icons-achievement pl-10 float-left" />
-                <p class="achievement-text pl-20 float-left">25</p>
-                <img src="rating.png" class=" icons-achievement pl-10 float-left" />
-                <p class="achievement-text pl-20 float-left pr-5">25</p>
-              </div>
-            </li>
-            <br />
           </ol>
-
         </div>
       </div>
 
@@ -94,14 +88,25 @@
 </template>
 
 <script>
+import apiService from "@/services";
+
 export default {
-name: 'UserPageDemo',
-    data() {
-  return {
-    element: {}
+  data() {
+    return {
+      achievements: []
+    }
+  },
+  created() {
+    apiService.getAchievements().then(resp => this.achievements = resp.data)
+  },
+  methods: {
+    getData() {
+      apiService.getAchievements().then((resp) => {
+        console.log(resp.data)
+        this.achievements = resp.data
+      })
+    }
   }
-},
-methods: {}
 }
 </script>
 
@@ -143,5 +148,26 @@ methods: {}
   overflow: hidden; /* Обрезаем все, что не помещается в область */
   text-overflow: ellipsis; /* Добавляем многоточие */
   font-size: 2vw;
+}
+
+.flex-container {
+  display: -ms-inline-flexbox;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
 }
 </style>

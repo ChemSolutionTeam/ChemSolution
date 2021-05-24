@@ -302,13 +302,9 @@ export default {
 
   //Achievements queries
   getAchievements() {
-    API.get('/Achievements')
-      .then((resp) => {
-        console.log(resp)
-      })
-      .catch((e) => {
-        console.error(e)
-      })
+    return API.get('/Achievements').catch((e) => {
+      console.error(e)
+    })
   },
   postAchievement(achievement) {
     achievement
