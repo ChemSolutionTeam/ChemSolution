@@ -35,7 +35,7 @@ export default {
   },
   computed: {
     fill() {
-      return 'fill-current text-' + this.category
+      return 'fill-current text-category' + this.category
     },
   },
 }
