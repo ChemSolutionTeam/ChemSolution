@@ -33,16 +33,7 @@
               >
                 AtomicWeight
               </th>
-              <th
-                class="py-1 hover:text-csgreen cursor-pointer px-6 text-center border-csgreen border-b-4"
-              >
-                ElectronQuantity
-              </th>
-              <th
-                class="py-1 hover:text-csgreen cursor-pointer px-6 text-center border-csgreen border-b-4"
-              >
-                ProtonQuantity
-              </th>
+
               <th
                 class="py-1 hover:text-csgreen cursor-pointer px-6 text-center border-csgreen border-b-4"
               >
@@ -106,7 +97,7 @@
               <th
                 class="py-1 hover:text-csgreen cursor-pointer px-6 text-center border-csgreen border-b-4"
               >
-                Materials
+                Price
               </th>
               <th
                 class="py-1 hover:text-csgreen cursor-pointer px-6 text-center border-csgreen border-b-4"
@@ -146,16 +137,7 @@
               >
                 {{ element.atomicWeight }}
               </td>
-              <td
-                class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
-              >
-                {{ element.electronQuantity }}
-              </td>
-              <td
-                class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
-              >
-                {{ element.protonQuantity }}
-              </td>
+
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
@@ -174,7 +156,7 @@
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
-                {{ element.category }}
+                {{ element.category.categoryName }}
               </td>
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
@@ -219,15 +201,13 @@
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
-                <p v-for="(material, index) in element.materials" :key="index">
-                  {{ material }}
-                </p>
+                {{ element.price }}
               </td>
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
                 <p v-for="(valence, index) in element.valences" :key="index">
-                  {{ valence }}
+                  {{ valence.valenceVal }}
                 </p>
               </td>
               <td
@@ -284,14 +264,18 @@ export default {
     },
   },
   mounted() {
-    let elements = apiService.getElements()
+    /*let elements = apiService.getElements()
     if (elements == null || elements == undefined) return
-    else this.elements = elements
+    else this.elements = elements */
+    apiService.getElements().then((resp) => {
+      this.elements = resp.data
+      console.log(resp)
+    })
   },
   data() {
     return {
       elements: [
-        {
+        /*   {
           elementId: 1,
           symbol: '538.14',
           name: '662.978.63',
@@ -336,7 +320,7 @@ export default {
           elementMaterials: [],
           materials: [],
           valences: [],
-        },
+        }, */
       ],
     }
   },
