@@ -32,10 +32,6 @@ namespace ChemSolution.Models
         public string Info { get; set; }
         public string ImgSymbol { get; set; }
         public string ImgAtom { get; set; }
-        [StringLength(50, MinimumLength = 1)]
-        public string SubGroup { get; set; }
-        [Range(1, 7)]
-        public int? Period { get; set; }
         [Range(0, Double.MaxValue)]
         public double? Price { get; set; }
         [Range(0, int.MaxValue)]
