@@ -1,5 +1,5 @@
 # ChemSolution
-## Наше мото: Learn chemistry as fast as world spins.
+## Learn chemistry as fast as world spins.
 
 ## Ціль проекту
 
@@ -7,11 +7,11 @@
 
 ## Хто ми?
 ### Алієв Денис - back-end
-### Бахмат Євгеній - front-end
+### [Бахмат Євгеній](mailto:yevhenii.bakhmat@nure.ua) - front-end
 ### Берковський Микола - back-end
-### Бурцев Сергій - - front-end
+### Бурцев Сергій - front-end
 ### Коба Юлія - mobile
 ### Татарський Данило - front-end
 
 ## Contacts
-[Email](mailto:yevhenii.bakhmat@nure.ua)
+
