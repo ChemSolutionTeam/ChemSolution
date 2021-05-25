@@ -1,7 +1,8 @@
 import axios from 'axios'
 import storage from '../store/index'
 const API = axios.create({
-  baseURL: 'https://localhost:5001',
+  //  baseURL: 'https://localhost:5001',
+  baseURL: 'http://192.168.0.104:5001',
   headers: {
     'Access-Control-Allow-Origin': '*',
     Accept: 'text/plan',
@@ -218,7 +219,8 @@ export default {
 
   //Elements queries
   getElements() {
-    return API.get('/Elements')
+    return (
+      API.get('/Elements')
         /*.then((resp) => {
           console.log(resp)
            let data = resp.data
@@ -228,6 +230,7 @@ export default {
         .catch((e) => {
           console.error(e)
         })
+    )
   },
   postElement(element) {
     element
@@ -319,12 +322,12 @@ export default {
   },
   getAchievement(id) {
     return API.get('/Achievements/' + id)
-        .then((resp) => {
-          console.log(resp)
-        })
-        .catch((e) => {
-          console.error(e)
-        })
+      .then((resp) => {
+        console.log(resp)
+      })
+      .catch((e) => {
+        console.error(e)
+      })
   },
   putAchievement(id) {
     id

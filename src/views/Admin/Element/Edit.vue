@@ -100,6 +100,7 @@ import BaseTextArea from '@/components/BaseTextArea'
 import BaseCheck from '@/components/BaseCheck'
 import Button from '@/components/HomePageButtons'
 import router from '../../../router'
+
 export default {
   name: 'ElementEdit',
   components: {
@@ -111,11 +112,13 @@ export default {
   computed: {
     id() {
       let id = this.$route.params.id
+      console.log(id)
       return id
     },
   },
   mounted() {
     let element = apiService.getElement(this.id)
+    console.log(apiService.getElement(this.id).PromiseResult)
     if (element != null && element != undefined) {
       this.element = element
     }
@@ -131,7 +134,7 @@ export default {
   data() {
     return {
       element: {
-        elementId: 1,
+        /*  elementId: 1,
         symbol: 'C',
         name: 'Carbon',
         atomicWeight: 809.75,
@@ -151,7 +154,7 @@ export default {
         group: 2008,
         elementMaterials: [],
         materials: [],
-        valences: [],
+        valences: [], */
       },
     }
   },
