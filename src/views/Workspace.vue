@@ -61,7 +61,7 @@ export default {
       try {
         if (this.search) {
           return this.elements.filter(element => {
-            return (element.name.toLowerCase().includes(this.search.toLowerCase())
+            return (element.name != null && element.name.toLowerCase().includes(this.search.toLowerCase())
                 || (element.symbol.toLowerCase().includes(this.search.toLowerCase())))
           })
         } else {
