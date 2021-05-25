@@ -218,15 +218,16 @@ export default {
 
   //Elements queries
   getElements() {
-    API.get('/Elements')
-      .then((resp) => {
-        console.log(resp)
-        let data = resp.data
-        if (data.length !== 0) return data
-      })
-      .catch((e) => {
-        console.error(e)
-      })
+    return API.get('/Elements')
+        /*.then((resp) => {
+          console.log(resp)
+           let data = resp.data
+          if (data.length !== 0)
+            return data
+        })*/
+        .catch((e) => {
+          console.error(e)
+        })
   },
   postElement(element) {
     element
@@ -317,13 +318,13 @@ export default {
       })
   },
   getAchievement(id) {
-    API.get('/Achievements/' + id)
-      .then((resp) => {
-        console.log(resp)
-      })
-      .catch((e) => {
-        console.error(e)
-      })
+    return API.get('/Achievements/' + id)
+        .then((resp) => {
+          console.log(resp)
+        })
+        .catch((e) => {
+          console.error(e)
+        })
   },
   putAchievement(id) {
     id
