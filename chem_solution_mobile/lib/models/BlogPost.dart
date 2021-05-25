@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:chem_solution_mobile/assets/images.dart';
 import 'package:chem_solution_mobile/assets/toasts.dart';
 import 'package:chem_solution_mobile/assets/colors.dart';
 import 'package:chem_solution_mobile/models/Autorisation.dart';
@@ -62,7 +63,7 @@ class BlogPost extends Model {
     bp.category = o['category'];
     bp.information = o['information'];
     bp.isLocked = o['isLocked'];
-    bp.image = o['image'];
+    bp.image = o['image']?? notFound;
     /* List<User> u = [];
     o['users'].forEach((e) {
       u.add(User.fromObject(e));
