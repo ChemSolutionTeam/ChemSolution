@@ -171,6 +171,16 @@ namespace ChemSolution.Migrations
                     b.Property<int?>("NeutronQuantity")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("Period")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double?>("Price")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("SubGroup")
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Symbol")
                         .HasMaxLength(5)
                         .HasColumnType("TEXT");
