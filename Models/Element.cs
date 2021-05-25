@@ -32,6 +32,8 @@ namespace ChemSolution.Models
         public string Info { get; set; }
         public string ImgSymbol { get; set; }
         public string ImgAtom { get; set; }
+        [Range(0, Double.MaxValue)]
+        public double? Price { get; set; }
         [Range(0, int.MaxValue)]
         public int? Group { get; set; }
         public int CategoryId { get; set; }
