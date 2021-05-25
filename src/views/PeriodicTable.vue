@@ -1046,7 +1046,8 @@
 import ElementInfoTable from '../components/ElementInfoTable'
 import Footer from '../components/Footer'
 import apiService from '@/services/index.js'
-import storage from "@/store";
+// eslint-disable-next-line no-unused-vars
+import storage from '@/store'
 
 export default {
   data() {
@@ -1085,7 +1086,7 @@ export default {
         this.bgColor = bgColor
         this.borderColor = borderColor
       })
-    }
+    },
   },
 }
 </script>

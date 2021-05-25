@@ -1,19 +1,27 @@
 <template>
   <div class="flex flex-row h-screen">
-    <div class="border border-csblack rounded-3xl rounded-l-none w-1/4 h-11/12 bg-csbluewhite p-4 shadow-xl">
+    <div
+      class="border border-csblack rounded-3xl rounded-l-none w-1/4 h-11/12 bg-csbluewhite p-4 shadow-xl overflow-y-auto"
+    >
       <!-- Search -->
       <div class="flex flex-wrap w-full text-xl mb-10">
-        <i class="fas fa-search mx-3 self-center scale-125 transform w-1/12"/>
-        <input class="w-10/12 border-csblack border rounded-xl outline-none px-5"
-               placeholder="Уведіть назву елемента.."
-               v-model="search"/>
+        <i class="fas fa-search mx-3 self-center scale-125 transform w-1/12" />
+        <input
+          class="w-10/12 border-csblack border rounded-xl outline-none px-5"
+          placeholder="Уведіть назву елемента.."
+          v-model="search"
+        />
       </div>
       <ul>
-        <li v-for="element in filteredElements" :key="element.elementId" class="overflow-y-auto h-5/6">
+        <li
+          v-for="element in filteredElements"
+          :key="element.elementId"
+          class="overflow-y-auto h-5/6"
+        >
           <ElementChooser
-              v-bind:symbol="element.symbol"
-              v-bind:name="element.name"
-              v-bind:category="element.category.categoryId"
+            v-bind:symbol="element.symbol"
+            v-bind:name="element.name"
+            v-bind:category="element.category.categoryId"
           />
         </li>
       </ul>
@@ -24,12 +32,12 @@
 
 <script>
 import ElementChooser from '@/components/ElementChooser'
-import apiService from "@/services";
+import apiService from '@/services'
 export default {
   data() {
     return {
       search: null,
-      elements: []
+      elements: [],
     }
   },
   name: 'Workspace',
@@ -37,19 +45,23 @@ export default {
     ElementChooser,
   },
   created() {
-    apiService.getElements().then(
-        resp => {
-          this.elements = resp.data
-          console.log(resp)
-        })
+    apiService.getElements().then((resp) => {
+      this.elements = resp.data
+      console.log(resp)
+    })
   },
   computed: {
     filteredElements() {
       try {
         if (this.search) {
-          return this.elements.filter(element => {
-            return (element.name != null && element.name.toLowerCase().includes(this.search.toLowerCase())
-                || (element.symbol.toLowerCase().includes(this.search.toLowerCase())))
+          return this.elements.filter((element) => {
+            return (
+              (element.name != null &&
+                element.name
+                  .toLowerCase()
+                  .includes(this.search.toLowerCase())) ||
+              element.symbol.toLowerCase().includes(this.search.toLowerCase())
+            )
           })
         } else {
           return this.elements
@@ -59,8 +71,8 @@ export default {
         return []
       }
     },
-    mounted: {}
-  }
+    mounted: {},
+  },
 }
 </script>
 
