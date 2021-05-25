@@ -1,3 +1,4 @@
+import 'package:chem_solution_mobile/assets/images.dart';
 import 'package:chem_solution_mobile/models/Model.dart';
 import 'MaterialGroup.dart';
 
@@ -49,7 +50,7 @@ class Achievement extends Model {
     Achievement a = Achievement();
     a.achievementId = o['achievementId'];
     a.heading = o['heading'];
-    a.imgAchievement = o['imgAchievement'];
+    a.imgAchievement = o['imgAchievement']?? notFound;
     a.description = o['description'];
     a.moneyReward = o['moneyReward'];
     a.ratingReward = o['ratingReward'];

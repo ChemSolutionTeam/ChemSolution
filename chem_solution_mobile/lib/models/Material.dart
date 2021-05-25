@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:chem_solution_mobile/assets/colors.dart';
+import 'package:chem_solution_mobile/assets/images.dart';
 import 'package:chem_solution_mobile/assets/toasts.dart';
 import 'package:chem_solution_mobile/main.dart';
 import 'package:flutter/material.dart';
@@ -73,7 +74,7 @@ class Material extends Model {
   static Material fromObject(dynamic o) {
     Material m = new Material();
     m.id = o['id'];
-    m.image = o['image'];
+    m.image = o['image']?? notFound;
     m.formula = o['formula'];
     m.name = o['name'];
     m.info = o['info'];

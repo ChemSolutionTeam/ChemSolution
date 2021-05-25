@@ -16,8 +16,21 @@ class ElementCard extends StatefulWidget {
 
 class _ElementCardState extends State<ElementCard> {
   CS.Element element;
-  Color _colorCard = Colors.white;
+  Color _colorCard;
   _ElementCardState(this.element);
+
+  Color _defaulCardColor() {
+    if (autorised && (!element.isLocked || element.unlocked(currentUser)))
+      return Colors.white;
+    else
+      return themeBlocked;
+  }
+
+  @override
+  void initState() {
+    _colorCard = _defaulCardColor();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +44,7 @@ class _ElementCardState extends State<ElementCard> {
         },
         onLongPressEnd: (_) {
           setState(() {
-            _colorCard = Colors.white;
+            _colorCard = _defaulCardColor();
           });
         },
         onTapDown: (details) {
@@ -40,7 +53,7 @@ class _ElementCardState extends State<ElementCard> {
           });
         },
         onTapUp: (details) {
-          _colorCard = Colors.white;
+          _colorCard = _defaulCardColor();
         },
         onTap: () {
           if (autorised) {
@@ -53,8 +66,7 @@ class _ElementCardState extends State<ElementCard> {
                 ),
               );
             } else {
-              return alertDialogShow(context,
-                createAttention(context), 200);
+              return alertDialogShow(context, createAttention(context), 200);
             }
           } else {
             return alertDialogShow(context,

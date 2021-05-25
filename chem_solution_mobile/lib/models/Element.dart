@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:chem_solution_mobile/assets/images.dart';
 import 'package:chem_solution_mobile/main.dart';
 import 'package:chem_solution_mobile/models/Category.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class Element extends Model {
   int elementId;
   String symbol;
   String name;
-  double atomicWeight;
+  dynamic atomicWeight;
   int neutronQuantity;
   int atomicRadius;
   dynamic electronegativity;
@@ -163,10 +164,10 @@ class Element extends Model {
     e.meltingTemperature = o['meltingTemperature'];
     e.boilingTemperature = o['boilingTemperature'];
     e.isLocked = o['isLocked'];
-    e.info = o['info'];
-    e.imgAtom = o['imgAtom'];
+    e.info = o['info'] ?? 'інформація';
+    e.imgAtom = o['imgAtom'] ?? notFound;
     e.group = o['group'];
-    e.imgSymbol = o['imgSymbol'];
+    e.imgSymbol = o['imgSymbol'] ?? notFound;
 
     /*  o['users'].forEach((el) {
       e.users.add(User.fromObject(el));
