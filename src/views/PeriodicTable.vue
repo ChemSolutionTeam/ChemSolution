@@ -1046,6 +1046,7 @@
 import ElementInfoTable from '../components/ElementInfoTable'
 import Footer from '../components/Footer'
 import apiService from '@/services/index.js'
+import storage from "@/store";
 
 export default {
   data() {
@@ -1075,7 +1076,6 @@ export default {
     Footer,
     ElementInfoTable,
   },
-  emits: ['showForm'],
   methods: {
     getData(id, bgColor, borderColor) {
       apiService.getElement(id).then((resp) => {
@@ -1085,10 +1085,7 @@ export default {
         this.bgColor = bgColor
         this.borderColor = borderColor
       })
-    },
-    openForm(args) {
-      this.$emit('showForm', args)
-    },
+    }
   },
 }
 </script>

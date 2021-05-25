@@ -49,49 +49,56 @@
         <p class="text-left">Атомний радіус:</p>
       </div>
       <div class="p-1 float-right text-right font-bold tooltip">
-        <p id="infoRadius" class="text-right text-red-500">Недоступно</p>
+        <p v-if="isElementUnbLocked" class="text-right">{{ element.atomicRadius }}</p>
+        <p v-else id="infoRadius" class="text-right text-red-500">Недоступно</p>
         <span class="tooltiptext">Авторизуйтесь</span>
       </div>
       <div class="p-1 float-left w-8/12">
         <p class="text-left">Електронегативність:</p>
       </div>
       <div class="p-1 float-right text-right font-bold tooltip">
-        <p id="infoElectronegativity" class="text-right text-red-500">Недоступно</p>
+        <p v-if="isElementUnbLocked" class="text-right">{{ element.electronegativity }}</p>
+        <p v-else class="text-right text-red-500">Недоступно</p>
         <span class="tooltiptext">Авторизуйтесь</span>
       </div>
       <div class="p-1 float-left w-8/12">
         <p class="text-left">Температура кіпіння:</p>
       </div>
       <div class="p-1 float-right text-right font-bold tooltip">
-        <p id="infoBoiling" class="text-right text-red-500">Недоступно</p>
+        <p v-if="isElementUnbLocked" class="text-right">{{ element.boilingTemperature }}</p>
+        <p v-else class="text-right text-red-500">Недоступно</p>
         <span class="tooltiptext">Авторизуйтесь</span>
       </div>
       <div class="p-1 float-left w-8/12">
         <p class="text-left">Температура плавління:</p>
       </div>
       <div class="p-1 float-right text-right font-bold tooltip">
-        <p id="infoMelting" class="text-right text-red-500"> Недоступно </p>
+        <p v-if="isElementUnbLocked" class="text-right">{{ element.meltingTemperature }}</p>
+        <p v-else class="text-right text-red-500">Недоступно</p>
         <span class="tooltiptext">Авторизуйтесь</span>
       </div>
       <div class="p-1 float-left w-8/12">
         <p class="text-left">Кількість електронів:</p>
       </div>
       <div class="p-1 float-right text-right font-bold tooltip">
-        <p id="infoElectrons" class="text-right text-red-500">Недоступно</p>
+        <p v-if="isElementUnbLocked" class="text-right">{{ element.electronQuantity }}</p>
+        <p v-else class="text-right text-red-500">Недоступно</p>
         <span class="tooltiptext">Авторизуйтесь</span>
       </div>
       <div class="p-1 float-left w-8/12">
         <p class="text-left">Кількість протонів:</p>
       </div>
       <div class="p-1 float-right text-right font-bold tooltip">
-        <p id="infoProtons" class="text-right text-red-500">Недоступно</p>
+        <p v-if="isElementUnbLocked" class="text-right">{{ element.protonQuantity }}</p>
+        <p v-else class="text-right text-red-500">Недоступно</p>
         <span class="tooltiptext">Авторизуйтесь</span>
       </div>
       <div class="p-1 float-left w-8/12">
         <p class="text-left">Кількість нейтронів:</p>
       </div>
       <div class="p-1 float-right text-right font-bold tooltip">
-        <p id="infoNeutrons" class="text-right text-red-500">Недоступно</p>
+        <p v-if="isElementUnbLocked" class="text-right">{{ element.neutronQuantity }}</p>
+        <p v-else class="text-right text-red-500">Недоступно</p>
         <span class="tooltiptext">Авторизуйтесь</span>
       </div>
     </div>
@@ -101,9 +108,19 @@
 </template>
 
 <script>
+import storage from "@/store";
+
 export default {
   data() {
     return this.element
+  },
+  computed: {
+    isUserAuthorised() {
+      return storage.state.token.length !== 0
+    },
+    isElementUnbLocked() {
+      return this.isUserAuthorised
+    }
   },
   props: {
     element: {

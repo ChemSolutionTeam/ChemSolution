@@ -17,19 +17,6 @@
           />
         </li>
       </ul>
-      <div>
-
-        <!--
-        <ElementChooser />
-        <ElementChooser />
-        <ElementChooser />
-        <ElementChooser />
-        <ElementChooser />
-        <ElementChooser />
-        <ElementChooser />
-        <ElementChooser />
-        !-->
-      </div>
     </div>
     <div></div>
   </div>
