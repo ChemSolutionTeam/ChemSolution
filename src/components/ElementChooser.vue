@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-wrap border p-3 shadow-2xl w-11/12 my-9 rounded-full border-csblack"
+      class="flex flex-wrap border p-3 w-11/12 my-1 rounded-full border-csblack"
   >
     <Atom :symbol="symbol" :category="category" />
     <p class="self-center overflow-y-auto text-2xl w-3/4">{{ name }}</p>

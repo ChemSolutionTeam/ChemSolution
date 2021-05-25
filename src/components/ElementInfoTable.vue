@@ -29,7 +29,7 @@
         <p class="text-left">Категорія:</p>
       </div>
       <div class="p-1 float-right text-right">
-        <p id="infoCategory" class="text-right font-bold">{{ element.category }}</p>
+        <p id="infoCategory" class="text-right font-bold">{{ element.category.categoryName }}</p>
       </div>
       <div class="p-1 float-left w-8/12">
         <p class="text-left">Атомна маса:</p>
