@@ -4,10 +4,12 @@
       <!-- Search -->
       <div class="flex flex-wrap w-full text-xl mb-10">
         <i class="fas fa-search mx-3 self-center scale-125 transform w-1/12"/>
-        <input class="w-10/12 border-csblack border rounded-xl outline-none px-5"/>
+        <input class="w-10/12 border-csblack border rounded-xl outline-none px-5"
+               placeholder="Уведіть назву елемента.."
+               v-model="search"/>
       </div>
       <ul>
-        <li v-for="element in elements" :key="element.elementId" class="overflow-y-auto h-5/6">
+        <li v-for="element in filteredElements" :key="element.elementId" class="overflow-y-auto h-5/6">
           <ElementChooser
               v-bind:symbol="element.symbol"
               v-bind:name="element.name"
@@ -39,6 +41,7 @@ import apiService from "@/services";
 export default {
   data() {
     return {
+      search: null,
       elements: []
     }
   },
@@ -53,6 +56,24 @@ export default {
           console.log(resp)
         })
   },
+  computed: {
+    filteredElements() {
+      try {
+        if (this.search) {
+          return this.elements.filter(element => {
+            return (element.name.toLowerCase().includes(this.search.toLowerCase())
+                || (element.symbol.toLowerCase().includes(this.search.toLowerCase())))
+          })
+        } else {
+          return this.elements
+        }
+      } catch (e) {
+        console.error(e)
+        return []
+      }
+    },
+    mounted: {}
+  }
 }
 </script>
 
