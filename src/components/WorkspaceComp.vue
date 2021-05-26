@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <div style="backgoround-color: #00ffff"></div>
 </template>
 
 <script>

@@ -15,17 +15,18 @@
       <div
         class="elementCollection mt-3 pt-3 overflow-y-scroll scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-blue-100 scrollbar-thumb-rounded-full scrollbar-track-rounded-full"
       >
-          <div v-for="element in filteredElements" :key="element.elementId">
-            <ElementChooser
-                v-bind:symbol="element.symbol"
-                v-bind:name="element.name"
-                v-bind:category="element.category.categoryId"
-                draggable="true"
-                @keydown.left="atomKeydownLeft(element.elementId, element.symbol)"
-                @click.left="atomKeydownLeft(element.elementId, element.symbol)"
-                @keyup.left="atomKeyupLeft()"
-            />
-          </div>
+        <div v-for="element in filteredElements" :key="element.elementId">
+          <ElementChooser
+            v-bind:symbol="element.symbol"
+            v-bind:name="element.name"
+            v-bind:category="element.category.categoryId"
+            draggable="true"
+            @dragstart="startDrag($event, element)"
+            @keydown.left="atomKeydownLeft(element.elementId, element.symbol)"
+            @click.left="atomKeydownLeft(element.elementId, element.symbol)"
+            @keyup.left="atomKeyupLeft()"
+          />
+        </div>
       </div>
     </div>
     <!-- scrollbar:
@@ -34,7 +35,11 @@
       !-->
   </div>
   <div>
-    <WorkspaceComp />
+    <WorkspaceComp
+      @drop="onDrop($event)"
+      @dragenter.prevent
+      @dragover.prevent
+    />
   </div>
   <Footer />
 </template>
@@ -58,6 +63,26 @@ export default {
     WorkspaceComp,
     Footer,
   },
+  setup() {
+    // eslint-disable-next-line no-unused-vars
+    const startDrag = (event, element) => {
+      console.log(element)
+      event.dataTransfer.dropEffect = 'move'
+      event.dataTransfer.effectAllowed = 'move'
+      event.dataTransfer.setData('elementId', element.elementId)
+    }
+
+    const onDrop = (event) => {
+      const elementId = event.dataTransfer.getData(elementId)
+      const element = this.elements.value.find((e) => e.elementId == elementId)
+      console.log(element.symbol)
+    }
+
+    return {
+      startDrag,
+      onDrop,
+    }
+  },
   created() {
     apiService.getElements().then((resp) => {
       this.elements = resp.data
@@ -78,9 +103,9 @@ export default {
         if (this.search) {
           return this.elements.filter((element) => {
             return (
-                (element.name != null &&
-                    element.name
-                        .toLowerCase()
+              (element.name != null &&
+                element.name
+                  .toLowerCase()
                   .includes(this.search.toLowerCase())) ||
               element.symbol.toLowerCase().includes(this.search.toLowerCase())
             )
