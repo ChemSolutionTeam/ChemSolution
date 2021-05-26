@@ -26,12 +26,16 @@
         </li>
       </ul>
     </div>
-    <div></div>
+    <div>
+      <WorkspaceComp />
+    </div>
   </div>
 </template>
 
 <script>
 import ElementChooser from '@/components/ElementChooser'
+import WorkspaceComp from '@/components/WorkspaceComp'
+
 import apiService from '@/services'
 export default {
   data() {
@@ -43,6 +47,7 @@ export default {
   name: 'Workspace',
   components: {
     ElementChooser,
+    WorkspaceComp,
   },
   created() {
     apiService.getElements().then((resp) => {
