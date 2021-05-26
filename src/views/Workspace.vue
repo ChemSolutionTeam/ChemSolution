@@ -15,19 +15,17 @@
       <div
         class="elementCollection mt-3 pt-3 overflow-y-scroll scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-blue-100 scrollbar-thumb-rounded-full scrollbar-track-rounded-full"
       >
-        <ul>
-          <li v-for="element in filteredElements" :key="element.elementId">
+          <div v-for="element in filteredElements" :key="element.elementId">
             <ElementChooser
-              v-bind:symbol="element.symbol"
-              v-bind:name="element.name"
-              v-bind:category="element.category.categoryId"
-              draggable="true"
-              @keydown.left="atomKeydownLeft(element.elementId, element.symbol)"
-              @click.left="atomKeydownLeft(element.elementId, element.symbol)"
-              @keyup.left="atomKeyupLeft()"
+                v-bind:symbol="element.symbol"
+                v-bind:name="element.name"
+                v-bind:category="element.category.categoryId"
+                draggable="true"
+                @keydown.left="atomKeydownLeft(element.elementId, element.symbol)"
+                @click.left="atomKeydownLeft(element.elementId, element.symbol)"
+                @keyup.left="atomKeyupLeft()"
             />
-          </li>
-        </ul>
+          </div>
       </div>
     </div>
     <!-- scrollbar:
@@ -80,9 +78,9 @@ export default {
         if (this.search) {
           return this.elements.filter((element) => {
             return (
-              (element.name != null &&
-                element.name
-                  .toLowerCase()
+                (element.name != null &&
+                    element.name
+                        .toLowerCase()
                   .includes(this.search.toLowerCase())) ||
               element.symbol.toLowerCase().includes(this.search.toLowerCase())
             )
