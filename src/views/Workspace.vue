@@ -21,7 +21,7 @@
             v-bind:name="element.name"
             v-bind:category="element.category.categoryId"
             draggable="true"
-            @mousedown="atomKeydownLeft(element.elementId, element.symbol)"
+            @mousedown="atomKeydownLeft(element)"
           />
         </div>
       </div>
@@ -31,7 +31,7 @@
       scrollbar-thin scrollbar-thumb-blue-0 scrollbar-track-blue-0 scrollbar-thumb-rounded-full scrollbar-track-rounded-full
       !-->
 
-    <WorkspaceComp @mouseup="atomKeyupLeft()" />
+    <WorkspaceComp @mouseup="atomKeyupLeft()" v-bind:atoms="atoms" />
   </div>
 
   <Footer />
@@ -48,15 +48,36 @@ export default {
     return {
       search: null,
       elements: [],
-      atoms: [],
-      /*
-      atom{
-        id: id,
-        symbol: symbol,
-        category: 
-
-      }
-      */
+      atoms: [
+        {
+          id: 1,
+          symbol: 'H',
+          category: 1,
+          positionX: 100,
+          positionY: 20,
+        },
+        {
+          id: 2,
+          symbol: 'He',
+          category: 2,
+          positionX: 40,
+          positionY: 40,
+        },
+        {
+          id: 3,
+          symbol: 'Li',
+          category: 3,
+          positionX: 40,
+          positionY: 100,
+        },
+        {
+          id: 4,
+          symbol: 'Be',
+          category: 4,
+          positionX: 40,
+          positionY: 200,
+        },
+      ],
     }
   },
   name: 'Workspace',
@@ -73,11 +94,20 @@ export default {
     })
   },
   methods: {
-    atomKeydownLeft(id, name) {
-      console.warn(id, name)
+    atomKeydownLeft(element) {
+      console.warn(element)
     },
     atomKeyupLeft() {
       console.warn('end')
+    },
+    addElement(element) {
+      this.atoms.push({
+        id: element.elementId,
+        symbol: element.symbol,
+        category: element.category.categoryId,
+        positionX: 40,
+        positionY: 200,
+      })
     },
   },
   computed: {
