@@ -85,6 +85,7 @@ module.exports = {
       animation: ['hover', 'focus'],
       opacity: ['disabled'],
     },
+    scrollbar: ['rounded'],
   },
-  plugins: [require('@tailwindcss/forms')],
+  plugins: [require('@tailwindcss/forms'), require('tailwind-scrollbar')],
 }

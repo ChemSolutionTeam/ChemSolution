@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-row h-screen">
     <div
-      class="border border-csblack rounded-3xl rounded-l-none w-1/4 h-11/12 bg-csbluewhite p-4 shadow-xl overflow-y-auto"
+      class="border border-csblack rounded-3xl rounded-l-none w-1/4 h-11/12 bg-csbluewhite p-4 shadow-xl overflow-y-auto scrollbar-thin scrollbar-thumb-blue-0 scrollbar-track-blue-0 scrollbar-thumb-rounded-full scrollbar-track-rounded-full"
     >
       <!-- Search -->
       <div class="flex flex-wrap w-full text-xl mb-10">
