@@ -1,28 +1,29 @@
 <template>
   <div class="flex flex-row my-20">
     <div
-        class="border border-csblack rounded-3xl rounded-l-none w-1/4 h-11/12 bg-csbluewhite p-4 shadow-xl mt-20"
+      class="border border-csblack rounded-3xl rounded-l-none w-1/4 h-11/12 bg-csbluewhite p-4 shadow-xl mt-20"
     >
       <!-- Search -->
-      <div class=" w-full text-xl my-5">
-        <i class="fas fa-search mx-3 self-center scale-125 transform w-1/12"/>
+      <div class="w-full text-xl my-5">
+        <i class="fas fa-search mx-3 self-center scale-125 transform w-1/12" />
         <input
-            class="w-10/12 border-csblack border rounded-xl outline-none px-5"
-            placeholder="Уведіть назву елемента.."
-            v-model="search"
+          class="w-10/12 border-csblack border rounded-xl outline-none px-5"
+          placeholder="Уведіть назву елемента.."
+          v-model="search"
         />
       </div>
-      <div class="elementCollection mt-3 pt-3 overflow-y-scroll scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-blue-100
-      scrollbar-thumb-rounded-full scrollbar-track-rounded-full">
+      <div
+        class="elementCollection mt-3 pt-3 overflow-y-scroll scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-blue-100 scrollbar-thumb-rounded-full scrollbar-track-rounded-full"
+      >
         <ul>
-          <li
-              v-for="element in filteredElements"
-              :key="element.elementId"
-          >
+          <li v-for="element in filteredElements" :key="element.elementId">
             <ElementChooser
-                v-bind:symbol="element.symbol"
-                v-bind:name="element.name"
-                v-bind:category="element.category.categoryId"
+              v-bind:symbol="element.symbol"
+              v-bind:name="element.name"
+              v-bind:category="element.category.categoryId"
+              @keydown.left="atomKeydownLeft(element.elementId, element.symbol)"
+              @click.left="atomKeydownLeft(element.elementId, element.symbol)"
+              @keyup.left="atomKeyupLeft()"
             />
           </li>
         </ul>
@@ -32,12 +33,11 @@
     overflow-y-auto
       scrollbar-thin scrollbar-thumb-blue-0 scrollbar-track-blue-0 scrollbar-thumb-rounded-full scrollbar-track-rounded-full
       !-->
-
   </div>
   <div>
-    <WorkspaceComp/>
+    <WorkspaceComp />
   </div>
-  <Footer/>
+  <Footer />
 </template>
 
 <script>
@@ -57,13 +57,21 @@ export default {
   components: {
     ElementChooser,
     WorkspaceComp,
-    Footer
+    Footer,
   },
   created() {
     apiService.getElements().then((resp) => {
       this.elements = resp.data
       console.log(resp)
     })
+  },
+  methods: {
+    atomKeydownLeft(id, name) {
+      console.warn(id, name)
+    },
+    atomKeyupLeft() {
+      console.warn('end')
+    },
   },
   computed: {
     filteredElements() {
