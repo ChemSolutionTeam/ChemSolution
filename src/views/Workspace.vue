@@ -22,7 +22,6 @@
             v-bind:category="element.category.categoryId"
             draggable="true"
             @mousedown="atomKeydownLeft(element.elementId, element.symbol)"
-            @mouseup="atomKeyupLeft()"
           />
         </div>
       </div>
@@ -32,11 +31,7 @@
       scrollbar-thin scrollbar-thumb-blue-0 scrollbar-track-blue-0 scrollbar-thumb-rounded-full scrollbar-track-rounded-full
       !-->
 
-    <WorkspaceComp
-      @drop="onDrop($event)"
-      @dragenter.prevent
-      @dragover.prevent
-    />
+    <WorkspaceComp @mouseup="atomKeyupLeft()" />
   </div>
 
   <Footer />
@@ -54,6 +49,14 @@ export default {
       search: null,
       elements: [],
       atoms: [],
+      /*
+      atom{
+        id: id,
+        symbol: symbol,
+        category: 
+
+      }
+      */
     }
   },
   name: 'Workspace',
@@ -62,26 +65,7 @@ export default {
     WorkspaceComp,
     Footer,
   },
-  setup() {
-    // eslint-disable-next-line no-unused-vars
-    const startDrag = (event, element) => {
-      console.log(element)
-      event.dataTransfer.dropEffect = 'move'
-      event.dataTransfer.effectAllowed = 'move'
-      event.dataTransfer.setData('elementId', element.elementId)
-    }
-
-    const onDrop = (event) => {
-      const elementId = event.dataTransfer.getData(elementId)
-      const element = this.elements.value.find((e) => e.elementId == elementId)
-      console.log(element.symbol)
-    }
-
-    return {
-      startDrag,
-      onDrop,
-    }
-  },
+  setup() {},
   created() {
     apiService.getElements().then((resp) => {
       this.elements = resp.data

@@ -25,6 +25,7 @@ export default {
   name: 'Atom',
   props: {
     id: {
+      type: Number,
       default: 1,
     },
     symbol: {
