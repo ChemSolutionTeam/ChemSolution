@@ -48,38 +48,16 @@
           <p class="text-4xl font-semibold">Рейтинг</p>
 
           <table class="text-left">
-            <tr>
+            <tr v-for="(user, index) in users" :key=index>
               <td class="w-5/6">
-                <p style="display: inline" class="rating-text font-semibold pl-5">01:</p>
-              <p style="display: inline" class="nickname-text">Наріман Намазов</p>
+                <p style="display: inline" class="rating-text font-semibold pl-5">{{index+1}}: </p>
+              <p style="display: inline" class="nickname-text">{{ user.userName }}</p>
               </td>
               <td class="w-1/6">
-                <p style="font-size: 2vw;">725</p>
+                <p style="font-size: 2vw;">{{ user.rating }}</p>
               </td>
             </tr>
             <br />
-            <tr>
-              <td>
-              <p style="display: inline" class="rating-text font-semibold pl-5 ">02:</p>
-              <p style="" class="nickname-text inline">ффффaaaaaaaaaaa</p>
-              </td >
-              <td>
-              <p style="font-size: 2vw;">231</p>
-              </td>
-            </tr>
-            <br />
-
-            <tr>
-              <td>
-              <p style="display: inline" class="rating-text font-semibold pl-5">03:</p>
-              <p style="display: inline" class="nickname-text">Зумєр</p>
-              </td>
-              <td>
-              <p style="font-size: 2vw;">199</p>
-              </td>
-            </tr>
-            <br />
-
           </table>
         </div>
       </div>
@@ -92,10 +70,12 @@
 import apiService from "@/services";
 import Footer from '../components/Footer';
 
+
 export default {
   data() {
     return {
-      achievements: []
+      achievements: [],
+      users: []
     }
   },
   components: {
@@ -103,11 +83,11 @@ export default {
   },
   created() {
     apiService.getAchievements().then(resp => this.achievements = resp.data)
+    apiService.getUsersByRating().then(resp => this.users = resp.data)
   },
   methods: {
     getData() {
       apiService.getAchievements().then((resp) => {
-        console.log(resp.data)
         this.achievements = resp.data
       })
     }
