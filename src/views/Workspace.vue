@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-row my-20">
     <div
-      class="border border-csblack rounded-3xl rounded-l-none w-1/4 h-11/12 bg-csbluewhite p-4 shadow-xl mt-20"
+      class="column border border-csblack rounded-3xl rounded-l-none w-1/4 h-11/12 bg-csbluewhite p-4 shadow-xl mt-20"
     >
       <!-- Search -->
       <div class="w-full text-xl my-5">
@@ -21,10 +21,8 @@
             v-bind:name="element.name"
             v-bind:category="element.category.categoryId"
             draggable="true"
-            @dragstart="startDrag($event, element)"
-            @keydown.left="atomKeydownLeft(element.elementId, element.symbol)"
-            @click.left="atomKeydownLeft(element.elementId, element.symbol)"
-            @keyup.left="atomKeyupLeft()"
+            @mousedown="atomKeydownLeft(element.elementId, element.symbol)"
+            @mouseup="atomKeyupLeft()"
           />
         </div>
       </div>
@@ -33,14 +31,14 @@
     overflow-y-auto
       scrollbar-thin scrollbar-thumb-blue-0 scrollbar-track-blue-0 scrollbar-thumb-rounded-full scrollbar-track-rounded-full
       !-->
-  </div>
-  <div>
+
     <WorkspaceComp
       @drop="onDrop($event)"
       @dragenter.prevent
       @dragover.prevent
     />
   </div>
+
   <Footer />
 </template>
 
@@ -55,6 +53,7 @@ export default {
     return {
       search: null,
       elements: [],
+      atoms: [],
     }
   },
   name: 'Workspace',
