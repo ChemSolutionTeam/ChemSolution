@@ -1,22 +1,21 @@
 <template>
-  <div class="periodicTable mt-20 h-screen">
-    <div class="row">
-      <ElementInfoTable
+  <div class="row periodicTable mt-20 h-screen">
+    <ElementInfoTable
         v-bind:element="this.element"
         v-bind:bg-color="this.bgColor"
         v-bind:border-color="this.borderColor"
-      />
-      <div class="column mt-20 mb-10 pb-4 ml-1 bg-csblack rounded text-white">
-        <table id="periodic">
-          <tr id="periods">
-            <td class="periodCell"></td>
-            <td class="periodCell">1</td>
-            <td class="periodCell">2</td>
-            <td class="periodCell">3</td>
-            <td class="periodCell">4</td>
-            <td class="periodCell">5</td>
-            <td class="periodCell">6</td>
-            <td class="periodCell">7</td>
+    />
+    <div class="column my-20 pb-4 ml-1 bg-csblack rounded text-white">
+      <table id="periodic">
+        <tr id="periods">
+          <td class="periodCell"></td>
+          <td class="periodCell">1</td>
+          <td class="periodCell">2</td>
+          <td class="periodCell">3</td>
+          <td class="periodCell">4</td>
+          <td class="periodCell">5</td>
+          <td class="periodCell">6</td>
+          <td class="periodCell">7</td>
             <td class="periodCell">8</td>
             <td class="periodCell">9</td>
             <td class="periodCell">10</td>
@@ -1037,7 +1036,6 @@
           </tr>
         </table>
       </div>
-    </div>
   </div>
   <Footer />
 </template>

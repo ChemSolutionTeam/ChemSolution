@@ -1,5 +1,5 @@
 <template>
-  <div class="column mt-20 mb-10 w-1/5 rounded">
+  <div class="column my-20 w-1/5 rounded">
     <div id="elementLogo" class="infoTable" :style="{ 'backgroundColor': bgColor, 'borderColor': borderColor }">
       <p class="number"> {{ element.elementId }} </p>
       <p class="symbol">{{ element.symbol }}</p>
