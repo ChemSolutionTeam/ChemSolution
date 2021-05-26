@@ -1,7 +1,7 @@
 <template>
-  <div class="flex flex-row h-screen">
+  <div class="flex flex-row my-20">
     <div
-        class="border border-csblack rounded-3xl rounded-l-none w-1/4 h-11/12 bg-csbluewhite p-4 shadow-xl "
+        class="border border-csblack rounded-3xl rounded-l-none w-1/4 h-11/12 bg-csbluewhite p-4 shadow-xl mt-20"
     >
       <!-- Search -->
       <div class=" w-full text-xl my-5">
@@ -12,7 +12,7 @@
             v-model="search"
         />
       </div>
-      <div class="my-5 overflow-y-scroll h-full scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-blue-100
+      <div class="elementCollection mt-3 pt-3 overflow-y-scroll scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-blue-100
       scrollbar-thumb-rounded-full scrollbar-track-rounded-full">
         <ul>
           <li
@@ -32,15 +32,18 @@
     overflow-y-auto
       scrollbar-thin scrollbar-thumb-blue-0 scrollbar-track-blue-0 scrollbar-thumb-rounded-full scrollbar-track-rounded-full
       !-->
-    <div>
-      <WorkspaceComp />
-    </div>
+
   </div>
+  <div>
+    <WorkspaceComp/>
+  </div>
+  <Footer/>
 </template>
 
 <script>
 import ElementChooser from '@/components/ElementChooser'
 import WorkspaceComp from '@/components/WorkspaceComp'
+import Footer from '@/components/Footer'
 
 import apiService from '@/services'
 export default {
@@ -54,6 +57,7 @@ export default {
   components: {
     ElementChooser,
     WorkspaceComp,
+    Footer
   },
   created() {
     apiService.getElements().then((resp) => {
@@ -87,4 +91,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.elementCollection {
+  height: 70vh;
+}
+</style>
