@@ -62,6 +62,7 @@ namespace ChemSolution.Controllers
         {
             var element = await _context.Elements
                 .Include(p => p.Materials)
+                .Include(p=> p.Valences)
                 .FirstAsync(e=> e.ElementId == id);
             if (element == null)
             {
