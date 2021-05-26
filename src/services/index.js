@@ -1,8 +1,7 @@
 import axios from 'axios'
 import storage from '../store/index'
 const API = axios.create({
-  //baseURL: 'https://localhost:5001',
-  baseURL: 'http://192.168.0.104:5001',
+  baseURL: 'https://localhost:5001',
   headers: {
     'Access-Control-Allow-Origin': '*',
     Accept: 'text/plan',
@@ -87,6 +86,9 @@ export default {
   },
   resetUser() {
     //TODO USER PUT request
+  },
+  getUsersByRating() {
+    return API.get('/Users/rating').catch((e) => console.error(e))
   },
 
   //Request queries
