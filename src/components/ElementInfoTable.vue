@@ -25,23 +25,23 @@
       <div class="p-1 float-right text-right">
         <p id="infoName" class="text-right font-bold">{{ element.name }}</p>
       </div>
-      <div class="p-1 float-left w-8/12">
+      <div class="p-1 float-left w-4/12">
         <p class="text-left">Категорія:</p>
       </div>
-      <div class="p-1 float-right text-right">
-        <p id="infoCategory" class="text-right font-bold">{{ element.category.categoryName }}</p>
+      <div class="p-1 float-right text-right w-7/12">
+        <p class="text-right font-bold">{{ element.category.categoryName }}</p>
       </div>
       <div class="p-1 float-left w-8/12">
         <p class="text-left">Атомна маса:</p>
       </div>
       <div class="p-1 float-right text-right">
-        <p id="infoMass" class="text-right font-bold">{{ element.atomicWeight }}</p>
+        <p class="text-right font-bold">{{ element.atomicWeight }}</p>
       </div>
       <div class="p-1 float-left w-8/12">
         <p class="text-left">Валентність:</p>
       </div>
       <div class="p-1 float-right text-right">
-        <p id="infoValency" class="text-right font-bold">{{ element.valency }}</p>
+        <p lass="text-right font-bold">{{ element.valency }}</p>
       </div>
 
 

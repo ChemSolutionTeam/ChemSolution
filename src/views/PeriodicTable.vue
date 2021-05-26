@@ -1056,7 +1056,9 @@ export default {
         atomicRadius: 454.59,
         atomicWeight: 1.008,
         boilingTemperature: 607,
-        category: 'Неметали',
+        category: {
+          categoryName: 'неметали',
+        },
         electronQuantity: 588,
         electronegativity: 511.1,
         elementId: 1,
