@@ -19,10 +19,10 @@
       <div class="p-1 float-right text-right">
         <p id="infoSymbol" class="text-right font-bold">{{ element.symbol }}</p>
       </div>
-      <div class="p-1 float-left w-8/12">
+      <div class="p-1 float-left w-4/12">
         <p class="text-left">Назва:</p>
       </div>
-      <div class="p-1 float-right text-right">
+      <div class="p-1 float-right text-right w-7/12">
         <p id="infoName" class="text-right font-bold">{{ element.name }}</p>
       </div>
       <div class="p-1 float-left w-4/12">
