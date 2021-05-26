@@ -41,7 +41,7 @@
         <p class="text-left">Валентність:</p>
       </div>
       <div class="p-1 float-right text-right">
-        <p lass="text-right font-bold">{{ element.valency }}</p>
+        <p lass="text-right font-bold">{{ valencyString }}</p>
       </div>
 
 
@@ -50,7 +50,7 @@
       </div>
       <div class="p-1 float-right text-right font-bold tooltip">
         <p v-if="isElementUnbLocked" class="text-right">{{ element.atomicRadius }}</p>
-        <p v-else id="infoRadius" class="text-right text-red-500">Недоступно</p>
+        <i v-else class="fas fa-lock mx-3 self-end scale-125 transform w-1/12"/>
         <span class="tooltiptext">Авторизуйтесь</span>
       </div>
       <div class="p-1 float-left w-8/12">
@@ -58,7 +58,7 @@
       </div>
       <div class="p-1 float-right text-right font-bold tooltip">
         <p v-if="isElementUnbLocked" class="text-right">{{ element.electronegativity }}</p>
-        <p v-else class="text-right text-red-500">Недоступно</p>
+        <i v-else class="fas fa-lock mx-3 self-end scale-125 transform w-1/12"/>
         <span class="tooltiptext">Авторизуйтесь</span>
       </div>
       <div class="p-1 float-left w-8/12">
@@ -66,7 +66,7 @@
       </div>
       <div class="p-1 float-right text-right font-bold tooltip">
         <p v-if="isElementUnbLocked" class="text-right">{{ element.boilingTemperature }}</p>
-        <p v-else class="text-right text-red-500">Недоступно</p>
+        <i v-else class="fas fa-lock mx-3 self-end scale-125 transform w-1/12"/>
         <span class="tooltiptext">Авторизуйтесь</span>
       </div>
       <div class="p-1 float-left w-8/12">
@@ -74,7 +74,7 @@
       </div>
       <div class="p-1 float-right text-right font-bold tooltip">
         <p v-if="isElementUnbLocked" class="text-right">{{ element.meltingTemperature }}</p>
-        <p v-else class="text-right text-red-500">Недоступно</p>
+        <i v-else class="fas fa-lock mx-3 self-end scale-125 transform w-1/12"/>
         <span class="tooltiptext">Авторизуйтесь</span>
       </div>
       <div class="p-1 float-left w-8/12">
@@ -82,7 +82,7 @@
       </div>
       <div class="p-1 float-right text-right font-bold tooltip">
         <p v-if="isElementUnbLocked" class="text-right">{{ element.electronQuantity }}</p>
-        <p v-else class="text-right text-red-500">Недоступно</p>
+        <i v-else class="fas fa-lock mx-3 self-end scale-125 transform w-1/12"/>
         <span class="tooltiptext">Авторизуйтесь</span>
       </div>
       <div class="p-1 float-left w-8/12">
@@ -90,7 +90,7 @@
       </div>
       <div class="p-1 float-right text-right font-bold tooltip">
         <p v-if="isElementUnbLocked" class="text-right">{{ element.protonQuantity }}</p>
-        <p v-else class="text-right text-red-500">Недоступно</p>
+        <i v-else class="fas fa-lock mx-3 self-end scale-125 transform w-1/12"/>
         <span class="tooltiptext">Авторизуйтесь</span>
       </div>
       <div class="p-1 float-left w-8/12">
@@ -98,7 +98,7 @@
       </div>
       <div class="p-1 float-right text-right font-bold tooltip">
         <p v-if="isElementUnbLocked" class="text-right">{{ element.neutronQuantity }}</p>
-        <p v-else class="text-right text-red-500">Недоступно</p>
+        <i v-else class="fas fa-lock mx-3 self-end scale-125 transform w-1/12"/>
         <span class="tooltiptext">Авторизуйтесь</span>
       </div>
     </div>
@@ -120,6 +120,41 @@ export default {
     },
     isElementUnbLocked() {
       return this.isUserAuthorised
+    },
+    valencyString() {
+      if (!this.element.valences)
+        return "Невизначено"
+
+      let result = ""
+
+      for (let i = 0; i < this.element.valences.length; i++) {
+        switch (this.element.valences[i].valenceVal) {
+          case 1:
+            result += "I, "
+            break
+          case 2:
+            result += "II, "
+            break
+          case 3:
+            result += "III, "
+            break
+          case 4:
+            result += "IV, "
+            break
+          case 5:
+            result += "V, "
+            break
+          case 6:
+            result += "VI, "
+            break
+          case 7:
+            result += "VII, "
+            break
+          default:
+            break
+        }
+      }
+      return result.substr(0, result.length - 2)
     }
   },
   props: {
@@ -180,9 +215,9 @@ export default {
         type: String,
         default: "H"
       },
-      valency: {
-        type: Number,
-        default: 1
+      valences: {
+        type: Array,
+        default: []
       }
     },
     bgColor: {
