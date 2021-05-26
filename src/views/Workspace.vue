@@ -21,7 +21,8 @@
             v-bind:name="element.name"
             v-bind:category="element.category.categoryId"
             draggable="true"
-            @mousedown="atomKeydownLeft(element)"
+            @click="addElement(element)"
+            @dragstart="startDrag($event, element)"
           />
         </div>
       </div>
@@ -31,7 +32,14 @@
       scrollbar-thin scrollbar-thumb-blue-0 scrollbar-track-blue-0 scrollbar-thumb-rounded-full scrollbar-track-rounded-full
       !-->
 
-    <WorkspaceComp @mouseup="atomKeyupLeft()" v-bind:atoms="atoms" />
+    <WorkspaceComp
+      @mouseup="atomKeyupLeft()"
+      @mousemove="move"
+      v-bind:atoms="atoms"
+      @drop="onDrop($event)"
+      @dragenter.prevent
+      @dragover.prevent
+    />
   </div>
 
   <Footer />
@@ -86,7 +94,7 @@ export default {
     WorkspaceComp,
     Footer,
   },
-  setup() {},
+
   created() {
     apiService.getElements().then((resp) => {
       this.elements = resp.data
@@ -106,6 +114,31 @@ export default {
         symbol: element.symbol,
         category: element.category.categoryId,
         positionX: 40,
+        positionY: 300,
+      })
+    },
+    move($event) {
+      console.log($event)
+    },
+    startDrag(event, element) {
+      console.warn(element)
+      event.dataTransfer.dropEffect = 'move'
+      event.dataTransfer.effectAllowed = 'move'
+      event.dataTransfer.setData('atom', element)
+    },
+    onDrop(event) {
+      const element = event.dataTransfer.getData('atom')
+      console.log(element)
+      this.atoms.push({
+        /*  id: element.elementId,
+        symbol: element.symbol,
+        category: element.category.categoryId,
+        positionX: 40,
+        positionY: 300, */
+        id: 5,
+        symbol: 'Be',
+        category: 7,
+        positionX: 50,
         positionY: 200,
       })
     },

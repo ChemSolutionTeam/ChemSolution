@@ -24,6 +24,7 @@
 <script>
 import Atom from '@/components/Atom'
 export default {
+  data() {},
   props: {
     atoms: { type: Array },
   },
