@@ -34,7 +34,6 @@
 
     <WorkspaceComp
       @mouseup="atomKeyupLeft()"
-      @mousemove="move"
       v-bind:atoms="atoms"
       @drop="onDrop($event)"
       @dragenter.prevent
@@ -55,6 +54,7 @@ export default {
   data() {
     return {
       search: null,
+      dragElement: null,
       elements: [],
       atoms: [
         {
@@ -108,15 +108,6 @@ export default {
     atomKeyupLeft() {
       console.warn('end')
     },
-    addElement(element) {
-      this.atoms.push({
-        id: element.elementId,
-        symbol: element.symbol,
-        category: element.category.categoryId,
-        positionX: 40,
-        positionY: 300,
-      })
-    },
     move($event) {
       console.log($event)
     },
@@ -124,23 +115,18 @@ export default {
       console.warn(element)
       event.dataTransfer.dropEffect = 'move'
       event.dataTransfer.effectAllowed = 'move'
-      event.dataTransfer.setData('atom', element)
+      this.dragElement = element
     },
     onDrop(event) {
-      const element = event.dataTransfer.getData('atom')
-      console.log(element)
+      console.log(this.dragElement)
       this.atoms.push({
-        /*  id: element.elementId,
-        symbol: element.symbol,
-        category: element.category.categoryId,
-        positionX: 40,
-        positionY: 300, */
-        id: 5,
-        symbol: 'Be',
-        category: 7,
-        positionX: 50,
-        positionY: 200,
+        id: this.dragElement.elementId,
+        symbol: this.dragElement.symbol,
+        category: this.dragElement.category.categoryId,
+        positionX: event.layerX,
+        positionY: event.layerY,
       })
+      console.log(event)
     },
   },
   computed: {
