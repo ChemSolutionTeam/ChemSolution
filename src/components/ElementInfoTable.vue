@@ -19,10 +19,10 @@
       <div class="p-1 float-right text-right">
         <p id="infoSymbol" class="text-right font-bold">{{ element.symbol }}</p>
       </div>
-      <div class="p-1 float-left w-8/12">
+      <div class="p-1 float-left w-4/12">
         <p class="text-left">Назва:</p>
       </div>
-      <div class="p-1 float-right text-right">
+      <div class="p-1 float-right text-right w-7/12">
         <p id="infoName" class="text-right font-bold">{{ element.name }}</p>
       </div>
       <div class="p-1 float-left w-4/12">
@@ -49,7 +49,7 @@
         <p class="text-left">Атомний радіус:</p>
       </div>
       <div class="p-1 float-right text-right font-bold tooltip">
-        <p v-if="isElementUnbLocked" class="text-right">{{ element.atomicRadius }}</p>
+        <p v-if="isElementUnlocked" class="text-right">{{ element.atomicRadius }}</p>
         <i v-else class="fas fa-lock mx-3 self-end scale-125 transform w-1/12"/>
         <span class="tooltiptext">Авторизуйтесь</span>
       </div>
@@ -57,7 +57,7 @@
         <p class="text-left">Електронегативність:</p>
       </div>
       <div class="p-1 float-right text-right font-bold tooltip">
-        <p v-if="isElementUnbLocked" class="text-right">{{ element.electronegativity }}</p>
+        <p v-if="isElementUnlocked" class="text-right">{{ element.electronegativity }}</p>
         <i v-else class="fas fa-lock mx-3 self-end scale-125 transform w-1/12"/>
         <span class="tooltiptext">Авторизуйтесь</span>
       </div>
@@ -65,7 +65,7 @@
         <p class="text-left">Температура кіпіння:</p>
       </div>
       <div class="p-1 float-right text-right font-bold tooltip">
-        <p v-if="isElementUnbLocked" class="text-right">{{ element.boilingTemperature }}</p>
+        <p v-if="isElementUnlocked" class="text-right">{{ element.boilingTemperature }}</p>
         <i v-else class="fas fa-lock mx-3 self-end scale-125 transform w-1/12"/>
         <span class="tooltiptext">Авторизуйтесь</span>
       </div>
@@ -73,7 +73,7 @@
         <p class="text-left">Температура плавління:</p>
       </div>
       <div class="p-1 float-right text-right font-bold tooltip">
-        <p v-if="isElementUnbLocked" class="text-right">{{ element.meltingTemperature }}</p>
+        <p v-if="isElementUnlocked" class="text-right">{{ element.meltingTemperature }}</p>
         <i v-else class="fas fa-lock mx-3 self-end scale-125 transform w-1/12"/>
         <span class="tooltiptext">Авторизуйтесь</span>
       </div>
@@ -81,7 +81,7 @@
         <p class="text-left">Кількість електронів:</p>
       </div>
       <div class="p-1 float-right text-right font-bold tooltip">
-        <p v-if="isElementUnbLocked" class="text-right">{{ element.electronQuantity }}</p>
+        <p v-if="isElementUnlocked" class="text-right">{{ element.elementId }}</p>
         <i v-else class="fas fa-lock mx-3 self-end scale-125 transform w-1/12"/>
         <span class="tooltiptext">Авторизуйтесь</span>
       </div>
@@ -89,7 +89,9 @@
         <p class="text-left">Кількість протонів:</p>
       </div>
       <div class="p-1 float-right text-right font-bold tooltip">
-        <p v-if="isElementUnbLocked" class="text-right">{{ element.protonQuantity }}</p>
+        <p v-if="isElementUnlocked" class="text-right">{{
+            Math.round(element.atomicWeight) - element.neutronQuantity
+          }}</p>
         <i v-else class="fas fa-lock mx-3 self-end scale-125 transform w-1/12"/>
         <span class="tooltiptext">Авторизуйтесь</span>
       </div>
@@ -97,7 +99,7 @@
         <p class="text-left">Кількість нейтронів:</p>
       </div>
       <div class="p-1 float-right text-right font-bold tooltip">
-        <p v-if="isElementUnbLocked" class="text-right">{{ element.neutronQuantity }}</p>
+        <p v-if="isElementUnlocked" class="text-right">{{ element.neutronQuantity }}</p>
         <i v-else class="fas fa-lock mx-3 self-end scale-125 transform w-1/12"/>
         <span class="tooltiptext">Авторизуйтесь</span>
       </div>
@@ -118,7 +120,7 @@ export default {
     isUserAuthorised() {
       return storage.state.token.length !== 0
     },
-    isElementUnbLocked() {
+    isElementUnlocked() {
       return this.isUserAuthorised
     },
     valencyString() {
