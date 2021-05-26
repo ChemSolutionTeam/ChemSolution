@@ -21,6 +21,7 @@
               v-bind:symbol="element.symbol"
               v-bind:name="element.name"
               v-bind:category="element.category.categoryId"
+              draggable="true"
               @keydown.left="atomKeydownLeft(element.elementId, element.symbol)"
               @click.left="atomKeydownLeft(element.elementId, element.symbol)"
               @keyup.left="atomKeyupLeft()"
