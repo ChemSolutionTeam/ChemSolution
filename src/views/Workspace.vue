@@ -56,36 +56,7 @@ export default {
       search: null,
       dragElement: null,
       elements: [],
-      atoms: [
-        {
-          id: 1,
-          symbol: 'H',
-          category: 1,
-          positionX: 100,
-          positionY: 20,
-        },
-        {
-          id: 2,
-          symbol: 'He',
-          category: 2,
-          positionX: 40,
-          positionY: 40,
-        },
-        {
-          id: 3,
-          symbol: 'Li',
-          category: 3,
-          positionX: 40,
-          positionY: 100,
-        },
-        {
-          id: 4,
-          symbol: 'Be',
-          category: 4,
-          positionX: 40,
-          positionY: 200,
-        },
-      ],
+      atoms: [],
     }
   },
   name: 'Workspace',
