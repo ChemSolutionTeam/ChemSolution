@@ -69,6 +69,7 @@
 <script>
 import apiService from "@/services";
 import Footer from '../components/Footer';
+import storage from "@/store";
 
 
 export default {
@@ -82,7 +83,12 @@ export default {
     Footer
   },
   created() {
-    apiService.getAchievements().then(resp => this.achievements = resp.data)
+    apiService.getUser(storage.state.email).then(resp => {
+      console.log(resp)
+      this.achievements = resp.data.achievement
+    })
+    //apiService.getUsers()
+    //apiService.getAchievements().then(resp => this.achievements = resp.data)
     apiService.getUsersByRating().then(resp => this.users = resp.data)
   },
   methods: {

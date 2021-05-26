@@ -63,15 +63,11 @@ export default {
   },
 
   getUser(id) {
-    API.get('/Users/' + id, {
+    return API.get('/Users/' + id, {
       headers: {
         Authorization: 'Bearer' + storage.state.token,
       },
-    })
-      .then((resp) => {
-        console.log(resp)
-      })
-      .catch((e) => console.error(e))
+    }).catch((e) => console.error(e))
   },
   deleteUser(id) {
     API.delete('/Users/' + id, {
