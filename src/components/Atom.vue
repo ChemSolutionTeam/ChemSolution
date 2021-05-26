@@ -11,9 +11,9 @@
       d="M35,.25A34.75,34.75,0,1,1,.25,35,34.79,34.79,0,0,1,35,.25M35,0A35,35,0,1,0,70,35,35,35,0,0,0,35,0Z"
     />
     <text
-        class="cls-2"
-        style="font-size: 31.32px; font-family: 'Century Gothic'; fill: #ffffff;"
-        transform="translate(24.33 45.8)"
+      class="cls-2"
+      style="font-size: 31.32px; font-family: 'Century Gothic'; fill: #ffffff"
+      transform="translate(24.33 45.8)"
     >
       {{ symbol }}
     </text>
@@ -24,6 +24,9 @@
 export default {
   name: 'Atom',
   props: {
+    id: {
+      default: 1,
+    },
     symbol: {
       type: String,
       default: 'H',
