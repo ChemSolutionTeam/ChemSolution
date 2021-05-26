@@ -1,31 +1,41 @@
 <template>
-  <div class="row my-20">
-    <div class="column flex flex-row w-1/4">
-      <div class="border border-csblack rounded-3xl rounded-l-none  h-11/12 bg-csbluewhite p-4 shadow-xl mt-20">
-        <!-- Search -->
-        <div class=" w-full text-xl my-5">
-          <i class="fas fa-search mx-3 self-center scale-125 transform w-1/12"/>
-          <input
-              class="w-10/12 border-csblack border rounded-xl outline-none px-5"
-              placeholder="Уведіть назву елемента.."
-              v-model="search"
-          />
-        </div>
-        <div class="elementCollection mt-3 pt-3 overflow-y-scroll scrollbar-thin scrollbar-thumb-blue-400
-          scrollbar-track-blue-100 scrollbar-thumb-rounded-full scrollbar-track-rounded-full">
-          <div v-for="element in filteredElements" :key="element.elementId">
+  <div class="flex flex-row my-20">
+    <div
+        class="border border-csblack rounded-3xl rounded-l-none w-1/4 h-11/12 bg-csbluewhite p-4 shadow-xl mt-20"
+    >
+      <!-- Search -->
+      <div class=" w-full text-xl my-5">
+        <i class="fas fa-search mx-3 self-center scale-125 transform w-1/12"/>
+        <input
+            class="w-10/12 border-csblack border rounded-xl outline-none px-5"
+            placeholder="Уведіть назву елемента.."
+            v-model="search"
+        />
+      </div>
+      <div class="elementCollection mt-3 pt-3 overflow-y-scroll scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-blue-100
+      scrollbar-thumb-rounded-full scrollbar-track-rounded-full">
+        <ul>
+          <li
+              v-for="element in filteredElements"
+              :key="element.elementId"
+          >
             <ElementChooser
                 v-bind:symbol="element.symbol"
                 v-bind:name="element.name"
                 v-bind:category="element.category.categoryId"
             />
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
     </div>
-    <div class="column ml-10 border border-csblack rounded-3xl w-2/4 h-11/12 bg-csbluewhite p-4 shadow-xl">
-      <WorkspaceComp/>
-    </div>
+    <!-- scrollbar:
+    overflow-y-auto
+      scrollbar-thin scrollbar-thumb-blue-0 scrollbar-track-blue-0 scrollbar-thumb-rounded-full scrollbar-track-rounded-full
+      !-->
+
+  </div>
+  <div>
+    <WorkspaceComp/>
   </div>
   <Footer/>
 </template>
