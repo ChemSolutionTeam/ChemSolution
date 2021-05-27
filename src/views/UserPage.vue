@@ -23,7 +23,7 @@
             <li v-for="achievement in achievements" :key="achievement.achievementId">
               <div class="row">
                 <span class="column w-7/12 ml-5 achievement-text">
-                  <img src="{{achievement.imgAchievement}}" class="icons-achievement mr-3 float-left"/>
+                  <img src="{{ achievement.imgAchievement }}" class="icons-achievement mr-3 float-left"/>
                   {{ achievement.heading }}
                 </span>
                 <span class="column w-2/12 mr-1 achievement-text">
@@ -75,26 +75,39 @@ import storage from "@/store";
 export default {
   data() {
     return {
-      achievements: [],
-      users: []
+      users: [],
+      achievements: []
     }
   },
   components: {
     Footer
   },
   created() {
-    apiService.getUser(storage.state.email).then(resp => {
+    /*apiService.getUser(storage.state.email).then(resp => {
+      console.log('GetUser method:')
+      console.log(storage.state.email)
       console.log(resp)
-      this.achievements = resp.data.achievement
-    })
+      //this.achievements = resp.data.achievemen
+    })*/
     //apiService.getUsers()
     //apiService.getAchievements().then(resp => this.achievements = resp.data)
     apiService.getUsersByRating().then(resp => this.users = resp.data)
+    try {
+      if (storage.state.token.length !== 0) {
+        apiService.getUser().then(resp => {
+          console.log(resp)
+          this.achievements = resp.data.achievement
+        })
+      }
+    } catch (e) {
+      console.error(e)
+    }
+
   },
   methods: {
     getData() {
-      apiService.getAchievements().then((resp) => {
-        this.achievements = resp.data
+      apiService.getUser().then((resp) => {
+        console.log(resp.data)
       })
     }
   }
