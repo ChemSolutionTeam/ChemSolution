@@ -5,12 +5,14 @@
         <div
             class="user-info w-11/12 bg-csblack text-white mb-20 border border-csblack block overflow-hidden"
         >
-          <a href="">
+          <Link v-if="isUserAuthorised" label="Ваші запити" href="/UserRequests"/>
             <img
                 src="button-for-request.png"
                 class="pl-10 w-20 h-20 float-left"
             />
-          </a>
+
+
+
           <p class="text-7xl font-semibold">{{ currentUserName }}</p>
         </div>
 
@@ -70,6 +72,7 @@
 import apiService from "@/services";
 import Footer from '../components/Footer';
 import storage from "@/store";
+import Link from '../components/NavigationLink.vue'
 
 
 export default {
@@ -81,7 +84,13 @@ export default {
     }
   },
   components: {
-    Footer
+    Footer,
+    Link
+  },
+  computed: {
+    isUserAuthorised() {
+      return storage.state.token.length !== 0
+    }
   },
   created() {
     apiService.getUsersByRating().then(resp => this.users = resp.data)

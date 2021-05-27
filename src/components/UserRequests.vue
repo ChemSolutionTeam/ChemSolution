@@ -2,14 +2,14 @@
   <div class="request-block">
     <h3 class="text-4xl text-center pb-5">Запити</h3>
 
-    <div id="approved" class="request border border-csblack mr-5 ml-5 mb-5 rounded-xl text-csblack h-full block overflow-hidden">
+    <div  v-for="(request, index) in requests" :key=index class="request border border-csblack mr-5 ml-5 mb-5 rounded-xl text-csblack h-full block overflow-hidden">
       <table>
         <tr>
           <td>
             <p class="font-bold">Тема:</p>
           </td>
           <td>
-            <p>Додавання C2H5OH</p>
+            <p>{{ request.Theme}}</p>
           </td>
         </tr>
         <tr>
@@ -17,7 +17,7 @@
             <p class="font-bold">Дата:</p>
           </td>
           <td>
-            <p>23.05.2021</p>
+            <p>{{ request.DateTimeSended }}</p>
           </td>
         </tr>
         <tr>
@@ -25,65 +25,7 @@
             <p class="font-bold">Статус:</p>
           </td>
           <td>
-            <p>Схвалено</p>
-          </td>
-        </tr>
-      </table>
-    </div>
-
-    <div id="canceled" class="request border border-csblack mr-5 ml-5 mb-5 rounded-xl text-csblack h-full block overflow-hidden">
-      <table>
-        <tr>
-          <td>
-            <p class="font-bold">Тема:</p>
-          </td>
-          <td>
-            <p>Додавання C2H5OH</p>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <p class="font-bold">Дата:</p>
-          </td>
-          <td>
-            <p>23.05.2021</p>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <p class="font-bold">Статус:</p>
-          </td>
-          <td>
-            <p>Відхиленно</p>
-          </td>
-        </tr>
-      </table>
-    </div>
-
-    <div id="under-consideration" class="request border border-csblack mr-5 ml-5 mb-5 rounded-xl text-csblack h-full block overflow-hidden">
-      <table>
-        <tr>
-          <td>
-            <p class="font-bold">Тема:</p>
-          </td>
-          <td>
-            <p>Додавання C2H5OH</p>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <p class="font-bold">Дата:</p>
-          </td>
-          <td>
-            <p>23.05.2021</p>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <p class="font-bold">Статус:</p>
-          </td>
-          <td>
-            <p>Розглядається</p>
+            <p>{{ request.StatusId }}</p>
           </td>
         </tr>
       </table>
@@ -92,10 +34,27 @@
 </template>
 
 <script>
+import apiService from "@/services";
+import storage from "@/store";
+
 export default {
-  name: "UserRequests",
-  methods: {}
+  data() {
+    return {
+      requests: [],
+    }
+  },
+  components: {
+  },
+  created() {
+    if (storage.state.token.length !== 0) {
+      apiService.getUser().then(resp => {
+        console.log(resp)
+        this.requests = resp.data.requests
+      })
+    }
+  },
 }
+
 </script>
 
 <style type="text/css">
