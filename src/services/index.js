@@ -1,8 +1,8 @@
 import axios from 'axios'
 import storage from '../store/index'
 const API = axios.create({
-  baseURL: 'http://192.168.0.104:5001',
-  //baseURL: 'https://localhost:5001',
+  //baseURL: 'http://192.168.0.104:5001',
+  baseURL: 'https://localhost:5001',
   headers: {
     'Access-Control-Allow-Origin': '*',
     Accept: 'text/plan',
@@ -68,7 +68,7 @@ export default {
       headers: {
         Authorization: 'Bearer ' + storage.state.token,
       },
-    }).then(resp => console.log(resp)).catch((e) => console.error(e))
+    }).catch((e) => console.error(e))
   },
   deleteUser(id) {
     API.delete('/Users/' + id, {

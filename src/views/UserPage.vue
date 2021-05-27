@@ -11,7 +11,7 @@
                 class="pl-10 w-20 h-20 float-left"
             />
           </a>
-          <p class="text-7xl font-semibold">Звичайний учень</p>
+          <p @click="getData()" class="text-7xl font-semibold">Звичайний учень</p>
         </div>
 
         <div
@@ -83,34 +83,15 @@ export default {
     Footer
   },
   created() {
-    /*apiService.getUser(storage.state.email).then(resp => {
-      console.log('GetUser method:')
-      console.log(storage.state.email)
-      console.log(resp)
-      //this.achievements = resp.data.achievemen
-    })*/
-    //apiService.getUsers()
-    //apiService.getAchievements().then(resp => this.achievements = resp.data)
     apiService.getUsersByRating().then(resp => this.users = resp.data)
-    try {
-      if (storage.state.token.length !== 0) {
-        apiService.getUser().then(resp => {
-          console.log(resp)
-          this.achievements = resp.data.achievement
-        })
-      }
-    } catch (e) {
-      console.error(e)
-    }
 
-  },
-  methods: {
-    getData() {
-      apiService.getUser().then((resp) => {
-        console.log(resp.data)
+    if (storage.state.token.length !== 0) {
+      apiService.getUser().then(resp => {
+        console.log(resp)
+        this.achievements = resp.data.achievement
       })
     }
-  }
+  },
 }
 </script>
 
