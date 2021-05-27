@@ -87,7 +87,6 @@ export default {
     apiService.getUsersByRating().then(resp => this.users = resp.data)
 
     if (storage.state.token.length !== 0) {
-      //this.currentUserName = storage.state.username
       apiService.getUser().then(resp => {
         console.log(resp)
         this.currentUserName = resp.data.userName
