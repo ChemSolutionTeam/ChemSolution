@@ -1,5 +1,11 @@
 <template>
-  <div :class="tooltip">Авторизуйтесь</div>
+  <div class="relative">
+    <div class="h-full" @mouseenter="toggle" @mouseleave="toggle">
+      <slot/>
+    </div>
+    <div v-show="isShown" :class="tooltip">{{ text }}</div>
+  </div>
+
 </template>
 
 <script>
@@ -8,6 +14,12 @@ export default {
   data() {
     return {
       isShown: false
+    }
+  },
+  props: {
+    text: {
+      type: String,
+      default: 'Авторизуйтесь'
     }
   },
   computed: {
@@ -21,6 +33,7 @@ export default {
         'whitespace-nowrap',
         'p-2',
         'absolute',
+        'top-0'
       ]
     },
   },
