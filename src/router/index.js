@@ -139,9 +139,9 @@ const routes = [
     component: () => import('../views/PeriodicTable.vue'),
   },
   {
-    path: '/periodicTableDemo',
-    name: 'PeriodicTableDemo',
-    component: () => import('../views/PeriodicTableDemo.vue'),
+    path: '/shop',
+    name: 'Shop',
+    component: () => import('../views/Shop.vue'),
   },
   {
     path: '/404',
