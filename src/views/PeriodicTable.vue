@@ -1070,6 +1070,7 @@ export default {
         protonQuantity: 936,
         symbol: 'Н',
         valences: [{valenceVal: 1}],
+        isLocked: 1
       },
     }
   },
