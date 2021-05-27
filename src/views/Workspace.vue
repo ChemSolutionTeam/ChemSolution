@@ -39,6 +39,7 @@
       @dragenter.prevent
       @dragover.prevent
       @remove="removeElement"
+      @dragAndDrop="dragAndDropElement"
     />
   </div>
 
@@ -104,6 +105,12 @@ export default {
     },
     removeElement(atom) {
       this.atoms = this.atoms.filter((el) => el != atom)
+    },
+    dragAndDropElement(atom) {
+      // event.dataTransfer.dropEffect = 'move'
+      // event.dataTransfer.effectAllowed = 'move'
+      this.dragElement = atom
+      print(this.dragElement)
     },
   },
   computed: {

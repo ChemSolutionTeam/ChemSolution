@@ -1,14 +1,11 @@
 <template>
-
+  <div></div>
 </template>
 
 <script>
 export default {
-  name: 'PeriodicTable',
+  name: 'Shop',
 }
 </script>
 
-<style type="text/css">
-
-
-</style>
+<style type="text/css"></style>

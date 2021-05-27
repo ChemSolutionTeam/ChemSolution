@@ -5,6 +5,8 @@
   >
     <div v-for="atom in atoms" :key="atom.id">
       <div
+        draggable="true"
+        v-on:click.ctrl="this.$emit('remove', atom)"
         v-bind:style="{
           position: 'absolute',
           top: atom.clientY + 'px',
@@ -15,7 +17,6 @@
           v-bind:id="atom.id"
           v-bind:symbol="atom.symbol"
           v-bind:category="atom.category"
-          v-on:click.ctrl="this.$emit('remove', atom)"
         />
       </div>
     </div>
