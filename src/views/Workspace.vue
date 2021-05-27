@@ -57,6 +57,7 @@ export default {
     return {
       search: null,
       dragElement: null,
+      dragAtom: null,
       elements: [],
       atoms: [],
     }
@@ -91,26 +92,40 @@ export default {
       this.dragElement = element
     },
     onDrop(event) {
-      console.log(this.dragElement)
-      this.atoms.push({
-        id: this.dragElement.elementId,
-        symbol: this.dragElement.symbol,
-        category: this.dragElement.category.categoryId,
-        clientX: event.offsetX,
-        clientY: event.offsetY,
-        movementX: event.movementX,
-        movementY: event.movementY,
-      })
-      console.log(event)
+      console.warn(event)
+      if (this.dragElement != null) {
+        this.atoms.push({
+          id: this.dragElement.elementId,
+          symbol: this.dragElement.symbol,
+          category: this.dragElement.category.categoryId,
+          clientX: event.offsetX,
+          clientY: event.offsetY,
+          movementX: event.movementX,
+          movementY: event.movementY,
+        })
+        this.dragElement = null
+      }
+      if (this.dragAtom != null) {
+        this.atoms.push({
+          id: this.dragAtom.id,
+          symbol: this.dragAtom.symbol,
+          category: this.dragAtom.category,
+          clientX: event.offsetX,
+          clientY: event.offsetY,
+          movementX: event.movementX,
+          movementY: event.movementY,
+        })
+        this.atoms = this.atoms.filter((el) => el != this.dragAtom)
+        this.dragAtom = null
+      }
     },
     removeElement(atom) {
       this.atoms = this.atoms.filter((el) => el != atom)
     },
-    dragAndDropElement(atom) {
-      // event.dataTransfer.dropEffect = 'move'
-      // event.dataTransfer.effectAllowed = 'move'
-      this.dragElement = atom
-      print(this.dragElement)
+    dragAndDropElement(obj) {
+      console.log(obj.atom)
+      console.log(obj.event)
+      this.dragAtom = obj.atom
     },
   },
   computed: {

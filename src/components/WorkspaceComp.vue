@@ -7,6 +7,9 @@
       <div
         draggable="true"
         v-on:click.ctrl="this.$emit('remove', atom)"
+        v-on:dragstart="
+          this.$emit('dragAndDrop', { atom: atom, event: $event })
+        "
         v-bind:style="{
           position: 'absolute',
           top: atom.clientY + 'px',
