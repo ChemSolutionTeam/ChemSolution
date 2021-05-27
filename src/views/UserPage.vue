@@ -11,7 +11,7 @@
                 class="pl-10 w-20 h-20 float-left"
             />
           </a>
-          <p @click="getData()" class="text-7xl font-semibold">Звичайний учень</p>
+          <p class="text-7xl font-semibold">{{ currentUserName }}</p>
         </div>
 
         <div
@@ -76,7 +76,8 @@ export default {
   data() {
     return {
       users: [],
-      achievements: []
+      achievements: [],
+      currentUserName: ''
     }
   },
   components: {
@@ -86,8 +87,10 @@ export default {
     apiService.getUsersByRating().then(resp => this.users = resp.data)
 
     if (storage.state.token.length !== 0) {
+      //this.currentUserName = storage.state.username
       apiService.getUser().then(resp => {
         console.log(resp)
+        this.currentUserName = resp.data.userName
         this.achievements = resp.data.achievement
       })
     }
