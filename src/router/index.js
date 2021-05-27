@@ -149,9 +149,9 @@ const routes = [
     component: () => import('../views/NotFound.vue'),
   },
   {
-    path: '/userPageDemo',
-    name: 'UserPageDemo',
-    component: () => import('../views/UserPageDemo.vue'),
+    path: '/userPage',
+    name: 'UserPage',
+    component: () => import('../views/UserPage.vue'),
   },
   {
     path: '/userRequests',
