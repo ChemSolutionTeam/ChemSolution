@@ -38,6 +38,7 @@
       @drop="onDrop($event)"
       @dragenter.prevent
       @dragover.prevent
+      @remove="removeElement"
     />
   </div>
 
@@ -94,10 +95,15 @@ export default {
         id: this.dragElement.elementId,
         symbol: this.dragElement.symbol,
         category: this.dragElement.category.categoryId,
-        positionX: event.layerX,
-        positionY: event.layerY,
+        clientX: event.offsetX,
+        clientY: event.offsetY,
+        movementX: event.movementX,
+        movementY: event.movementY,
       })
       console.log(event)
+    },
+    removeElement(atom) {
+      this.atoms = this.atoms.filter((el) => el != atom)
     },
   },
   computed: {
