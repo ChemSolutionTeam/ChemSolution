@@ -4,6 +4,7 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      fill: ['hover', 'focus'],
       width: {
         two: '200%',
       },
@@ -34,7 +35,6 @@ module.exports = {
       category8: '#21d0b2',
       category9: '#1dcdfe',
       category10: '#696969',
-
 
       red: colors.red,
       amber: colors.amber,

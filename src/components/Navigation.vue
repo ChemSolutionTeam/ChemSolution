@@ -26,11 +26,11 @@
       class="w-full h-full block flex-grow lg:flex lg:items-center lg:mr-6 lg:ml-9 lg:w-auto"
     >
       <div class="text-lg lg:flex-grow flex justify-start">
-        <Link label="Головна" href="/"/>
-        <Link label="Admin" href="/admin"/>
-        <Link label="Періодична таблиця" href="/PeriodicTable"/>
-        <Link label="Лабораторія" href="/Workspace"/>
-        <Link v-if="isUserAuthorised" label="Мій профіль" href="/UserPage"/>
+        <Link label="Головна" href="/" />
+        <Link label="Admin" href="/admin" />
+        <Link label="Періодична таблиця" href="/PeriodicTable" />
+        <Link label="Лабораторія" href="/Workspace" />
+        <Link v-if="isUserAuthorised" label="Мій профіль" href="/UserPage" />
       </div>
       <div>
         <button
@@ -54,7 +54,7 @@
 import Link from '../components/NavigationLink.vue'
 import Logo from '../components/Logo.vue'
 import BackToTopButton from '../components/BackToTopButton.vue'
-import storage from "@/store";
+import storage from '@/store'
 
 export default {
   name: 'Navigation',
@@ -70,7 +70,7 @@ export default {
     },
     isUserAuthorised() {
       return storage.state.token.length !== 0
-    }
+    },
   },
   mounted() {
     window.addEventListener('scroll', this.handleScroll)

@@ -14,12 +14,15 @@
           position: 'absolute',
           top: atom.clientY + 'px',
           left: atom.clientX + 'px',
+          width: '75px',
+          height: '75px',
         }"
       >
         <Atom
           v-bind:id="atom.id"
           v-bind:symbol="atom.symbol"
           v-bind:category="atom.category"
+          class="w-full"
         />
       </div>
     </div>
@@ -32,6 +35,7 @@ export default {
   data() {
     return {
       dragAtom: null,
+      isShown: true,
     }
   },
   props: {

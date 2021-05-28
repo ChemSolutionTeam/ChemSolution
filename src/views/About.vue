@@ -15,6 +15,4 @@ export default {
 }
 </script>
 
-
-// width = 1vw;
-// height = 1vw;
+// width = 1vw; // height = 1vw;

@@ -8,7 +8,4 @@ export default {
 }
 </script>
 
-<style type="text/css">
-
-
-</style>
+<style type="text/css"></style>

@@ -2,14 +2,18 @@
   <div class="request-block">
     <h3 class="text-4xl text-center pb-5">Запити</h3>
 
-    <div  v-for="(request, index) in requests" :key=index class="request border border-csblack mr-5 ml-5 mb-5 rounded-xl text-csblack h-full block overflow-hidden">
+    <div
+      v-for="(request, index) in requests"
+      :key="index"
+      class="request border border-csblack mr-5 ml-5 mb-5 rounded-xl text-csblack h-full block overflow-hidden"
+    >
       <table>
         <tr>
           <td>
             <p class="font-bold">Тема:</p>
           </td>
           <td>
-            <p>{{ request.Theme}}</p>
+            <p>{{ request.Theme }}</p>
           </td>
         </tr>
         <tr>
@@ -34,8 +38,8 @@
 </template>
 
 <script>
-import apiService from "@/services";
-import storage from "@/store";
+import apiService from '@/services'
+import storage from '@/store'
 
 export default {
   data() {
@@ -43,46 +47,41 @@ export default {
       requests: [],
     }
   },
-  components: {
-  },
+  components: {},
   created() {
     if (storage.state.token.length !== 0) {
-      apiService.getUser().then(resp => {
+      apiService.getUser().then((resp) => {
         console.log(resp)
         this.requests = resp.data.requests
       })
     }
   },
 }
-
 </script>
 
 <style type="text/css">
-
 @font-face {
   font-family: 'Century Gothic';
   src: url('/public/CenturyGothic.ttf');
 }
 
-div{
+div {
   font-size: 2vw;
 }
 
-td{
+td {
   text-align: left;
 }
 
-#approved{
-  background-color: #CEFFB7;
+#approved {
+  background-color: #ceffb7;
 }
 
-#canceled{
-  background-color: #FFB7B8;
+#canceled {
+  background-color: #ffb7b8;
 }
 
-#under-consideration{
-  background-color: #C0F7FB;
+#under-consideration {
+  background-color: #c0f7fb;
 }
-
-
 </style>
