@@ -1,8 +1,8 @@
 import axios from 'axios'
 import storage from '../store/index'
 const API = axios.create({
-  baseURL: 'http://192.168.0.104:5001',
-  //baseURL: 'https://localhost:5001',
+  // baseURL: 'http://192.168.0.104:5001',
+  baseURL: 'https://localhost:5001',
   headers: {
     'Access-Control-Allow-Origin': '*',
     Accept: 'text/plan',
@@ -56,11 +56,11 @@ export default {
         Authorization: 'Bearer ' + storage.state.token,
       },
     })
-        .then((resp) => {
-          let data = resp.data
-          console.log(data)
-        })
-        .catch((e) => console.error(e))
+      .then((resp) => {
+        let data = resp.data
+        console.log(data)
+      })
+      .catch((e) => console.error(e))
   },
 
   getUser() {

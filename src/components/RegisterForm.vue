@@ -10,11 +10,11 @@
           <h3 class="text-4xl text-center heading pb-5">Реєстрація</h3>
           <div class="column w-6/12">
             <BaseInput
-                label="Email"
-                type="email"
-                placeholder="Уведіть E-mail"
-                :isMultiline="true"
-                v-model="user.email"
+              label="Email"
+              type="email"
+              placeholder="Уведіть E-mail"
+              :isMultiline="true"
+              v-model="user.email"
             />
             <BaseInput
               label="Пароль"

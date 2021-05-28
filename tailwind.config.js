@@ -35,7 +35,6 @@ module.exports = {
       category9: '#1dcdfe',
       category10: '#696969',
 
-
       red: colors.red,
       amber: colors.amber,
       orange: colors.orange,
