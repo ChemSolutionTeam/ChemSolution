@@ -36,6 +36,7 @@ export default {
   },
   props: {
     atoms: { type: Array },
+    value: { type: Array },
   },
   model: {
     prop: 'atoms',

@@ -35,6 +35,7 @@
     <WorkspaceComp
       @mouseup="atomKeyupLeft()"
       v-bind:atoms="atoms"
+      v-bind:value="value"
       @drop="onDrop($event)"
       @dragenter.prevent
       @dragover.prevent
@@ -60,6 +61,7 @@ export default {
       dragAtom: null,
       elements: [],
       atoms: [],
+      value: [],
     }
   },
   name: 'Workspace',
@@ -103,6 +105,22 @@ export default {
           movementX: event.movementX,
           movementY: event.movementY,
         })
+        if (
+          this.value.filter((el) => el.elementId == this.dragElement.elementId)
+            .length == 0
+        ) {
+          this.value.push({
+            amount: 1,
+            elementId: this.dragElement.elementId,
+          })
+        } else {
+          for (let i = 0; i < this.value.length; i += 1) {
+            if (this.value[i].elementId == this.dragElement.elementId) {
+              this.value[i].amount += 1
+            }
+          }
+        }
+        console.log(this.value)
         this.dragElement = null
       }
       if (this.dragAtom != null) {
