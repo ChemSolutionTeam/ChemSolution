@@ -7,10 +7,18 @@
         </p>
       </div>
       <div class="text-7xl">
-        <i class="fab fa-twitter-square mx-6"></i>
-        <i class="fab fa-telegram mx-6"></i>
-        <i class="fab fa-instagram mx-6"></i>
-        <i class="fab fa-facebook-square mx-6"></i>
+        <i
+          class="fab fa-twitter-square mx-6 cursor-pointer hover:text-white hover:animate-wiggle"
+        ></i>
+        <i
+          class="fab fa-telegram mx-6 cursor-pointer hover:text-white hover:animate-wiggle"
+        ></i>
+        <i
+          class="fab fa-instagram mx-6 cursor-pointer hover:text-white hover:animate-wiggle ease-in-out"
+        ></i>
+        <i
+          class="fab fa-facebook-square mx-6 cursor-pointer hover:text-white hover:animate-wiggle"
+        ></i>
       </div>
     </div>
 

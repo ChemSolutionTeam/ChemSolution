@@ -50,7 +50,7 @@
           Інтерактивна хімічна лабораторія дозволяє користувачу вивчати хімічні
           сполуки, шляхом комбінування відповідних атомів між собою.
         </p>
-        <Button label="До хімічної лабораторії" />
+        <Button label="До хімічної лабораторії" @click="toLab()" />
       </div>
     </div>
   </div>
@@ -77,7 +77,7 @@
           закону. Долучіться до світу хімії за допомогою періодичної системи
           хімічних елементів.
         </p>
-        <Button label="До періодичної системи" />
+        <Button label="До періодичної системи" @click="toTable()" />
       </div>
       <img
         src="https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg"
@@ -135,7 +135,7 @@
 import Logo from '../components/Logo'
 import Button from '../components/HomePageButtons'
 import Footer from '../components/Footer'
-
+import router from '@/router/index'
 export default {
   name: 'Home',
   components: {
@@ -151,6 +151,24 @@ export default {
   methods: {
     openForm(args) {
       this.$emit('showForm', args)
+    },
+    toLab() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      })
+      setTimeout(() => {
+        router.push('/Workspace')
+      }, 500)
+    },
+    toTable() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      })
+      setTimeout(() => {
+        router.push('/PeriodicTable')
+      }, 500)
     },
   },
 }

@@ -4,6 +4,7 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      fill: ['hover', 'focus'],
       width: {
         two: '200%',
       },
