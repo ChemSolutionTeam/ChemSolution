@@ -52,10 +52,11 @@
         <BaseTooltip v-if="!isUserAuthorised">
           <i class="fas fa-lock mx-3 self-end scale-125 transform w-1/12"/>
         </BaseTooltip>
-        <BaseTooltip v-else-if="element.isLocked" text='Елемент не відкрито'>
+        <p v-else-if="!element.isLocked || userElements.some(e => e.elementId === element.elementId)"
+           class="text-right">{{ element.atomicRadius }}</p>
+        <BaseTooltip v-else text='Елемент не відкрито'>
           <i class="fas fa-lock mx-3 self-end scale-125 transform w-1/12"/>
         </BaseTooltip>
-        <p v-else class="text-right">{{ element.atomicRadius }}</p>
       </div>
 
 
@@ -66,10 +67,11 @@
         <BaseTooltip v-if="!isUserAuthorised">
           <i class="fas fa-lock mx-3 self-end scale-125 transform w-1/12"/>
         </BaseTooltip>
-        <BaseTooltip v-else-if="element.isLocked" text='Елемент не відкрито'>
+        <p v-else-if="!element.isLocked || userElements.some(e => e.elementId === element.elementId)"
+           class="text-right">{{ element.electronegativity }}</p>
+        <BaseTooltip v-else text='Елемент не відкрито'>
           <i class="fas fa-lock mx-3 self-end scale-125 transform w-1/12"/>
         </BaseTooltip>
-        <p v-else class="text-right">{{ element.electronegativity }}</p>
       </div>
 
 
@@ -80,10 +82,11 @@
         <BaseTooltip v-if="!isUserAuthorised">
           <i class="fas fa-lock mx-3 self-end scale-125 transform w-1/12"/>
         </BaseTooltip>
-        <BaseTooltip v-else-if="element.isLocked" text='Елемент не відкрито'>
+        <p v-else-if="!element.isLocked || userElements.some(e => e.elementId === element.elementId)"
+           class="text-right">{{ element.boilingTemperature }}</p>
+        <BaseTooltip v-else text='Елемент не відкрито'>
           <i class="fas fa-lock mx-3 self-end scale-125 transform w-1/12"/>
         </BaseTooltip>
-        <p v-else class="text-right">{{ element.boilingTemperature }}</p>
       </div>
       <div class="p-1 float-left w-8/12">
         <p class="text-left">Температура плавління:</p>
@@ -92,10 +95,11 @@
         <BaseTooltip v-if="!isUserAuthorised">
           <i class="fas fa-lock mx-3 self-end scale-125 transform w-1/12"/>
         </BaseTooltip>
-        <BaseTooltip v-else-if="element.isLocked" text='Елемент не відкрито'>
+        <p v-else-if="!element.isLocked || userElements.some(e => e.elementId === element.elementId)"
+           class="text-right">{{ element.meltingTemperature }}</p>
+        <BaseTooltip v-else text='Елемент не відкрито'>
           <i class="fas fa-lock mx-3 self-end scale-125 transform w-1/12"/>
         </BaseTooltip>
-        <p v-else class="text-right">{{ element.meltingTemperature }}</p>
       </div>
       <div class="p-1 float-left w-8/12">
         <p class="text-left">Кількість електронів:</p>
@@ -104,10 +108,11 @@
         <BaseTooltip v-if="!isUserAuthorised">
           <i class="fas fa-lock mx-3 self-end scale-125 transform w-1/12"/>
         </BaseTooltip>
-        <BaseTooltip v-else-if="element.isLocked" text='Елемент не відкрито'>
+        <p v-else-if="!element.isLocked || userElements.some(e => e.elementId === element.elementId)"
+           class="text-right">{{ element.elementId }}</p>
+        <BaseTooltip v-else text='Елемент не відкрито'>
           <i class="fas fa-lock mx-3 self-end scale-125 transform w-1/12"/>
         </BaseTooltip>
-        <p v-else class="text-right">{{ element.elementId }}</p>
       </div>
       <div class="p-1 float-left w-8/12">
         <p class="text-left">Кількість протонів:</p>
@@ -116,14 +121,15 @@
         <BaseTooltip v-if="!isUserAuthorised">
           <i class="fas fa-lock mx-3 self-end scale-125 transform w-1/12"/>
         </BaseTooltip>
-        <BaseTooltip v-else-if="element.isLocked" text='Елемент не відкрито'>
-          <i class="fas fa-lock mx-3 self-end scale-125 transform w-1/12"/>
-        </BaseTooltip>
-        <p v-else class="text-right">
+        <p v-else-if="!element.isLocked || userElements.some(e => e.elementId === element.elementId)"
+           class="text-right">
           {{
             Math.round(element.atomicWeight) - element.neutronQuantity
           }}
         </p>
+        <BaseTooltip v-else text='Елемент не відкрито'>
+          <i class="fas fa-lock mx-3 self-end scale-125 transform w-1/12"/>
+        </BaseTooltip>
       </div>
 
       <div class="p-1 float-left w-8/12">
@@ -133,10 +139,11 @@
         <BaseTooltip v-if="!isUserAuthorised">
           <i class="fas fa-lock mx-3 self-end scale-125 transform w-1/12"/>
         </BaseTooltip>
-        <BaseTooltip v-else-if="element.isLocked" text='Елемент не відкрито'>
+        <p v-else-if="!element.isLocked || userElements.some(e => e.elementId === element.elementId)"
+           class="text-right">{{ element.neutronQuantity }}</p>
+        <BaseTooltip v-else text='Елемент не відкрито'>
           <i class="fas fa-lock mx-3 self-end scale-125 transform w-1/12"/>
         </BaseTooltip>
-        <p v-else class="text-right">{{ element.neutronQuantity }}</p>
       </div>
     </div>
   </div>
@@ -147,13 +154,16 @@
 <script>
 import storage from "@/store";
 import BaseTooltip from "@/components/BaseTooltip";
+import apiService from "@/services";
 
 export default {
   components: {
     BaseTooltip
   },
   data() {
-    return this.element
+    return {
+      userElements: [],
+    }
   },
   computed: {
     isUserAuthorised() {
@@ -194,7 +204,13 @@ export default {
       }
       return result.substr(0, result.length - 2)
     },
-
+  },
+  created() {
+    if (storage.state.token.length !== 0) {
+      apiService.getUser().then(resp => {
+        this.userElements = resp.data.elements
+      })
+    }
   },
   props: {
     element: {
