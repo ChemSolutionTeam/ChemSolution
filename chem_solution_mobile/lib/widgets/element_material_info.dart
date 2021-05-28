@@ -9,7 +9,7 @@ Widget scaffoldInfo(BuildContext context, String title, Column column) {
       }
     },
     child: Scaffold(
-      backgroundColor: Color(0xffEBFAFF),
+      backgroundColor: themeLightBlue,
       appBar: AppBar(
         backgroundColor: themeDark,
         title: Padding(

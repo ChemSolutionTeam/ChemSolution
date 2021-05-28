@@ -143,7 +143,7 @@ class _MaterialsState extends State<Materials>
         }
       },
       child: Scaffold(
-        backgroundColor: Color(0xffEBFAFF),
+        backgroundColor: themeLightBlue,
         appBar: new AppBar(
           backgroundColor: themeDark,
           title: ListTile(

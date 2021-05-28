@@ -45,7 +45,7 @@ class _MyProfileState extends State<MyProfile> {
         }
       },
       child: Scaffold(
-        backgroundColor: Color(0xffEBFAFF),
+        backgroundColor: themeLightBlue,
         appBar: new AppBar(
           backgroundColor: themeDark,
           title: new Text(

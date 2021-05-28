@@ -154,7 +154,7 @@ information2\ninformation2\ninformation2\ninformation2\n''',
         }
       },
       child: Scaffold(
-        backgroundColor: Color(0xffEBFAFF),
+        backgroundColor: themeLightBlue,
         appBar: AppBar(
           backgroundColor: themeDark,
           title: Padding(

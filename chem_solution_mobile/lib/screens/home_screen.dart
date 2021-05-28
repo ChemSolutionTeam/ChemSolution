@@ -100,7 +100,7 @@ class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
         }
       },
       child: Scaffold(
-        backgroundColor: Color(0xffEBFAFF),
+        backgroundColor: themeLightBlue,
         appBar: AppBar(
           backgroundColor: themeDark,
           title: ListTile(
@@ -168,7 +168,7 @@ class _ChemSolutionWidgetState extends State<ChemSolutionWidget> {
             ],
             currentIndex: _selectedIndex,
             selectedItemColor: themeGreen,
-            unselectedItemColor: Color(0xffEBFAFF),
+            unselectedItemColor: themeLightBlue,
             onTap: _onItemTapped,
           ),
         ),

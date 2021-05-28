@@ -62,7 +62,7 @@ class _RequestsPageState extends State<RequestsPage>
         }
       },
       child: Scaffold(
-        backgroundColor: Color(0xffEBFAFF),
+        backgroundColor: themeLightBlue,
         appBar: new AppBar(
           backgroundColor: themeDark,
           title: new Text(

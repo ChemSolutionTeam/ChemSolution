@@ -67,7 +67,7 @@ class _PostInfoState extends State<PostInfo> {
                 },
               )
             : null,
-        backgroundColor: Color(0xffEBFAFF),
+        backgroundColor: themeLightBlue,
         appBar: AppBar(
           backgroundColor: themeDark,
           title: Padding(
