@@ -139,6 +139,13 @@ export default {
     },
     removeElement(atom) {
       this.atoms = this.atoms.filter((el) => el != atom)
+      for (let i = 0; i < this.value.length; i += 1) {
+        if (this.value[i].elementId == atom.id) {
+          this.value[i].amount -= 1
+        }
+      }
+      this.value = this.value.filter((el) => el.amount != 0)
+      console.log(this.value)
     },
     dragAndDropElement(obj) {
       console.log(obj.atom)
