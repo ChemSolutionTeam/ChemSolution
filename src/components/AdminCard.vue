@@ -1,7 +1,7 @@
 <template>
   <div
     @click="redirect()"
-    class="shadow-xl hover:border-csgreen border-4 border-opacity-25 border-csblack w-1/5 m-5 rounded-xl h-full cursor-pointer"
+    class="shadow-xl self-center hover:border-csgreen border-4 border-opacity-25 border-csblack m-5 rounded-xl cursor-pointer"
   >
     <img :src="image" class="rounded-2xl p-3 pb-0 rounded-b-none" />
     <div
