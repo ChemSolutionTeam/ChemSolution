@@ -33,14 +33,14 @@
 
       <div v-if="!isUserAuthorised" class="flex flex-row">
         <div
-          class="block mt-4 text-lg lg:inline-block self-center focus:outline-none lg:mt-0 text-white hover:text-cslightgreen hover:scale-110 transform duration-300 ease-in-out"
+          class="block mt-4 text-lg lg:inline-block cursor-pointer self-center focus:outline-none lg:mt-0 text-white hover:text-cslightgreen hover:scale-110 transform duration-300 ease-in-out"
           @click="openForm('login')"
         >
           Авторизуватися
         </div>
         <div
           @click="openForm('register')"
-          class="inline-block self-center ml-6 text-lg items-center bg-gradient-to-tr from-cslightgreen via-csgreen to-csblue px-4 py-2 leading-none border rounded text-csblack border-csgreen hover:border-transparent hover:text-white transform duration-300 ease-in-out hover:scale-110 hover:animate-pulse mt-4 lg:mt-0"
+          class="inline-block self-center cursor-pointer ml-6 text-lg items-center bg-gradient-to-tr from-cslightgreen via-csgreen to-csblue px-4 py-2 leading-none border rounded text-csblack border-csgreen hover:border-transparent hover:text-white transform duration-300 ease-in-out hover:scale-110 hover:animate-pulse mt-4 lg:mt-0"
         >
           Зареєструватися
         </div>
