@@ -195,44 +195,36 @@
       <div class="text-center py-36 pt-1">
         <h1 class="text-5xl m-3 px-10">Ключові функції</h1>
         <div class="grid grid-cols-2">
-          <div class="flex flex-row p-3">
-            <i
-              class="fas fa-heart self-center transform scale-250 w-1/12 text-csgreen hover:animate-ping"
-            ></i>
-            <div class="text-left p-3">
-              <h1 class="text-2xl font-bold">Відсутність аналогів</h1>
-              <p class="text-xl">
-                Сьогодні на ринку не існує сервісу, який має усі функції
-                реалізовані у ChemSolution.
-              </p>
-            </div>
-          </div>
-
-          <div class="flex flex-row p-3">
-            <i
-              class="fas fa-mobile self-center transform scale-250 w-1/12 text-csgreen hover:animate-ping"
-            ></i>
-            <div class="text-left p-3">
-              <h1 class="text-2xl font-bold">Кросплатформеність</h1>
-              <p class="text-xl">
-                Доступ до сервісу можна отримати з будь-якого пистрою, як із
-                телефону, так і з компьютера.
-              </p>
-            </div>
-          </div>
-
-          <div class="flex flex-row p-3">
-            <i
-              class="fas fa-book self-center transform scale-250 w-1/12 text-csgreen hover:animate-ping"
-            ></i>
-            <div class="text-left p-3">
-              <h1 class="text-2xl font-bold">Інтеграція із соц. мережами</h1>
-              <p class="text-xl">
-                Ви можете ділитися своїми досягненнями у соціальних мережах,
-                таких, як Facebook.
-              </p>
-            </div>
-          </div>
+          <KeyFeature
+            header="Відсутність аналогів"
+            description="Сьогодні на ринку не існує сервісу, який має усі функції реалізовані у ChemSolution."
+            icon="fa-heart hover:animate-ping"
+          />
+          <KeyFeature
+            header="Кросплатформеність"
+            description="Доступ до сервісу можна отримати з будь-якого пистрою, як із телефону, так і з компьютера."
+            icon="fa-mobile hover:animate-wiggle-fast"
+          />
+          <KeyFeature
+            header="Інтеграція із соц. мережами"
+            description="Ви можете ділитися своїми досягненнями у соціальних мережах, таких, як Facebook."
+            icon="fa-users hover:animate-bounce"
+          />
+          <KeyFeature
+            header="Досягенення"
+            description="Користувач отримує досягнення за покупку або відкриття речовини (або сукупностей речовин), ці досягнення можна переглянути у своєму профілі, а також отримати за них винагороду в якості ігрової валюти."
+            icon="fa-trophy hover:animate-wiggle"
+          />
+          <KeyFeature
+            header="Оффлайн доступ"
+            description="При відсутності підключення до Інтернет додаток відображає дані, отримані під час останнього сеансу."
+            icon="fa-cloud hover:animate-bounce"
+          />
+          <KeyFeature
+            header="Оновленість"
+            description="Якщо ористувач помітив, що існує певна речовина, однак її немає в базі даних веб-додатку, він може подати запит про її відсутність, а розробники додають речовину."
+            icon="fa-database hover:animate-bonk"
+          />
         </div>
       </div>
     </div>
@@ -244,6 +236,7 @@
 import Logo from '../components/Logo'
 import Button from '../components/HomePageButtons'
 import Footer from '../components/Footer'
+import KeyFeature from '../components/KeyFeature'
 import router from '@/router/index'
 export default {
   name: 'Home',
@@ -251,6 +244,7 @@ export default {
     Logo,
     Button,
     Footer,
+    KeyFeature,
   },
   emits: ['showForm'],
   data() {

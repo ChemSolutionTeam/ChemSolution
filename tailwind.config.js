@@ -18,9 +18,16 @@ module.exports = {
           '0%, 100%': { transform: 'rotate(-3deg)' },
           '50%': { transform: 'rotate(3deg)' },
         },
+        bonk: {
+          '0%, 100%': { transform: 'none' },
+          '50%': { transform: 'scaleY(0.5)' },
+        },
       },
       animation: {
         wiggle: 'wiggle 1s ease-in-out infinite',
+        bounce: 'bounce 1s ease-in-out infinite',
+        bonk: 'bonk 1s ease-in-out infinite',
+        'wiggle-fast': 'wiggle 0.25s ease-in-out infinite',
         'spin-fast': 'spin 0.25s linear infinite',
       },
     },
