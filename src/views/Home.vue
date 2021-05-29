@@ -10,7 +10,7 @@
           Відкрий для себе кросплатформенний сервіс дослідження хімічних сполук
           із можливістю оффлайн доступом до інформації.
         </p>
-        <Button />
+        <Button @click="learnMore()" />
       </div>
       <Logo class="w-4/5" static="true" />
     </div>
@@ -169,6 +169,10 @@ export default {
       setTimeout(() => {
         router.push('/PeriodicTable')
       }, 500)
+    },
+    learnMore() {
+      window.location =
+        'https://www.canva.com/design/DAEfwWSbAYU/g0dWRDjlVaAwJMkLdNny1w/view?utm_content=DAEfwWSbAYU&utm_campaign=designshare&utm_medium=link&utm_source=publishpresent#1'
     },
   },
 }
