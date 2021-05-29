@@ -14,14 +14,14 @@
         image="https://www.innovationnewsnetwork.com/wp-content/uploads/2019/12/ST27-McGillU1-image-%C2%A9-iStock-Garsya.jpg"
       />
       <AdminCard
-        label="Досягнення"
-        path="/admin/achievements"
-        image="https://www.thoughtco.com/thmb/XuJo7-P3gRDQshW69iFDNkFdS1U=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-545286316-433dd345105e4c6ebe4cdd8d2317fdaa.jpg"
-      />
-      <AdminCard
         label="Пости"
         path="/admin/blogposts"
-        image="https://www.njit.edu/sites/default/files/styles/16_9_banner/public/major_images/chemistry-phd.jpg?itok=qETVgslD"
+        image="https://blog.hootsuite.com/wp-content/uploads/2019/03/Schedule-Facebook-Posts.jpg"
+      />
+      <AdminCard
+        label="Досягнення"
+        path="/admin/achievements"
+        image="https://i.pinimg.com/originals/c7/80/5e/c7805ee9aa1a16baaa33a7b1be2f220e.png"
       />
       <AdminCard image="https://i.imgur.com/bAaiGiu.jpeg" /><AdminCard
         image="https://i.imgur.com/bAaiGiu.jpeg"
