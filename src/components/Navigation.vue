@@ -26,7 +26,7 @@
       class="w-full h-full block flex-grow lg:flex lg:items-center lg:mr-6 lg:ml-9 lg:w-auto"
     >
       <div class="text-lg lg:flex-grow flex justify-start">
-        <div v-if="!loggedIn">
+        <div v-if="!isUserAuthorised">
           <Link label="Домашня сторінка" href="/" />
           <Link label="Хімічна лабораторія" href="/Workspace" />
           <Link label="Періодична таблиця" href="/PeriodicTable" />
@@ -38,7 +38,7 @@
         </div>
       </div>
 
-      <div v-if="!loggedIn">
+      <div v-if="!isUserAuthorised">
         <button
           class="block mt-4 lg:inline-block focus:outline-none lg:mt-0 text-white hover:text-cslightgreen hover:scale-110 transform duration-300 ease-in-out"
           @click="openForm('login')"
@@ -61,7 +61,9 @@
           class="text-white text-center mx-3 items-center self-center text-2xl"
         >
           Баланс:
-          <span class="text-cslightgreen"> {{ balance }}</span>
+          <span class="text-cslightgreen" @show="getBalance()">
+            {{ balance }}</span
+          >
         </div>
 
         <button
@@ -79,11 +81,17 @@
 import Link from '../components/NavigationLink.vue'
 import Logo from '../components/Logo.vue'
 import BackToTopButton from '../components/BackToTopButton.vue'
-import storage from '@/store'
+import apiService from '../services/index'
 
 export default {
   name: 'Navigation',
-  emits: ['showForm'],
+  emits: ['showForm', 'logout'],
+  props: {
+    isUserAuthorised: {
+      type: Boolean,
+      default: false,
+    },
+  },
   components: {
     Link,
     Logo,
@@ -93,24 +101,36 @@ export default {
     toTop() {
       return this.scroll.y > 200
     },
-    isUserAuthorised() {
-      return storage.state.token.length !== 0
-    },
   },
   mounted() {
     window.addEventListener('scroll', this.handleScroll)
   },
   data() {
     return {
-      loggedIn: false,
-      balance: 22,
+      balance: 0,
       scroll: {
         timer: 0,
         y: 0,
       },
     }
   },
+  watch: {
+    isUserAuthorised() {
+      this.getBalance()
+    },
+  },
   methods: {
+    async getBalance() {
+      if (this.isUserAuthorised) {
+        await apiService.getUser().then((resp) => {
+          console.error(resp.data.balance)
+          this.balance = resp.data.balance
+          return resp.data.balance
+        })
+      } else {
+        return 0
+      }
+    },
     openForm(args) {
       this.$emit('showForm', args)
     },
@@ -121,6 +141,9 @@ export default {
         clearTimeout(this.scroll.timer)
         this.scroll.timer = 0
       }, 100)
+    },
+    logout() {
+      this.$emit('logout')
     },
   },
 }

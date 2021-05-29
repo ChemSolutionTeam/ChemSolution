@@ -1,5 +1,9 @@
 <template>
-  <Navigation v-on:showForm="openForm($event)" />
+  <Navigation
+    v-on:showForm="openForm($event)"
+    :isUserAuthorised="isUserAuthorised"
+    v-on:logout="logout()"
+  />
   <!-- <div id="nav"> -->
   <!-- <router-link to="/">Home</router-link> | -->
   <!-- <router-link to="/about">About</router-link> -->
@@ -16,7 +20,7 @@
         @mouseover="isMouseOut = false"
         v-on:openRegister="closeForm('register')"
         v-on:openReset="closeForm('reset')"
-        v-on:login="closeForm('auth')"
+        v-on:login="login()"
         v-show="isFormShow == 'login'"
       />
     </transition>
@@ -60,6 +64,7 @@ export default {
   data() {
     return {
       isMouseOut: true,
+      isUserAuthorised: false,
       isFormShow: 'none',
       isBackgroundShown: 'none',
     }
@@ -91,6 +96,13 @@ export default {
       setTimeout(() => {
         this.isBackgroundShown = args
       }, 500)
+    },
+    login() {
+      this.closeForm('auth')
+      this.isUserAuthorised = true
+    },
+    logout() {
+      this.isUserAuthorised = false
     },
   },
 }
