@@ -26,13 +26,19 @@
       class="w-full h-full block flex-grow lg:flex lg:items-center lg:mr-6 lg:ml-9 lg:w-auto"
     >
       <div class="text-lg lg:flex-grow flex justify-start">
-        <Link label="Головна" href="/" />
-        <Link label="Admin" href="/admin" />
-        <Link label="Періодична таблиця" href="/PeriodicTable" />
-        <Link label="Лабораторія" href="/Workspace" />
-        <Link v-if="isUserAuthorised" label="Мій профіль" href="/UserPage" />
+        <div v-if="!loggedIn">
+          <Link label="Домашня сторінка" href="/" />
+          <Link label="Хімічна лабораторія" href="/Workspace" />
+          <Link label="Періодична таблиця" href="/PeriodicTable" />
+        </div>
+        <div v-else>
+          <Link label="Особистий кабінет" href="/UserPage" />
+          <Link label="Хімічна лабораторія" href="/Workspace" />
+          <Link label="Періодична таблиця" href="/PeriodicTable" />
+        </div>
       </div>
-      <div>
+
+      <div v-if="!loggedIn">
         <button
           class="block mt-4 lg:inline-block focus:outline-none lg:mt-0 text-white hover:text-cslightgreen hover:scale-110 transform duration-300 ease-in-out"
           @click="openForm('login')"
@@ -44,6 +50,25 @@
           class="inline-block ml-6 h-10 text-lg items-center bg-gradient-to-tr from-cslightgreen via-csgreen to-csblue px-4 py-2 leading-none border rounded text-csblack border-csgreen hover:border-transparent hover:text-white transform duration-300 ease-in-out hover:scale-110 hover:animate-pulse mt-4 lg:mt-0"
         >
           Зареєструватися
+        </button>
+      </div>
+      <div v-else class="flex flex-row">
+        <i
+          class="fas fa-plus-circle text-white scale-200 cursor-pointer transform mx-2 self-center hover:scale-250 duration-150 ease-in-out"
+        ></i>
+
+        <div
+          class="text-white text-center mx-3 items-center self-center text-2xl"
+        >
+          Баланс:
+          <span class="text-cslightgreen"> {{ balance }}</span>
+        </div>
+
+        <button
+          @click="logout()"
+          class="inline-block ml-6 h-10 text-lg items-center bg-gradient-to-tr from-cslightgreen via-csgreen to-csblue px-4 py-2 leading-none border rounded text-csblack border-csgreen hover:border-transparent hover:text-white transform duration-300 ease-in-out hover:scale-110 hover:animate-pulse mt-4 lg:mt-0"
+        >
+          Вийти
         </button>
       </div>
     </div>
@@ -77,6 +102,8 @@ export default {
   },
   data() {
     return {
+      loggedIn: false,
+      balance: 22,
       scroll: {
         timer: 0,
         y: 0,
