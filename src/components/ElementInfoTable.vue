@@ -50,7 +50,7 @@
         <p class="text-right font-bold">{{ valencyString }}</p>
       </div>
 
-      <div class="p-1 float-left w-8/12">
+      <div @show="getUserElements()" class="p-1 float-left w-8/12">
         <p class="text-left">Атомний радіус:</p>
       </div>
       <div class="p-1 float-right text-right font-bold">
@@ -210,6 +210,24 @@ export default {
     return {
       userElements: [],
     }
+  },
+  watch: {
+    isUserAuthorised: function () {
+      this.getUserElements()
+    },
+  },
+  methods: {
+    async getUserElements() {
+      if (this.isUserAuthorised) {
+        await apiService.getUser().then((resp) => {
+          console.error(resp.data.elements)
+          this.userElements = resp.data.elements
+          return resp.data.elements
+        })
+      } else {
+        return 0
+      }
+    },
   },
   computed: {
     isUserAuthorised() {
