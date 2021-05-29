@@ -25,10 +25,10 @@
       <div class="p-1 float-right text-right w-7/12">
         <p id="infoName" class="text-right font-bold">{{ element.name }}</p>
       </div>
-      <div class="p-1 float-left w-4/12">
+      <div class="p-1 float-left w-3/12">
         <p class="text-left">Категорія:</p>
       </div>
-      <div class="p-1 float-right text-right w-7/12">
+      <div class="p-1 float-right text-right w-8/12">
         <p class="text-right font-bold">{{ element.category.categoryName }}</p>
       </div>
       <div class="p-1 float-left w-8/12">
@@ -171,32 +171,35 @@ export default {
     },
     valencyString() {
       if (!this.element.valences)
-        return "Невизначено"
+        return 'Невизначено'
 
-      let result = ""
+      let result = ''
 
       for (let i = 0; i < this.element.valences.length; i++) {
         switch (this.element.valences[i].valenceVal) {
           case 1:
-            result += "I, "
+            result += 'I, '
             break
           case 2:
-            result += "II, "
+            result += 'II, '
             break
           case 3:
-            result += "III, "
+            result += 'III, '
             break
           case 4:
-            result += "IV, "
+            result += 'IV, '
             break
           case 5:
-            result += "V, "
+            result += 'V, '
             break
           case 6:
-            result += "VI, "
+            result += 'VI, '
             break
           case 7:
-            result += "VII, "
+            result += 'VII, '
+            break
+          case 8:
+            result += 'VIII, '
             break
           default:
             break
@@ -228,7 +231,7 @@ export default {
       },
       category: {
         type: String,
-        default: "Неметали"
+        default: 'Неметали'
       },
       electronQuantity: {
         type: Number,
@@ -256,7 +259,7 @@ export default {
       },
       name: {
         type: String,
-        default: "Гідроген"
+        default: 'Гідроген'
       },
       neutronQuantity: {
         type: Number,
@@ -268,7 +271,7 @@ export default {
       },
       symbol: {
         type: String,
-        default: "H"
+        default: 'H'
       },
       valences: {
         type: Array,
@@ -280,10 +283,10 @@ export default {
       },
     },
     bgColor: {
-      default: "#a1c768",
+      default: '#a1c768',
     },
     borderColor: {
-      default: "#657c41"
+      default: '#657c41'
     }
   }
 }
