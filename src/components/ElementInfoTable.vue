@@ -31,10 +31,10 @@
       <div class="p-1 float-right text-right w-7/12">
         <p id="infoName" class="text-right font-bold">{{ element.name }}</p>
       </div>
-      <div class="p-1 float-left w-4/12">
+      <div class="p-1 float-left w-3/12">
         <p class="text-left">Категорія:</p>
       </div>
-      <div class="p-1 float-right text-right w-7/12">
+      <div class="p-1 float-right text-right w-8/12">
         <p class="text-right font-bold">{{ element.category.categoryName }}</p>
       </div>
       <div class="p-1 float-left w-8/12">
@@ -242,6 +242,9 @@ export default {
             break
           case 7:
             result += 'VII, '
+            break
+          case 8:
+            result += 'VIII, '
             break
           default:
             break
