@@ -129,6 +129,115 @@
       </div>
     </div>
   </div>
+
+  <svg
+    version="1.1"
+    id="Слой_1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    x="0px"
+    y="0px"
+    viewBox="0 0 1440 106"
+    style="enable-background: new 0 0 1440 106"
+    xml:space="preserve"
+    class="bg-csbluewhite"
+  >
+    <path
+      fill="#1dcdfe"
+      d="M0,0h48c48,0,144,0,240,14.1c96,14.4,192,42.2,288,46c96,3.5,192-17.7,288-31.8c96-14.4,192-21,288-7.1
+	s192,49.7,240,67.1l48,17.7l0,0h-48c-48,0-144,0-240,0s-192,0-288,0s-192,0-288,0s-192,0-288,0s-192,0-240,0H0V0z"
+    />
+  </svg>
+
+  <div id="block5" class="bg-csblue h-5/6 px-40 py-5 text-csblack text-left">
+    <div class="w-full">
+      <div class="text-center py-36 pt-1">
+        <h1 class="text-5xl m-3 px-10">Ми у мобільному додатку!</h1>
+        <p class="text-4xl m-3 px-10">
+          Переглядай інформацію про елементи, читай новини та цікаві факти зі
+          світу хімії користуйся "шпаргалками", які допоможуть тобі краще
+          зрозуміти складний матеріал, а також лайкай цей матеріал і зберігай
+          його на своєму смартфоні!
+        </p>
+
+        <!-- Slideshow -->
+        <!-- <div>
+          
+        </div> -->
+      </div>
+    </div>
+  </div>
+
+  <svg
+    version="1.1"
+    id="Слой_1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    x="0px"
+    y="0px"
+    viewBox="0 0 1440 106"
+    style="enable-background: new 0 0 1440 106"
+    xml:space="preserve"
+    class="bg-csblue"
+  >
+    <path
+      fill="#EAF9FE"
+      d="M0,0h48c48,0,144,0,240,14.1c96,14.4,192,42.2,288,46c96,3.5,192-17.7,288-31.8c96-14.4,192-21,288-7.1
+	s192,49.7,240,67.1l48,17.7l0,0h-48c-48,0-144,0-240,0s-192,0-288,0s-192,0-288,0s-192,0-288,0s-192,0-240,0H0V0z"
+    />
+  </svg>
+
+  <div
+    id="block6"
+    class="bg-csbluewhite h-5/6 px-40 py-5 text-csblack text-left"
+  >
+    <div class="w-full">
+      <div class="text-center py-36 pt-1">
+        <h1 class="text-5xl m-3 px-10">Ключові функції</h1>
+        <div class="grid grid-cols-2">
+          <div class="flex flex-row p-3">
+            <i
+              class="fas fa-heart self-center transform scale-250 w-1/12 text-csgreen hover:animate-ping"
+            ></i>
+            <div class="text-left p-3">
+              <h1 class="text-2xl font-bold">Відсутність аналогів</h1>
+              <p class="text-xl">
+                Сьогодні на ринку не існує сервісу, який має усі функції
+                реалізовані у ChemSolution.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex flex-row p-3">
+            <i
+              class="fas fa-mobile self-center transform scale-250 w-1/12 text-csgreen hover:animate-ping"
+            ></i>
+            <div class="text-left p-3">
+              <h1 class="text-2xl font-bold">Кросплатформеність</h1>
+              <p class="text-xl">
+                Доступ до сервісу можна отримати з будь-якого пистрою, як із
+                телефону, так і з компьютера.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex flex-row p-3">
+            <i
+              class="fas fa-book self-center transform scale-250 w-1/12 text-csgreen hover:animate-ping"
+            ></i>
+            <div class="text-left p-3">
+              <h1 class="text-2xl font-bold">Інтеграція із соц. мережами</h1>
+              <p class="text-xl">
+                Ви можете ділитися своїми досягненнями у соціальних мережах,
+                таких, як Facebook.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <Footer />
 </template>
 <script>
