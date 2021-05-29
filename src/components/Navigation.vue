@@ -33,7 +33,7 @@
 
       <div v-if="!isUserAuthorised" class="flex flex-row">
         <div
-          class="block mt-4 lg:inline-block self-center focus:outline-none lg:mt-0 text-white hover:text-cslightgreen hover:scale-110 transform duration-300 ease-in-out"
+          class="block mt-4 text-lg lg:inline-block self-center focus:outline-none lg:mt-0 text-white hover:text-cslightgreen hover:scale-110 transform duration-300 ease-in-out"
           @click="openForm('login')"
         >
           Авторизуватися
