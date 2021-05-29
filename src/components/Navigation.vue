@@ -51,12 +51,13 @@
         ></i>
 
         <div
-          class="text-white text-center mx-3 items-center self-center text-2xl"
+          class="text-white text-center flex mx-3 items-center self-center text-2xl"
         >
           Баланс:
-          <span class="text-cslightgreen" @show="getBalance()">
-            {{ balance }}</span
-          >
+          <span class="text-cslightgreen flex mx-3" @show="getBalance()">
+            {{ balance }}
+            <img src="AtomCoinGreen.png" width="30" class="" />
+          </span>
         </div>
 
         <button
