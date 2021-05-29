@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using ChemSolution.Models;
 using ChemSolution.Services.CheckProperties;
@@ -62,26 +63,55 @@ namespace ChemSolution.Services
             foreach (var propertyInfo in objType.GetProperties())
             {
                 Type tmp = Type.GetType(propertyInfo.PropertyType.ToString(), true, false);
-                if (tmp.GetInterfaces().Any(i => i.Name == "IList"))
+                if(options.ClearInModel.Contains(propertyInfo.Name))
                 {
-                    var list = (IEnumerable) propertyInfo.GetValue(obj);
-                    foreach (var tmpEntity in list)
-                    {
-                        if (options.ClearInLinkedList.Keys.Contains(propertyInfo.Name))
-                        {
-                            ClearLists(tmpEntity,options.ClearInLinkedList[propertyInfo.Name]);
-                        }else if (options.ClearInLinkedList.Keys.Contains("All"))
-                        {
-                            ClearLists(tmpEntity,options.ClearInLinkedList["All"]);
-                        }
-                    }
+                   CleanInModel(propertyInfo, obj);
                 }
-                else if(options.ClearInModel.Contains(propertyInfo.Name))
+                else if (options.ClearInLinkedModel.Keys.Contains(propertyInfo.Name))
                 {
-                    propertyInfo.SetValue(obj,null);
+                    CleanInLinkedModel(options, propertyInfo, obj);
+                }
+                else if (tmp.GetInterfaces().Any(i => i.Name == "IList"))
+                {
+                    CleanInLinkedList(options, propertyInfo, obj);
                 }
             }
             return obj;
+        }
+
+        private void CleanInModel(PropertyInfo propertyInfo, object obj)
+        {
+            propertyInfo.SetValue(obj,null);
+        }
+
+        private void CleanInLinkedModel(ClearOptions options, PropertyInfo propertyInfo, object obj)
+        {
+            object tmpObj = propertyInfo.GetValue(obj);
+            
+            Type tmp = Type.GetType(propertyInfo.PropertyType.ToString(), true, false);
+                    
+            foreach (var p in tmp.GetProperties())
+            {
+                if (options.ClearInLinkedModel[propertyInfo.Name].Contains(p.Name))
+                {
+                    p.SetValue(tmpObj, null);
+                }
+            }
+        }
+
+        private void CleanInLinkedList(ClearOptions options, PropertyInfo propertyInfo, object obj)
+        {
+            var list = (IEnumerable) propertyInfo.GetValue(obj);
+            foreach (var tmpEntity in list)
+            {
+                if (options.ClearInLinkedList.Keys.Contains(propertyInfo.Name))
+                {
+                    ClearLists(tmpEntity,options.ClearInLinkedList[propertyInfo.Name]);
+                }else if (options.ClearInLinkedList.Keys.Contains("All"))
+                {
+                    ClearLists(tmpEntity,options.ClearInLinkedList["All"]);
+                }
+            }
         }
         
     }
