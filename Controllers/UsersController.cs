@@ -29,26 +29,34 @@ namespace ChemSolution.Controllers
         [Authorize(Roles = Startup.Roles.Admin)]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return _context.Users
+
+            ClearOptions clearOptions = new()
+            {
+                ClearInLinkedList = new Dictionary<string, string[]>()
+                {
+                    {"All", new []{"User"}}
+                }
+            };
+            return await _context.Users
                 .Include(p => p.BlogPosts)
                 .Include(p => p.Requests)
                 .Include(p => p.ResearchHistorys)
                 .Include(p => p.Elements)
                 .Include(p => p.Achievement)
-                .AsEnumerable()
                 .Select(u => _checkProperties
-                    .PrepareModelForJson(ClearForbidetedInfo(u), new ClearOptions()
-                    {
-                        ClearInLinkedList = new Dictionary<string, string[]>()
-                        {
-                            {"All", new []{"User"}}
-                        }
-                    })).ToList();
+                    .PrepareModelForJson(ClearForbidetedInfo(u), clearOptions )).ToListAsync();
         }
         [HttpGet]
         [Authorize]
         public async Task<JsonResult> GetUser()
         {
+            ClearOptions clearOptions = new()
+            {
+                ClearInLinkedList = new Dictionary<string, string[]>()
+                {
+                    {"All", new []{"User"}}
+                }
+            };
             var id = User.Identity?.Name;
             var user = await _context.Users
                 .Include(p=>p.BlogPosts)
@@ -62,13 +70,7 @@ namespace ChemSolution.Controllers
             {
                 return new JsonResult(null);
             }
-            _checkProperties.PrepareModelForJson(user, new ClearOptions()
-            {
-                ClearInLinkedList = new Dictionary<string, string[]>()
-                {
-                    {"All", new []{"User"}}
-                }
-            });
+            _checkProperties.PrepareModelForJson(user,clearOptions);
             return new JsonResult(ClearForbidetedInfo(user));
         }
         [HttpPut]
