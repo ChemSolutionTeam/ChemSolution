@@ -8,7 +8,7 @@
     <!-- <div>TODO Search</div> -->
     <div class="flex flex-wrap mx-3 my-5">
       <div
-        class="border-2 overflow-x-auto border-csgreen rounded-xl rounded-b-none bg-cslightgreen bg-opacity-25 shadow-lg"
+        class="border-2 overflow-x-visible border-csgreen rounded-xl rounded-b-none bg-cslightgreen bg-opacity-25 shadow-lg"
       >
         <table class="w-11/12 py-2 px-5 divide-y divide-gray-200 table-auto">
           <thead class="">
@@ -118,7 +118,7 @@
               :key="index"
             >
               <td
-                class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
+                class="border border-t-0 border-csgreen py-3 px-1 whitespace-nowrap"
               >
                 {{ element.elementId }}
               </td>
@@ -178,20 +178,18 @@
               >
                 {{ element.isLocked }}
               </td>
-              <td
-                class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
-              >
-                {{ element.info }}
+              <td class="border border-t-0 border-csgreen py-3 px-6">
+                <div class="whitespace-normal w-half">{{ element.info }}</div>
               </td>
-              <td
-                class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
-              >
-                {{ element.imgSymbol }}
+              <td class="border border-t-0 border-csgreen py-3 px-6">
+                <div class="whitespace-normal break-words w-half">
+                  <div class="truncate">{{ element.imgSymbol }}</div>
+                </div>
               </td>
-              <td
-                class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
-              >
-                {{ element.imgAtom }}
+              <td class="border border-t-0 border-csgreen py-3 px-6">
+                <div class="whitespace-normal break-words w-half">
+                  <div class="truncate">{{ element.imgAtom }}</div>
+                </div>
               </td>
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"

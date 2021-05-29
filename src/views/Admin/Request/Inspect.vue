@@ -5,11 +5,11 @@
     <Button label="Go Back" class="w-2/12" @click="goBack()" />
 
     <!-- <div>TODO Search</div> -->
-    <div class="flex flex-wrap mx-3 my-5">
+    <div class="flex flex-row mx-3 my-5">
       <div
-        class="border-2 overflow-x-auto border-csgreen rounded-xl rounded-b-none bg-cslightgreen bg-opacity-25 shadow-lg"
+        class="w-screen border-2 overflow-x-auto border-csgreen rounded-xl rounded-b-none bg-cslightgreen bg-opacity-25 shadow-lg"
       >
-        <table class="w-11/12 py-2 px-5 divide-y divide-gray-200 table-auto">
+        <table class="w-full py-2 px-5 divide-y divide-gray-200 table-auto">
           <thead class="">
             <tr class="text-csblack uppercase">
               <th
@@ -52,7 +52,7 @@
           <tbody class="text-csblack">
             <tr
               class="hover:bg-gray-100"
-              v-for="(material, index) in materials"
+              v-for="(request, index) in requests"
               :key="index"
             >
               <td
@@ -70,6 +70,12 @@
               >
                 {{ request.theme }}
               </td>
+              <td
+                class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
+              >
+                {{ request.text }}
+              </td>
+
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
@@ -119,23 +125,22 @@ export default {
     goBack() {
       router.push('/admin')
     },
-    edit(material) {
-      material
-      router.push('/admin/elements/edit/' + material.elementId)
+    confirm(request) {
+      alert(request.userEmail)
     },
-    delete(material) {
-      material
-      router.push('/admin/elements/delete/' + material.elementId)
+    reject(request) {
+      request
     },
   },
   mounted() {
-    let materials = apiService.getMaterials()
-    if (materials == null || materials == undefined) return
-    else this.materials = materials
+    apiService.getRequests().then((resp) => {
+      console.error(resp.data)
+      this.requests = resp.data
+    })
   },
   data() {
     return {
-      materials: [],
+      requests: [],
     }
   },
 }

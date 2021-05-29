@@ -7,6 +7,7 @@ module.exports = {
       fill: ['hover', 'focus'],
       width: {
         two: '200%',
+        half: '50vw',
       },
       scale: {
         200: '2',

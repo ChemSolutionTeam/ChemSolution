@@ -2,7 +2,7 @@
   <div>
     <title>{{ title }}</title>
     <h1 class="text-5xl">Welcome to Admin Panel</h1>
-    <div class="flex">
+    <div class="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2">
       <AdminCard
         label="Элементы"
         path="/admin/elements"
@@ -23,7 +23,11 @@
         path="/admin/blogposts"
         image="https://www.njit.edu/sites/default/files/styles/16_9_banner/public/major_images/chemistry-phd.jpg?itok=qETVgslD"
       />
-      <AdminCard image="https://i.imgur.com/bAaiGiu.jpeg" />
+      <AdminCard image="https://i.imgur.com/bAaiGiu.jpeg" /><AdminCard
+        image="https://i.imgur.com/bAaiGiu.jpeg"
+      /><AdminCard image="https://i.imgur.com/bAaiGiu.jpeg" /><AdminCard
+        image="https://i.imgur.com/bAaiGiu.jpeg"
+      />
     </div>
   </div>
 </template>

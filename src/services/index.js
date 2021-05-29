@@ -90,13 +90,9 @@ export default {
 
   //Request queries
   getRequests() {
-    API.get('/Requests')
-      .then((resp) => {
-        console.log(resp)
-      })
-      .catch((e) => {
-        console.error(e)
-      })
+    return API.get('/Requests').catch((e) => {
+      console.error(e)
+    })
   },
   postRequest(request) {
     request

@@ -112,6 +112,11 @@ const routes = [
     component: () => import('../views/Admin/BlogPost/Inspect.vue'),
   },
   {
+    path: '/admin/requests',
+    name: 'Request Inspect',
+    component: () => import('../views/Admin/Request/Inspect.vue'),
+  },
+  {
     path: '/admin/blogposts/edit/:id',
     name: 'BlogPosts Edit',
     component: () => import('../views/Admin/BlogPost/Edit.vue'),
