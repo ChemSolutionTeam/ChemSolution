@@ -26,15 +26,22 @@
       class="w-full h-full block flex-grow lg:flex lg:items-center lg:mr-6 lg:ml-9 lg:w-auto"
     >
       <div class="text-lg lg:flex-grow flex justify-start">
-        <div v-if="!isUserAuthorised">
+        <div class="flex flex-grow" v-if="!isUserAuthorised">
           <Link label="Домашня сторінка" href="/" />
           <Link label="Хімічна лабораторія" href="/Workspace" />
           <Link label="Періодична таблиця" href="/PeriodicTable" />
         </div>
-        <div v-else>
-          <Link label="Особистий кабінет" href="/UserPage" />
-          <Link label="Хімічна лабораторія" href="/Workspace" />
-          <Link label="Періодична таблиця" href="/PeriodicTable" />
+        <div class="flex flex-grow" v-else>
+          <div v-if="userRole === 'Admin'">
+            <Link label="Редагування БД" href="/Admin" />
+            <Link label="Обробка запитів" href="/Admin/Requests" />
+            <Link label="Додавання адмінів" href="/Admin" />
+          </div>
+          <div v-else>
+            <Link label="Особистий кабінет" href="/UserPage" />
+            <Link label="Хімічна лабораторія" href="/Workspace" />
+            <Link label="Періодична таблиця" href="/PeriodicTable" />
+          </div>
         </div>
       </div>
 
@@ -108,6 +115,7 @@ export default {
   data() {
     return {
       balance: 0,
+      userRole: '',
       scroll: {
         timer: 0,
         y: 0,
@@ -124,6 +132,7 @@ export default {
       if (this.isUserAuthorised) {
         await apiService.getUser().then((resp) => {
           console.error(resp.data.balance)
+          this.userRole = resp.data.role
           this.balance = resp.data.balance
           return resp.data.balance
         })
