@@ -8,6 +8,10 @@ module.exports = {
       width: {
         two: '200%',
       },
+      scale: {
+        200: '2',
+        250: '2.5',
+      },
       keyframes: {
         wiggle: {
           '0%, 100%': { transform: 'rotate(-3deg)' },
