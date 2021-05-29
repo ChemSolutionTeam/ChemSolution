@@ -152,8 +152,8 @@
   <div id="block5" class="bg-csblue h-5/6 px-40 py-5 text-csblack text-left">
     <div class="w-full">
       <div class="text-center py-36 pt-1">
-        <h1 class="text-5xl m-3 px-10">Ми у мобільному додатку!</h1>
-        <p class="text-4xl m-3 px-10">
+        <h1 class="text-4xl m-3 px-10">Ми у мобільному додатку!</h1>
+        <p class="text-2xl m-3 px-10">
           Переглядай інформацію про елементи, читай новини та цікаві факти зі
           світу хімії користуйся "шпаргалками", які допоможуть тобі краще
           зрозуміти складний матеріал, а також лайкай цей матеріал і зберігай
@@ -161,9 +161,16 @@
         </p>
 
         <!-- Slideshow -->
-        <!-- <div>
-          
-        </div> -->
+        <div class="flex flex-row items-center">
+          <div
+            class="bg-white flex w-2/4 self-center mx-auto border-2 border-csblack rounded-3xl"
+          >
+            <img
+              src="https://picsum.photos/id/1084/536/354?grayscale"
+              class="self-center w-full rounded-3xl"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </div>
