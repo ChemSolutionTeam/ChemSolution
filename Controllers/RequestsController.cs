@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ChemSolution.Data;
 using ChemSolution.Models;
 using ChemSolution.Services;
+using ChemSolution.Services.CheckProperties;
 using Microsoft.AspNetCore.Authorization;
 
 namespace ChemSolution.Controllers
@@ -28,20 +29,38 @@ namespace ChemSolution.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Request>>> GetRequests()
         {
+            ClearOptions options = new ClearOptions()
+            {
+                ClearInLinkedModel = new Dictionary<string, string[]>()
+                {
+                    {"Status", new[]{"Requests"}}
+                }
+            };
             return await _context.Requests
+                .Include( r=> r.Status)
+                .Select( r=> _checkProperties.PrepareModelForJson(r, options))
                 .ToListAsync();
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Request>> GetRequest(string id)
+        [HttpGet("{email}/{date}")]
+        public async Task<ActionResult<Request>> GetRequest(string email, string date)
         {
-            var request = await _context.Requests.FindAsync(id);
+            ClearOptions options = new ClearOptions()
+            {
+                ClearInLinkedModel = new Dictionary<string, string[]>()
+                {
+                    {"Status", new[]{"Requests"}}
+                }
+            };
+            var request = await _context.Requests
+                .Include( r=> r.Status)
+                .SingleOrDefaultAsync(r => r.UserEmail == email && r.DateTimeSended == Convert.ToDateTime(date));
 
             if (request == null)
             {
                 return NotFound();
             }
-            return request;
+            return _checkProperties.PrepareModelForJson(request, options);
         }
 
         [HttpPut("{id}")]
@@ -77,6 +96,27 @@ namespace ChemSolution.Controllers
             return NoContent();
         }
 
+        [HttpPut("set/status/{statusId}/{email}/{dateTimeSended}")]
+        [Authorize(Roles = Startup.Roles.Admin)]
+        public async Task<IActionResult> SetStatus(string statusId,string email, string dateTimeSended)
+        {
+            var dateTime = DateTime.Parse(dateTimeSended);
+            var request =
+                await _context.Requests.SingleOrDefaultAsync(r => r.UserEmail == email && r.DateTimeSended == dateTime);
+            if (request != null)
+            {
+                var status = await _context.Status.FindAsync(statusId);
+                if (status != null)
+                {
+                    request.Status = status;
+                    await _context.SaveChangesAsync();
+                }
+                return Ok();
+            }
+            return Problem();
+        } 
+        
+
         [HttpPost]
         [Authorize]
         public async Task<ActionResult<Request>> PostRequest(Request request)
@@ -84,7 +124,7 @@ namespace ChemSolution.Controllers
             var user = await _context.Users.FindAsync(User.Identity?.Name);
             if (user != null)
             {
-                _context.Requests.Add(request);
+                await _context.Requests.AddAsync(request);
                 user.Requests.Add(request);
                 try
                 {
