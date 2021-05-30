@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:core';
+import 'package:chem_solution_mobile/assets/colors.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 

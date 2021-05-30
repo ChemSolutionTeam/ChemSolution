@@ -83,7 +83,7 @@ class Material extends Model {
     //  m.materialGroup = MaterialGroup.fromObject(o['materialGroup']);
 
     m.materialGroup =
-        MaterialGroup(materialGroupId: m.materialGroupId, groupName: '1');
+        MaterialGroup.fromObject(o['materialGroup']);
     /*  
     o['elementMaterials'].forEach((e) {
       m.elementMaterials.add(ElementMaterial.fromObject(e));
