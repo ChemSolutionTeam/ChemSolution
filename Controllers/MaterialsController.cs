@@ -38,7 +38,10 @@ namespace ChemSolution.Controllers
                     {"MaterialGroup", new[] {"Materials", "Achievement"}}
                 }
             };
-            return await _context.Materials.Include(m=>m.MaterialGroup).ToListAsync();
+            return await _context.Materials
+                .Include(m=>m.MaterialGroup)
+                .Select(m=>_checkProperties.PrepareModelForJson(m, options))
+                .ToListAsync();
         }
 
         [HttpGet("{id}")]
@@ -60,7 +63,7 @@ namespace ChemSolution.Controllers
                 return NotFound();
             }
 
-            return material;
+            return _checkProperties.PrepareModelForJson(material, options);
         }
 
         [HttpPut("{id}")]
