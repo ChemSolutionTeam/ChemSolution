@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using ChemSolution.Data;
 using ChemSolution.Models;
 using ChemSolution.Models.BufferModels.RequestModels;
-using ChemSolution.Models.BufferModels.ResponseModels;
 using ChemSolution.Services;
 using ChemSolution.Services.CheckProperties;
 using Microsoft.AspNetCore.Authorization;
@@ -173,18 +172,20 @@ namespace ChemSolution.Controllers
                         await _context.SaveChangesAsync();
                         achievementsId = await ComplateAchivmentsAsync(user);
                     }
-                    return new JsonResult(new SearchMaterialResponse()
+                    return new JsonResult(new 
                     {
                         ResultMaterialId = material.MaterialId,
                         IsNew = isNew,
-                        NewAchievementsId = achievementsId
+                        NewAchievementsId = achievementsId,
+                        Formula = material.Formula
                     });
                 }
-                return new JsonResult(new SearchMaterialResponse()
+                return new JsonResult(new
                     {
                         ResultMaterialId = material.MaterialId,
                         IsNew = true,
-                        NewAchievementsId = null
+                        NewAchievementsId = new List<int>(),
+                        Formula = material.Formula
                     });
             }
             return NotFound();

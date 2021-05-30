@@ -10,8 +10,8 @@ namespace ChemSolution.Services
 {
     public class EmailService
     {
-        private readonly string _serviceEmail = "";
-        private readonly string _serviceEmailPassword = "";
+        private readonly string _serviceEmail = "chemsolution2021@gmail.com";
+        private readonly string _serviceEmailPassword = "ChemSolution2021";
 
         public async Task SendEmailAsync(string email, string subject, string message)
         {
