@@ -8,6 +8,8 @@ namespace ChemSolution.Data
         public DbSet<Status> Status { get; set; }
         public DbSet<Achievement> Achievements  { get; set; }
         public DbSet<User> Users  { get; set; }
+        
+        public DbSet<Order> Orders { set; get; }
         public DbSet<BlogPost> BlogPosts  { get; set; }
         public DbSet<Element> Elements  { get; set; }
         public DbSet<ElementMaterial> ElementMaterials  { get; set; }

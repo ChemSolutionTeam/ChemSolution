@@ -247,6 +247,28 @@ namespace ChemSolution.Migrations
                     b.ToTable("MaterialGroups");
                 });
 
+            modelBuilder.Entity("ChemSolution.Models.Order", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CoinsAmount")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("UserEmail")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserEmail1")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("OrderId");
+
+                    b.HasIndex("UserEmail1");
+
+                    b.ToTable("Orders");
+                });
+
             modelBuilder.Entity("ChemSolution.Models.Request", b =>
                 {
                     b.Property<string>("UserEmail")
@@ -447,6 +469,15 @@ namespace ChemSolution.Migrations
                     b.Navigation("MaterialGroup");
                 });
 
+            modelBuilder.Entity("ChemSolution.Models.Order", b =>
+                {
+                    b.HasOne("ChemSolution.Models.User", "User")
+                        .WithMany("Orders")
+                        .HasForeignKey("UserEmail1");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("ChemSolution.Models.Request", b =>
                 {
                     b.HasOne("ChemSolution.Models.Status", "Status")
@@ -542,6 +573,8 @@ namespace ChemSolution.Migrations
 
             modelBuilder.Entity("ChemSolution.Models.User", b =>
                 {
+                    b.Navigation("Orders");
+
                     b.Navigation("Requests");
 
                     b.Navigation("ResearchHistorys");

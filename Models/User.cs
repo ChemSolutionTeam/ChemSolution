@@ -27,5 +27,6 @@ namespace ChemSolution.Models
         public List<Request> Requests { set; get; } = new List<Request>();
         public List<ResearchHistory> ResearchHistorys { set; get; } = new List<ResearchHistory>();
         public List<Material> Materials { set; get; } = new List<Material>();
+        public List<Order> Orders { set; get; } = new List<Order>();
     }
 }
