@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ChemSolution.Services.Pay;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ChemSolution.Services
@@ -23,7 +24,7 @@ namespace ChemSolution.Services
         }
         public static void AddPayService(this IServiceCollection serviceCollection)
         {
-            
+            serviceCollection.AddTransient<PayService>();
         }
     }
 }

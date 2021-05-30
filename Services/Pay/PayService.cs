@@ -6,13 +6,9 @@ namespace ChemSolution.Services.Pay
 {
     public class PayService
     {
-        private readonly string _publicKey;
-        private readonly string _privateKey;
-        public PayService(string publicKey, string privateKey)
-        {
-            _publicKey = publicKey;
-            _privateKey = privateKey;
-        }
+        private readonly string _publicKey = "sandbox_i78702606286";
+        private readonly string _privateKey = "sandbox_s4FSNyEIpXb2eOU076bas7t2q29Z4EWJRJtpor9b";
+        
         public PayButtonModel GetPayButton(PayOptions options)
         {
 

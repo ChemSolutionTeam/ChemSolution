@@ -100,6 +100,7 @@ namespace ChemSolution
             services.AddCheckFieldService();
             services.AddEmailService();
             services.AddSecurityEmailService();
+            services.AddPayService();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
