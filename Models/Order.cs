@@ -10,5 +10,7 @@ namespace ChemSolution.Models
         public int CoinsAmount { set; get; }
         public string UserEmail { set; get; }
         public User User { set; get; }
+        public string Data { set; get; }
+        public string Signature { set; get;}
     }
 }

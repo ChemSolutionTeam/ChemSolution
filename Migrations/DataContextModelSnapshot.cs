@@ -256,6 +256,12 @@ namespace ChemSolution.Migrations
                     b.Property<int>("CoinsAmount")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Data")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Signature")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("UserEmail")
                         .HasColumnType("TEXT");
 
