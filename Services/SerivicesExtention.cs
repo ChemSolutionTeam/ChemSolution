@@ -13,7 +13,6 @@ namespace ChemSolution.Services
         {
             serviceCollection.AddTransient<CheckPropertiesService>();
         }
-
         public static void AddEmailService(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddTransient<EmailService>();
@@ -21,6 +20,10 @@ namespace ChemSolution.Services
         public static void AddSecurityEmailService(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton<SecurityEmailService>();
+        }
+        public static void AddPayService(this IServiceCollection serviceCollection)
+        {
+            
         }
     }
 }
