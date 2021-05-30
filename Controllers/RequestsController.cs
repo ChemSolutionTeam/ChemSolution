@@ -146,16 +146,15 @@ namespace ChemSolution.Controllers
             return NotFound();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{email}/{date}")]
         [Authorize(Roles = Startup.Roles.Admin)]
-        public async Task<IActionResult> DeleteRequest(string id)
+        public async Task<IActionResult> DeleteRequest(string email, string date)
         {
-            var request = await _context.Requests.FindAsync(id);
+            var request = await _context.Requests.SingleOrDefaultAsync(r => r.UserEmail == email && r.DateTimeSended == Convert.ToDateTime(date));;
             if (request == null)
             {
                 return NotFound();
             }
-
             _context.Requests.Remove(request);
             await _context.SaveChangesAsync();
 
