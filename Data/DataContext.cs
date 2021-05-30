@@ -5,6 +5,7 @@ namespace ChemSolution.Data
 {
     public class DataContext : DbContext
     {
+        public DbSet<Status> Status { get; set; }
         public DbSet<Achievement> Achievements  { get; set; }
         public DbSet<User> Users  { get; set; }
         public DbSet<BlogPost> BlogPosts  { get; set; }
