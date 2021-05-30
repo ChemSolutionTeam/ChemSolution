@@ -3,6 +3,7 @@
     class="column w-3/4 h-11/12 p-4 shadow-xl mt-20"
     style="position: relative"
   >
+    <H2 />
     <div v-for="atom in atoms" :key="atom.id">
       <div
         draggable="true"
@@ -31,6 +32,7 @@
 
 <script>
 import Atom from '@/components/Atom'
+import H2 from '@/components/materials/H2'
 export default {
   data() {
     return {
@@ -49,6 +51,7 @@ export default {
   name: 'WorkspaceComp',
   components: {
     Atom,
+    H2,
   },
   methods: {},
   computed() {},

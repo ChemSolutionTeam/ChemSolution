@@ -122,6 +122,9 @@ export default {
         }
         console.log(this.value)
         this.dragElement = null
+        apiService
+          .searchMaterial(this.value)
+          .then((resp) => console.log(resp.data))
       }
       if (this.dragAtom != null) {
         this.atoms.push({
@@ -146,6 +149,9 @@ export default {
       }
       this.value = this.value.filter((el) => el.amount != 0)
       console.log(this.value)
+      apiService
+        .searchMaterial(this.value)
+        .then((resp) => console.log(resp.data))
     },
     dragAndDropElement(obj) {
       console.log(obj.atom)

@@ -2,6 +2,7 @@ import axios from 'axios'
 import storage from '../store/index'
 const API = axios.create({
   // baseURL: 'http://192.168.0.104:5001',
+  //baseURL: 'http://192.168.1.8:5001',
   baseURL: 'https://localhost:5001',
   headers: {
     'Access-Control-Allow-Origin': '*',
@@ -166,6 +167,28 @@ export default {
       })
       .catch((e) => {
         console.error(e)
+      })
+  },
+
+  searchMaterial(value) {
+    API.post(
+      '/Materials/search',
+      { value: value },
+      {
+        headers: {
+          Authorization: 'Bearer ' + storage.state.token,
+        },
+      }
+    )
+      .then((resp) => {
+        if (resp) {
+          console.log(resp)
+          return 'Success'
+        }
+      })
+      .catch((e) => {
+        console.error(e)
+        return 'Fail'
       })
   },
 
