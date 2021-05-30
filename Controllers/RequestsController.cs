@@ -63,11 +63,11 @@ namespace ChemSolution.Controllers
             return _checkProperties.PrepareModelForJson(request, options);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{email}/{date}")]
         [Authorize(Roles = Startup.Roles.Admin)]
-        public async Task<IActionResult> PutRequest(string id, Request request)
+        public async Task<IActionResult> PutRequest(string email, string date, Request request)
         {
-            var tmpRequest = await _context.Requests.FindAsync(id);
+            var tmpRequest = await _context.Requests.SingleOrDefaultAsync(r => r.UserEmail == email && r.DateTimeSended == Convert.ToDateTime(date));
             if (tmpRequest != null)
             {
                 _checkProperties.CheckModelProperties(tmpRequest, request);
@@ -83,7 +83,7 @@ namespace ChemSolution.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RequestExists(id))
+                if (!RequestExists(email))
                 {
                     return NotFound();
                 }
@@ -96,13 +96,12 @@ namespace ChemSolution.Controllers
             return NoContent();
         }
 
-        [HttpPut("set/status/{statusId}/{email}/{dateTimeSended}")]
+        [HttpPut("set/status/{statusId}/{email}/{date}")]
         [Authorize(Roles = Startup.Roles.Admin)]
-        public async Task<IActionResult> SetStatus(string statusId,string email, string dateTimeSended)
+        public async Task<IActionResult> SetStatus(int statusId,string email, string date)
         {
-            var dateTime = DateTime.Parse(dateTimeSended);
             var request =
-                await _context.Requests.SingleOrDefaultAsync(r => r.UserEmail == email && r.DateTimeSended == dateTime);
+                await _context.Requests.SingleOrDefaultAsync(r => r.UserEmail == email && r.DateTimeSended == Convert.ToDateTime(date));
             if (request != null)
             {
                 var status = await _context.Status.FindAsync(statusId);
