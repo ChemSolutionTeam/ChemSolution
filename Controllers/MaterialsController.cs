@@ -36,7 +36,9 @@ namespace ChemSolution.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Material>> GetMaterial(int id)
         {
-            var material = await _context.Materials.FindAsync(id);
+            var material = await _context.Materials
+                .Include(m=>m.MaterialGroup)
+                .SingleOrDefaultAsync(m=>m.MaterialId ==id);
 
             if (material == null)
             {
