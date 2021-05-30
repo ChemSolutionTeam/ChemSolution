@@ -10,6 +10,7 @@ using ChemSolution.Models;
 using ChemSolution.Models.BufferModels.RequestModels;
 using ChemSolution.Models.BufferModels.ResponseModels;
 using ChemSolution.Services;
+using ChemSolution.Services.CheckProperties;
 using Microsoft.AspNetCore.Authorization;
 
 namespace ChemSolution.Controllers
@@ -30,12 +31,26 @@ namespace ChemSolution.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Material>>> GetMaterials()
         {
-            return await _context.Materials.ToListAsync();
+            ClearOptions options = new ClearOptions()
+            {
+                ClearInLinkedModel = new()
+                {
+                    {"MaterialGroup", new[] {"Materials", "Achievement"}}
+                }
+            };
+            return await _context.Materials.Include(m=>m.MaterialGroup).ToListAsync();
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Material>> GetMaterial(int id)
         {
+            ClearOptions options = new ClearOptions()
+            {
+                ClearInLinkedModel = new()
+                {
+                    {"MaterialGroup", new[] {"Materials", "Achievement"}}
+                }
+            };
             var material = await _context.Materials
                 .Include(m=>m.MaterialGroup)
                 .SingleOrDefaultAsync(m=>m.MaterialId ==id);
