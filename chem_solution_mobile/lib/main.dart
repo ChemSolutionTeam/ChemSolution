@@ -7,7 +7,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 bool autorised;
 //final String chemURL = '192.168.0.104:5001';
-final String chemURL = '192.168.1.8:5001';
+//final String chemURL = '192.168.1.8:5001';
+final String chemURL = 'chemsolutionapi.azurewebsites.net';
 final storage = FlutterSecureStorage();
 User currentUser;
 
