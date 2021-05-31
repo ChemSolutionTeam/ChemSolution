@@ -11,8 +11,8 @@
             href="/UserRequests"
           />
           <img
-            src="button-for-request.png"
-            class="pl-10 w-20 h-20 float-left"
+              src="../assets/requestButton.png"
+              class="pl-10 w-30 h-20 float-left"
           />
 
           <p class="text-7xl font-semibold">{{ currentUserName }}</p>
@@ -38,14 +38,14 @@
                 </span>
                 <span class="column w-2/12 mr-1 achievement-text">
                   <img
-                    src="coin.png"
+                    src="AtomCoinGreen.png"
                     class="icons-achievement float-left mr-1"
                   />
                   {{ achievement.moneyReward }}
                 </span>
                 <span class="column w-2/12 mr-1 achievement-text">
                   <img
-                    src="rating.png"
+                    src="../assets/ratingCup.png"
                     class="icons-achievement float-left mr-1"
                   />
                   {{ achievement.ratingReward }}
@@ -60,8 +60,8 @@
         <div
           class="scroll-rating border border-csblack mr-10 rounded-3xl bg-white text-csblack h-full block overflow-hidden"
         >
-          <img src="cupImage.png" class="w-10 h-10 pl-20 float-left" />
-          <p class="text-4xl font-semibold">Рейтинг</p>
+          <img src="../assets/ratingCup.png" class="w-10 h-10 inline" />
+          <p class="text-4xl font-semibold inline align-middle">Рейтинг</p>
 
           <table class="text-left">
             <tr v-for="(user, index) in users" :key="index">
