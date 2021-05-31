@@ -172,7 +172,7 @@ export default {
   },
 
   searchMaterial(value) {
-    API.post(
+    return API.post(
       '/Materials/search',
       { value: value },
       {
@@ -180,17 +180,10 @@ export default {
           Authorization: 'Bearer ' + storage.state.token,
         },
       }
-    )
-      .then((resp) => {
-        if (resp) {
-          console.log(resp)
-          return 'Success'
-        }
-      })
-      .catch((e) => {
-        console.error(e)
-        return 'Fail'
-      })
+    ).catch((e) => {
+      console.error(e)
+      return 'Fail'
+    })
   },
 
   //MaterialGroups queries
