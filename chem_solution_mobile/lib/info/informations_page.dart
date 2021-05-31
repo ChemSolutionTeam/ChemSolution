@@ -1,3 +1,4 @@
+import 'package:chem_solution_mobile/main.dart';
 import 'package:chem_solution_mobile/models/BlogPost.dart';
 import 'package:chem_solution_mobile/widgets/nothing_find.dart';
 import 'package:chem_solution_mobile/widgets/post_card.dart';
@@ -19,7 +20,7 @@ class InformationsState extends State<Informations>
   InformationsState(this.search);
 
   List<Widget> posts = [];
-  List<BlogPost> allPosts = [];
+  List<BlogPost> _allPosts = allPosts;
   List<BlogPost> filterPosts = [];
 
   final GlobalKey<AnimatedListState> _key = new GlobalKey<AnimatedListState>();
@@ -29,7 +30,7 @@ class InformationsState extends State<Informations>
 
   bool _condition(BlogPost post) =>
       (post.title.toLowerCase().indexOf(search.toLowerCase()) > -1 ||
-        (post.information.toLowerCase().indexOf(search.toLowerCase()))>-1);
+          (post.information.toLowerCase().indexOf(search.toLowerCase())) > -1);
 
   void getSearch(String value) {
     setState(() {
@@ -39,7 +40,7 @@ class InformationsState extends State<Informations>
       }
       filterPosts = [];
       posts = [];
-      allPosts.forEach((post) {
+      _allPosts.forEach((post) {
         if (_condition(post)) filterPosts.add(post);
       });
       filterPosts = filterPosts.reversed.toList();
@@ -52,14 +53,16 @@ class InformationsState extends State<Informations>
   }
 
   void _addBlogPost() async {
-    allPosts = await BlogPost.fetchObjects(path: 'BlogPosts');
-    allPosts.removeWhere((post) => post.category != 'facts');
-    allPosts = allPosts.reversed.toList();
-    allPosts.forEach((post) {
-      if ((search != null || search != '') && _condition(post)) {
-        posts.add(BlogCard(post: post));
-        filterPosts.add(post);
-        _key.currentState.insertItem(posts.length - 1);
+    //   _allPosts = await BlogPost.fetchObjects(path: 'BlogPosts');
+    // _allPosts.removeWhere((post) => post.category != 'facts');
+    _allPosts = _allPosts.reversed.toList();
+    _allPosts.forEach((post) {
+      if (post.category == 'facts') {
+        if ((search != null || search != '') && _condition(post)) {
+          posts.add(BlogCard(post: post));
+          filterPosts.add(post);
+          _key.currentState.insertItem(posts.length - 1);
+        }
       }
     });
     ifEmptyPosts();

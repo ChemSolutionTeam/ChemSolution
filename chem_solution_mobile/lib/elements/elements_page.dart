@@ -1,4 +1,5 @@
 import 'package:chem_solution_mobile/elements/element_card.dart';
+import 'package:chem_solution_mobile/main.dart';
 import 'package:chem_solution_mobile/models/Element.dart' as CS;
 import 'package:chem_solution_mobile/widgets/nothing_find.dart';
 import 'package:flutter/foundation.dart';
@@ -18,7 +19,6 @@ class ElementsState extends State<Elements>
   String search = '';
   ElementsState(this.search);
   List<Widget> elements = [];
-  List<CS.Element> allElements = [];
   List<CS.Element> filterElements = [];
   final GlobalKey<AnimatedListState> _key = new GlobalKey<AnimatedListState>();
 
@@ -90,7 +90,6 @@ class ElementsState extends State<Elements>
     ];
 */
 
-    allElements = await CS.Element.fetchObjects(path: 'Elements');
     allElements.forEach((element) {
       if ((search != null || search != '') && _condition(element)) {
         filterElements.add(element);

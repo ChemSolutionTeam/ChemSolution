@@ -21,11 +21,11 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
     animationController = new AnimationController(
       vsync: this,
-      duration: new Duration(milliseconds: 720),
+      duration: new Duration(milliseconds: 1500),
     );
     animationController.repeat();
 
-    Timer(Duration(milliseconds: 2500), () {
+    Timer(Duration(milliseconds: 5000), () {
       Navigator.of(context).pushReplacementNamed(widget.nextRoute);
     });
   }

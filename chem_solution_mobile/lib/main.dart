@@ -1,9 +1,11 @@
 import 'package:chem_solution_mobile/models/Autorisation.dart';
+import 'package:chem_solution_mobile/models/BlogPost.dart';
 import 'package:chem_solution_mobile/models/User.dart';
 import 'package:chem_solution_mobile/screens/home_screen.dart';
 import 'package:chem_solution_mobile/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:chem_solution_mobile/models/Element.dart' as CS;
 
 bool autorised;
 //final String chemURL = '192.168.0.104:5001';
@@ -11,8 +13,12 @@ bool autorised;
 final String chemURL = 'chemsolutionapi.azurewebsites.net';
 final storage = FlutterSecureStorage();
 User currentUser;
+List<BlogPost> allPosts = [];
+List<CS.Element> allElements = [];
 
 void main() async {
+  allPosts = await BlogPost.fetchObjects(path: 'BlogPosts');
+  allElements = await CS.Element.fetchObjects(path: 'Elements');
   await Autorisation.setUser();
   runApp(ChemApp());
 }
