@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:url(#SVGID_1_);}
+	.st1{fill:#2F455C;}
+	.st2{fill:#FFFFFF;}
+	.st3{font-family:'ColonnaMT';}
+	.st4{font-size:407.58px;}
+	.st5{fill:none;stroke:#278585;stroke-width:5;stroke-miterlimit:10;}
+	.st6{fill:none;}
+	.st7{fill:#FFFFFF;stroke:#278585;stroke-miterlimit:10;}
+	.st8{font-size:100px;}
+	.st9{fill:#FFFFFF;stroke:#2D8C85;stroke-miterlimit:10;}
+	.st10{font-size:58px;}
+</style>
+<g>
+	<g id="Слой_1_1_">
+		
+			<radialGradient id="SVGID_1_" cx="256" cy="256" r="241" gradientTransform="matrix(1 0 0 -1 0 512)" gradientUnits="userSpaceOnUse">
+			<stop  offset="0.72" style="stop-color:#34F4C5"/>
+			<stop  offset="1" style="stop-color:#18D0EA"/>
+		</radialGradient>
+		<circle class="st0" cx="256" cy="256" r="241"/>
+		<g>
+			<path class="st1" d="M256,19c130.9,0.1,237,106.3,236.9,237.2c-0.1,95.1-57,181-144.6,218.1c-120.9,50.2-259.6-7.2-309.8-128.1
+				C-11.3,226.4,44.6,88.9,163.8,37.6C192.9,25.3,224.3,18.9,256,19 M256,15C122.9,15,15,122.9,15,256s107.9,241,241,241
+				s241-107.9,241-241S389.1,15,256,15z"/>
+		</g>
+		<text transform="matrix(1 0 0 1 58.79 351.96)" class="st2 st3 st4">Cs</text>
+		<text transform="matrix(1 0 0 1 58.79 351.96)" class="st5 st3 st4">Cs</text>
+	</g>
+</g>
+<rect x="195.9" y="34.8" class="st6" width="121.3" height="81.4"/>
+<text transform="matrix(1 0 0 1 195.9122 94.4351)" class="st7 st3 st8">196</text>
+<rect x="85.2" y="368.2" class="st6" width="341.6" height="41.3"/>
+<text transform="matrix(1 0 0 1 86.8426 402.7716)" class="st9 st3 st10">ChemSolution</text>
+</svg>
