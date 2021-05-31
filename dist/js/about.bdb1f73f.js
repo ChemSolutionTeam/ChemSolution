@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["about"],{f820:function(e,t,o){"use strict";o.r(t);var r=o("7a23"),n={class:"about"};function s(e,t,o,s,a,c){var u=Object(r["y"])("RegisterForm");return Object(r["s"])(),Object(r["e"])("div",n,[Object(r["i"])(u,{msg:"Welcome to Your Vue.js App"})])}var a=o("349f"),c={name:"About",components:{RegisterForm:a["a"]}};c.render=s;t["default"]=c}}]);
-//# sourceMappingURL=about.bdb1f73f.js.map
