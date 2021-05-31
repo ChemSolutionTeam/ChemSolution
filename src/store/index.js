@@ -6,7 +6,7 @@ export default createStore({
       token: '',
       username: '',
       email: '',
-      currentPage: 'Home',
+      currentPage: 'Домашня сторінка',
       authorizeProgress: 0,
     }
   },
