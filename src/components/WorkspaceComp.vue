@@ -3,7 +3,7 @@
     class="column w-3/4 h-11/12 p-4 shadow-xl mt-20"
     style="position: relative"
   >
-    <H2 />
+    <O2 />
     <div v-for="atom in atoms" :key="atom.id">
       <div
         draggable="true"
@@ -31,8 +31,11 @@
 </template>
 
 <script>
+/* eslint-disable vue/no-unused-components */
+
 import Atom from '@/components/Atom'
 import H2 from '@/components/materials/H2'
+import O2 from '@/components/materials/O2'
 export default {
   data() {
     return {
@@ -52,6 +55,7 @@ export default {
   components: {
     Atom,
     H2,
+    O2,
   },
   methods: {},
   computed() {},
