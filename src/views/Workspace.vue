@@ -17,12 +17,12 @@
       >
         <div v-for="element in filteredElements" :key="element.elementId">
           <ElementChooser
-              v-bind:symbol="element.symbol"
-              v-bind:name="element.name"
-              v-bind:category="element.categoryId.toString()"
-              draggable="true"
-              @click="addElement(element)"
-              @dragstart="startDrag($event, element)"
+            v-bind:symbol="element.symbol"
+            v-bind:name="element.name"
+            v-bind:category="element.categoryId.toString()"
+            draggable="true"
+            @click="addElement(element)"
+            @dragstart="startDrag($event, element)"
           />
         </div>
       </div>
@@ -33,14 +33,14 @@
       !-->
 
     <WorkspaceComp
-        @mouseup="atomKeyupLeft()"
-        v-bind:atoms="atoms"
-        v-bind:value="value"
-        @drop="onDrop($event)"
-        @dragenter.prevent
-        @dragover.prevent
-        @remove="removeElement"
-        @dragAndDrop="dragAndDropElement"
+      @mouseup="atomKeyupLeft()"
+      v-bind:atoms="atoms"
+      v-bind:value="value"
+      @drop="onDrop($event)"
+      @dragenter.prevent
+      @dragover.prevent
+      @remove="removeElement"
+      @dragAndDrop="dragAndDropElement"
     />
   </div>
 
@@ -74,8 +74,8 @@ export default {
   },
   created() {
     apiService.getElements().then((resp) => {
-      this.elements = resp.data.filter(e => !e.isLocked)
-      this.unlockableElements = resp.data.filter(e => e.isLocked)
+      this.elements = resp.data.filter((e) => !e.isLocked)
+      this.unlockableElements = resp.data.filter((e) => e.isLocked)
       console.log(resp)
     })
     if (storage.state.token.length !== 0) {
@@ -93,7 +93,11 @@ export default {
         await apiService.getUser().then((resp) => {
           console.log(resp.data.elements)
           for (let i = 0; i < resp.data.elements.length; ++i) {
-            if (!this.elements.some(e => e.elementId === resp.data.elements[i].elementId)) {
+            if (
+              !this.elements.some(
+                (e) => e.elementId === resp.data.elements[i].elementId
+              )
+            ) {
               resp.data.elements[i].isLocked = false
               this.elements.push(resp.data.elements[i])
             }
@@ -129,8 +133,8 @@ export default {
           movementY: event.movementY,
         })
         if (
-            this.value.filter((el) => el.elementId === this.dragElement.elementId)
-                .length === 0
+          this.value.filter((el) => el.elementId === this.dragElement.elementId)
+            .length === 0
         ) {
           this.value.push({
             amount: 1,
@@ -140,7 +144,6 @@ export default {
           for (let i = 0; i < this.value.length; i += 1) {
             if (this.value[i].elementId === this.dragElement.elementId) {
               this.value[i].amount += 1
-
             }
           }
         }
@@ -192,11 +195,11 @@ export default {
         if (this.search) {
           return this.elements.filter((element) => {
             return (
-                (element.name != null &&
-                    element.name
-                        .toLowerCase()
-                        .includes(this.search.toLowerCase())) ||
-                element.symbol.toLowerCase().includes(this.search.toLowerCase())
+              (element.name != null &&
+                element.name
+                  .toLowerCase()
+                  .includes(this.search.toLowerCase())) ||
+              element.symbol.toLowerCase().includes(this.search.toLowerCase())
             )
           })
         } else {

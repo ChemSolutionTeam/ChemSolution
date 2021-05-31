@@ -11,18 +11,23 @@
       d="M35,.25A34.75,34.75,0,1,1,.25,35,34.79,34.79,0,0,1,35,.25M35,0A35,35,0,1,0,70,35,35,35,0,0,0,35,0Z"
     />
     <text
-        class="cls-2"
-        style="font-size: 31.32px; font-family: 'Century Gothic'; font-weight: bold; fill: #ffffff;
+      class="cls-2"
+      style="
+        font-size: 31.32px;
+        font-family: 'Century Gothic';
+        font-weight: bold;
+        fill: #ffffff;
         -webkit-touch-callout: none;
         -webkit-user-select: none;
         -khtml-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
-        user-select: none;"
-        x="50%"
-        y="50%"
-        text-anchor="middle"
-        dominant-baseline="middle"
+        user-select: none;
+      "
+      x="50%"
+      y="50%"
+      text-anchor="middle"
+      dominant-baseline="middle"
     >
       {{ symbol }}
     </text>

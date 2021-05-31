@@ -1,28 +1,26 @@
 <template>
   <div
-      id="el1"
-      v-bind:style="{
+    id="el1"
+    v-bind:style="{
       position: 'absolute',
       width: '70px',
       height: '70px',
     }"
   >
-    <Atom v-bind:id="1" v-bind:symbol="H" v-bind:category="1" class="w-full"/>
+    <Atom v-bind:id="1" v-bind:symbol="H" v-bind:category="1" class="w-full" />
   </div>
 
   <div
-      id="el2"
-      v-bind:style="{
+    id="el2"
+    v-bind:style="{
       position: 'absolute',
       width: '70px',
       height: '70px',
     }"
   >
-    <Atom v-bind:id="1" v-bind:symbol="H" v-bind:category="1" class="w-full"/>
+    <Atom v-bind:id="1" v-bind:symbol="H" v-bind:category="1" class="w-full" />
   </div>
-  <canvas id="canvas">
-
-  </canvas>
+  <canvas id="canvas"> </canvas>
 </template>
 
 <script>
@@ -43,7 +41,6 @@ export default {
       height: undefined,
       current: null,
       atoms: undefined,
-
     }
   },
   mounted() {
@@ -58,27 +55,26 @@ export default {
         x: Math.random() * (this.width - this.size),
         y: Math.random() * (this.height - this.size),
         startX: 0,
-        startY: 0
+        startY: 0,
       },
       el2: {
         x: Math.random() * (this.width - this.size),
         y: Math.random() * (this.height - this.size),
         startX: 0,
-        startY: 0
-      }
+        startY: 0,
+      },
     }
     this.translate(this.el1, this.atoms.el1.x, this.atoms.el1.y)
     this.translate(this.el2, this.atoms.el2.x, this.atoms.el2.y)
     this.drawLine(
-        this.atoms.el1.x,
-        this.atoms.el2.x,
-        this.atoms.el1.y,
-        this.atoms.el2.y
+      this.atoms.el1.x,
+      this.atoms.el2.x,
+      this.atoms.el1.y,
+      this.atoms.el2.y
     )
 
     this.el1.addEventListener('mousedown', this.onMouseDown)
     this.el2.addEventListener('mousedown', this.onMouseDown)
-
   },
   methods: {
     translate(el, x, y) {
@@ -90,7 +86,7 @@ export default {
       this.context.moveTo(x1 + this.size / 2, y1 + this.size / 2)
       this.context.lineTo(x2 + this.size / 2, y2 + this.size / 2)
       this.context.stroke()
-    }
+    },
   },
   onMouseDown(e) {
     e.preventDefault()
@@ -104,15 +100,17 @@ export default {
     document.body.addEventListener('mouseup', this.onMouseUp)
   },
   onMouseMove(e) {
-    const x = this.atoms[this.current.id].x = e.x - this.atoms[this.current.id].startX
-    const y = this.atoms[this.current.id].y = e.y - this.atoms[this.current.id].startY
+    const x = (this.atoms[this.current.id].x =
+      e.x - this.atoms[this.current.id].startX)
+    const y = (this.atoms[this.current.id].y =
+      e.y - this.atoms[this.current.id].startY)
 
     this.translate(this.current, x, y)
     this.drawLine(
-        this.atoms.el1.x,
-        this.atoms.el2.x,
-        this.atoms.el1.y,
-        this.atoms.el2.y
+      this.atoms.el1.x,
+      this.atoms.el2.x,
+      this.atoms.el1.y,
+      this.atoms.el2.y
     )
   },
   onMouseUp() {
