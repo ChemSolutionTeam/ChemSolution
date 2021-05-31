@@ -31,7 +31,6 @@
               <div class="row">
                 <span class="column w-7/12 ml-5 achievement-text">
                   <img
-                    src="{{ achievement.imgAchievement }}"
                     class="icons-achievement mr-3 float-left"
                     :src="achievement.imgAchievement"
                   />
