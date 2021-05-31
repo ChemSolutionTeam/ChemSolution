@@ -32,15 +32,15 @@
       scrollbar-thin scrollbar-thumb-blue-0 scrollbar-track-blue-0 scrollbar-thumb-rounded-full scrollbar-track-rounded-full
       !-->
 
-    <WorkspaceComp id="workspaceCanvas"
-                   @mouseup="atomKeyupLeft()"
-                   v-bind:atoms="atoms"
-                   v-bind:value="value"
-                   @drop="onDrop($event)"
-                   @dragenter.prevent
-                   @dragover.prevent
-                   @remove="removeElement"
-                   @dragAndDrop="dragAndDropElement"
+    <WorkspaceComp
+        @mouseup="atomKeyupLeft()"
+        v-bind:atoms="atoms"
+        v-bind:value="value"
+        @drop="onDrop($event)"
+        @dragenter.prevent
+        @dragover.prevent
+        @remove="removeElement"
+        @dragAndDrop="dragAndDropElement"
     />
   </div>
 
