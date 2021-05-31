@@ -36,7 +36,7 @@ export default {
     const canvas = document.getElementById('canvas')
     const context = canvas.getContext('2d')
     let width = (canvas.width = innerWidth / 1.4)
-    let height = (canvas.height = innerHeight / 2)
+    let height = (canvas.height = innerHeight / 1.3)
 
     /*------------------------------------*/
 
