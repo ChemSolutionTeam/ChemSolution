@@ -15,8 +15,8 @@
           position: 'absolute',
           top: atom.clientY + 'px',
           left: atom.clientX + 'px',
-          width: '75px',
-          height: '75px',
+          width: '70px',
+          height: '70px',
         }"
       >
         <Atom
