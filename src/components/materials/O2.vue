@@ -1,22 +1,10 @@
 <template>
   <div style="position: absolute; width: 70px; height: 70px; z-index: 50">
-    <Atom
-      div-id="el1"
-      v-bind:id="8"
-      v-bind:symbol="O"
-      v-bind:category="1"
-      class="w-full z-10"
-    />
+    <Atom div-id="el1" id="8" symbol="O" category="1" class="w-full z-10" />
   </div>
 
   <div style="position: absolute; width: 70px; height: 70px; z-index: 50">
-    <Atom
-      div-id="el2"
-      v-bind:id="8"
-      v-bind:symbol="O"
-      v-bind:category="1"
-      class="w-full z-10"
-    />
+    <Atom div-id="el2" id="8" symbol="O" category="1" class="w-full z-10" />
   </div>
 
   <canvas id="canvas" class="block"> </canvas>

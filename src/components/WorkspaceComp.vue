@@ -4,6 +4,7 @@
     style="position: relative"
   >
     <O2 />
+    <H2 />
     <div v-for="atom in atoms" :key="atom.id">
       <div
         draggable="true"
