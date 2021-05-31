@@ -1,12 +1,12 @@
 <template>
-  <div style="position: absolute; width: 70px; height: 70px; z-index: 50">
-    <Atom div-id="el1" id="1" symbol="H" category="1" class="w-full z-10" />
+  <div style="position: absolute; width: 70px; height: 70px;">
+    <Atom div-id="el1" id="1" symbol="H" category="1" class="w-full"/>
   </div>
 
-  <div style="position: absolute; width: 70px; height: 70px; z-index: 50">
-    <Atom div-id="el2" id="1" symbol="H" category="1" class="w-full z-10" />
+  <div style="position: absolute; width: 70px; height: 70px;">
+    <Atom div-id="el2" id="1" symbol="H" category="1" class="w-full"/>
   </div>
-  <canvas id="canvas" class="block"> </canvas>
+  <canvas id="canvas" class="block"></canvas>
 </template>
 
 <script>
