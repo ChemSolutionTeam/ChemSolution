@@ -17,12 +17,12 @@
       >
         <div v-for="element in filteredElements" :key="element.elementId">
           <ElementChooser
-            v-bind:symbol="element.symbol"
-            v-bind:name="element.name"
-            v-bind:category="element.category.categoryId"
-            draggable="true"
-            @click="addElement(element)"
-            @dragstart="startDrag($event, element)"
+              v-bind:symbol="element.symbol"
+              v-bind:name="element.name"
+              v-bind:category="element.categoryId.toString()"
+              draggable="true"
+              @click="addElement(element)"
+              @dragstart="startDrag($event, element)"
           />
         </div>
       </div>
@@ -32,15 +32,15 @@
       scrollbar-thin scrollbar-thumb-blue-0 scrollbar-track-blue-0 scrollbar-thumb-rounded-full scrollbar-track-rounded-full
       !-->
 
-    <WorkspaceComp
-      @mouseup="atomKeyupLeft()"
-      v-bind:atoms="atoms"
-      v-bind:value="value"
-      @drop="onDrop($event)"
-      @dragenter.prevent
-      @dragover.prevent
-      @remove="removeElement"
-      @dragAndDrop="dragAndDropElement"
+    <WorkspaceComp id="workspaceCanvas"
+                   @mouseup="atomKeyupLeft()"
+                   v-bind:atoms="atoms"
+                   v-bind:value="value"
+                   @drop="onDrop($event)"
+                   @dragenter.prevent
+                   @dragover.prevent
+                   @remove="removeElement"
+                   @dragAndDrop="dragAndDropElement"
     />
   </div>
 
@@ -51,8 +51,9 @@
 import ElementChooser from '@/components/ElementChooser'
 import WorkspaceComp from '@/components/WorkspaceComp'
 import Footer from '@/components/Footer'
-
+import storage from '@/store'
 import apiService from '@/services'
+
 export default {
   data() {
     return {
@@ -60,6 +61,7 @@ export default {
       dragElement: null,
       dragAtom: null,
       elements: [],
+      unlockableElements: [],
       atoms: [],
       value: [],
     }
@@ -70,14 +72,35 @@ export default {
     WorkspaceComp,
     Footer,
   },
-
   created() {
     apiService.getElements().then((resp) => {
-      this.elements = resp.data
+      this.elements = resp.data.filter(e => !e.isLocked)
+      this.unlockableElements = resp.data.filter(e => e.isLocked)
       console.log(resp)
     })
+    if (storage.state.token.length !== 0) {
+      this.getUserElements()
+    }
+  },
+  watch: {
+    isUserAuthorised: function () {
+      this.getUserElements()
+    },
   },
   methods: {
+    async getUserElements() {
+      if (this.isUserAuthorised) {
+        await apiService.getUser().then((resp) => {
+          console.log(resp.data.elements)
+          for (let i = 0; i < resp.data.elements.length; ++i) {
+            if (!this.elements.some(e => e.elementId === resp.data.elements[i].elementId)) {
+              resp.data.elements[i].isLocked = false
+              this.elements.push(resp.data.elements[i])
+            }
+          }
+        })
+      }
+    },
     atomKeydownLeft(element) {
       console.warn(element)
     },
@@ -106,8 +129,8 @@ export default {
           movementY: event.movementY,
         })
         if (
-          this.value.filter((el) => el.elementId == this.dragElement.elementId)
-            .length == 0
+            this.value.filter((el) => el.elementId === this.dragElement.elementId)
+                .length === 0
         ) {
           this.value.push({
             amount: 1,
@@ -115,8 +138,9 @@ export default {
           })
         } else {
           for (let i = 0; i < this.value.length; i += 1) {
-            if (this.value[i].elementId == this.dragElement.elementId) {
+            if (this.value[i].elementId === this.dragElement.elementId) {
               this.value[i].amount += 1
+
             }
           }
         }
@@ -136,18 +160,18 @@ export default {
           movementX: event.movementX,
           movementY: event.movementY,
         })
-        this.atoms = this.atoms.filter((el) => el != this.dragAtom)
+        this.atoms = this.atoms.filter((el) => el !== this.dragAtom)
         this.dragAtom = null
       }
     },
     removeElement(atom) {
-      this.atoms = this.atoms.filter((el) => el != atom)
+      this.atoms = this.atoms.filter((el) => el !== atom)
       for (let i = 0; i < this.value.length; i += 1) {
-        if (this.value[i].elementId == atom.id) {
+        if (this.value[i].elementId === atom.id) {
           this.value[i].amount -= 1
         }
       }
-      this.value = this.value.filter((el) => el.amount != 0)
+      this.value = this.value.filter((el) => el.amount !== 0)
       console.log(this.value)
       apiService
         .searchMaterial(this.value)
@@ -160,16 +184,19 @@ export default {
     },
   },
   computed: {
+    isUserAuthorised() {
+      return storage.state.token.length !== 0
+    },
     filteredElements() {
       try {
         if (this.search) {
           return this.elements.filter((element) => {
             return (
-              (element.name != null &&
-                element.name
-                  .toLowerCase()
-                  .includes(this.search.toLowerCase())) ||
-              element.symbol.toLowerCase().includes(this.search.toLowerCase())
+                (element.name != null &&
+                    element.name
+                        .toLowerCase()
+                        .includes(this.search.toLowerCase())) ||
+                element.symbol.toLowerCase().includes(this.search.toLowerCase())
             )
           })
         } else {
