@@ -64,6 +64,7 @@ export default {
       unlockableElements: [],
       atoms: [],
       value: [],
+      materials: [],
     }
   },
   name: 'Workspace',
@@ -149,9 +150,18 @@ export default {
         }
         console.log(this.value)
         this.dragElement = null
-        apiService
-          .searchMaterial(this.value)
-          .then((resp) => console.log(resp.data))
+        apiService.searchMaterial(this.value).then((resp) => {
+          console.log(resp.data)
+          if (resp.data != undefined) {
+            this.materials.push({
+              materialId: resp.data.resultMaterialId,
+              formula: resp.data.formula,
+            })
+            this.atoms = []
+            this.value = []
+            console.log(this.materials)
+          }
+        })
       }
       if (this.dragAtom != null) {
         this.atoms.push({
@@ -176,9 +186,18 @@ export default {
       }
       this.value = this.value.filter((el) => el.amount !== 0)
       console.log(this.value)
-      apiService
-        .searchMaterial(this.value)
-        .then((resp) => console.log(resp.data))
+      apiService.searchMaterial(this.value).then((resp) => {
+        console.log(resp.data)
+        if (resp.data != undefined) {
+          this.materials.push({
+            materialId: resp.data.resultMaterialId,
+            formula: resp.data.formula,
+          })
+          this.atoms = []
+          this.value = []
+          console.log(this.materials)
+        }
+      })
     },
     dragAndDropElement(obj) {
       console.log(obj.atom)
