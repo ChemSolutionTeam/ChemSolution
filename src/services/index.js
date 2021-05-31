@@ -41,16 +41,9 @@ export default {
           Authorization: 'Bearer ' + storage.state.token,
         },
       }
-    )
-      .then((resp) => {
-        if (resp) {
-          return 'Success'
-        }
-      })
-      .catch((e) => {
-        console.error(e)
-        return 'Fail'
-      })
+    ).catch((e) => {
+      console.error(e)
+    })
   },
   getUsers() {
     API.get('/Users', {

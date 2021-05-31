@@ -34,6 +34,7 @@
       <RegisterForm
         @mouseleave="isMouseOut = true"
         @mouseover="isMouseOut = false"
+        @register="register()"
         v-show="isFormShow == 'register'"
         v-on:openLogin="closeForm('login')"
         v-on:openReset="closeForm('reset')"
@@ -59,6 +60,10 @@ import Navigation from '../src/components/Navigation.vue'
 import LoginForm from '../src/components/LoginForm.vue'
 import RegisterForm from '../src/components/RegisterForm.vue'
 import ForgetPassForm from '../src/components/ForgetPassForm'
+import router from '@/router/index'
+import apiService from '@/services/index'
+import storage from '@/store/index'
+// import storage from '@/store/index'
 export default {
   components: { Navigation, LoginForm, RegisterForm, ForgetPassForm },
   data() {
@@ -67,6 +72,7 @@ export default {
       isUserAuthorised: false,
       isFormShow: 'none',
       isBackgroundShown: 'none',
+      role: '',
     }
   },
   methods: {
@@ -100,9 +106,23 @@ export default {
     login() {
       this.closeForm('auth')
       this.isUserAuthorised = true
+      this.getRole().then(() => {
+        alert(this.role)
+        router.push(this.role == 'Admin' ? 'Admin' : 'userPage')
+      })
+    },
+    async getRole() {
+      await apiService.getUser().then((resp) => {
+        storage.state.role = resp.data.role
+        this.role = resp.data.role
+      })
     },
     logout() {
       this.isUserAuthorised = false
+      router.push('/')
+    },
+    register() {
+      this.login()
     },
   },
 }

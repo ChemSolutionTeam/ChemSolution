@@ -102,6 +102,7 @@ export default {
   data() {
     return {
       balance: 0,
+      name: '',
       userRole: '',
       scroll: {
         timer: 0,
@@ -120,6 +121,7 @@ export default {
         await apiService.getUser().then((resp) => {
           console.error(resp.data.balance)
           this.userRole = resp.data.role
+          this.name = resp.data.userName
           this.balance = resp.data.balance
           return resp.data.balance
         })
