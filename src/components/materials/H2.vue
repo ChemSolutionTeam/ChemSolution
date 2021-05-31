@@ -1,18 +1,24 @@
 <template>
-  <div
-      style="position: absolute; width: 70px; height: 70px; z-index: 50;"
-  >
-    <Atom div-id="el1" v-bind:id="1" v-bind:symbol="H" v-bind:category="1" class="w-full z-10"/>
+  <div style="position: absolute; width: 70px; height: 70px; z-index: 50">
+    <Atom
+      div-id="el1"
+      v-bind:id="1"
+      v-bind:symbol="H"
+      v-bind:category="1"
+      class="w-full z-10"
+    />
   </div>
 
-  <div
-      style="position: absolute; width: 70px; height: 70px; z-index: 50;"
-  >
-    <Atom div-id="el2" v-bind:id="1" v-bind:symbol="H" v-bind:category="1" class="w-full z-10"/>
+  <div style="position: absolute; width: 70px; height: 70px; z-index: 50">
+    <Atom
+      div-id="el2"
+      v-bind:id="1"
+      v-bind:symbol="H"
+      v-bind:category="1"
+      class="w-full z-10"
+    />
   </div>
-  <canvas id="canvas" class="block">
-
-  </canvas>
+  <canvas id="canvas" class="block"> </canvas>
 </template>
 
 <script>
@@ -29,8 +35,8 @@ export default {
 
     const canvas = document.getElementById('canvas')
     const context = canvas.getContext('2d')
-    let width = canvas.width = innerWidth / 3
-    let height = canvas.height = innerHeight / 3
+    let width = (canvas.width = innerWidth / 1.4)
+    let height = (canvas.height = innerHeight / 2)
 
     /*------------------------------------*/
 
@@ -40,32 +46,26 @@ export default {
         x: Math.random() * (width - size),
         y: Math.random() * (height - size),
         startX: 0,
-        startY: 0
+        startY: 0,
       },
 
       el2: {
         x: Math.random() * (width - size),
         y: Math.random() * (height - size),
         startX: 0,
-        startY: 0
-      }
+        startY: 0,
+      },
     }
 
-// начальное положение
+    // начальное положение
     translate(el1, elements.el1.x, elements.el1.y)
     translate(el2, elements.el2.x, elements.el2.y)
-    drawLine(
-        elements.el1.x,
-        elements.el2.x,
-        elements.el1.y,
-        elements.el2.y
-    )
+    drawLine(elements.el1.x, elements.el2.x, elements.el1.y, elements.el2.y)
 
     /*------------------------------------*/
 
     el1.addEventListener('mousedown', onMouseDown)
     el2.addEventListener('mousedown', onMouseDown)
-
 
     function onMouseDown(e) {
       e.preventDefault()
@@ -81,16 +81,11 @@ export default {
     }
 
     function onMouseMove(e) {
-      const x = elements[current.id].x = e.x - elements[current.id].startX
-      const y = elements[current.id].y = e.y - elements[current.id].startY
+      const x = (elements[current.id].x = e.x - elements[current.id].startX)
+      const y = (elements[current.id].y = e.y - elements[current.id].startY)
 
       translate(current, x, y)
-      drawLine(
-          elements.el1.x,
-          elements.el2.x,
-          elements.el1.y,
-          elements.el2.y
-      )
+      drawLine(elements.el1.x, elements.el2.x, elements.el1.y, elements.el2.y)
     }
 
     function onMouseUp() {
@@ -123,7 +118,7 @@ export default {
       this.context.moveTo(x1 + this.size / 2, y1 + this.size / 2)
       this.context.lineTo(x2 + this.size / 2, y2 + this.size / 2)
       this.context.stroke()
-    }
+    },
   },
   onMouseDown(e) {
     console.log('MOUSE DOWN')
@@ -138,20 +133,22 @@ export default {
     document.body.addEventListener('mouseup', this.onMouseUp)
   },
   onMouseMove(e) {
-    const x = this.atoms[this.currentAtom.id].x = e.x - this.atoms[this.currentAtom.id].startX
-    const y = this.atoms[this.currentAtom.id].y = e.y - this.atoms[this.currentAtom.id].startY
+    const x = (this.atoms[this.currentAtom.id].x =
+      e.x - this.atoms[this.currentAtom.id].startX)
+    const y = (this.atoms[this.currentAtom.id].y =
+      e.y - this.atoms[this.currentAtom.id].startY)
 
     this.translate(this.currentAtom, x, y)
     this.drawLine(
-        this.atoms.el1.x,
-        this.atoms.el2.x,
-        this.atoms.el1.y,
-        this.atoms.el2.y
+      this.atoms.el1.x,
+      this.atoms.el2.x,
+      this.atoms.el1.y,
+      this.atoms.el2.y
     )
   },
   onMouseUp() {
     document.body.removeEventListener('mousemove', this.onMouseMove)
     document.body.removeEventListener('mouseup', this.onMouseUp)
-  }
+  },
 }
 </script>
