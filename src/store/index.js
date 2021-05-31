@@ -5,6 +5,7 @@ export default createStore({
     return {
       token: '',
       username: '',
+      role: '',
       email: '',
       currentPage: 'Домашня сторінка',
       authorizeProgress: 0,
@@ -17,6 +18,7 @@ export default createStore({
     setUser(state, user) {
       state.username = user.username
       state.email = user.email
+      state.role = user.role
     },
     setCurrentPage(state, page) {
       state.currentPage = page

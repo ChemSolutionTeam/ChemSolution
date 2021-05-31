@@ -3,7 +3,8 @@ import storage from '../store/index'
 const API = axios.create({
   // baseURL: 'http://192.168.0.104:5001',
   //baseURL: 'http://192.168.1.8:5001',
-  baseURL: 'https://localhost:5001',
+  // baseURL: 'https://localhost:5001',
+  baseURL: 'https://chemsolutionapi.azurewebsites.net',
   headers: {
     'Access-Control-Allow-Origin': '*',
     Accept: 'text/plan',
@@ -40,16 +41,9 @@ export default {
           Authorization: 'Bearer ' + storage.state.token,
         },
       }
-    )
-      .then((resp) => {
-        if (resp) {
-          return 'Success'
-        }
-      })
-      .catch((e) => {
-        console.error(e)
-        return 'Fail'
-      })
+    ).catch((e) => {
+      console.error(e)
+    })
   },
   getUsers() {
     API.get('/Users', {
@@ -171,7 +165,7 @@ export default {
   },
 
   searchMaterial(value) {
-    API.post(
+    return API.post(
       '/Materials/search',
       { value: value },
       {
@@ -179,17 +173,10 @@ export default {
           Authorization: 'Bearer ' + storage.state.token,
         },
       }
-    )
-      .then((resp) => {
-        if (resp) {
-          console.log(resp)
-          return 'Success'
-        }
-      })
-      .catch((e) => {
-        console.error(e)
-        return 'Fail'
-      })
+    ).catch((e) => {
+      console.error(e)
+      return 'Fail'
+    })
   },
 
   //MaterialGroups queries

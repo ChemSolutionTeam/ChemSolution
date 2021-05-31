@@ -21,7 +21,7 @@
               type="password"
               placeholder="Уведіть пароль"
               :isMultiline="true"
-              @change="validatePass()"
+              @change="validate()"
               v-model="user.pass"
               :isIncorrect="passWrong"
               errorMassage="Пароль має містити 8 знаків, 1 цифру, 1 велику , 1 малу літери та 1 символ"
@@ -34,7 +34,7 @@
                 v-model="user.birthDate"
                 errorMassage="Уведіть правильну дату"
                 :isIncorrect="dateWrong"
-                @change="validateAge()"
+                @change="validate()"
               />
             </div>
           </div>
@@ -53,7 +53,7 @@
               placeholder="Уведіть пароль"
               :isMultiline="true"
               v-model="user.passRepeat"
-              @change="validatePassRepeat()"
+              @change="validate()"
               :isIncorrect="passDontMatch"
               errorMassage="Паролі не співпадають"
             ></BaseInput>
@@ -136,6 +136,9 @@ import BaseInput from '@/components/BaseInput.vue'
 import BaseCheck from '@/components/BaseCheck.vue'
 import Logo from '@/components/Logo.vue'
 import Validation from '@/services/validation.js'
+import apiService from '@/services/index.js'
+import storage from '@/store/index.js'
+
 export default {
   name: 'RegisterForm',
   components: {
@@ -143,7 +146,7 @@ export default {
     BaseCheck,
     Logo,
   },
-  emits: ['openLogin'],
+  emits: ['openLogin', 'register'],
   data() {
     return {
       user: {
@@ -176,15 +179,28 @@ export default {
     },
   },
   methods: {
-    register() {
-      //verification.
-
+    validate() {
       this.passWrong = !Validation.pass(this.user.pass)
       this.passDontMatch = !Validation.passRepeat(
         this.user.pass,
         this.user.passRepeat
       )
       this.dateWrong = !Validation.age(this.user.birthDate)
+    },
+    async register() {
+      //verification.
+      this.validate()
+      await apiService.postUser(this.user).then(() => {
+        apiService.getToken(this.user).then(() => {
+          console.log(storage.state.token.length)
+          if (storage.state.token.length !== 0) {
+            this.$emit('login')
+          } else {
+            this.passIsIncorrect = true
+          }
+        })
+        this.$emit('register')
+      })
     },
   },
 }

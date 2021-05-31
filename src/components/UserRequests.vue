@@ -13,7 +13,7 @@
             <p class="font-bold">Тема:</p>
           </td>
           <td>
-            <p>{{ request.Theme }}</p>
+            <p>{{ request.theme }}</p>
           </td>
         </tr>
         <tr>
@@ -21,7 +21,7 @@
             <p class="font-bold">Дата:</p>
           </td>
           <td>
-            <p>{{ request.DateTimeSended }}</p>
+            <p>{{ request.dateTimeSended }}</p>
           </td>
         </tr>
         <tr>
@@ -29,7 +29,7 @@
             <p class="font-bold">Статус:</p>
           </td>
           <td>
-            <p>{{ request.StatusId }}</p>
+            <p>{{ request.status.statusName }}</p>
           </td>
         </tr>
       </table>
