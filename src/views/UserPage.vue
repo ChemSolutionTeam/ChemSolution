@@ -33,6 +33,7 @@
                   <img
                     src="{{ achievement.imgAchievement }}"
                     class="icons-achievement mr-3 float-left"
+                    :src="achievement.imgAchievement"
                   />
                   {{ achievement.heading }}
                 </span>
