@@ -43,10 +43,10 @@
       <div class="p-1 float-right text-right">
         <p class="text-right font-bold">{{ element.atomicWeight }}</p>
       </div>
-      <div class="p-1 float-left w-8/12">
+      <div class="p-1 float-left w-4/12">
         <p class="text-left">Валентність:</p>
       </div>
-      <div class="p-1 float-right text-right">
+      <div class="p-1 float-right text-right w-8/12">
         <p class="text-right font-bold">{{ valencyString }}</p>
       </div>
 
@@ -234,7 +234,8 @@ export default {
       return storage.state.token.length !== 0
     },
     valencyString() {
-      if (!this.element.valences) return 'Невизначено'
+      if (this.element.valences.length === 0)
+        return 'невизначено'
 
       let result = ''
 
