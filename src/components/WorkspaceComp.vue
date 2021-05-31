@@ -3,7 +3,6 @@
     class="column w-3/4 h-11/12 p-4 shadow-xl mt-20"
     style="position: relative"
   >
-    <O2 />
     <H2 />
     <div v-for="atom in atoms" :key="atom.id">
       <div
