@@ -46,21 +46,35 @@ namespace ChemSolution.Controllers
             if (order != null)
             {
                 // do later checking status
-                if (order.User.Balance != null)
-                {
-                    order.User.Balance += order.CoinsAmount;
-                }
-                else
-                {
-                    order.User.Balance = order.CoinsAmount;
-                }
+                order.User.Balance += order.CoinsAmount;
                 _context.Orders.Remove(order);
                 await _context.SaveChangesAsync();
                 return Ok();
             }
             return BadRequest();
         }
-        
-        
+
+        [Authorize]
+        [HttpPost("buy/element/{id}")]
+        public async Task<ActionResult> BuyElement(int id)
+        {
+            var user = await _context.Users
+                .Include(u=> u.Elements)
+                .SingleOrDefaultAsync( u=> u.UserEmail == User.Identity.Name);
+            var element = await _context.Elements.FindAsync(id);
+            if (user != null && element != null)
+            {
+                if (user.Balance >= element.Price && !user.Elements.Contains(element))
+                {
+                    user.Balance -= element.Price;
+                    user.Elements.Add(element);
+                    await _context.SaveChangesAsync();
+                    return Ok();
+                }
+                return BadRequest();
+            }
+            return BadRequest();
+        }
+                
     }
 }
