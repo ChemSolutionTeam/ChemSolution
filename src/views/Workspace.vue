@@ -17,12 +17,13 @@
       >
         <div v-for="element in filteredElements" :key="element.elementId">
           <ElementChooser
-            v-bind:symbol="element.symbol"
-            v-bind:name="element.name"
-            v-bind:category="element.categoryId.toString()"
-            draggable="true"
-            @click="addElement(element)"
-            @dragstart="startDrag($event, element)"
+              v-bind:symbol="element.symbol"
+              v-bind:name="element.name"
+              v-bind:category="element.categoryId.toString()"
+              v-bind:is-locked="element.isLocked"
+              v-bind:draggable="!element.isLocked"
+              @click="addElement(element)"
+              @dragstart="startDrag($event, element)"
           />
         </div>
       </div>
@@ -75,8 +76,7 @@ export default {
   },
   created() {
     apiService.getElements().then((resp) => {
-      this.elements = resp.data.filter((e) => !e.isLocked)
-      this.unlockableElements = resp.data.filter((e) => e.isLocked)
+      this.elements = resp.data
       console.log(resp)
     })
     if (storage.state.token.length !== 0) {
