@@ -79,6 +79,20 @@
         @mouseleave="isMouseOut = true"
         @mouseover="isMouseOut = false"
         v-show="isFormShow == 'requests'"
+        v-on:openCreateRequest="closeForm('createRequest')"
+      />
+    </transition>
+  </div>
+  <div
+    class="inset-0 z-20 fixed sm:pt-2 md:pt-5 overflow-auto lg:pt-10 w-full h-full bg-csblack bg-opacity-50"
+    v-show="isBackgroundShown == 'createRequest'"
+    @click="closeForm('none')"
+  >
+    <transition name="bounce">
+      <CreateRequestForm
+        @mouseleave="isMouseOut = true"
+        @mouseover="isMouseOut = false"
+        v-show="isFormShow == 'createRequest'"
       />
     </transition>
   </div>
@@ -89,6 +103,7 @@ import LoginForm from '../src/components/LoginForm.vue'
 import RegisterForm from '../src/components/RegisterForm.vue'
 import ShopForm from '../src/components/ShopForm.vue'
 import UserRequests from '../src/components/UserRequests.vue'
+import CreateRequestForm from '../src/components/CreateRequestForm.vue'
 import ForgetPassForm from '../src/components/ForgetPassForm'
 import router from '@/router/index'
 import apiService from '@/services/index'
@@ -97,6 +112,7 @@ import storage from '@/store/index'
 export default {
   components: {
     Navigation,
+    CreateRequestForm,
     LoginForm,
     RegisterForm,
     UserRequests,
