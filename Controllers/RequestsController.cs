@@ -101,7 +101,8 @@ namespace ChemSolution.Controllers
         public async Task<IActionResult> SetStatus(int statusId,string email, string date)
         {
             var request =
-                await _context.Requests.SingleOrDefaultAsync(r => r.UserEmail == email && r.DateTimeSended == Convert.ToDateTime(date));
+                await _context.Requests.Include(r=>r.User)
+                    .SingleOrDefaultAsync(r => r.UserEmail == email && r.DateTimeSended == Convert.ToDateTime(date));
             if (request != null)
             {
                 var status = await _context.Status.FindAsync(statusId);
@@ -109,6 +110,18 @@ namespace ChemSolution.Controllers
                 {
                     request.Status = status;
                     await _context.SaveChangesAsync();
+                    switch (statusId)
+                    {
+                        case 2:
+                            request.User.Honesty += 10;
+                            break;
+                        case 3:
+                            if (request.User.Honesty >= 0)
+                            {
+                                request.User.Honesty -= 10;
+                            }
+                            break;
+                    }
                 }
                 return Ok();
             }
