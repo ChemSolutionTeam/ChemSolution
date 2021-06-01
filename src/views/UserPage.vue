@@ -5,10 +5,12 @@
         <div
           class="user-info flex w-11/12 bg-csblack text-white mb-20 border border-csblack overflow-hidden"
         >
-          <i
-            class="fas fa-tasks self-center text-6xl ml-5 cursor-pointer transform hover:scale-125 duration-200"
-            @click="openForm('requests')"
-          ></i>
+          <BaseTooltip text="Мої запроси">
+            <i
+              class="fas fa-tasks self-center text-6xl ml-5 cursor-pointer transform hover:scale-125 duration-200"
+              @click="openForm('requests')"
+            ></i>
+          </BaseTooltip>
           <p class="text-7xl font-semibold mx-auto">
             {{ currentUserName }}
           </p>
@@ -88,6 +90,7 @@
 <script>
 import apiService from '@/services'
 import Footer from '../components/Footer'
+import BaseTooltip from '../components/BaseTooltip'
 import storage from '@/store'
 // import Link from '../components/NavigationLink.vue'
 
@@ -101,6 +104,7 @@ export default {
   },
   components: {
     Footer,
+    BaseTooltip,
   },
   computed: {
     isUserAuthorised() {
