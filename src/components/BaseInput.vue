@@ -52,6 +52,7 @@
 
 <script>
 export default {
+  name: 'Input',
   props: {
     label: {
       type: String,

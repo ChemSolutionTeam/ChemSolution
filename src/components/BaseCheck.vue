@@ -54,6 +54,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    isIncorrect: {
+      type: Boolean,
+      default: false,
+    },
   },
 }
 </script>
