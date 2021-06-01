@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using ChemSolution.Data;
@@ -65,9 +67,19 @@ namespace ChemSolution.Middlewares.Authorization
             }
             
         }
+        
+        private string GetPasswordHash(string password)
+        {
+            byte[] hash;
+            using (var sha1 = new SHA1CryptoServiceProvider())
+                hash = sha1.ComputeHash(Encoding.UTF8.GetBytes(password));
+            return Convert.ToBase64String(hash);
+            
+        }
+        
         private async Task<ClaimsIdentity> GetIdentityAsync(DbContext context, string login, string password)
         {
-            JwtUser user = await _userGetter.GetUserAsync(context, login, password);
+            JwtUser user = await _userGetter.GetUserAsync(context, login, GetPasswordHash(password));
             if (user != null)
             {
                 var claims = new List<Claim>
