@@ -1,7 +1,11 @@
 <template>
-  <div class="relative">
+  <div
+      class="relative"
+      style="-webkit-touch-callout: none;-webkit-user-select: none;-moz-user-select: none;
+        -ms-user-select: none;user-select: none;"
+  >
     <div class="h-full" @mouseenter="toggle" @mouseleave="toggle">
-      <slot />
+      <slot/>
     </div>
     <div v-show="isShown" :class="tooltip">{{ text }}</div>
   </div>
@@ -20,9 +24,26 @@ export default {
       type: String,
       default: 'Авторизуйтесь',
     },
+    size: {
+      type: String,
+      default: 'default',
+    }
   },
   computed: {
     tooltip() {
+      if (this.size === 'larger') {
+        return [
+          'bg-csgreen',
+          'rounded-sm',
+          'text-white',
+          'text-s',
+          'bg-opacity-90',
+          'whitespace-nowrap',
+          'p-2',
+          'absolute',
+          'bottom-30',
+        ]
+      }
       return [
         'bg-csgreen',
         'rounded-sm',
