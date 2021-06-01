@@ -7,27 +7,20 @@
     :class="bgColor"
   >
     <div class="flex m-1">
-      <h1 class="mr-3">Number:</h1>
+      <h1 class="mr-3">Тема:</h1>
+      <p>{{ request.theme }}</p>
       <p class="ml-auto mr-1">{{ number }}</p>
     </div>
     <div class="flex m-1">
-      <h1 class="mr-3">User:</h1>
-      <p>{{ request.userEmail }}</p>
-    </div>
-    <div class="flex m-1">
-      <h1 class="mr-3">Theme:</h1>
-      <p>{{ request.theme }}</p>
-    </div>
-    <div class="flex m-1">
-      <h1 class="mr-3">Text:</h1>
+      <h1 class="mr-3">Текст:</h1>
       <p>{{ request.text }}</p>
     </div>
     <div class="flex m-1">
-      <h1 class="mr-3">DateTimeSended:</h1>
+      <h1 class="mr-3">Дата-час:</h1>
       <p>{{ request.dateTimeSended }}</p>
     </div>
     <div class="flex m-1">
-      <h1 class="mr-3">Status:</h1>
+      <h1 class="mr-3">Статус:</h1>
       <p>{{ request.status.statusName }}</p>
     </div>
   </div>
