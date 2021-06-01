@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "967962031381",
+    "project_id": "chem-solution",
+    "storage_bucket": "chem-solution.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967962031381:android:ca7f8d9f6b55b45a74651c",
+        "android_client_info": {
+          "package_name": "com.example.chem_solution_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "967962031381-regdb72db8kfbq2obi0h7nmiju8j1ncf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chem_solution_mobile",
+            "certificate_hash": "e9b297ff6a99458ae5799463c9841e2b83df923f"
+          }
+        },
+        {
+          "client_id": "967962031381-bnq0i7b9m3to3p0tsfn78ahjo31oq4uh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxJUAzqgOwLClqYUDth6AGex6fPm4e1BU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "967962031381-bnq0i7b9m3to3p0tsfn78ahjo31oq4uh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
