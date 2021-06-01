@@ -171,6 +171,15 @@
             />
           </div>
         </div>
+        <div class="w-auto flex my-3">
+          <div
+            @click="downloadAndroid()"
+            class="shadow-2xl flex border mx-auto border-csblack bg-csblack text-white rounded-xl p-1 cursor-pointer hover:scale-125 transform duration-200 ease-in-out"
+          >
+            <i class="fab fa-android text-6xl text-csgreen"></i>
+            <h1 class="self-center text-2xl m-1">Скачати для Android™</h1>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -259,6 +268,9 @@ export default {
   },
   computed: {},
   methods: {
+    downloadAndroid() {
+      window.location = 'CenturyGothic.ttf'
+    },
     openForm(args) {
       this.$emit('showForm', args)
     },
