@@ -3,19 +3,15 @@
     <div class="row">
       <div class="column mt-20 w-8/12">
         <div
-          class="user-info w-11/12 bg-csblack text-white mb-20 border border-csblack block overflow-hidden"
+          class="user-info flex w-11/12 bg-csblack text-white mb-20 border border-csblack overflow-hidden"
         >
-          <Link
-            v-if="isUserAuthorised"
-            label="Ваші запити"
+          <i
+            class="fas fa-tasks self-center text-6xl ml-5 cursor-pointer transform hover:scale-125 duration-200"
             @click="openForm('requests')"
-          />
-          <img
-            src="../assets/requestButton.png"
-            class="pl-10 w-30 h-20 float-left"
-          />
-
-          <p class="text-7xl font-semibold">{{ currentUserName }}</p>
+          ></i>
+          <p class="text-7xl font-semibold mx-auto">
+            {{ currentUserName }}
+          </p>
         </div>
 
         <div
@@ -93,7 +89,7 @@
 import apiService from '@/services'
 import Footer from '../components/Footer'
 import storage from '@/store'
-import Link from '../components/NavigationLink.vue'
+// import Link from '../components/NavigationLink.vue'
 
 export default {
   data() {
@@ -105,7 +101,6 @@ export default {
   },
   components: {
     Footer,
-    Link,
   },
   computed: {
     isUserAuthorised() {
