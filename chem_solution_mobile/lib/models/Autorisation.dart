@@ -37,8 +37,8 @@ abstract class Autorisation {
         autorised = false;
       }
       update();
-   } catch (ex) {
-      throw Exception(ex);
+    } catch (ex) {
+      print(ex);
     }
   }
 

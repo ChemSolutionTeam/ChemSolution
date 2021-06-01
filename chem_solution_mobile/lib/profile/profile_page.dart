@@ -131,7 +131,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
               child: GestureDetector(
                 onTap: () {
                   return alertDialogShow(
-                      context, autorisation(context, refresh), 400);
+                      context, autorisation(refresh), 400);
                 },
                 child: _card(
                   context,

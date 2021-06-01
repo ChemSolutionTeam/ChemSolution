@@ -3,9 +3,13 @@ import 'package:chem_solution_mobile/models/BlogPost.dart';
 import 'package:chem_solution_mobile/models/User.dart';
 import 'package:chem_solution_mobile/screens/home_screen.dart';
 import 'package:chem_solution_mobile/screens/splash_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:chem_solution_mobile/models/Element.dart' as CS;
+import 'package:provider/provider.dart';
+
+import 'bloc/auth_bloc.dart';
 
 bool autorised;
 //final String chemURL = '192.168.0.104:5001';
@@ -17,6 +21,8 @@ List<BlogPost> allPosts = [];
 List<CS.Element> allElements = [];
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   allPosts = await BlogPost.fetchObjects(path: 'BlogPosts');
   allElements = await CS.Element.fetchObjects(path: 'Elements');
   await Autorisation.setUser();
@@ -30,13 +36,16 @@ class ChemApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'ChemSolution',
-      home: SplashScreen(nextRoute: '/Home'),
-      routes: routes,
-      theme: ThemeData(
-        fontFamily: 'CenturyGothic',
+    return Provider<AuthBloc>(
+      create: (context) => AuthBloc(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'ChemSolution',
+        home: SplashScreen(nextRoute: '/Home'),
+        routes: routes,
+        theme: ThemeData(
+          fontFamily: 'CenturyGothic',
+        ),
       ),
     );
   }
