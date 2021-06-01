@@ -7,7 +7,7 @@
     <p class="self-center overflow-y-auto text-2xl w-3/4">{{ name }}</p>
   </div>
 
-  <BaseTooltip v-else text="Елемент не відкрито">
+  <BaseTooltip v-else text="Елемент не відкрито" size="larger">
     <div
         class="flex flex-wrap border p-3 w-11/12 my-1 rounded-full border-csblack"
         style="-webkit-touch-callout: none;-webkit-user-select: none;-moz-user-select: none;
