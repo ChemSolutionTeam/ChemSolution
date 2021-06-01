@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,10 +22,12 @@ namespace ChemSolution.Controllers
     {
         private readonly DataContext _context;
         private readonly CheckPropertiesService _checkProperties;
-        public UsersController(DataContext context, CheckPropertiesService checkProperties)
+        private readonly EmailService _emailService;
+        public UsersController(DataContext context, CheckPropertiesService checkProperties, EmailService emailService)
         {
             _checkProperties = checkProperties;
             _context = context;
+            _emailService = emailService;
         }
         [HttpGet("all")]
         [Authorize(Roles = Startup.Roles.Admin)]
@@ -107,6 +111,15 @@ namespace ChemSolution.Controllers
 
             return NoContent();
         }
+        
+        private string GetPasswordHash(string password)
+        {
+            byte[] hash;
+            using (var sha1 = new SHA1CryptoServiceProvider())
+                hash = sha1.ComputeHash(Encoding.UTF8.GetBytes(password));
+            return Convert.ToBase64String(hash);
+            
+        }
 
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
@@ -114,7 +127,9 @@ namespace ChemSolution.Controllers
             await _context.Users.AddAsync(user);
             try
             {
+                user.Password = GetPasswordHash(user.Password);
                 await _context.SaveChangesAsync();
+                await _emailService.SendEmailAsync(user.UserEmail, "ChemSolution", "<h1>You are registered in ChemSolution</h1>");
             }
             catch (DbUpdateException)
             {
@@ -159,7 +174,7 @@ namespace ChemSolution.Controllers
                         await _context.SaveChangesAsync();
                         return Ok();
                     }
-                    catch(Exception e)
+                    catch
                     {
                         return Conflict();
                     }
@@ -187,7 +202,7 @@ namespace ChemSolution.Controllers
                         await _context.SaveChangesAsync();
                         return Ok();
                     }
-                    catch (Exception e)
+                    catch
                     {
                         return Conflict();
                     }
