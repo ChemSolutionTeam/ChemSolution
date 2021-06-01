@@ -16,8 +16,8 @@
       <p>{{ request.text }}</p>
     </div>
     <div class="flex m-1">
-      <h1 class="mr-3">Дата-час:</h1>
-      <p>{{ request.dateTimeSended }}</p>
+      <h1 class="mr-3">Дата:</h1>
+      <p>{{ fixDate(request.dateTimeSended) }}</p>
     </div>
     <div class="flex m-1">
       <h1 class="mr-3">Статус:</h1>
@@ -51,6 +51,12 @@ export default {
         default:
           return ''
       }
+    },
+  },
+  methods: {
+    fixDate(date) {
+      let d = date.split('T')[0].split('-')
+      return d[2] + '.' + d[1] + '.' + d[0]
     },
   },
 }
