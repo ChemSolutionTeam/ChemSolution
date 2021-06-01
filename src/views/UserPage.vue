@@ -5,9 +5,9 @@
         <div
           class="user-info flex w-11/12 bg-csblack text-white mb-20 border border-csblack overflow-hidden"
         >
-          <BaseTooltip text="Мої запроси">
+          <BaseTooltip text="Мої запроси" class="self-center">
             <i
-              class="fas fa-tasks self-center text-6xl ml-5 cursor-pointer transform hover:scale-125 duration-200"
+              class="fas fa-tasks text-6xl ml-5 cursor-pointer transform hover:scale-125 duration-200"
               @click="openForm('requests')"
             ></i>
           </BaseTooltip>
