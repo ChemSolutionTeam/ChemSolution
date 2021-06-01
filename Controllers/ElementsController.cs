@@ -37,7 +37,7 @@ namespace ChemSolution.Controllers
         
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Element>>> GetElements()
+        public IEnumerable<Element> GetElements()
         {
             
             return _context.Elements
