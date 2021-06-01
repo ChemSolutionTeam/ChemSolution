@@ -12,7 +12,8 @@ namespace ChemSolution.Services.Pay
         public PayButtonModel GetPayButton(PayOptions options)
         {
 
-            var dataJson = $@"{{""public_key"":""{_publicKey}"",""version"":""{options.Version}"",""amount"":""{options.Amount}"",""action"":""pay"",""currency"":""{options.Currency}"",""description"":""{options.Description}"",""order_id"":""{options.OrderId}""}}";
+            var dataJson = $@"{{""public_key"":""{_publicKey}"",""version"":""{options.Version}"",""amount"":""{options.Amount}""," +
+            @$"""action"":""pay"",""currency"":""{options.Currency}"",""description"":""{options.Description}"",""order_id"":""{options.OrderId}""}}";
             
             var dataResult = GetData(dataJson);
             
