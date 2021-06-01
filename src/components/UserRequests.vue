@@ -41,7 +41,7 @@ export default {
           status: {
             statusId: 1,
             requests: null,
-            statusName: 'Розглядаяться',
+            statusName: 'Розглядається',
           },
           user: null,
         },
@@ -54,7 +54,7 @@ export default {
           status: {
             statusId: 1,
             requests: null,
-            statusName: 'Розглядаяться',
+            statusName: 'Розглядається',
           },
           user: null,
         },

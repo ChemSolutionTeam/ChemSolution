@@ -53,11 +53,11 @@ export default {
     bgColor() {
       switch (this.request.status.statusName) {
         case 'Підтверджено':
-          return 'bg-cslightgreen'
-        case 'Розглядаяться':
-          return 'bg-csblue'
+          return 'bg-requestaccept'
+        case 'Розглядається':
+          return 'bg-requestwait'
         case 'Відхилено':
-          return 'bg-red-500'
+          return 'bg-requestcancel'
         default:
           return ''
       }

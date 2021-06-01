@@ -47,6 +47,9 @@ module.exports = {
       category8: '#21d0b2',
       category9: '#1dcdfe',
       category10: '#696969',
+      requestcancel: '#FFB7B8',
+      requestaccept: '#CEFFB7',
+      requestwait: '#BFF6FA',
 
       shopbg: '#b8ffe6',
       shopsale: '#49d40a',
