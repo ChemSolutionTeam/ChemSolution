@@ -1,6 +1,8 @@
 <template>
-  <ElementWorkspaceInfo id="slider"
-                        v-bind:element="this.element"
+  <ElementWorkspaceInfo
+      id="slider"
+      class="z-50"
+      v-bind:element="this.element"
   />
   <div class="flex flex-row my-20">
     <div
@@ -25,6 +27,7 @@
               v-bind:atomic-weight="element.atomicWeight"
               v-bind:category-name="element.category.categoryName"
               v-bind:id="element.elementId"
+              v-bind:valences="element.valences"
               v-bind:category="element.categoryId.toString()"
               v-bind:is-locked="element.isLocked"
               v-bind:draggable="!element.isLocked"
@@ -123,7 +126,7 @@ export default {
           for (let i = 0; i < resp.data.elements.length; ++i) {
             if (
               !this.elements.some(
-                (e) => e.elementId === resp.data.elements[i].elementId
+                  (e) => e.elementId === resp.data.elements[i].elementId
               )
             ) {
               resp.data.elements[i].isLocked = false
@@ -132,6 +135,9 @@ export default {
           }
         })
       }
+    },
+    addElement(element) {
+      console.log(element)
     },
     atomKeydownLeft(element) {
       console.warn(element)
@@ -273,9 +279,27 @@ export default {
   transition-duration: 0.3s;
   box-shadow: 0 0 5px #777;
   color: #fff;
+  background: #ffffff;
   width: 15vw;
   height: 20vw;
   padding: 10px;
   box-sizing: initial;
+}
+
+#infoGraphics #infoNumber {
+  font-size: 1vw;
+  color: white;
+}
+
+#infoGraphics #infoSymbol {
+  font-size: 2vw;
+  color: white;
+}
+
+#infoGraphics {
+  padding: 0.7vw;
+  position: relative;
+  font-size: 0.6vw;
+  font-weight: bold;
 }
 </style>

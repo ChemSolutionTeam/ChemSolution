@@ -10,6 +10,7 @@
         :category-name="categoryName"
         :id="id"
         :atomic-weight="atomicWeight"
+        :valences="valences"
     />
     <p class="self-center overflow-y-auto text-2xl w-3/4">{{ name }}</p>
   </div>
@@ -33,6 +34,7 @@
           :category-name="categoryName"
           :id="id"
           :atomic-weight="atomicWeight"
+          :valences="valences"
       />
       <div style="flex: 1">
         <p class="self-center overflow-y-auto text-2xl h-1/2">{{ name }}</p>
@@ -87,6 +89,9 @@ export default {
     atomicWeight: {
       type: Number,
       default: 1.008,
+    },
+    valences: {
+      type: Array
     }
   },
 }

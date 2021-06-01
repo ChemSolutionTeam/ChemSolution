@@ -8,7 +8,34 @@
       <p id="infoName" class="name">{{ element.name }}</p>
       <p id="infoWeight" class="weight">{{ element.atomicWeight }}</p>
     </div>
+
     <hr>
+    <div class="m-4 text-csblack" style="font-size: 0.7vw">
+      <div style="float:left; margin:auto;">Порядковий номер:</div>
+      <div id="infoNumber1" style="float:right; margin:auto;"></div>
+      <div style="clear: left;"></div>
+
+      <div style="float:left; margin:auto;">Позначення:</div>
+      <div id="infoSymbol1" style="float:right; margin:auto;"></div>
+      <div style="clear: left;"></div>
+
+      <div style="float:left; margin:auto;">Назва:</div>
+      <div id="infoName1" style="float:right; margin:auto;"></div>
+      <div style="clear: left;"></div>
+
+      <div style="float:left; margin:auto;">Категорія:</div>
+      <div id="infoCategory" style="float:right; margin:auto;"></div>
+      <div style="clear: left;"></div>
+
+      <div style="float:left; margin:auto;">Атомна маса:</div>
+      <div id="infoWeight1" style="float:right; margin:auto;"></div>
+      <div style="clear: left;"></div>
+
+      <div style="float:left; margin:auto;">Валентність:</div>
+      <div id="infoValences" style="float:right; margin:auto;"></div>
+      <div style="clear: left;"></div>
+
+    </div>
   </div>
 </template>
 
