@@ -56,7 +56,7 @@ namespace ChemSolution.Controllers
                        await _context.SaveChangesAsync();
                        return Ok();
                    }
-                   catch (Exception e)
+                   catch
                    {
                        _logger.LogError($"Error user: {info.email} couldn't change password Date: {DateTime.UtcNow}");
                    }
