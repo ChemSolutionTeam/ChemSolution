@@ -1,7 +1,7 @@
 <template>
   <div v-show="!isMultiline">
     <div class="m-3 mt-1 mb-1 flex flex-row justify-between">
-      <label class="mt-1 text-2xl">{{ label }}</label>
+      <label class="mt-1">{{ label }}</label>
       <input
         v-bind="$attrs"
         :placeholder="placeholder"
@@ -54,6 +54,11 @@
 export default {
   name: 'Input',
   props: {
+    textSize: {
+      type: String,
+      default: 'text-2xl',
+    },
+
     label: {
       type: String,
       default: 'default',

@@ -159,6 +159,11 @@ const routes = [
     name: 'UserRequests',
     component: () => import('../components/UserRequests.vue'),
   },
+  {
+    path: '/mobileRegister',
+    name: 'MobileRegister',
+    component: () => import('@/components/MobileRegisterForm.vue'),
+  },
 ]
 
 const router = createRouter({
