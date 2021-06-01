@@ -32,7 +32,7 @@ export default {
         'whitespace-nowrap',
         'p-2',
         'absolute',
-        'top-0',
+        'bottom-6',
       ]
     },
   },
