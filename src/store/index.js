@@ -15,11 +15,7 @@ export default createStore({
     setToken(state, t) {
       state.token = t
     },
-    setUser(state, user) {
-      state.username = user.username
-      state.email = user.email
-      state.role = user.role
-    },
+
     setCurrentPage(state, page) {
       state.currentPage = page
     },

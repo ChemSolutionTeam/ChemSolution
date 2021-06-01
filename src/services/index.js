@@ -17,7 +17,9 @@ export default {
     await API.post('/getjwt?email=' + user.email + '&password=' + user.password)
       .then((resp) => {
         storage.commit('setToken', resp.data.access_token)
-        storage.commit('setUser', resp.data.username)
+        storage.state.username = resp.data.username
+        storage.state.email = user.email
+
         console.log(resp)
       })
       .catch((e) => {
@@ -89,15 +91,25 @@ export default {
       console.error(e)
     })
   },
-  postRequest(request) {
-    request
-    API.post('/Requests')
-      .then((resp) => {
-        console.log(resp)
-      })
-      .catch((e) => {
-        console.error(e)
-      })
+  async postRequest(request) {
+    console.info(request)
+    await API.post(
+      '/Requests',
+      {
+        userEmail: request.userEmail,
+        theme: request.theme,
+        text: request.text,
+        dateTimeSended: request.dateTimeSended,
+        statusId: 0,
+      },
+      {
+        headers: {
+          Authorization: 'Bearer ' + storage.state.token,
+        },
+      }
+    ).catch((e) => {
+      console.error(e)
+    })
   },
   getRequest(id) {
     API.get('/Requests/' + id)

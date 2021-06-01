@@ -16,6 +16,14 @@
           <Request :number="index + 1" :request="request" />
         </div>
       </div>
+      <div class="flex flex-row-reverse">
+        <div class="w-1/2 flex flex-row-reverse">
+          <Button
+            label="Створити запрос"
+            @click="this.$emit('openCreateRequest')"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -24,6 +32,7 @@
 // import apiService from '@/services'
 // import storage from '@/store'
 import Request from '@/components/Request'
+import Button from '@/components/HomePageButtons'
 
 import apiService from '@/services/index'
 import storage from '@/store/index'
@@ -32,7 +41,9 @@ export default {
   name: 'UserRequests',
   components: {
     Request,
+    Button,
   },
+  emits: ['openCreateRequest'],
   data() {
     return {
       requests: [],

@@ -11,7 +11,10 @@
               @click="openForm('requests')"
             ></i>
           </BaseTooltip>
-          <p class="text-7xl font-semibold mx-auto">
+          <p
+            class="text-7xl font-semibold mx-auto"
+            @click="openForm('createReqest')"
+          >
             {{ currentUserName }}
           </p>
         </div>
