@@ -3,34 +3,33 @@
 
   <div
     id="approved"
-    class="request border border-csblack mr-5 ml-5 mb-5 rounded-xl text-csblack h-full block overflow-hidden"
+    class="w-full p-3 border border-csblack rounded-xl my-1 text-2xl"
+    :class="bgColor"
   >
-    <table>
-      <tr>
-        <td>
-          <p class="font-bold">Тема:</p>
-        </td>
-        <td>
-          <p>{{ request.Theme }}</p>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p class="font-bold">Дата:</p>
-        </td>
-        <td>
-          <p>{{ request.DateTimeSended }}</p>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <p class="font-bold">Статус:</p>
-        </td>
-        <td>
-          <p>{{ request.StatusId }}</p>
-        </td>
-      </tr>
-    </table>
+    <div class="flex m-1">
+      <h1 class="mr-3">Number:</h1>
+      <p class="ml-auto mr-1">{{ number }}</p>
+    </div>
+    <div class="flex m-1">
+      <h1 class="mr-3">User:</h1>
+      <p>{{ request.userEmail }}</p>
+    </div>
+    <div class="flex m-1">
+      <h1 class="mr-3">Theme:</h1>
+      <p>{{ request.theme }}</p>
+    </div>
+    <div class="flex m-1">
+      <h1 class="mr-3">Text:</h1>
+      <p>{{ Text }}</p>
+    </div>
+    <div class="flex m-1">
+      <h1 class="mr-3">DateTimeSended:</h1>
+      <p>{{ request.dateTimeSended }}</p>
+    </div>
+    <div class="flex m-1">
+      <h1 class="mr-3">Status:</h1>
+      <p>{{ request.status.statusName }}</p>
+    </div>
   </div>
 </template>
 
@@ -42,17 +41,25 @@ export default {
       type: Number,
       default: 1,
     },
+    Text: {
+      type: String,
+      default: 'Please add H2O to your app',
+    },
+    request: {
+      type: Object,
+    },
   },
   computed: {
-    request() {
-      return {
-        //not sure if this is what we need
-        userEmail: 'aaaaaa@gmail.com',
-        DateTimeSended: '12.01.2021',
-        Text: 'Please add H2O to your app',
-        Theme: 'Adding element',
-        UserEmail1: 'bbbbbb@gmail.com',
-        StatusId: 1,
+    bgColor() {
+      switch (this.request.status.statusName) {
+        case 'Підтверджено':
+          return 'bg-cslightgreen'
+        case 'Розглядаяться':
+          return 'bg-csblue'
+        case 'Відхилено':
+          return 'bg-red-500'
+        default:
+          return ''
       }
     },
   },

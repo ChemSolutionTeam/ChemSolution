@@ -68,19 +68,41 @@
       />
     </transition>
   </div>
+
+  <div
+    class="inset-0 z-20 fixed sm:pt-2 md:pt-5 overflow-auto lg:pt-10 w-full h-full bg-csblack bg-opacity-50"
+    v-show="isBackgroundShown == 'requests'"
+    @click="closeForm('none')"
+  >
+    <transition name="bounce">
+      <UserRequests
+        @mouseleave="isMouseOut = true"
+        @mouseover="isMouseOut = false"
+        v-show="isFormShow == 'requests'"
+      />
+    </transition>
+  </div>
 </template>
 <script>
 import Navigation from '../src/components/Navigation.vue'
 import LoginForm from '../src/components/LoginForm.vue'
 import RegisterForm from '../src/components/RegisterForm.vue'
 import ShopForm from '../src/components/ShopForm.vue'
+import UserRequests from '../src/components/UserRequests.vue'
 import ForgetPassForm from '../src/components/ForgetPassForm'
 import router from '@/router/index'
 import apiService from '@/services/index'
 import storage from '@/store/index'
 // import storage from '@/store/index'
 export default {
-  components: { Navigation, LoginForm, RegisterForm, ShopForm, ForgetPassForm },
+  components: {
+    Navigation,
+    LoginForm,
+    RegisterForm,
+    UserRequests,
+    ShopForm,
+    ForgetPassForm,
+  },
   data() {
     return {
       isMouseOut: true,
@@ -122,7 +144,6 @@ export default {
       this.closeForm('auth')
       this.isUserAuthorised = true
       this.getRole().then(() => {
-        alert(this.role)
         router.push(this.role == 'Admin' ? 'Admin' : 'userPage')
       })
     },

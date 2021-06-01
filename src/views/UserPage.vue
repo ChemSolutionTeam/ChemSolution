@@ -8,11 +8,11 @@
           <Link
             v-if="isUserAuthorised"
             label="Ваші запити"
-            href="/UserRequests"
+            @click="openForm('requests')"
           />
           <img
-              src="../assets/requestButton.png"
-              class="pl-10 w-30 h-20 float-left"
+            src="../assets/requestButton.png"
+            class="pl-10 w-30 h-20 float-left"
           />
 
           <p class="text-7xl font-semibold">{{ currentUserName }}</p>
@@ -122,6 +122,11 @@ export default {
         this.achievements = resp.data.achievement
       })
     }
+  },
+  methods: {
+    openForm(args) {
+      this.$emit('showForm', args)
+    },
   },
 }
 </script>

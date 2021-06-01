@@ -1,61 +1,101 @@
 <template>
-  <div class="request-block">
-    <h3 class="text-4xl text-center pb-5">Запити</h3>
-
+  <div
+    class="transform md:scale-50 lg:scale-100 flex items-start inset-0 my-4 shadow-lg max-w-6xl mx-auto"
+  >
     <div
-      v-for="(request, index) in requests"
-      :key="index"
-      class="request border border-csblack mr-5 ml-5 mb-5 rounded-xl text-csblack h-full block overflow-hidden"
+      class="box self-center px-12 p-3 pb-16 text-left w-full bg-white border-csblack shadow-2xl border rounded-lg"
     >
-      <table>
-        <tr>
-          <td>
-            <p class="font-bold">Тема:</p>
-          </td>
-          <td>
-            <p>{{ request.theme }}</p>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <p class="font-bold">Дата:</p>
-          </td>
-          <td>
-            <p>{{ request.dateTimeSended }}</p>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <p class="font-bold">Статус:</p>
-          </td>
-          <td>
-            <p>{{ request.status.statusName }}</p>
-          </td>
-        </tr>
-      </table>
+      <div class="column w-full mt-4">
+        <h3 class="text-4xl text-center pb-5">Запити</h3>
+        <div
+          v-for="(request, index) in requests"
+          :key="index"
+          class="grid grid-cols-1 gap-3"
+        >
+          <Request :number="index + 1" :request="request" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import apiService from '@/services'
-import storage from '@/store'
+// import apiService from '@/services'
+// import storage from '@/store'
+import Request from '@/components/Request'
 
 export default {
+  name: 'UserRequests',
+  components: {
+    Request,
+  },
   data() {
     return {
-      requests: [],
+      requests: [
+        {
+          userEmail: 'user@example.com',
+          dateTimeSended: '2021-05-17T14:53:50.696',
+          theme: 'string',
+          text: 'string',
+          statusId: 1,
+          status: {
+            statusId: 1,
+            requests: null,
+            statusName: 'Розглядаяться',
+          },
+          user: null,
+        },
+        {
+          userEmail: 'user@gmail.com',
+          dateTimeSended: '2021-05-23T15:26:56.391',
+          theme: 'string',
+          text: 'string',
+          statusId: 1,
+          status: {
+            statusId: 1,
+            requests: null,
+            statusName: 'Розглядаяться',
+          },
+          user: null,
+        },
+        {
+          userEmail: 'user@gmail.com',
+          dateTimeSended: '2021-05-23T15:26:56.401',
+          theme: 'string',
+          text: 'string',
+          statusId: 2,
+          status: {
+            statusId: 2,
+            requests: null,
+            statusName: 'Підтверджено',
+          },
+          user: null,
+        },
+        {
+          userEmail: 'user@gmail.com',
+          dateTimeSended: '2021-03-23T15:26:56.401',
+          theme: 'string',
+          text: 'string',
+          statusId: 3,
+          status: {
+            statusId: 3,
+            requests: null,
+            statusName: 'Відхилено',
+          },
+          user: null,
+        },
+      ],
     }
   },
-  components: {},
-  created() {
-    if (storage.state.token.length !== 0) {
-      apiService.getUser().then((resp) => {
-        console.log(resp)
-        this.requests = resp.data.requests
-      })
-    }
-  },
+
+  // created() {
+  //   if (storage.state.token.length !== 0) {
+  //     apiService.getUser().then((resp) => {
+  //       console.log(resp)
+  //       this.requests = resp.data.requests
+  //     })
+  //   }
+  // },
 }
 </script>
 
@@ -63,25 +103,5 @@ export default {
 @font-face {
   font-family: 'Century Gothic';
   src: url('/public/CenturyGothic.ttf');
-}
-
-div {
-  font-size: 2vw;
-}
-
-td {
-  text-align: left;
-}
-
-#approved {
-  background-color: #ceffb7;
-}
-
-#canceled {
-  background-color: #ffb7b8;
-}
-
-#under-consideration {
-  background-color: #c0f7fb;
 }
 </style>
