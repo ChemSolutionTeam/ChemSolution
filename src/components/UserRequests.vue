@@ -1,5 +1,6 @@
 <template>
   <div
+    @mousemove.once="getRequests()"
     class="transform md:scale-50 lg:scale-100 flex items-start inset-0 my-4 shadow-lg max-w-6xl mx-auto"
   >
     <div
@@ -24,6 +25,9 @@
 // import storage from '@/store'
 import Request from '@/components/Request'
 
+import apiService from '@/services/index'
+import storage from '@/store/index'
+
 export default {
   name: 'UserRequests',
   components: {
@@ -31,71 +35,18 @@ export default {
   },
   data() {
     return {
-      requests: [
-        {
-          userEmail: 'user@example.com',
-          dateTimeSended: '2021-05-17T14:53:50.696',
-          theme: 'string',
-          text: 'string',
-          statusId: 1,
-          status: {
-            statusId: 1,
-            requests: null,
-            statusName: 'Розглядається',
-          },
-          user: null,
-        },
-        {
-          userEmail: 'user@gmail.com',
-          dateTimeSended: '2021-05-23T15:26:56.391',
-          theme: 'string',
-          text: 'string',
-          statusId: 1,
-          status: {
-            statusId: 1,
-            requests: null,
-            statusName: 'Розглядається',
-          },
-          user: null,
-        },
-        {
-          userEmail: 'user@gmail.com',
-          dateTimeSended: '2021-05-23T15:26:56.401',
-          theme: 'string',
-          text: 'string',
-          statusId: 2,
-          status: {
-            statusId: 2,
-            requests: null,
-            statusName: 'Підтверджено',
-          },
-          user: null,
-        },
-        {
-          userEmail: 'user@gmail.com',
-          dateTimeSended: '2021-03-23T15:26:56.401',
-          theme: 'string',
-          text: 'string',
-          statusId: 3,
-          status: {
-            statusId: 3,
-            requests: null,
-            statusName: 'Відхилено',
-          },
-          user: null,
-        },
-      ],
+      requests: [],
     }
   },
-
-  // created() {
-  //   if (storage.state.token.length !== 0) {
-  //     apiService.getUser().then((resp) => {
-  //       console.log(resp)
-  //       this.requests = resp.data.requests
-  //     })
-  //   }
-  // },
+  methods: {
+    getRequests() {
+      if (storage.state.token.length !== 0) {
+        apiService.getUser().then((resp) => {
+          this.requests = resp.data.requests
+        })
+      }
+    },
+  },
 }
 </script>
 

@@ -20,7 +20,7 @@
     </div>
     <div class="flex m-1">
       <h1 class="mr-3">Text:</h1>
-      <p>{{ Text }}</p>
+      <p>{{ request.text }}</p>
     </div>
     <div class="flex m-1">
       <h1 class="mr-3">DateTimeSended:</h1>
@@ -41,10 +41,7 @@ export default {
       type: Number,
       default: 1,
     },
-    Text: {
-      type: String,
-      default: 'Please add H2O to your app',
-    },
+
     request: {
       type: Object,
     },
