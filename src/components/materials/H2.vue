@@ -55,8 +55,8 @@ export default {
 
       // тут будут храниться и изменяться все его координаты
       elements['el' + id] = {
-        x: Math.random() * (width - size),
-        y: Math.random() * (height - size),
+        x: Math.random() * (width - size) / 3,
+        y: Math.random() * (height - size) / 3,
         startX: 0,
         startY: 0,
       }

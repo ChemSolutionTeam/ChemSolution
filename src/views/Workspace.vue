@@ -20,13 +20,16 @@
       >
         <div v-for="element in filteredElements" :key="element.elementId">
           <ElementChooser
-            v-bind:symbol="element.symbol"
-            v-bind:name="element.name"
-            v-bind:category="element.categoryId.toString()"
-            v-bind:is-locked="element.isLocked"
-            v-bind:draggable="!element.isLocked"
-            @click="addElement(element)"
-            @dragstart="startDrag($event, element)"
+              v-bind:symbol="element.symbol"
+              v-bind:name="element.name"
+              v-bind:atomic-weight="element.atomicWeight"
+              v-bind:category-name="element.category.categoryName"
+              v-bind:id="element.elementId"
+              v-bind:category="element.categoryId.toString()"
+              v-bind:is-locked="element.isLocked"
+              v-bind:draggable="!element.isLocked"
+              @click="addElement(element)"
+              @dragstart="startDrag($event, element)"
           />
         </div>
       </div>
@@ -70,6 +73,7 @@ export default {
       atoms: [],
       value: [],
       materials: [],
+
       element: {
         atomicRadius: 454.59,
         atomicWeight: 1.008,
@@ -102,7 +106,6 @@ export default {
   created() {
     apiService.getElements().then((resp) => {
       this.elements = resp.data
-      console.log(resp)
     })
     if (storage.state.token.length !== 0) {
       this.getUserElements()
@@ -117,7 +120,6 @@ export default {
     async getUserElements() {
       if (this.isUserAuthorised) {
         await apiService.getUser().then((resp) => {
-          console.log(resp.data.elements)
           for (let i = 0; i < resp.data.elements.length; ++i) {
             if (
               !this.elements.some(
@@ -235,24 +237,16 @@ export default {
       return storage.state.token.length !== 0
     },
     filteredElements() {
-      try {
         if (this.search) {
           return this.elements.filter((element) => {
             return (
-              (element.name != null &&
-                element.name
-                  .toLowerCase()
-                  .includes(this.search.toLowerCase())) ||
-              element.symbol.toLowerCase().includes(this.search.toLowerCase())
+                (element.name.toLowerCase().includes(this.search.toLowerCase())) ||
+                element.symbol.toLowerCase().includes(this.search.toLowerCase())
             )
           })
         } else {
           return this.elements
         }
-      } catch (e) {
-        console.error(e)
-        return []
-      }
     }
   },
   mounted() {
@@ -271,16 +265,16 @@ export default {
 
 #slider {
   position: fixed;
-  min-height: 200px;
   top: 400px;
-  right: -250px;
+  right: -16vw;
   -webkit-transition-duration: 0.3s;
   -moz-transition-duration: 0.3s;
   -o-transition-duration: 0.3s;
   transition-duration: 0.3s;
   box-shadow: 0 0 5px #777;
   color: #fff;
-  width: 250px;
+  width: 15vw;
+  height: 20vw;
   padding: 10px;
   box-sizing: initial;
 }

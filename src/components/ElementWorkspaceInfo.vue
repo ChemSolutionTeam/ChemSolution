@@ -1,12 +1,14 @@
 <template>
   <div>
-    <div class="bg-category1">
+    <div id="infoGraphics" class="bg-category1 m-4"
+         style="height: 8vw; width: 8vw; margin-right: auto; margin-left: auto;">
       <!-- :class="fill" !-->
-      <p class="number">{{ element.elementId }}</p>
-      <p class="symbol">{{ element.symbol }}</p>
-      <p class="name">{{ element.name }}</p>
-      <p class="weight">{{ element.atomicWeight }}</p>
+      <p id="infoNumber" class="number">{{ element.elementId }}</p>
+      <p id="infoSymbol" class="symbol">{{ element.symbol }}</p>
+      <p id="infoName" class="name">{{ element.name }}</p>
+      <p id="infoWeight" class="weight">{{ element.atomicWeight }}</p>
     </div>
+    <hr>
   </div>
 </template>
 

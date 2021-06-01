@@ -2,7 +2,7 @@
   <div @mouseenter="changeItem" @mouseleave="rechangeItem"
        :id="divId"
        :class="fill"
-       style="width: 70px; height: 70px; font-size: 31.32px"
+       style="width: 70px; height: 70px; font-size: 31.32px; cursor: pointer"
   >
     {{ symbol }}
   </div>
@@ -20,14 +20,26 @@ export default {
       type: String,
       default: 'H',
     },
+    name: {
+      type: String,
+      default: 'Гідроген',
+    },
     category: {
       type: String,
       default: '1',
+    },
+    categoryName: {
+      type: String,
+      default: 'неметали',
     },
     divId: {
       type: String,
       default: '1',
     },
+    atomicWeight: {
+      type: Number,
+      default: 1.008,
+    }
   },
   computed: {
     fill() {
@@ -39,10 +51,17 @@ export default {
   },
   methods: {
     changeItem() {
-      document.getElementById('slider').style.right = '0px';
+      document.getElementById('infoGraphics').className = 'm-4 bg-category' + this.category
+      document.getElementById('infoNumber').innerText = this.id.toString()
+      document.getElementById('infoSymbol').innerText = this.symbol
+      document.getElementById('infoName').innerText = this.name
+      document.getElementById('infoWeight').innerText = this.atomicWeight
+
+      document.getElementById('slider').style.right = '0vw';
     },
     rechangeItem() {
-      document.getElementById('slider').style.right = '-250px';
+      document.getElementById('slider').style.right = '-16vw';
+
     }
   }
 }

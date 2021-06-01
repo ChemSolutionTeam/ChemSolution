@@ -1,9 +1,16 @@
 <template>
   <div
-    v-if="!isLocked"
-    class="flex flex-wrap border p-3 w-11/12 my-1 rounded-full border-csblack"
+      v-if="!isLocked"
+      class="flex flex-wrap border p-3 w-11/12 my-1 rounded-full border-csblack"
   >
-    <Atom :symbol="symbol" :category="category" class=""/>
+    <Atom
+        :symbol="symbol"
+        :category="category"
+        :name="name"
+        :category-name="categoryName"
+        :id="id"
+        :atomic-weight="atomicWeight"
+    />
     <p class="self-center overflow-y-auto text-2xl w-3/4">{{ name }}</p>
   </div>
 
@@ -19,7 +26,14 @@
         user-select: none;
       "
     >
-      <Atom :symbol="symbol" :category="category"/>
+      <Atom
+          :symbol="symbol"
+          :category="category"
+          :name="name"
+          :category-name="categoryName"
+          :id="id"
+          :atomic-weight="atomicWeight"
+      />
       <div style="flex: 1">
         <p class="self-center overflow-y-auto text-2xl h-1/2">{{ name }}</p>
         <div class="self-center overflow-y-auto text-2xl h-1/2 w-3/12 mx-auto">
@@ -42,13 +56,21 @@ export default {
     BaseTooltip,
   },
   props: {
+    id: {
+      type: Number,
+      default: 1,
+    },
     symbol: {
       type: String,
       default: 'H',
     },
     name: {
       type: String,
-      default: 'Hydrogen',
+      default: 'Гідроген',
+    },
+    categoryName: {
+      type: String,
+      default: 'неметали',
     },
     isLocked: {
       type: Boolean,
@@ -62,6 +84,10 @@ export default {
       type: String,
       default: 'csgreen',
     },
+    atomicWeight: {
+      type: Number,
+      default: 1.008,
+    }
   },
 }
 </script>
