@@ -234,8 +234,7 @@ export default {
       return storage.state.token.length !== 0
     },
     valencyString() {
-      if (this.element.valences.length === 0)
-        return 'невизначено'
+      if (this.element.valences.length === 0) return 'невизначено'
 
       let result = ''
 

@@ -1,10 +1,10 @@
 <template>
   <div
-      style="position: absolute; width: 70px; height: 70px;"
-      v-for="atom in atoms"
-      :key="atom.id"
+    style="position: absolute; width: 70px; height: 70px"
+    v-for="atom in atoms"
+    :key="atom.id"
   >
-    <Atom :div-id="atom.id" id="1" symbol="H" category="1" class="w-full"/>
+    <Atom :div-id="atom.id" id="1" symbol="H" category="1" class="w-full" />
   </div>
   <canvas id="canvas" class="block"></canvas>
 </template>
@@ -15,7 +15,7 @@ export default {
   name: 'H2',
   data() {
     return {
-      atoms: []
+      atoms: [],
     }
   },
   components: {
@@ -24,16 +24,16 @@ export default {
   props: {
     elementsNumber: {
       type: Number,
-      default: 2
+      default: 2,
     },
     workspaceAtoms: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
   created() {
     for (let i = 0; i < this.elementsNumber; ++i) {
-      this.atoms.push({id: 'el' + (i + this.workspaceAtoms)})
+      this.atoms.push({ id: 'el' + (i + this.workspaceAtoms) })
     }
   },
   mounted() {
@@ -58,7 +58,7 @@ export default {
         x: Math.random() * (width - size),
         y: Math.random() * (height - size),
         startX: 0,
-        startY: 0
+        startY: 0,
       }
       // начальное положение
       translate(element, elements['el' + id].x, elements['el' + id].y)
@@ -101,10 +101,10 @@ export default {
 
       for (let i = 0; i < num - 1; ++i) {
         drawLine(
-            elements['el' + (i + fromNum)].x,
-            elements['el' + (i + 1 + fromNum)].x,
-            elements['el' + (i + fromNum)].y,
-            elements['el' + (i + 1 + fromNum)].y
+          elements['el' + (i + fromNum)].x,
+          elements['el' + (i + 1 + fromNum)].x,
+          elements['el' + (i + fromNum)].y,
+          elements['el' + (i + 1 + fromNum)].y
         )
       }
     }

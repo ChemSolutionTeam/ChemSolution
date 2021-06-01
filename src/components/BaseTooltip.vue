@@ -1,11 +1,16 @@
 <template>
   <div
-      class="relative"
-      style="-webkit-touch-callout: none;-webkit-user-select: none;-moz-user-select: none;
-        -ms-user-select: none;user-select: none;"
+    class="relative"
+    style="
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    "
   >
     <div class="h-full" @mouseenter="toggle" @mouseleave="toggle">
-      <slot/>
+      <slot />
     </div>
     <div v-show="isShown" :class="tooltip">{{ text }}</div>
   </div>
@@ -27,7 +32,7 @@ export default {
     size: {
       type: String,
       default: 'default',
-    }
+    },
   },
   computed: {
     tooltip() {

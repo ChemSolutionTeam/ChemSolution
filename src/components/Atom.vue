@@ -1,5 +1,9 @@
 <template>
-  <div :id="divId" :class="fill" style="width:70px; height: 70px; font-size: 31.32px;">
+  <div
+    :id="divId"
+    :class="fill"
+    style="width: 70px; height: 70px; font-size: 31.32px"
+  >
     {{ symbol }}
   </div>
 </template>
@@ -23,12 +27,14 @@ export default {
     divId: {
       type: String,
       default: '1',
-    }
+    },
   },
   computed: {
     fill() {
-      return 'rounded-full w-70 h-70 text-white text-center font-bold flex items-center justify-center bg-category'
-          + this.category
+      return (
+        'rounded-full w-70 h-70 text-white text-center font-bold flex items-center justify-center bg-category' +
+        this.category
+      )
     },
   },
 }

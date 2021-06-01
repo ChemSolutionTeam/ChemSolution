@@ -17,13 +17,13 @@
       >
         <div v-for="element in filteredElements" :key="element.elementId">
           <ElementChooser
-              v-bind:symbol="element.symbol"
-              v-bind:name="element.name"
-              v-bind:category="element.categoryId.toString()"
-              v-bind:is-locked="element.isLocked"
-              v-bind:draggable="!element.isLocked"
-              @click="addElement(element)"
-              @dragstart="startDrag($event, element)"
+            v-bind:symbol="element.symbol"
+            v-bind:name="element.name"
+            v-bind:category="element.categoryId.toString()"
+            v-bind:is-locked="element.isLocked"
+            v-bind:draggable="!element.isLocked"
+            @click="addElement(element)"
+            @dragstart="startDrag($event, element)"
           />
         </div>
       </div>
