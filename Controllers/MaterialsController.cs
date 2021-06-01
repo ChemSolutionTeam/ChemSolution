@@ -132,24 +132,11 @@ namespace ChemSolution.Controllers
         [HttpPost("search")]
         public async Task<IActionResult> Search(SearchMaterialRequest searchRequest)
         {
-            bool IsEqual(Material material)
-            {
-                
-                var tmpU1 = material.ElementMaterials
-                    .Select(e => (ElementId: e.ElementId, Amount: e.Amount))
-                    .ToList();
-                
-                var tmpU2 = searchRequest.Value
-                    .Select(rm => (ElementId: rm.ElementId, Amount: rm.Amount))
-                    .ToList();
-                
-                return !tmpU1.Except(tmpU2).Any() && !tmpU2.Except(tmpU1).Any();
-            }
-            
+          
             Material material = _context.Materials
                 .Include(p => p.ElementMaterials)
                 .AsEnumerable()
-                .SingleOrDefault(m => IsEqual(m));
+                .SingleOrDefault(m => IsEqualMaterials(m, searchRequest));
             if (material != null)
             {
                  User user = await _context.Users
@@ -190,7 +177,21 @@ namespace ChemSolution.Controllers
             }
             return NotFound();
         }
-        
+
+        private bool IsEqualMaterials(Material material, SearchMaterialRequest searchRequest)
+        {
+                
+            var tmpU1 = material.ElementMaterials
+                .Select(e => (ElementId: e.ElementId, Amount: e.Amount))
+                .ToList();
+                 
+            var tmpU2 = searchRequest.Value
+                .Select(rm => (ElementId: rm.ElementId, Amount: rm.Amount))
+                .ToList();
+                
+            return !tmpU1.Except(tmpU2).Any() && !tmpU2.Except(tmpU1).Any();
+        }
+
         private async Task<List<int>> ComplateAchivmentsAsync (User user)
         {
             var tmpU1 = user.Materials.GroupBy(u => u.MaterialGroupId)
