@@ -1,14 +1,17 @@
 <template>
+  <ElementWorkspaceInfo id="slider"
+                        v-bind:element="this.element"
+  />
   <div class="flex flex-row my-20">
     <div
-      class="column border border-csblack rounded-3xl rounded-l-none w-1/4 h-11/12 bg-csbluewhite p-4 shadow-xl mt-20"
+        class="column border border-csblack rounded-3xl rounded-l-none w-1/4 h-11/12 bg-csbluewhite p-4 shadow-xl mt-20"
     >
       <!-- Search -->
       <div class="w-full text-xl my-5">
-        <i class="fas fa-search mx-3 self-center scale-125 transform w-1/12" />
+        <i class="fas fa-search mx-3 self-center scale-125 transform w-1/12"/>
         <input
-          class="w-10/12 border-csblack border rounded-xl outline-none px-5"
-          placeholder="Уведіть назву елемента.."
+            class="w-10/12 border-csblack border rounded-xl outline-none px-5"
+            placeholder="Уведіть назву елемента.."
           v-model="search"
         />
       </div>
@@ -50,6 +53,7 @@
 
 <script>
 import ElementChooser from '@/components/ElementChooser'
+import ElementWorkspaceInfo from '@/components/ElementWorkspaceInfo'
 import WorkspaceComp from '@/components/WorkspaceComp'
 import Footer from '@/components/Footer'
 import storage from '@/store'
@@ -66,6 +70,26 @@ export default {
       atoms: [],
       value: [],
       materials: [],
+      element: {
+        atomicRadius: 454.59,
+        atomicWeight: 1.008,
+        boilingTemperature: 607,
+        category: {
+          categoryName: 'неметали',
+        },
+        electronQuantity: 588,
+        electronegativity: 511.1,
+        elementId: 1,
+        energyLevels: 0,
+        group: 1,
+        meltingTemperature: 1,
+        name: 'Гідроген',
+        neutronQuantity: 733,
+        protonQuantity: 936,
+        symbol: 'Н',
+        valences: [{valenceVal: 1}],
+        isLocked: 1,
+      },
     }
   },
   name: 'Workspace',
@@ -73,6 +97,7 @@ export default {
     ElementChooser,
     WorkspaceComp,
     Footer,
+    ElementWorkspaceInfo
   },
   created() {
     apiService.getElements().then((resp) => {
@@ -228,14 +253,35 @@ export default {
         console.error(e)
         return []
       }
-    },
-    mounted: {},
+    }
   },
+  mounted() {
+  }
 }
 </script>
 
 <style>
 .elementCollection {
   height: 70vh;
+}
+
+.elementCollection:hover ~ #slider {
+  right: 0;
+}
+
+#slider {
+  position: fixed;
+  min-height: 200px;
+  top: 400px;
+  right: -250px;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  box-shadow: 0 0 5px #777;
+  color: #fff;
+  width: 250px;
+  padding: 10px;
+  box-sizing: initial;
 }
 </style>
