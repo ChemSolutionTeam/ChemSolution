@@ -48,6 +48,8 @@ module.exports = {
       category9: '#1dcdfe',
       category10: '#696969',
 
+      shopbg: '#b8ffe6',
+      shopsale: '#49d40a',
       red: colors.red,
       amber: colors.amber,
       orange: colors.orange,

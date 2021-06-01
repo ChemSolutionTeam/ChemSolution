@@ -47,6 +47,7 @@
       </div>
       <div v-else class="flex flex-row">
         <i
+          @click="openForm('shop')"
           class="fas fa-plus-circle text-white scale-200 cursor-pointer transform mx-2 self-center hover:scale-250 duration-150 ease-in-out"
         ></i>
 

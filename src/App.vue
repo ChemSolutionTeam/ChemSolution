@@ -54,18 +54,33 @@
       />
     </transition>
   </div>
+
+  <div
+    class="inset-0 z-20 fixed sm:pt-2 md:pt-5 overflow-auto lg:pt-10 w-full h-full bg-csblack bg-opacity-50"
+    v-show="isBackgroundShown == 'shop'"
+    @click="closeForm('none')"
+  >
+    <transition name="bounce">
+      <ShopForm
+        @mouseleave="isMouseOut = true"
+        @mouseover="isMouseOut = false"
+        v-show="isFormShow == 'shop'"
+      />
+    </transition>
+  </div>
 </template>
 <script>
 import Navigation from '../src/components/Navigation.vue'
 import LoginForm from '../src/components/LoginForm.vue'
 import RegisterForm from '../src/components/RegisterForm.vue'
+import ShopForm from '../src/components/ShopForm.vue'
 import ForgetPassForm from '../src/components/ForgetPassForm'
 import router from '@/router/index'
 import apiService from '@/services/index'
 import storage from '@/store/index'
 // import storage from '@/store/index'
 export default {
-  components: { Navigation, LoginForm, RegisterForm, ForgetPassForm },
+  components: { Navigation, LoginForm, RegisterForm, ShopForm, ForgetPassForm },
   data() {
     return {
       isMouseOut: true,

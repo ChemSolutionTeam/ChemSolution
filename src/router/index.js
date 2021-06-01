@@ -143,11 +143,7 @@ const routes = [
     name: 'PeriodicTable',
     component: () => import('../views/PeriodicTable.vue'),
   },
-  {
-    path: '/shop',
-    name: 'Shop',
-    component: () => import('../views/Shop.vue'),
-  },
+
   {
     path: '/404',
     name: 'NotFound',
