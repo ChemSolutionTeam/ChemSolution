@@ -35,7 +35,7 @@ namespace ChemSolution.Services
             {
                 string code;
                 while (_securityCodeDictionary.ContainsKey( code = PasswordGenerator.Generate(length: 10, allowed: Sets.Alphanumerics) )) { }
-                string message = $"Link: <a href='https://localhost:5001/UserSecurity/SetPassword/{code}'>Click here</a>";
+                string message = $"Link: <a href='https://chemsolutionapi.azurewebsites.net/UserSecurity/SetPassword/{code}'>Click here</a>";
                 await _emailService.SendEmailAsync(email, "Change password in ChemSolution", message);
                 _securityCodeDictionary[code] = (email: email, newPassword: newPassword);
             }
