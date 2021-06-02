@@ -12,15 +12,16 @@
   "dependencies": {
     "@tailwindcss/forms": "^0.3.2",
     "animate.css": "^4.1.1",
-    "axios": "^0.15.3",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "datatables.net-jqui": "^1.10.24",
+    "firebase": "^8.6.3",
     "lodash": "^4.17.21",
     "vue": "^3.0.0",
-    "vue-router": "^4.0.0-0",
+    "vue-router": "^4.0.8",
     "vue3-click-away": "^1.2.1",
     "vuetable-2": "^2.0.0-beta.4",
-    "vuex": "^4.0.0-0"
+    "vuex": "^4.0.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss7-compat": "^2.1.0",
