@@ -43,6 +43,18 @@ namespace ChemSolution.Controllers
             return NotFound();
         }
         
+        [HttpPost("RecoverPassword/{userEmail}/{newPassword}")]
+        public async Task<IActionResult> RecoverPassword(string userEmail, string newPassword)
+        {
+            var id = userEmail;
+            if (id != null)
+            {
+                await _securityEmailService.ChangePassword(_context,id, GetPasswordHash(newPassword));
+                return Ok();
+            }
+            return NotFound();
+        }
+
         private string GetPasswordHash(string password)
         {
             byte[] hash;
@@ -73,7 +85,6 @@ namespace ChemSolution.Controllers
                    }
                }
             }
-
             return BadRequest();
         }
     }
