@@ -23,11 +23,14 @@
         path="/admin/achievements"
         image="https://i.pinimg.com/originals/c7/80/5e/c7805ee9aa1a16baaa33a7b1be2f220e.png"
       />
-      <AdminCard image="https://i.imgur.com/bAaiGiu.jpeg" /><AdminCard
-        image="https://i.imgur.com/bAaiGiu.jpeg"
-      /><AdminCard image="https://i.imgur.com/bAaiGiu.jpeg" /><AdminCard
-        image="https://i.imgur.com/bAaiGiu.jpeg"
+      <AdminCard
+        path="/admin/requests"
+        label="Запити"
+        image="https://english-grammar.biz/dictionary/img/wlibrary/f/600d5bfa28a0d3.74268989.jpg"
       />
+      <AdminCard image="https://i.imgur.com/bAaiGiu.jpeg" />
+      <AdminCard image="https://i.imgur.com/bAaiGiu.jpeg" />
+      <AdminCard image="https://i.imgur.com/bAaiGiu.jpeg" />
     </div>
   </div>
 </template>

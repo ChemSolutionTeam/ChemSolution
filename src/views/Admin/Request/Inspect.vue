@@ -84,7 +84,12 @@
               <td
                 class="border border-t-0 border-csgreen py-3 px-6 whitespace-nowrap"
               >
-                {{ request.status }}
+                <div
+                  class="rounded-xl p-1 shadow-md border border-csblack border-opacity-20"
+                  :class="statusStyle(request.status.statusName)"
+                >
+                  {{ request.status.statusName }}
+                </div>
               </td>
 
               <td
@@ -130,6 +135,16 @@ export default {
     },
     reject(request) {
       request
+    },
+    statusStyle(status) {
+      switch (status) {
+        case 'Підтверджено':
+          return 'bg-requestaccept'
+        case 'Відхилено':
+          return 'bg-requestcancel'
+        default:
+          return 'bg-requestwait'
+      }
     },
   },
   mounted() {

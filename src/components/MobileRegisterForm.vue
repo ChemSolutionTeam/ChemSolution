@@ -67,48 +67,6 @@
         >
           Створити акаунт
         </button>
-        <hr class="mt-3 mb-3" />
-
-        <button
-          id="google-sign-up"
-          class="hover:text-csblack shadow-lg p-3 border border-grey-300 button-enter w-11/12 ml-3 m-5 sm:text-xl"
-        >
-          <i
-            class="text-white animate-pulse fab fa-google mr-3 transform scale-200"
-          />
-          Зареєструватися з Google
-        </button>
-
-        <button
-          id="facebook-sign-up"
-          class="hover:text-csblack shadow-lg border p-3 border-grey-300 button-enter w-11/12 ml-3 mt-0 m-5 text-xl"
-        >
-          <i
-            class="text-white animate-pulse fab fa-facebook mr-3 transform scale-200"
-          />
-          Зареєструватися з Facebook
-        </button>
-        <hr class="mt-3 mb-3" />
-        <div class="text-center">
-          <div class="mb-3 mt-3">
-            <button
-              type="button"
-              class="focus:outline-none hover:text-csgreen link"
-              @click="this.$emit('openReset')"
-            >
-              Забули пароль?
-            </button>
-          </div>
-          <div>
-            <button
-              type="button"
-              @click="this.$emit('openLogin')"
-              class="link focus:outline-none hover:text-csgreen"
-            >
-              Увійти
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -117,6 +75,10 @@
 <script>
 import BaseInput from '@/components/BaseInput'
 import BaseCheck from '@/components/BaseCheck'
+import Validation from '@/services/validation.js'
+import apiService from '@/services/index'
+import storage from '@/store/index.js'
+
 export default {
   name: 'MobileRegister',
   components: {
@@ -138,6 +100,30 @@ export default {
       passWrong: false,
       dateWrong: false,
     }
+  },
+  methods: {
+    validate() {
+      this.passWrong = !Validation.pass(this.user.pass)
+      this.passDontMatch = !Validation.passRepeat(
+        this.user.pass,
+        this.user.passRepeat
+      )
+      this.dateWrong = !Validation.age(this.user.birthDate)
+    },
+    async register() {
+      this.validate()
+      await apiService.postUser(this.user).then(() => {
+        apiService.getToken(this.user).then(() => {
+          console.log(storage.state.token.length)
+          if (storage.state.token.length !== 0) {
+            this.$emit('login')
+          } else {
+            this.passIsIncorrect = true
+          }
+        })
+        this.$emit('register')
+      })
+    },
   },
 }
 </script>

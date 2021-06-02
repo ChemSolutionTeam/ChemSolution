@@ -47,12 +47,14 @@
       </div>
       <div v-else class="flex flex-row">
         <i
+          v-if="userRole !== 'Admin'"
           @click="openForm('shop')"
           class="fas fa-plus-circle text-white scale-200 cursor-pointer transform mx-2 self-center hover:scale-250 duration-150 ease-in-out"
         ></i>
 
         <div
           class="text-white text-center flex mx-3 items-center self-center text-2xl"
+          v-if="userRole !== 'Admin'"
         >
           Баланс:
           <span class="text-cslightgreen flex mx-3" @show="getBalance()">
