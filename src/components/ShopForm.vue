@@ -9,10 +9,20 @@
         <div class="column w-full mt-4">
           <h3 class="text-4xl text-center heading pb-5">Магазин</h3>
           <div class="grid grid-cols-2 gap-2">
-            <ShopItem atoms="100" money="50" sales="0" @click="buy(100)" />
-            <ShopItem atoms="300" money="142.5" sales="5" @click="buy(300)" />
-            <ShopItem atoms="600" money="270" sales="10" @click="buy(600)" />
-            <ShopItem atoms="1000" money="425" sales="15" @click="buy(1000)" />
+            <ShopItem :atoms="100" :money="50" :sales="0" @click="buy(100)" />
+            <ShopItem
+              :atoms="300"
+              :money="142.5"
+              :sales="5"
+              @click="buy(300)"
+            />
+            <ShopItem :atoms="600" :money="270" :sales="10" @click="buy(600)" />
+            <ShopItem
+              :atoms="1000"
+              :money="425"
+              :sales="15"
+              @click="buy(1000)"
+            />
             <div
               class="col-span-2 w-full border border-csblack rounded-3xl bg-shopbg p-3 flex"
             >
