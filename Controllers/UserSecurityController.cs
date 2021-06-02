@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -35,10 +37,19 @@ namespace ChemSolution.Controllers
             var id = User.Identity?.Name;
             if (id != null)
             {
-                await _securityEmailService.ChangePassword(_context,id, newPassword);
+                await _securityEmailService.ChangePassword(_context,id, GetPasswordHash(newPassword));
                 return Ok();
             }
             return NotFound();
+        }
+        
+        private string GetPasswordHash(string password)
+        {
+            byte[] hash;
+            using (var sha1 = new SHA1CryptoServiceProvider())
+                hash = sha1.ComputeHash(Encoding.UTF8.GetBytes(password));
+            return Convert.ToBase64String(hash);
+            
         }
 
         [HttpGet("SetPassword/{code}")]
