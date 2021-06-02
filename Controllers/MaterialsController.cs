@@ -180,16 +180,13 @@ namespace ChemSolution.Controllers
 
         private bool IsEqualMaterials(Material material, SearchMaterialRequest searchRequest)
         {
-                
             var tmpU1 = material.ElementMaterials
                 .Select(e => (ElementId: e.ElementId, Amount: e.Amount))
                 .ToList();
-                 
             var tmpU2 = searchRequest.Value
                 .Select(rm => (ElementId: rm.ElementId, Amount: rm.Amount))
                 .ToList();
-                
-            return !tmpU1.Except(tmpU2).Any() && !tmpU2.Except(tmpU1).Any();
+            return (tmpU1.Count == tmpU2.Count) ? !tmpU1.Except(tmpU2).Any() : false;
         }
 
         private async Task<List<int>> ComplateAchivmentsAsync (User user)
@@ -211,8 +208,8 @@ namespace ChemSolution.Controllers
                     if (!user.Achievement.Contains(tmpAchievement))
                     {
                         achievementsId.Add(tmpAchievement.AchievementId);
-                        user.Balance += tmpAchievement.MoneyReward ?? 0;
-                        user.Rating += tmpAchievement.RatingReward ?? 0;
+                        user.Balance += 0;
+                        user.Rating += 0;
                         user.Achievement.Add(tmpAchievement);
                     }
                 }
