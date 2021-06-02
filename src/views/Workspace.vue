@@ -1,19 +1,19 @@
 <template>
   <ElementWorkspaceInfo
-      id="slider"
-      class="z-50"
-      v-bind:element="this.element"
+    id="slider"
+    class="z-50"
+    v-bind:element="this.element"
   />
   <div class="flex flex-row my-20">
     <div
-        class="column border border-csblack rounded-3xl rounded-l-none w-1/4 h-11/12 bg-csbluewhite p-4 shadow-xl mt-20"
+      class="column border border-csblack rounded-3xl rounded-l-none w-1/4 h-11/12 bg-csbluewhite p-4 shadow-xl mt-20"
     >
       <!-- Search -->
       <div class="w-full text-xl my-5">
-        <i class="fas fa-search mx-3 self-center scale-125 transform w-1/12"/>
+        <i class="fas fa-search mx-3 self-center scale-125 transform w-1/12" />
         <input
-            class="w-10/12 border-csblack border rounded-xl outline-none px-5"
-            placeholder="Уведіть назву елемента.."
+          class="w-10/12 border-csblack border rounded-xl outline-none px-5"
+          placeholder="Уведіть назву елемента.."
           v-model="search"
         />
       </div>
@@ -22,17 +22,17 @@
       >
         <div v-for="element in filteredElements" :key="element.elementId">
           <ElementChooser
-              v-bind:symbol="element.symbol"
-              v-bind:name="element.name"
-              v-bind:atomic-weight="element.atomicWeight"
-              v-bind:category-name="element.category.categoryName"
-              v-bind:id="element.elementId"
-              v-bind:valences="element.valences"
-              v-bind:category="element.categoryId.toString()"
-              v-bind:is-locked="element.isLocked"
-              v-bind:draggable="!element.isLocked"
-              @click="addElement(element)"
-              @dragstart="startDrag($event, element)"
+            v-bind:symbol="element.symbol"
+            v-bind:name="element.name"
+            v-bind:atomic-weight="element.atomicWeight"
+            v-bind:category-name="element.category.categoryName"
+            v-bind:id="element.elementId"
+            v-bind:valences="element.valences"
+            v-bind:category="element.categoryId.toString()"
+            v-bind:is-locked="element.isLocked"
+            v-bind:draggable="!element.isLocked"
+            @click="addElement(element)"
+            @dragstart="startDrag($event, element)"
           />
         </div>
       </div>
@@ -76,7 +76,7 @@ export default {
       atoms: [],
       value: [],
       materials: [],
-
+      counter: 0,
       element: {
         atomicRadius: 454.59,
         atomicWeight: 1.008,
@@ -94,7 +94,7 @@ export default {
         neutronQuantity: 733,
         protonQuantity: 936,
         symbol: 'Н',
-        valences: [{valenceVal: 1}],
+        valences: [{ valenceVal: 1 }],
         isLocked: 1,
       },
     }
@@ -104,7 +104,7 @@ export default {
     ElementChooser,
     WorkspaceComp,
     Footer,
-    ElementWorkspaceInfo
+    ElementWorkspaceInfo,
   },
   created() {
     apiService.getElements().then((resp) => {
@@ -126,7 +126,7 @@ export default {
           for (let i = 0; i < resp.data.elements.length; ++i) {
             if (
               !this.elements.some(
-                  (e) => e.elementId === resp.data.elements[i].elementId
+                (e) => e.elementId === resp.data.elements[i].elementId
               )
             ) {
               resp.data.elements[i].isLocked = false
@@ -157,6 +157,8 @@ export default {
     onDrop(event) {
       console.warn(event)
       if (this.dragElement != null) {
+        this.counter += 1
+        console.log(this.counter)
         this.atoms.push({
           id: this.dragElement.elementId,
           symbol: this.dragElement.symbol,
@@ -243,20 +245,19 @@ export default {
       return storage.state.token.length !== 0
     },
     filteredElements() {
-        if (this.search) {
-          return this.elements.filter((element) => {
-            return (
-                (element.name.toLowerCase().includes(this.search.toLowerCase())) ||
-                element.symbol.toLowerCase().includes(this.search.toLowerCase())
-            )
-          })
-        } else {
-          return this.elements
-        }
-    }
+      if (this.search) {
+        return this.elements.filter((element) => {
+          return (
+            element.name.toLowerCase().includes(this.search.toLowerCase()) ||
+            element.symbol.toLowerCase().includes(this.search.toLowerCase())
+          )
+        })
+      } else {
+        return this.elements
+      }
+    },
   },
-  mounted() {
-  }
+  mounted() {},
 }
 </script>
 
