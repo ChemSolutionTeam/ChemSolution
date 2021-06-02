@@ -208,8 +208,8 @@ namespace ChemSolution.Controllers
                     if (!user.Achievement.Contains(tmpAchievement))
                     {
                         achievementsId.Add(tmpAchievement.AchievementId);
-                        user.Balance += 0;
-                        user.Rating += 0;
+                        user.Balance += tmpAchievement.MoneyReward ?? 0;
+                        user.Rating += tmpAchievement.RatingReward ?? 0;
                         user.Achievement.Add(tmpAchievement);
                     }
                 }
