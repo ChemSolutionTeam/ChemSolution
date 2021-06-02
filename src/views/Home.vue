@@ -12,7 +12,7 @@
         </p>
         <Button @click="learnMore()" />
       </div>
-      <Logo class="w-4/5" static="true" />
+      <Logo class="w-4/5" :static="true" />
     </div>
   </div>
   <!-- Generator: Adobe Illustrator 25.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
@@ -120,7 +120,7 @@
         </p>
         <div class="flex my-10">
           <Button
-            white="true"
+            :white="true"
             label="Авторизуватися"
             @click="openForm('login')"
           />
