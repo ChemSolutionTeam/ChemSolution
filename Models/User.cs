@@ -18,8 +18,8 @@ namespace ChemSolution.Models
         public int Balance { set; get; }
         [Range(0, int.MaxValue)]
         public int Rating { set; get; }
-        [Range(0, int.MaxValue)]
-        public int Honesty { set; get; }
+        [Range(0, int.MaxValue)] 
+        public int Honesty { set; get; } = 100;
         public string Role { set; get; } = Startup.Roles.User; 
         public List<BlogPost> BlogPosts { set; get; } = new List<BlogPost>();
         public List<Achievement> Achievement { set; get; } = new List<Achievement>();
