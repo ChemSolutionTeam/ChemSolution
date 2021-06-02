@@ -22,17 +22,18 @@
       >
         <div v-for="element in filteredElements" :key="element.elementId">
           <ElementChooser
-            v-bind:symbol="element.symbol"
-            v-bind:name="element.name"
-            v-bind:atomic-weight="element.atomicWeight"
-            v-bind:category-name="element.category.categoryName"
-            v-bind:id="element.elementId"
-            v-bind:valences="element.valences"
-            v-bind:category="element.categoryId.toString()"
-            v-bind:is-locked="element.isLocked"
-            v-bind:draggable="!element.isLocked"
-            @click="addElement(element)"
-            @dragstart="startDrag($event, element)"
+              v-bind:symbol="element.symbol"
+              v-bind:name="element.name"
+              v-bind:atomic-weight="element.atomicWeight"
+              v-bind:category-name="element.category.categoryName"
+              v-bind:id="element.elementId"
+              v-bind:valences="element.valences"
+              v-bind:category="element.categoryId.toString()"
+              v-bind:is-locked="element.isLocked"
+              v-bind:draggable="!element.isLocked"
+              v-bind:price="element.price"
+              @click="addElement(element)"
+              @dragstart="startDrag($event, element)"
           />
         </div>
       </div>
