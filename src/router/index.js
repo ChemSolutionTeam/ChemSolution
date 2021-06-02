@@ -22,6 +22,11 @@ const routes = [
     component: () => import('../views/Admin.vue'),
   },
   {
+    path: '/newachiv',
+    name: 'newachiv',
+    component: () => import('../components/NewAchievement.vue'),
+  },
+  {
     path: '/workspace',
     name: 'Workspace',
     component: () => import('../views/Workspace.vue'),
