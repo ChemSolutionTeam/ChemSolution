@@ -172,6 +172,7 @@ export default {
     },
     logout() {
       this.isUserAuthorised = false
+      storage.state.token = ''
       router.push('/')
     },
     register() {

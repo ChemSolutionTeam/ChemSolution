@@ -38,9 +38,10 @@
       />
       <div style="flex: 1">
         <p class="self-center overflow-y-auto text-2xl h-1/2">{{ name }}</p>
-        <div class="self-center overflow-y-auto text-2xl h-1/2 w-3/12 mx-auto">
-          <p style="float:left; margin:auto;" class="text-csgreen">{{ price }}</p>
-          <img style="float:right; margin:auto;" src="AtomCoinGreen.png" class="w-7 h-7"/>
+        <div class="self-center overflow-y-auto text-2xl h-1/2 mx-auto">
+          <p style="float:left; margin-right: 4px; text-align: right;" class="text-csgreen p-0">{{ price }}</p>
+          <img style="margin-right: 0px; position: relative; bottom: -3px;" src="AtomCoinGreen.png"
+               class="w-7 h-7 p-0"/>
           <div style="clear: left;"/>
         </div>
       </div>
@@ -76,7 +77,7 @@ export default {
     },
     isLocked: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     price: {
       type: Number,
@@ -91,7 +92,10 @@ export default {
       default: 1.008,
     },
     valences: {
-      type: Array
+      type: Array,
+      default: function () {
+        return [1]
+      }
     }
   },
 }
