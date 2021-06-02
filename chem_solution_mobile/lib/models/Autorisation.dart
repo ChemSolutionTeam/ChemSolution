@@ -20,7 +20,7 @@ abstract class Autorisation {
     try {
       final response = await http.get(
           Uri.http(chemURL, 'getjwt', {'email': email, 'password': password}));
-
+      print('Авторизация ${response.statusCode}');
       if ('${response.statusCode}'.indexOf('2') == 0) {
         try {
           await storage.write(
@@ -29,6 +29,7 @@ abstract class Autorisation {
                   RegExp(r'n":"(\S)+",')));
           autorised = true;
           setUser();
+          print('${await storage.read(key: 'token')}');
         } catch (ex) {
           print(ex);
           autorised = false;
@@ -37,6 +38,33 @@ abstract class Autorisation {
         autorised = false;
       }
       update();
+    } catch (ex) {
+      print(ex);
+    }
+  }
+
+  static Future<void> signUp(String userEmail, String userName,
+      String dateOfBirth, String password) async {
+    try {
+      var date = '${dateOfBirth.replaceFirst(' ', 'T')}Z';
+      print(date);
+      var userBody = {
+        "userEmail": userEmail,
+        "userName": userName,
+        "dateOfBirth": date,
+        "password": password
+      };
+
+      final response = await http.post(
+        Uri.https(chemURL, 'Users'),
+        headers: {
+          "Accept": "application/json",
+          "content-type": "application/json"
+        },
+        body: json.encode(userBody),
+        encoding: Encoding.getByName("utf-8"),
+      );
+      print('Регистрация ${response.statusCode}');
     } catch (ex) {
       print(ex);
     }

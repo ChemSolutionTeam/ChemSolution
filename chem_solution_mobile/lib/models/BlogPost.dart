@@ -63,7 +63,7 @@ class BlogPost extends Model {
     bp.category = o['category'];
     bp.information = o['information'];
     bp.isLocked = o['isLocked'];
-    bp.image = o['image']?? notFound;
+    bp.image = o['image'] ?? notFound;
     /* List<User> u = [];
     o['users'].forEach((e) {
       u.add(User.fromObject(e));
@@ -83,8 +83,8 @@ class BlogPost extends Model {
         throw Exception('Failed to load');
       }
     } catch (ex) {
-      showToast('Помилка підключення', themeRed, themeDarkRed,
-          Icons.error, FToast());
+      showToast(
+          'Помилка підключення', themeRed, themeDarkRed, Icons.error, FToast());
     }
   }
 
@@ -107,9 +107,10 @@ class BlogPost extends Model {
     String token = await storage.read(key: 'token');
     try {
       final response = await http.post(
-          Uri.http(chemURL, 'Users/liked/add/${this.blogPostId}'),
+          Uri.https(chemURL, 'Users/liked/add/${this.blogPostId}'),
           headers: {HttpHeaders.authorizationHeader: 'Bearer $token'});
 
+      print(response.statusCode);
       Autorisation.setUser();
       return response.statusCode == 200;
     } catch (ex) {
@@ -123,7 +124,7 @@ class BlogPost extends Model {
 
     try {
       final response = await http.post(
-          Uri.http(chemURL, 'Users/liked/remove/${this.blogPostId}'),
+          Uri.https(chemURL, 'Users/liked/remove/${this.blogPostId}'),
           headers: {HttpHeaders.authorizationHeader: 'Bearer $token'});
       Autorisation.setUser();
 

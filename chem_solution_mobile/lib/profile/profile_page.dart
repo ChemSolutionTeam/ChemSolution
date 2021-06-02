@@ -1,3 +1,4 @@
+import 'package:chem_solution_mobile/bloc/auth_bloc.dart';
 import 'package:chem_solution_mobile/profile/achivements_page.dart';
 import 'package:chem_solution_mobile/profile/liked_posts.dart';
 import 'package:chem_solution_mobile/profile/materials_page.dart';
@@ -8,6 +9,7 @@ import 'package:chem_solution_mobile/main.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:chem_solution_mobile/assets/alerts.dart';
 import 'package:chem_solution_mobile/assets/colors.dart';
+import 'package:provider/provider.dart';
 
 class Profile extends StatefulWidget {
   Profile({Key key}) : super(key: key);
@@ -39,50 +41,6 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _exitDialog(BuildContext context) {
-    return AlertDialog(
-      elevation: 24,
-      title: Text(
-        'Увага!',
-        style: TextStyle(
-          color: themeDark,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      content: Text(
-        'Ви точно хочете вийти?',
-        style: TextStyle(
-          color: themeDark,
-        ),
-      ),
-      actions: [
-        // ignore: deprecated_member_use
-        FlatButton(
-            onPressed: () {
-              autorised = false;
-              storage.delete(key: 'token');
-              currentUser = null;
-              refresh();
-              Navigator.of(context).pop();
-            },
-            child: Text(
-              'Так',
-              style: TextStyle(color: Colors.red),
-            )),
-        // ignore: deprecated_member_use
-        FlatButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: Text(
-            'Ні',
-            style: TextStyle(color: themeBlue, fontWeight: FontWeight.w700),
-          ),
-        ),
-      ],
     );
   }
 
@@ -120,6 +78,55 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final authBloc = Provider.of<AuthBloc>(context, listen: false);
+
+    Widget _exitDialog() {
+      return AlertDialog(
+        elevation: 24,
+        title: Text(
+          'Увага!',
+          style: TextStyle(
+            color: themeDark,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        content: Text(
+          'Ви точно хочете вийти?',
+          style: TextStyle(
+            color: themeDark,
+          ),
+        ),
+        actions: [
+          // ignore: deprecated_member_use
+          FlatButton(
+              onPressed: () {
+                autorised = false;
+                storage.delete(key: 'token');
+                currentUser = null;
+                try {
+                  authBloc.logoutGoogle();
+                } catch (ex) {}
+                refresh();
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                'Так',
+                style: TextStyle(color: Colors.red),
+              )),
+          // ignore: deprecated_member_use
+          FlatButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text(
+              'Ні',
+              style: TextStyle(color: themeBlue, fontWeight: FontWeight.w700),
+            ),
+          ),
+        ],
+      );
+    }
+
     if (!autorised) {
       return Container(
         alignment: Alignment.center,
@@ -129,9 +136,8 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
             SlideTransition(
               position: _offsetAnimationToLeft,
               child: GestureDetector(
-                onTap: () {
-                  return alertDialogShow(
-                      context, autorisation(refresh), 400);
+                onTap: ()  {
+                  return alertDialogShow(context, autorisation(refresh), 400);
                 },
                 child: _card(
                   context,
@@ -262,7 +268,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                 position: _offsetAnimationToLeft,
                 child: GestureDetector(
                   onTap: () {
-                    return alertDialogShow(context, _exitDialog(context), 200);
+                    return alertDialogShow(context, _exitDialog(), 200);
                   },
                   child: _card(
                     context,

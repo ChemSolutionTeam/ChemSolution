@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class AuthWidget extends StatefulWidget {
   Function() update;
   AuthWidget({Key key, Function() update}) : super(key: key);
