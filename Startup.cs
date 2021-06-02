@@ -44,7 +44,11 @@ namespace ChemSolution
             {
                 options.AddPolicy(name:_AllowSpecificOrigins, builder =>
                 {
-                    builder.WithOrigins("http://localhost:8080", "https://localhost:8080")
+                    builder.WithOrigins(
+                            "http://localhost:8080", 
+                            "https://localhost:8080",
+                            "https://chemsolution.onrender.com",
+                            "http://chemsolution.onrender.com")
                         .AllowAnyHeader()
                         .AllowAnyMethod();
                 } );
