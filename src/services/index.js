@@ -107,9 +107,8 @@ export default {
           Authorization: 'Bearer ' + storage.state.token,
         },
       }
-    ).catch((e) => {
-      console.error(e)
-    })
+    )
+
   },
   getRequest(id) {
     API.get('/Requests/' + id)
@@ -359,4 +358,12 @@ export default {
         console.error(e)
       })
   },
+
+  //recoverPassword
+  recoverPassword(email, newPassword) {
+    API.post('/UserSecurity/RecoverPassword/' + email + '/' + newPassword)
+        .catch((e) => {
+          console.error(e)
+        })
+  }
 }

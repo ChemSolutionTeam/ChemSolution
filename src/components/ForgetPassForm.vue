@@ -31,6 +31,7 @@
         <hr class="m-3 w-11/12" />
 
         <button
+          @click="changePassword"
           id="sign-in"
           type="submit"
           class="shadow-lg p-3 border border-grey-300 bg-csblue button-enter w-11/12 ml-3 m-5 focus:outline-none focus:ring-4 focus:ring-csgreen"
@@ -39,7 +40,8 @@
         </button>
         <div class="text-center">
           <div class="m-3 ml-0 mt-1 mb-1 flex flex-row justify-center">
-            <p>Лінк для підтвердження зміни паролю відправлено на вашу пошту</p>
+            <p>Посилання для підтвердження зміни паролю буде відправлено на вашу пошту</p>
+            <p>Якщо лист не прийшов, перевірте правильність написання пошти та перевірте розділ "Спам"</p>
           </div>
         </div>
       </form>
@@ -49,6 +51,7 @@
 
 <script>
 import BaseInput from '../components/BaseInput.vue'
+import apiService from '@/services/index.js'
 
 export default {
   name: 'ResetForm',
@@ -62,6 +65,7 @@ export default {
       },
       passDontMatch: false,
       passWrong: false,
+      emailWrong: false,
       isShown: false,
       emailIsIncorrect: false,
       passIsIncorrect: false,
@@ -81,6 +85,13 @@ export default {
     },
     validatePassRepeat() {
       this.passDontMatch = this.user.newPass !== this.user.newPass2
+    },
+    changePassword() {
+      this.validatePassRepeat()
+      this.validatePass()
+      if(!this.passWrong && !this.passDontMatch) {
+        apiService.recoverPassword(this.user.email, this.user.newPass)
+      }
     },
   },
 }
