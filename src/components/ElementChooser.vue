@@ -2,6 +2,14 @@
   <div
       v-if="!isLocked"
       class="flex flex-wrap border p-3 w-11/12 my-1 rounded-full border-csblack"
+      style="
+        align-items: flex-start;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      "
   >
     <Atom
         :symbol="symbol"
@@ -36,13 +44,12 @@
           :atomic-weight="atomicWeight"
           :valences="valences"
       />
-      <div style="flex: 1">
-        <p class="self-center overflow-y-auto text-2xl h-1/2">{{ name }}</p>
-        <div class="self-center overflow-y-auto text-2xl h-1/2 mx-auto">
-          <p style="float:left; margin-right: 4px; text-align: right;" class="text-csgreen p-0">{{ price }}</p>
-          <img style="margin-right: 0px; position: relative; bottom: -3px;" src="AtomCoinGreen.png"
+      <div class="flex-1">
+        <p class="self-center overflow-y-auto text-2xl w-3/4">{{ name }}</p>
+        <div class="self-center overflow-y-auto text-2xl">
+          <p style="float:left; text-align: right;" class="text-csgreen p-0">{{ price }}</p>
+          <img style="margin-right: 0px; position: relative; bottom: -3px; left: 3px;" src="AtomCoinGreen.png"
                class="w-7 h-7 p-0"/>
-          <div style="clear: left;"/>
         </div>
       </div>
     </div>

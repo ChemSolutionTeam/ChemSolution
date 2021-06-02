@@ -125,13 +125,12 @@ export default {
       if (this.isUserAuthorised) {
         await apiService.getUser().then((resp) => {
           for (let i = 0; i < resp.data.elements.length; ++i) {
-            if (
-              !this.elements.some(
-                (e) => e.elementId === resp.data.elements[i].elementId
-              )
-            ) {
-              resp.data.elements[i].isLocked = false
-              this.elements.push(resp.data.elements[i])
+            try {
+              let el = this.unlockableElements.find(e => e.id === resp.data.elements[i].id)
+              this.elements.push(el)
+              this.unlockableElements.filter(e => e.id !== resp.data.elements[i].id)
+            } catch (e) {
+              continue
             }
           }
         })
