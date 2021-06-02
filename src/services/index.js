@@ -100,7 +100,7 @@ export default {
         theme: request.theme,
         text: request.text,
         dateTimeSended: request.dateTimeSended,
-        statusId: 0,
+        statusId: 1,
       },
       {
         headers: {

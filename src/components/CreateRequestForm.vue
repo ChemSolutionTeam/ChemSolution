@@ -42,6 +42,7 @@ export default {
     BaseTextArea,
     BaseInput,
   },
+  emits: ['openUserRequests'],
   data() {
     return {
       request: {
@@ -52,12 +53,12 @@ export default {
   },
   methods: {
     async submit() {
-      alert(this.getDate())
-      this.request.dateTimeSended = Date.now().toString()
+      this.request.dateTimeSended = this.getDate()
       this.request.userEmail = storage.state.email
       await apiService.postRequest(this.request).then((resp) => {
         console.info(resp)
       })
+      this.$emit('openUserRequests')
     },
     getDate() {
       let d = new Date()
@@ -68,7 +69,7 @@ export default {
       let hour = d.getHours()
       let minute = d.getMinutes()
       let second = d.getSeconds()
-
+      let milisecond = d.getMilliseconds()
       let result =
         year +
         '-' +
@@ -81,7 +82,9 @@ export default {
         (minute < 10 ? '0' + minute : minute) +
         ':' +
         (second < 10 ? '0' + second : second) +
-        '.'
+        '.' +
+        milisecond +
+        'Z'
       return result
     },
   },

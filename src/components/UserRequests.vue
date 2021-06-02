@@ -1,6 +1,6 @@
 <template>
   <div
-    @mousemove.once="getRequests()"
+    @mousemove="getRequests()"
     class="transform md:scale-50 lg:scale-100 flex items-start inset-0 my-4 shadow-lg max-w-6xl mx-auto"
   >
     <div

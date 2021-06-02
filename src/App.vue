@@ -93,6 +93,7 @@
         @mouseleave="isMouseOut = true"
         @mouseover="isMouseOut = false"
         v-show="isFormShow == 'createRequest'"
+        v-on:openUserRequests="closeForm('requests')"
       />
     </transition>
   </div>
