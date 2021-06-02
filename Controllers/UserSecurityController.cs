@@ -77,7 +77,7 @@ namespace ChemSolution.Controllers
                    {
                        user.Password = info.newPassword;
                        await _context.SaveChangesAsync();
-                       return Ok();
+                       return Redirect("http://chemsolution.onrender.com");
                    }
                    catch
                    {
