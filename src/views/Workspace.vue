@@ -22,6 +22,7 @@
       <div
         class="elementCollection mt-3 pt-3 overflow-y-scroll scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-blue-100 scrollbar-thumb-rounded-full scrollbar-track-rounded-full"
       >
+        <Preloader v-if="elements.length == 0" />
         <div v-for="element in filteredElements" :key="element.elementId">
           <ElementChooser
             v-bind:symbol="element.symbol"
@@ -84,6 +85,7 @@ import ElementWorkspaceInfo from '@/components/ElementWorkspaceInfo'
 import NewAchievement from '@/components/NewAchievement.vue'
 import WorkspaceComp from '@/components/WorkspaceComp'
 import Footer from '@/components/Footer'
+import Preloader from '@/components/Preloader'
 import storage from '@/store'
 import apiService from '@/services'
 export default {
@@ -95,6 +97,7 @@ export default {
         moneyReward: '',
         ratingReward: '',
       },
+      loading: true,
       isMouseOut: false,
       isFormShow: '',
       isBackgroundShown: '',
@@ -132,6 +135,7 @@ export default {
   name: 'Workspace',
   components: {
     ElementChooser,
+    Preloader,
     WorkspaceComp,
     Footer,
     ElementWorkspaceInfo,
@@ -327,6 +331,7 @@ export default {
     filteredElements() {
       if (this.search) {
         return this.elements.filter((element) => {
+          this.loading = false
           return (
             element.name.toLowerCase().includes(this.search.toLowerCase()) ||
             element.symbol.toLowerCase().includes(this.search.toLowerCase())
