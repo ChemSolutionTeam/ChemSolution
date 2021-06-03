@@ -1,33 +1,31 @@
 <template>
   <div style="position: absolute; width: 70px; height: 70px">
     <Atom
-        :div-id="el1"
-        id="1"
-        symbol="H"
-        category="1"
-        class="w-full"
-        name="Гідроген"
-        category-name="неметали"
-        atomic-weight="1.008"
-        :valences="valences"
+      :div-id="el1"
+      id="1"
+      symbol="H"
+      category="1"
+      class="w-full"
+      name="Гідроген"
+      category-name="неметали"
+      atomic-weight="1.008"
+      :valences="valences"
     />
   </div>
 
   <div style="position: absolute; width: 70px; height: 70px">
     <Atom
-        :div-id="el2"
-        id="1"
-        symbol="H"
-        category="1"
-        class="w-full"
-        name="Гідроген"
-        category-name="неметали"
-        atomic-weight="1.008"
-        :valences="valences"
+      :div-id="el2"
+      id="1"
+      symbol="H"
+      category="1"
+      class="w-full"
+      name="Гідроген"
+      category-name="неметали"
+      atomic-weight="1.008"
+      :valences="valences"
     />
   </div>
-
-
 </template>
 
 <script>
@@ -41,7 +39,7 @@ export default {
     return {
       valences: [1],
       el1: 'el' + this.initNumber,
-      el2: 'el' + (parseInt(this.initNumber) + 1)
+      el2: 'el' + (parseInt(this.initNumber) + 1),
     }
   },
   emits: ['added'],
@@ -51,7 +49,7 @@ export default {
   props: {
     initNumber: {
       type: Number,
-      default: 0
+      default: 0,
     },
     /*el1: {
       type: String
@@ -75,14 +73,14 @@ export default {
     let current = null
     let elements = {}
     elements[this.el1] = {
-      x: Math.random() * (width - size) / 3,
-      y: Math.random() * (height - size) / 3,
+      x: (Math.random() * (width - size)) / 3,
+      y: (Math.random() * (height - size)) / 3,
       startX: 0,
       startY: 0,
     }
     elements[this.el2] = {
-      x: Math.random() * (width - size) / 3,
-      y: Math.random() * (height - size) / 3,
+      x: (Math.random() * (width - size)) / 3,
+      y: (Math.random() * (height - size)) / 3,
       startX: 0,
       startY: 0,
     }
@@ -90,7 +88,12 @@ export default {
     // начальное положение
     translate(el1, elements[this.el1].x, elements[this.el1].y)
     translate(el2, elements[this.el2].x, elements[this.el2].y)
-    drawLine(elements[this.el1].x, elements[this.el2].x, elements[this.el1].y, elements[this.el2].y)
+    drawLine(
+      elements[this.el1].x,
+      elements[this.el2].x,
+      elements[this.el1].y,
+      elements[this.el2].y
+    )
     /*------------------------------------*/
     el1.addEventListener('mousedown', onMouseDown)
     el2.addEventListener('mousedown', onMouseDown)
@@ -130,7 +133,12 @@ export default {
       const x = (elements[current.id].x = e.x - elements[current.id].startX)
       const y = (elements[current.id].y = e.y - elements[current.id].startY)
       translate(current, x, y)
-      drawLine(elements[elementIds[0]].x, elements[elementIds[1]].x, elements[elementIds[0]].y, elements[elementIds[1]].y)
+      drawLine(
+        elements[elementIds[0]].x,
+        elements[elementIds[1]].x,
+        elements[elementIds[0]].y,
+        elements[elementIds[1]].y
+      )
     }
     function onMouseUp() {
       document.body.removeEventListener('mousemove', onMouseMove)
@@ -148,6 +156,6 @@ export default {
       context.stroke()
     }
   },
-  methods: {}
+  methods: {},
 }
 </script>
