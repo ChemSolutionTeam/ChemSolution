@@ -41,8 +41,8 @@
   >
     <div class="flex flex-row w-full">
       <img
-        src="../assets/workspace.png"
-        class="h-full my-36 m-3 rounded-3xl border-csblue border-2 transform duration-300 ease-in-out hover:scale-105"
+        src="@/assets/workspace.png"
+        class="h-full w-1/2 my-36 m-3 rounded-3xl border-csblue border-2 transform duration-300 ease-in-out hover:scale-105"
       />
       <div class="text-center items-center py-36">
         <h1 class="text-5xl z-0 m-3 px-10">ChemSolution</h1>
@@ -80,8 +80,8 @@
         <Button label="До періодичної системи" @click="toTable()" />
       </div>
       <img
-        src="../assets/periodic.png"
-        class="h-full m-3 my-36 rounded-3xl border-csblue border-2 transform duration-300 ease-in-out hover:scale-105"
+        src="@/assets/periodic.png"
+        class="h-full w-1/2 m-3 my-36 rounded-3xl border-csblue border-2 transform duration-300 ease-in-out hover:scale-105"
       />
     </div>
   </div>
@@ -110,8 +110,8 @@
   >
     <div class="flex flex-row w-full">
       <img
-        src="../assets/userpage.png"
-        class="h-full my-36 m-3 rounded-3xl border-csblue border-2 transform duration-300 ease-in-out hover:scale-105"
+        src="@/assets/userpage.png"
+        class="h-full w-1/2 my-36 m-3 rounded-3xl border-csblue border-2 transform duration-300 ease-in-out hover:scale-105"
       />
       <div class="text-center items-center py-36">
         <h1 class="text-5xl z-0 m-3 px-10">ChemSolution</h1>
@@ -166,7 +166,7 @@
             class="bg-white flex w-2/4 self-center mx-auto border-2 border-csblack rounded-3xl"
           >
             <img
-              src="../assets/mobile.png"
+              src="@/assets/mobile.png"
               class="self-center w-full rounded-3xl"
             />
           </div>
