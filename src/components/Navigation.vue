@@ -58,7 +58,7 @@
         >
           Баланс:
           <span class="text-cslightgreen flex mx-3" @show="getBalance()">
-            {{ balance }}
+            {{ storageBalance }}
             <img src="AtomCoinGreen.png" width="30" class="" />
           </span>
         </div>
@@ -75,10 +75,11 @@
 </template>
 
 <script>
-import Link from '../components/NavigationLink.vue'
-import Logo from '../components/Logo.vue'
-import BackToTopButton from '../components/BackToTopButton.vue'
-import apiService from '../services/index'
+import Link from '@/components/NavigationLink.vue'
+import Logo from '@/components/Logo.vue'
+import BackToTopButton from '@/components/BackToTopButton.vue'
+import apiService from '@/services/index'
+import storage from '@/store/index'
 
 export default {
   name: 'Navigation',
@@ -97,6 +98,12 @@ export default {
   computed: {
     toTop() {
       return this.scroll.y > 200
+    },
+    storageBalance() {
+      if (storage.state.balance === 0) {
+        storage.dispatch('getBalance')
+      }
+      return storage.state.balance
     },
   },
   mounted() {

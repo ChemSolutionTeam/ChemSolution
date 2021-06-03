@@ -248,7 +248,7 @@ export default {
                 .finally(() => {
                   this.openForm('achievement')
                 })
-
+            storage.dispatch('getBalance')
             this.atoms = []
             this.value = []
             console.log(this.materials)

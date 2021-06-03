@@ -94,9 +94,16 @@ export default {
         .finally(() => {
           console.log('Data: ' + this.donateData)
           console.log('Signature: ' + this.donateSignature)
-          if (this.donateData.length != 0 && this.donateSignature.length != 0) {
-            document.getElementById('donateForm').submit()
-          }
+          apiService
+            .postDonate(this.donateData, this.donateSignature)
+            .then(() => {
+              if (
+                this.donateData.length != 0 &&
+                this.donateSignature.length != 0
+              ) {
+                document.getElementById('donateForm').submit()
+              }
+            })
         })
     },
   },

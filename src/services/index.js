@@ -387,4 +387,20 @@ export default {
       console.error(error)
     })
   },
+  postDonate(data, signature) {
+    return API.post(
+      '/Donate/',
+      {
+        data: data,
+        signature: signature,
+      },
+      {
+        headers: {
+          Authorization: 'Bearer ' + storage.state.token,
+        },
+      }
+    ).catch((error) => {
+      console.error(error)
+    })
+  },
 }
