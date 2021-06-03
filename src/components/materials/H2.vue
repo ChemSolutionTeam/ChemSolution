@@ -1,11 +1,32 @@
 <template>
-  <div
-    style="position: absolute; width: 70px; height: 70px"
-    v-for="atom in atoms"
-    :key="atom.id"
-  >
-    <Atom :div-id="atom.id" id="1" symbol="H" category="1" class="w-full" />
+  <div style="position: absolute; width: 70px; height: 70px">
+    <Atom
+        :div-id="el1"
+        id="1"
+        symbol="H"
+        category="1"
+        class="w-full"
+        name="Гідроген"
+        category-name="неметали"
+        atomic-weight="1.008"
+        :valences="valences"
+    />
   </div>
+
+  <div style="position: absolute; width: 70px; height: 70px">
+    <Atom
+        :div-id="el2"
+        id="1"
+        symbol="H"
+        category="1"
+        class="w-full"
+        name="Гідроген"
+        category-name="неметали"
+        atomic-weight="1.008"
+        :valences="valences"
+    />
+  </div>
+
   <canvas id="canvas" class="block"></canvas>
 </template>
 
@@ -13,60 +34,82 @@
 import Atom from '@/components/Atom'
 export default {
   name: 'H2',
-  data() {
-    return {
-      atoms: [],
-    }
-  },
   components: {
     Atom,
   },
-  props: {
-    elementsNumber: {
-      type: Number,
-      default: 2,
-    },
-    workspaceAtoms: {
-      type: Number,
-      default: 0,
-    },
+  data() {
+    return {
+      valences: [1]
+    }
   },
-  created() {
-    for (let i = 0; i < this.elementsNumber; ++i) {
-      this.atoms.push({ id: 'el' + (i + this.workspaceAtoms) })
+  props: {
+    el1: {
+      type: String
+    },
+    el2: {
+      type: String
     }
   },
   mounted() {
+    //let componentId = this._uid
+    const el1 = document.getElementById(this.el1)
+    const el2 = document.getElementById(this.el2)
+    const size = 70
+
     const canvas = document.getElementById('canvas')
     const context = canvas.getContext('2d')
     let width = (canvas.width = innerWidth / 1.4)
     let height = (canvas.height = innerHeight / 1.3)
 
-    const elements = {}
-    const num = this.elementsNumber
-    const fromNum = this.workspaceAtoms
-    const size = 70
+    /*------------------------------------*/
+
+
     let current = null
-
-    for (let i = 0; i < num; ++i) {
-      let id = i + fromNum
-      const element = document.getElementById('el' + id)
-      element.addEventListener('mousedown', onMouseDown)
-
-      // тут будут храниться и изменяться все его координаты
-      elements['el' + id] = {
-        x: (Math.random() * (width - size)) / 3,
-        y: (Math.random() * (height - size)) / 3,
-        startX: 0,
-        startY: 0,
-      }
-      // начальное положение
-      translate(element, elements['el' + id].x, elements['el' + id].y)
+    let elements = {}
+    elements[this.el1] = {
+      x: Math.random() * (width - size) / 3,
+      y: Math.random() * (height - size) / 3,
+      startX: 0,
+      startY: 0,
     }
-    connect(elements)
+    elements[this.el2] = {
+      x: Math.random() * (width - size) / 3,
+      y: Math.random() * (height - size) / 3,
+      startX: 0,
+      startY: 0,
+    }
+    let elementIds = [this.el1, this.el2]
+
+    // начальное положение
+    translate(el1, elements[this.el1].x, elements[this.el1].y)
+    translate(el2, elements[this.el2].x, elements[this.el2].y)
+    drawLine(elements[this.el1].x, elements[this.el2].x, elements[this.el1].y, elements[this.el2].y)
+
+    /*------------------------------------*/
+
+    el1.addEventListener('mousedown', onMouseDown)
+    el2.addEventListener('mousedown', onMouseDown)
+
+    /*dragWrapper(el1, this.el1, this.el2)
+    dragWrapper(el2, this.el1, this.el2)
+
+    function dragWrapper(targetElement, el1, el2) {
+      targetElement.addEventListener('mousedown', function onMouseDown(e) {
+        e.preventDefault()
+        console.log(e.target.id)
+
+        // координаты нажатия мыши внутри элемента
+        targetElement.startX = e.x - targetElement.x
+        targetElement.startY = e.y - targetElement.y
+
+        mouseMoveWrap(targetElement, el1, el2)
+      })
+    }*/
 
     function onMouseDown(e) {
       e.preventDefault()
+      console.log(e.target.id)
+
       // координаты нажатия мыши внутри элемента
       elements[e.target.id].startX = e.x - elements[e.target.id].x
       elements[e.target.id].startY = e.y - elements[e.target.id].y
@@ -77,12 +120,23 @@ export default {
       document.body.addEventListener('mouseup', onMouseUp)
     }
 
+    /*function mouseMoveWrap(currentElement, el1, el2) {
+      currentElement.addEventListener('mousemove', function onMouseMove(e) {
+        const x = (elements[current.id].x = e.x - elements[current.id].startX)
+        const y = (elements[current.id].y = e.y - elements[current.id].startY)
+
+        translate(current, x, y)
+        drawLine(elements[el1].x, elements[el2].x, elements[el1].y, elements[el2].y)
+      })
+      document.body.addEventListener('mouseup', onMouseUp)
+    }
+*/
     function onMouseMove(e) {
       const x = (elements[current.id].x = e.x - elements[current.id].startX)
       const y = (elements[current.id].y = e.y - elements[current.id].startY)
 
       translate(current, x, y)
-      connect(elements)
+      drawLine(elements[elementIds[0]].x, elements[elementIds[1]].x, elements[elementIds[0]].y, elements[elementIds[1]].y)
     }
 
     function onMouseUp() {
@@ -96,19 +150,6 @@ export default {
       el.style.transform = `translate(${x}px, ${y}px)`
     }
 
-    function connect(elements) {
-      context.clearRect(0, 0, width, height)
-
-      for (let i = 0; i < num - 1; ++i) {
-        drawLine(
-          elements['el' + (i + fromNum)].x,
-          elements['el' + (i + 1 + fromNum)].x,
-          elements['el' + (i + fromNum)].y,
-          elements['el' + (i + 1 + fromNum)].y
-        )
-      }
-    }
-
     function drawLine(x1, x2, y1, y2) {
       context.clearRect(0, 0, width, height)
       context.beginPath()
@@ -118,47 +159,6 @@ export default {
       context.stroke()
     }
   },
-  methods: {
-    translate(el, x, y) {
-      el.style.transform = `translate(${x}px, ${y}px)`
-    },
-    drawLine(x1, x2, y1, y2) {
-      this.context.clearRect(0, 0, this.width, this.height)
-      this.context.beginPath()
-      this.context.moveTo(x1 + this.size / 2, y1 + this.size / 2)
-      this.context.lineTo(x2 + this.size / 2, y2 + this.size / 2)
-      this.context.stroke()
-    },
-  },
-  onMouseDown(e) {
-    console.log('MOUSE DOWN')
-    e.preventDefault()
-    // координаты нажатия мыши внутри элемента
-    this.atoms[e.target.id].startX = e.x - this.atoms[e.target.id].x
-    this.atoms[e.target.id].startY = e.y - this.atoms[e.target.id].y
-
-    this.currentAtom = e.target
-
-    document.body.addEventListener('mousemove', this.onMouseMove)
-    document.body.addEventListener('mouseup', this.onMouseUp)
-  },
-  onMouseMove(e) {
-    const x = (this.atoms[this.currentAtom.id].x =
-      e.x - this.atoms[this.currentAtom.id].startX)
-    const y = (this.atoms[this.currentAtom.id].y =
-      e.y - this.atoms[this.currentAtom.id].startY)
-
-    this.translate(this.currentAtom, x, y)
-    this.drawLine(
-      this.atoms.el1.x,
-      this.atoms.el2.x,
-      this.atoms.el1.y,
-      this.atoms.el2.y
-    )
-  },
-  onMouseUp() {
-    document.body.removeEventListener('mousemove', this.onMouseMove)
-    document.body.removeEventListener('mouseup', this.onMouseUp)
-  },
+  methods: {}
 }
 </script>
