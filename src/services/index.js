@@ -359,11 +359,27 @@ export default {
       })
   },
 
-  //recoverPassword
+  //recovering Password
   recoverPassword(email, newPassword) {
     API.post('/UserSecurity/RecoverPassword/' + email + '/' + newPassword)
         .catch((e) => {
           console.error(e)
         })
-  }
+  },
+
+  //buy element
+  buyElements(id) {
+    API.post(
+        '/Donate/buy/element/' + id,
+        { value: id },
+        {
+          headers: {
+            Authorization: 'Bearer ' + storage.state.token,
+          },
+        }
+    ).catch((e) => {
+      console.error(e)
+      return 'Fail'
+    })
+  },
 }

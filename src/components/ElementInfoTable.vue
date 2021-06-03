@@ -193,6 +193,22 @@
         <BaseTooltip v-else text="Елемент не відкрито">
           <i class="fas fa-lock mx-3 self-end scale-125 transform w-1/12" />
         </BaseTooltip>
+
+
+
+        <div v-if="!isUserAuthorised ||
+        !element.isLocked ||
+        userElements.some((e) => e.elementId === element.elementId)"
+             class="clear-none float-right" />
+
+        <div v-else class="clear-none float-right">
+          <button
+              @click="buyElement(element.elementId)"
+              class="shadow-lg p-3 border border-grey-300 bg-csblue button-enter w-11/12 ml-3 m-5 focus:outline-none focus:ring-4 focus:ring-csgreen"
+          >
+            Купити елемент
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -232,6 +248,10 @@ export default {
     logStorage() {
       console.log(storage.state.token)
     },
+    buyElement(idElement) {
+      apiService.buyElements(idElement)
+      this.getUserElements()
+    }
   },
   computed: {
     isUserAuthorised() {
