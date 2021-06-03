@@ -19,6 +19,7 @@
           placeholder="Уведіть пароль"
           v-model="user.newPass"
           :isIncorrect="passWrong"
+          @change="validatePass()"
           :isMultiline="true"
           errorMassage="Пароль має містити 8 знаків, 1 цифру, 1 велику , 1 малу літери та 1 символ"
         />
@@ -29,10 +30,11 @@
           v-model="user.newPass2"
           :isIncorrect="passDontMatch"
           :isMultiline="true"
+          @change="validatePass()"
           errorMassage="Паролі не співпадають"
         />
         <button
-          @click="changePassword"
+          @click="changePassword()"
           id="sign-in"
           type="submit"
           class="shadow-lg p-3 border border-grey-300 bg-csblue button-enter w-11/12 ml-3 m-5 focus:outline-none focus:ring-4 focus:ring-csgreen"
@@ -96,6 +98,7 @@ export default {
     changePassword() {
       this.validatePassRepeat()
       this.validatePass()
+      alert('Check email')
       if (!this.passWrong && !this.passDontMatch) {
         apiService.recoverPassword(this.user.email, this.user.newPass)
       }
