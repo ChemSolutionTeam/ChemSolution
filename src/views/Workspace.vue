@@ -6,6 +6,7 @@
   />
   <div class="flex flex-row my-20">
     <div
+    
       class="column border border-csblack rounded-3xl rounded-l-none w-1/4 h-11/12 bg-csbluewhite p-4 shadow-xl mt-20"
     >
       <!-- Search -->
