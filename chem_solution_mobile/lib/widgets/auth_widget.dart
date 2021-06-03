@@ -161,7 +161,7 @@ class _AuthWidgetState extends State<AuthWidget> {
                   width: MediaQuery.of(context).size.width * 0.8,
                 ),
                 child: ElevatedButton(
-                 onPressed: () => authBloc.loginGoogle(),
+                  onPressed: () => authBloc.loginGoogle(),
                   child: Center(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -232,7 +232,7 @@ class _AuthWidgetState extends State<AuthWidget> {
             TextButton(
               onPressed: () {
                 toBrowser(
-                    context, 'https://www.google.com', 'Відновлення паролю');
+                    context, '$chemWeb/mobileReset', 'Відновлення паролю');
               },
               child: Text(
                 'Забули пароль?',
@@ -241,7 +241,7 @@ class _AuthWidgetState extends State<AuthWidget> {
             ),
             TextButton(
               onPressed: () {
-                toBrowser(context, 'https://www.google.com', 'Реєстрація');
+                toBrowser(context, '$chemWeb/mobileRegister', 'Реєстрація');
               },
               child: Text(
                 'Створити акаунт',

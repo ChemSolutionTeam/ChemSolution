@@ -101,27 +101,7 @@ class _MyProfileState extends State<MyProfile> {
             ],
           ),
         ),
-        bottomNavigationBar: BottomAppBar(
-          color: themeDark,
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                TextButton(
-                  onPressed: () {
-                    toBrowser(
-                        context, 'https://www.google.com', 'Редагування даних');
-                  },
-                  child: Text(
-                    'Редагувати',
-                    style: TextStyle(color: themeGreen, fontSize: 20),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+   
       ),
     );
   }
