@@ -41,7 +41,7 @@
   >
     <div class="flex flex-row w-full">
       <img
-        src="https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg"
+        src="../assets/workspace.png"
         class="h-full my-36 m-3 rounded-3xl border-csblue border-2 transform duration-300 ease-in-out hover:scale-105"
       />
       <div class="text-center items-center py-36">
@@ -80,7 +80,7 @@
         <Button label="До періодичної системи" @click="toTable()" />
       </div>
       <img
-        src="https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg"
+        src="../assets/periodic.png"
         class="h-full m-3 my-36 rounded-3xl border-csblue border-2 transform duration-300 ease-in-out hover:scale-105"
       />
     </div>
@@ -110,7 +110,7 @@
   >
     <div class="flex flex-row w-full">
       <img
-        src="https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg"
+        src="../assets/userpage.png"
         class="h-full my-36 m-3 rounded-3xl border-csblue border-2 transform duration-300 ease-in-out hover:scale-105"
       />
       <div class="text-center items-center py-36">
@@ -166,7 +166,7 @@
             class="bg-white flex w-2/4 self-center mx-auto border-2 border-csblack rounded-3xl"
           >
             <img
-              src="https://picsum.photos/id/1084/536/354?grayscale"
+              src="../assets/mobile.png"
               class="self-center w-full rounded-3xl"
             />
           </div>
