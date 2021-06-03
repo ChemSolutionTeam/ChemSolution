@@ -108,7 +108,6 @@ export default {
         },
       }
     )
-
   },
   getRequest(id) {
     API.get('/Requests/' + id)
@@ -361,9 +360,10 @@ export default {
 
   //recoverPassword
   recoverPassword(email, newPassword) {
-    API.post('/UserSecurity/RecoverPassword/' + email + '/' + newPassword)
-        .catch((e) => {
-          console.error(e)
-        })
-  }
+    API.post(
+      '/UserSecurity/RecoverPassword/' + email + '/' + newPassword
+    ).catch((e) => {
+      console.error(e)
+    })
+  },
 }

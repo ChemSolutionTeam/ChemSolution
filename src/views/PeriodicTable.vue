@@ -1065,7 +1065,7 @@ export default {
         neutronQuantity: 733,
         protonQuantity: 936,
         symbol: 'Н',
-        valences: [{valenceVal: 1}],
+        valences: [{ valenceVal: 1 }],
         isLocked: 0,
       },
     }

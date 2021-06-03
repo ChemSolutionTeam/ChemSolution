@@ -11,7 +11,6 @@
       <h1 class="text-5xl text-center py-3">Винагорода:</h1>
 
       <div class="flex space-x-4 justify-center">
-
         <div>
           <img src="AtomCoinGreen.png" class="icons-achievement" />
         </div>
@@ -49,7 +48,6 @@ export default {
   },
 }
 </script>
-
 
 <style type="text/css">
 .icons-achievement {

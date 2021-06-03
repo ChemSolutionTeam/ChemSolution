@@ -126,9 +126,13 @@ export default {
         await apiService.getUser().then((resp) => {
           for (let i = 0; i < resp.data.elements.length; ++i) {
             try {
-              let el = this.unlockableElements.find(e => e.id === resp.data.elements[i].id)
+              let el = this.unlockableElements.find(
+                (e) => e.id === resp.data.elements[i].id
+              )
               this.elements.push(el)
-              this.unlockableElements.filter(e => e.id !== resp.data.elements[i].id)
+              this.unlockableElements.filter(
+                (e) => e.id !== resp.data.elements[i].id
+              )
             } catch (e) {
               continue
             }
