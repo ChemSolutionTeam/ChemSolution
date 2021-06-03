@@ -27,7 +27,7 @@
     />
   </div>
 
-  <canvas id="canvas" class="block"></canvas>
+
 </template>
 
 <script>

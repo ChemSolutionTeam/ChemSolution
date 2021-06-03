@@ -6,6 +6,7 @@
 
     <H2 init-number="0"/>
     <H2 init-number="2"/>
+    <canvas id="canvas" class="block"></canvas>
     <div v-for="atom in atoms" :key="atom.id">
       <div
           draggable="true"
@@ -30,6 +31,7 @@
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
