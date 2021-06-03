@@ -133,9 +133,9 @@ namespace ChemSolution.Controllers
         public async Task<IActionResult> Search(SearchMaterialRequest searchRequest)
         {
           
-            Material material = await _context.Materials
-                .Include(p => p.ElementMaterials)
-                .SingleOrDefaultAsync(m => IsEqualMaterials(m, searchRequest));
+            Material material =  _context.Materials
+                .Include(p => p.ElementMaterials).AsEnumerable()
+                .SingleOrDefault(m => IsEqualMaterials(m, searchRequest));
             
             if (material != null)
             {
