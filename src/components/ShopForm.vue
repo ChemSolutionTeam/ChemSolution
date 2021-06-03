@@ -92,7 +92,8 @@ export default {
           this.donateSignature = resp.data.signature
         })
         .finally(() => {
-          alert('asdf')
+          console.log('Data: ' + this.donateData)
+          console.log('Signature: ' + this.donateSignature)
           if (this.donateData.length != 0 && this.donateSignature.length != 0) {
             document.getElementById('donateForm').submit()
           }
