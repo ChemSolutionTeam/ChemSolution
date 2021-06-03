@@ -11,6 +11,8 @@
     :materialId="molecule.materialId"
     :formula="molecule.formula"
     :info="molecule.info"
+    v-on:click.ctrl="this.$emit('removeMolecule', molecule)"
+
   />
   
   </div>

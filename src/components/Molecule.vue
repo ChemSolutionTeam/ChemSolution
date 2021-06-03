@@ -1,5 +1,6 @@
 <template>
-  <div :id="idCounter" @click="displayDebug">
+  <div :id="idCounter" @mouseenter="changeItem"
+    @mouseleave="rechangeItem">
     <img :src="imageSrc"/>
   </div>
 </template>
@@ -76,12 +77,12 @@ export default {
     }
   },
   methods: {
-    displayDegbug() {
-      console.log(this.formula)
-      console.log(this.idCounter)
-      console.log(this.materialId)
-      console.log(this.info)
-    }
+    changeItem() {
+      document.getElementById('moleculeInfo').innerText = this.info.toString()
+    },
+    rechangeItem() {
+      document.getElementById('moleculeInfo').innerText = 'Спробуйте зібрати молекулу!'
+    },
   }
 }
 </script>

@@ -6,9 +6,10 @@
   />
 
   <div
-    class="z-40 fixed h-52 w-3/4 border-2 bottom-7 right-0 border-csblack rounded-3xl p-2 bg-white"
+    class="z-40 fixed h-52 w-8/12 border-2 bottom-7 right-0 border-csblack rounded-3xl p-2 bg-white"
+    style=""
   >
-    <h1 class="text-csblack text-xl">{{ info }}</h1>
+    <h1 id="moleculeInfo" class="text-csblack text-xl"> Спробуйте зібрати молекулу! </h1>
   </div>
 
   <div class="flex flex-row my-20">
@@ -64,6 +65,7 @@
       @dragover.prevent
       @remove="removeElement"
       @dragAndDrop="dragAndDropElement"
+      @removeMolecule="removeMolecule"
     />
   </div>
 
@@ -105,8 +107,6 @@ export default {
         moneyReward: '',
         ratingReward: '',
       },
-      info:
-        'Вода, Н2O — хімічна речовина у вигляді прозорої, безбарвної рідини без запаху і смаку, (в нормальних умовах). У природі існує у трьох агрегатних станах — твердому (лід), рідкому (вода) і газоподібному (водяна пара). Молекула води складається з одного атома оксигену і двох атомів гідрогену. Атоми гідрогену розташовані в молекулі таким чином, що напрямки до них утворюють кут 104,45o із вершиною в центрі атома оксигену. Таке розташування зумовлює молекулі води дипольний момент у 1,844 дебаї. При заміні атомів гідрогену (протонів) на атоми дейтерію утворюється модифікація, яка називається важкою водою.',
       loading: true,
       isMouseOut: false,
       isFormShow: '',
@@ -168,6 +168,7 @@ export default {
     async getUserElements() {
       if (this.isUserAuthorised) {
         await apiService.getUser().then((resp) => {
+          
           for (let i = 0; i < resp.data.elements.length; ++i) {
             try {
               let el = this.unlockableElements.find(
@@ -290,13 +291,16 @@ export default {
           clientY: event.offsetY,
           movementX: event.movementX,
           movementY: event.movementY,
-             name: this.dragAtom.name,
+          name: this.dragAtom.name,
           categoryName: this.dragAtom.categoryName,
           atomicWeight: this.dragAtom.atomicWeight,
         })
         this.atoms = this.atoms.filter((el) => el !== this.dragAtom)
         this.dragAtom = null
       }
+    },
+    removeMolecule(molecule){
+      this.materials = this.materials.filter((el)=>el!=molecule)
     },
     removeElement(atom) {
       this.atoms = this.atoms.filter((el) => el !== atom)
