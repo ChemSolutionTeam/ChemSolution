@@ -5,7 +5,7 @@
     <div
       class="box self-center px-12 p-3 pb-16 text-left w-full bg-white border-csblack shadow-2xl border rounded-lg"
     >
-      <h1 class="text-4xl text-center py-3">Запис розробникам</h1>
+      <h1 class="text-4xl text-center py-3">Запит розробникам</h1>
       <div class="p-3">
         <BaseInput
           label="Тема"
