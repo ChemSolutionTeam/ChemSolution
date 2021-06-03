@@ -378,4 +378,13 @@ export default {
       return 'Fail'
     })
   },
+  getDonate(amount) {
+    return API.get('/Donate?amount=' + parseInt(amount), {
+      headers: {
+        Authorization: 'Bearer ' + storage.state.token,
+      },
+    }).catch((error) => {
+      console.error(error)
+    })
+  },
 }
