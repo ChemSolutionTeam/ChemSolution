@@ -254,6 +254,7 @@ export default {
           }
         })
       }
+
       if (this.dragAtom != null) {
         this.atoms.push({
           id: this.dragAtom.id,
