@@ -167,7 +167,7 @@ const routes = [
   {
     path: '/mobileRegister',
     name: 'MobileRegister',
-    component: () => import('@/components/MobileRegisterForm.vue'),
+    component: () => import('../components/MobileRegisterForm.vue'),
   },
 ]
 
