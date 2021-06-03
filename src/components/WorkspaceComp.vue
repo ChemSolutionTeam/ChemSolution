@@ -4,8 +4,8 @@
       style="position: relative"
   >
 
-    <H2 init-number="0"/>
-    <H2 init-number="2"/>
+    <H2 @added="incCounter" v-once init-number="0"/>
+    <H2 @added="incCounter" init-number="2"/>
     <canvas id="canvas" class="block"></canvas>
     <div v-for="atom in atoms" :key="atom.id">
       <div
@@ -45,11 +45,15 @@ export default {
     return {
       dragAtom: null,
       isShown: true,
+      elementCounter: this.counter
     }
   },
   props: {
-    atoms: { type: Array },
-    value: { type: Array },
+    atoms: {type: Array},
+    value: {type: Array},
+    counter: {
+      type: Number
+    }
   },
   model: {
     prop: 'atoms',
@@ -61,7 +65,12 @@ export default {
     H2,
     O2,
   },
-  methods: {},
-  computed() {},
+  methods: {
+    incCounter(value) {
+      this.elementCounter += value
+    }
+  },
+  computed() {
+  },
 }
 </script>

@@ -44,6 +44,10 @@ export default {
       el2: 'el' + (parseInt(this.initNumber) + 1)
     }
   },
+  emits: ['added'],
+  created() {
+    this.$emit('added', 2)
+  },
   props: {
     initNumber: {
       type: Number,
