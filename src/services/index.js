@@ -337,13 +337,9 @@ export default {
       })
   },
   getAchievement(id) {
-    return API.get('/Achievements/' + id)
-      .then((resp) => {
-        console.log(resp)
-      })
-      .catch((e) => {
-        console.error(e)
-      })
+    return API.get('/Achievements/' + id).catch((e) => {
+      console.error(e)
+    })
   },
   putAchievement(id) {
     id
