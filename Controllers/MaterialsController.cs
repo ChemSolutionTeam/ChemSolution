@@ -133,10 +133,10 @@ namespace ChemSolution.Controllers
         public async Task<IActionResult> Search(SearchMaterialRequest searchRequest)
         {
           
-            Material material = _context.Materials
+            Material material = await _context.Materials
                 .Include(p => p.ElementMaterials)
-                .AsEnumerable()
-                .SingleOrDefault(m => IsEqualMaterials(m, searchRequest));
+                .SingleOrDefaultAsync(m => IsEqualMaterials(m, searchRequest));
+            
             if (material != null)
             {
                  User user = await _context.Users
