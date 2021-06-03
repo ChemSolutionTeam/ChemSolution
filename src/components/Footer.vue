@@ -43,7 +43,7 @@
         </div>
         <div class="flex flex-row-reverse text-xl">
           <i class="fas fa-envelope-open-text self-center m-3"></i>
-          <p class="self-center">chemsolution@gmail.com</p>
+          <p class="self-center">chemsolution2021@gmail.com</p>
         </div>
         <div class="flex flex-row-reverse text-xl">
           <i class="fas fa-phone self-center m-3"></i>
