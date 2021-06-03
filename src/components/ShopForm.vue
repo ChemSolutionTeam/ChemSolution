@@ -5,23 +5,31 @@
     <div
       class="box self-center px-12 p-3 pb-16 text-left w-full bg-white border-csblack shadow-2xl border rounded-lg"
     >
-      <form @submit.prevent="register()">
+      <form
+        id="donateForm"
+        method="POST"
+        accept-charset="utf-8"
+        action="https://www.liqpay.ua/api/3/checkout"
+      >
+        <input type="hidden" name="data" :value="donateData" />
+        <input type="hidden" name="signature" :value="donateSignature" />
+
         <div class="column w-full mt-4">
           <h3 class="text-4xl text-center heading pb-5">Магазин</h3>
           <div class="grid grid-cols-2 gap-2">
-            <ShopItem :atoms="100" :money="50" :sales="0" @click="buy(100)" />
+            <ShopItem :atoms="100" :money="50" :sales="0" @click="buy(50)" />
             <ShopItem
               :atoms="300"
               :money="142.5"
               :sales="5"
               @click="buy(300)"
             />
-            <ShopItem :atoms="600" :money="270" :sales="10" @click="buy(600)" />
+            <ShopItem :atoms="600" :money="270" :sales="10" @click="buy(270)" />
             <ShopItem
               :atoms="1000"
               :money="425"
               :sales="15"
-              @click="buy(1000)"
+              @click="buy(425)"
             />
             <div
               class="col-span-2 w-full border border-csblack rounded-3xl bg-shopbg p-3 flex"
@@ -37,7 +45,9 @@
                   />
                   <button
                     class="focus:outline-none my-2 w-1/6 p-3 border border-csblack rounded-3xl bg-csgreen"
-                    @click="buy(this.atomAmount)"
+                    @click="buy(this.atomAmount / 2)"
+                    @submit.prevent
+                    type="button"
                   >
                     Купити
                   </button>
@@ -58,6 +68,7 @@
 
 <script>
 import ShopItem from '@/components/ShopItem'
+import apiService from '@/services/index'
 export default {
   name: 'ShopForm',
   components: {
@@ -66,12 +77,26 @@ export default {
   data() {
     return {
       atomAmount: 0,
+      donateData: '',
+      donateSignature: '',
     }
   },
   methods: {
     buy(amount) {
       //Сделать покупку атомов
-      alert('You are buying ' + amount + ' atoms')
+      apiService
+        .getDonate(amount)
+        .then((resp) => {
+          console.log(resp)
+          this.donateData = resp.data.data
+          this.donateSignature = resp.data.signature
+        })
+        .finally(() => {
+          alert('asdf')
+          if (this.donateData.length != 0 && this.donateSignature.length != 0) {
+            document.getElementById('donateForm').submit()
+          }
+        })
     },
   },
 }
