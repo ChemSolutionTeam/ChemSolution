@@ -206,7 +206,9 @@
               @click="buyElement(element.elementId)"
               class="shadow-lg p-3 border border-grey-300 bg-csblue button-enter w-11/12 ml-3 m-5 focus:outline-none focus:ring-4 focus:ring-csgreen"
           >
-            Купити елемент
+            Купити елемент <br>
+            <p class="text-lg inline">{{element.price}}</p>
+            <img src="AtomCoinGreen.png" width="30" class="inline" />
           </button>
         </div>
       </div>
