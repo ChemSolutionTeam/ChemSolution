@@ -24,7 +24,7 @@ const routes = [
   {
     path: '/o2',
     name: 'o2',
-    component: () => import('../components/materials/O2.vue'),
+    component: () => import('../components/materials/O2 dnd.vue'),
   },
   {
     path: '/workspace',
