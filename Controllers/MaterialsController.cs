@@ -164,7 +164,8 @@ namespace ChemSolution.Controllers
                         ResultMaterialId = material.MaterialId,
                         IsNew = isNew,
                         NewAchievementsId = achievementsId,
-                        Formula = material.Formula
+                        Formula = material.Formula,
+                        Info = material.Info
                     });
                 }
                 return new JsonResult(new
@@ -172,7 +173,8 @@ namespace ChemSolution.Controllers
                         ResultMaterialId = material.MaterialId,
                         IsNew = true,
                         NewAchievementsId = new List<int>(),
-                        Formula = material.Formula
+                        Formula = material.Formula,
+                        Info = material.Info
                     });
             }
             return NotFound();
