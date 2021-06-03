@@ -3,8 +3,8 @@ import storage from '../store/index'
 const API = axios.create({
   // baseURL: 'http://192.168.0.104:5001',
   //baseURL: 'http://192.168.1.8:5001',
-  // baseURL: 'https://localhost:5001',
-  baseURL: 'https://chemsolutionapi.azurewebsites.net',
+  baseURL: 'https://localhost:5001',
+  // baseURL: 'https://chemsolutionapi.azurewebsites.net',
   headers: {
     'Access-Control-Allow-Origin': '*',
     Accept: 'text/plan',

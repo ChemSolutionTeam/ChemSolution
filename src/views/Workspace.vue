@@ -53,11 +53,12 @@
       scrollbar-thin scrollbar-thumb-blue-0 scrollbar-track-blue-0 scrollbar-thumb-rounded-full scrollbar-track-rounded-full
       !-->
 
-    <WorkspaceComp
+    <WorkspaceComp id="elementContainer"
       @mouseup="atomKeyupLeft()"
       v-bind:atoms="atoms"
       v-bind:value="value"
       v-bind:counter="counter"
+      v-bind:materials="materials"
       @drop="onDrop($event)"
       @dragenter.prevent
       @dragover.prevent
@@ -214,6 +215,10 @@ export default {
           clientY: event.offsetY,
           movementX: event.movementX,
           movementY: event.movementY,
+          
+          name: this.dragElement.name,
+          categoryName: this.dragElement.category.categoryName,
+          atomicWeight: this.dragElement.atomicWeight,
         })
         if (
           this.value.filter((el) => el.elementId === this.dragElement.elementId)
@@ -238,6 +243,8 @@ export default {
             this.materials.push({
               materialId: resp.data.resultMaterialId,
               formula: resp.data.formula,
+              info: resp.data.info,
+              idCounter: this.counter  
             })
             //NEW ACHIEVEMENT
             console.log('NEW ACHIVEMENT')
@@ -283,6 +290,9 @@ export default {
           clientY: event.offsetY,
           movementX: event.movementX,
           movementY: event.movementY,
+             name: this.dragAtom.name,
+          categoryName: this.dragAtom.categoryName,
+          atomicWeight: this.dragAtom.atomicWeight,
         })
         this.atoms = this.atoms.filter((el) => el !== this.dragAtom)
         this.dragAtom = null

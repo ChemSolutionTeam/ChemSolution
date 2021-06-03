@@ -1,5 +1,6 @@
 <template>
   <div
+    @click="infoDebug"
     @mouseenter="changeItem"
     @mouseleave="rechangeItem"
     :id="divId"
@@ -92,6 +93,9 @@ export default {
     },
   },
   methods: {
+    infoDebug() {
+      console.log(this.categoryName)
+    },
     changeItem() {
       document.getElementById('infoGraphics').className =
         'm-4 bg-category' + this.category

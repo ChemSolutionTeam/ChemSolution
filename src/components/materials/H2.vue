@@ -59,6 +59,7 @@ export default {
     }*/
   },
   mounted() {
+
     /*this.el1 += this.initNumber.toString()
     this.el2 += this.initNumber.toString() + 1*/
     //let componentId = this._uid
