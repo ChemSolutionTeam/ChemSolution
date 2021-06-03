@@ -227,14 +227,20 @@ export default {
               formula: resp.data.formula,
             })
             //NEW ACHIEVEMENT
+            console.log('NEW ACHIVEMENT')
+            console.log(resp.data.newAchievementsId !== undefined)
+            console.log(storage.state.token.length != 0)
+            console.log(this.achievement.heading !== '')
+
             if (
               resp.data.newAchievementsId !== undefined &&
               storage.state.token.length != 0 &&
-              this.achievement.heading.length != 0
+              this.achievement.heading !== ''
             )
               apiService
                 .getAchievement(resp.data.newAchievementsId[0])
                 .then((r) => {
+                  console.error(r)
                   this.achievement.heading = r.data.heading
                   this.achievement.description = r.data.description
                   this.achievement.moneyReward = r.data.moneyReward
