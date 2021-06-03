@@ -10,7 +10,9 @@
     >
       <!-- Search -->
       <div class="w-full text-xl my-5">
-        <i class="fas fa-search mx-3 self-center scale-125 transform w-1/12" />
+        <i
+          class="fas fa-search mx-3 self-center scale-125 transform w-1/12 cursor-pointer"
+        />
         <input
           class="w-10/12 border-csblack border rounded-xl outline-none px-5"
           placeholder="Уведіть назву елемента.."
@@ -56,11 +58,29 @@
   </div>
 
   <Footer />
+  <div
+    class="inset-0 z-20 fixed sm:pt-2 md:pt-5 overflow-auto lg:pt-10 w-full h-full bg-csblack bg-opacity-50"
+    v-show="this.isBackgroundShown == 'achievement'"
+    @click="closeForm('none')"
+  >
+    <transition name="bounce">
+      <NewAchievement
+        @mouseleave="this.isMouseOut = true"
+        @mouseover="this.isMouseOut = false"
+        v-show="this.isFormShow == 'achievement'"
+        :heading="this.achievement.heading"
+        :description="this.achievement.description"
+        :moneyReward="this.achievement.moneyReward"
+        :ratingReward="this.achievement.ratingReward"
+      />
+    </transition>
+  </div>
 </template>
 
 <script>
 import ElementChooser from '@/components/ElementChooser'
 import ElementWorkspaceInfo from '@/components/ElementWorkspaceInfo'
+import NewAchievement from '@/components/NewAchievement.vue'
 import WorkspaceComp from '@/components/WorkspaceComp'
 import Footer from '@/components/Footer'
 import storage from '@/store'
@@ -69,6 +89,15 @@ import apiService from '@/services'
 export default {
   data() {
     return {
+      achievement: {
+        heading: '',
+        description: '',
+        moneyReward: '',
+        ratingReward: '',
+      },
+      isMouseOut: false,
+      isFormShow: '',
+      isBackgroundShown: '',
       search: null,
       dragElement: null,
       dragAtom: null,
@@ -106,6 +135,7 @@ export default {
     WorkspaceComp,
     Footer,
     ElementWorkspaceInfo,
+    NewAchievement,
   },
   created() {
     apiService.getElements().then((resp) => {
@@ -197,10 +227,19 @@ export default {
               formula: resp.data.formula,
             })
             //NEW ACHIEVEMENT
-            let achiv = apiService.getAchievement(
-              resp.data.newAchievementsId[0]
-            )
-            console.warn(achiv)
+            if (resp.data.newAchievementsId !== undefined)
+              apiService
+                .getAchievement(resp.data.newAchievementsId[0])
+                .then((r) => {
+                  this.achievement.heading = r.data.heading
+                  this.achievement.description = r.data.description
+                  this.achievement.moneyReward = r.data.moneyReward
+                  this.achievement.ratingReward = r.data.ratingReward
+                })
+                .finally(() => {
+                  this.openForm('achievement')
+                })
+
             this.atoms = []
             this.value = []
             console.log(this.materials)
@@ -247,6 +286,24 @@ export default {
       console.log(obj.atom)
       console.log(obj.event)
       this.dragAtom = obj.atom
+    },
+    openForm(form) {
+      //alert(form)
+      this.isBackgroundShown = form
+      this.isFormShow = form
+    },
+
+    //Form Close
+    closeForm(form) {
+      if (this.isMouseOut || form !== 'none') {
+        this.isFormShow = 'none'
+        this.hideBG(form)
+      }
+    },
+    hideBG(args) {
+      setTimeout(() => {
+        this.isBackgroundShown = args
+      }, 500)
     },
   },
   computed: {
