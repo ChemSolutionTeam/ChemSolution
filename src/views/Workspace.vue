@@ -49,6 +49,7 @@
       @mouseup="atomKeyupLeft()"
       v-bind:atoms="atoms"
       v-bind:value="value"
+      v-bind:counter="counter"
       @drop="onDrop($event)"
       @dragenter.prevent
       @dragover.prevent

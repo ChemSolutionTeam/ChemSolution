@@ -1,29 +1,29 @@
 <template>
   <div style="position: absolute; width: 70px; height: 70px">
     <Atom
-        :div-id="el1"
-        id="1"
-        symbol="H"
-        category="1"
-        class="w-full"
-        name="Гідроген"
-        category-name="неметали"
-        atomic-weight="1.008"
-        :valences="valences"
+      :div-id="el1"
+      id="1"
+      symbol="H"
+      category="1"
+      class="w-full"
+      name="Гідроген"
+      category-name="неметали"
+      atomic-weight="1.008"
+      :valences="valences"
     />
   </div>
 
   <div style="position: absolute; width: 70px; height: 70px">
     <Atom
-        :div-id="el2"
-        id="1"
-        symbol="H"
-        category="1"
-        class="w-full"
-        name="Гідроген"
-        category-name="неметали"
-        atomic-weight="1.008"
-        :valences="valences"
+      :div-id="el2"
+      id="1"
+      symbol="H"
+      category="1"
+      class="w-full"
+      name="Гідроген"
+      category-name="неметали"
+      atomic-weight="1.008"
+      :valences="valences"
     />
   </div>
 
@@ -39,16 +39,20 @@ export default {
   },
   data() {
     return {
-      valences: [1]
+      valences: [1],
     }
+  },
+  emits: ['added'],
+  created() {
+    this.$emit('added', 2)
   },
   props: {
     el1: {
-      type: String
+      type: String,
     },
     el2: {
-      type: String
-    }
+      type: String,
+    },
   },
   mounted() {
     //let componentId = this._uid
@@ -63,18 +67,17 @@ export default {
 
     /*------------------------------------*/
 
-
     let current = null
     let elements = {}
     elements[this.el1] = {
-      x: Math.random() * (width - size) / 3,
-      y: Math.random() * (height - size) / 3,
+      x: (Math.random() * (width - size)) / 3,
+      y: (Math.random() * (height - size)) / 3,
       startX: 0,
       startY: 0,
     }
     elements[this.el2] = {
-      x: Math.random() * (width - size) / 3,
-      y: Math.random() * (height - size) / 3,
+      x: (Math.random() * (width - size)) / 3,
+      y: (Math.random() * (height - size)) / 3,
       startX: 0,
       startY: 0,
     }
@@ -83,7 +86,12 @@ export default {
     // начальное положение
     translate(el1, elements[this.el1].x, elements[this.el1].y)
     translate(el2, elements[this.el2].x, elements[this.el2].y)
-    drawLine(elements[this.el1].x, elements[this.el2].x, elements[this.el1].y, elements[this.el2].y)
+    drawLine(
+      elements[this.el1].x,
+      elements[this.el2].x,
+      elements[this.el1].y,
+      elements[this.el2].y
+    )
 
     /*------------------------------------*/
 
@@ -136,7 +144,12 @@ export default {
       const y = (elements[current.id].y = e.y - elements[current.id].startY)
 
       translate(current, x, y)
-      drawLine(elements[elementIds[0]].x, elements[elementIds[1]].x, elements[elementIds[0]].y, elements[elementIds[1]].y)
+      drawLine(
+        elements[elementIds[0]].x,
+        elements[elementIds[1]].x,
+        elements[elementIds[0]].y,
+        elements[elementIds[1]].y
+      )
     }
 
     function onMouseUp() {
@@ -159,6 +172,6 @@ export default {
       context.stroke()
     }
   },
-  methods: {}
+  methods: {},
 }
 </script>
