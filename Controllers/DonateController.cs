@@ -32,7 +32,7 @@ namespace ChemSolution.Controllers
                 Currency = "UAH", Description = "Get game currency", Version = "3", OrderId = orderId});
             _context.Orders.Add(new Order()
             {
-                OrderId = orderId, CoinsAmount = amount, Data = payButton.Data, Signature = payButton.Signature, User = await _context.Users.FindAsync(User.Identity.Name)
+                OrderId = orderId, CoinsAmount = amount*2, Data = payButton.Data, Signature = payButton.Signature, User = await _context.Users.FindAsync(User.Identity.Name)
             });
             await _context.SaveChangesAsync();
             return payButton;
