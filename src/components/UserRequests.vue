@@ -19,7 +19,7 @@
       <div class="flex flex-row-reverse">
         <div class="w-1/2 flex flex-row-reverse">
           <Button
-            label="Створити запрос"
+            label="Створити запит"
             @click="this.$emit('openCreateRequest')"
           />
         </div>
