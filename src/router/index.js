@@ -169,6 +169,11 @@ const routes = [
     name: 'MobileRegister',
     component: () => import('../components/MobileRegisterForm.vue'),
   },
+  {
+    path: '/mobileReset',
+    name: 'MobileReset',
+    component: () => import('../components/MobileResetForm.vue'),
+  },
 ]
 
 const router = createRouter({
