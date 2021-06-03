@@ -199,15 +199,13 @@ export default {
             String(user.postUser.register.birthDate).replace(' ', 'T') + 'Z'
 
           apiService.postUser(this.user).then(() => {
-            apiService.getToken(this.user).then(() => {
-              console.log(storage.state.token.length)
-              if (storage.state.token.length !== 0) {
-                this.$emit('login')
-              } else {
-                this.passIsIncorrect = true
-              }
+            let u = {
+              email: this.user.email,
+              password: this.user.pass,
+            }
+            apiService.getToken(u).then(() => {
+              this.$emit('register')
             })
-            this.$emit('register')
           })
         })
         .catch((err) => {

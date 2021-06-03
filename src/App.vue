@@ -158,10 +158,10 @@ export default {
       }, 500)
     },
     login() {
-      this.closeForm('auth')
       this.isUserAuthorised = true
       this.getRole().then(() => {
         router.push(this.role == 'Admin' ? 'Admin' : 'userPage')
+        this.closeForm('auth')
       })
     },
     async getRole() {
@@ -176,6 +176,7 @@ export default {
       router.push('/')
     },
     register() {
+      this.closeForm('auth')
       this.login()
     },
   },
