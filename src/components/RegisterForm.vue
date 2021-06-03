@@ -86,6 +86,7 @@
           <hr class="mt-3 mb-3" />
 
           <button
+            @click="registerGoogle"
             id="google-sign-up"
             class="hover:text-csblack shadow-lg p-3 border border-grey-300 button-enter w-11/12 ml-3 m-5 sm:text-xl"
           >
@@ -138,6 +139,7 @@ import Logo from '@/components/Logo.vue'
 import Validation from '@/services/validation.js'
 import apiService from '@/services/index.js'
 import storage from '@/store/index.js'
+import firebase from 'firebase'
 
 export default {
   name: 'RegisterForm',
@@ -179,6 +181,37 @@ export default {
     },
   },
   methods: {
+    registerGoogle: function () {
+      let provider = new firebase.auth.GoogleAuthProvider()
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then((result) => {
+          let token = result.credential
+          let user = result.user
+          console.log(token) // Token
+          console.log(user) // User that was authenticated
+          this.user.email = user.email
+          this.user.pass = user.uid
+          this.user.passRepeat = user.uid
+          this.user.username = user.displayName
+          this.user.birthDate =
+            String(user.postUser.register.birthDate).replace(' ', 'T') + 'Z'
+
+          apiService.postUser(this.user).then(() => {
+            let u = {
+              email: this.user.email,
+              password: this.user.pass,
+            }
+            apiService.getToken(u).then(() => {
+              this.$emit('register')
+            })
+          })
+        })
+        .catch((err) => {
+          console.log(err) // This will give you all the information needed to further debug any errors
+        })
+    },
     validate() {
       this.passWrong = !Validation.pass(this.user.pass)
       this.passDontMatch = !Validation.passRepeat(

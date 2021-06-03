@@ -35,6 +35,7 @@
         <hr class="m-3 w-11/12" />
 
         <button
+          @click="googleSignIn"
           id="google-sign-in"
           class="focus:outline-none focus:ring-red-400 focus:ring hover:text-csblack shadow-lg p-3 border border-grey-300 button-enter w-11/12 ml-3 m-5 text-xl"
         >
@@ -85,6 +86,8 @@ import BaseInput from '@/components/BaseInput.vue'
 import BaseCheck from '@/components/BaseCheck.vue'
 import apiService from '@/services/index.js'
 import storage from '../store/index'
+import firebase from 'firebase'
+
 export default {
   name: 'LoginForm',
   components: {
@@ -104,6 +107,31 @@ export default {
     }
   },
   methods: {
+    googleSignIn: function () {
+      let provider = new firebase.auth.GoogleAuthProvider()
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then((result) => {
+          let token = result.credential
+          let user = result.user
+          console.log(token) // Token
+          console.log(user) // User that was authenticated
+          this.user.email = user.email
+          this.user.password = user.uid
+          apiService.getToken(this.user).then(() => {
+            console.log(storage.state.token.length)
+            if (storage.state.token.length !== 0) {
+              this.$emit('login')
+            } else {
+              this.passIsIncorrect = true
+            }
+          })
+        })
+        .catch((err) => {
+          console.log(err) // This will give you all the information needed to further debug any errors
+        })
+    },
     async logIn() {
       await apiService.getToken(this.user).then(() => {
         console.log(storage.state.token.length)

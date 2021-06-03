@@ -40,8 +40,14 @@
         </button>
         <div class="text-center">
           <div class="m-3 ml-0 mt-1 mb-1 flex flex-row justify-center">
-            <p>Посилання для підтвердження зміни паролю буде відправлено на вашу пошту</p>
-            <p>Якщо лист не прийшов, перевірте правильність написання пошти та перевірте розділ "Спам"</p>
+            <p>
+              Посилання для підтвердження зміни паролю буде відправлено на вашу
+              пошту
+            </p>
+            <p>
+              Якщо лист не прийшов, перевірте правильність написання пошти та
+              перевірте розділ "Спам"
+            </p>
           </div>
         </div>
       </form>
@@ -89,7 +95,7 @@ export default {
     changePassword() {
       this.validatePassRepeat()
       this.validatePass()
-      if(!this.passWrong && !this.passDontMatch) {
+      if (!this.passWrong && !this.passDontMatch) {
         apiService.recoverPassword(this.user.email, this.user.newPass)
       }
     },
