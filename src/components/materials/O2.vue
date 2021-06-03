@@ -49,7 +49,12 @@ export default {
     // начальное положение
     translate(el1, elements.el1.x, elements.el1.y)
     translate(el2, elements.el2.x, elements.el2.y)
-    drawLine(elements.el1.x, elements.el2.x, elements.el1.y, elements.el2.y)
+    drawLine(
+      elements.el1.x + 10,
+      elements.el2.x + 10,
+      elements.el1.y + 10,
+      elements.el2.y + 10
+    )
 
     /*------------------------------------*/
 
@@ -74,7 +79,12 @@ export default {
       const y = (elements[current.id].y = e.y - elements[current.id].startY)
 
       translate(current, x, y)
-      drawLine(elements.el1.x, elements.el2.x, elements.el1.y, elements.el2.y)
+      drawLine(
+        elements.el1.x + 10,
+        elements.el2.x + 10,
+        elements.el1.y + 10,
+        elements.el2.y + 10
+      )
     }
 
     function onMouseUp() {
@@ -129,10 +139,10 @@ export default {
 
     this.translate(this.currentAtom, x, y)
     this.drawLine(
-      this.atoms.el1.x,
-      this.atoms.el2.x,
-      this.atoms.el1.y,
-      this.atoms.el2.y
+      this.atoms.el1.x + 10,
+      this.atoms.el2.x + 10,
+      this.atoms.el1.y + 10,
+      this.atoms.el2.y + 10
     )
   },
   onMouseUp() {
