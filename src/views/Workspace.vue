@@ -1,41 +1,42 @@
 <template>
   <ElementWorkspaceInfo
-    id="slider"
-    class="z-50"
-    v-bind:element="this.element"
+      id="slider"
+      class="z-50"
+      v-bind:element="this.element"
   />
   <div class="flex flex-row my-20">
     <div
-      class="column border border-csblack rounded-3xl rounded-l-none w-1/4 h-11/12 bg-csbluewhite p-4 shadow-xl mt-20"
+
+        class="column border border-csblack rounded-3xl rounded-l-none w-1/4 h-11/12 bg-csbluewhite p-4 shadow-xl mt-20"
     >
       <!-- Search -->
       <div class="w-full text-xl my-5">
         <i
-          class="fas fa-search mx-3 self-center scale-125 transform w-1/12 cursor-pointer"
+            class="fas fa-search mx-3 self-center scale-125 transform w-1/12 cursor-pointer"
         />
         <input
-          class="w-10/12 border-csblack border rounded-xl outline-none px-5"
-          placeholder="Уведіть назву елемента.."
-          v-model="search"
+            class="w-10/12 border-csblack border rounded-xl outline-none px-5"
+            placeholder="Уведіть назву елемента.."
+            v-model="search"
         />
       </div>
       <div
-        class="elementCollection mt-3 pt-3 overflow-y-scroll scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-blue-100 scrollbar-thumb-rounded-full scrollbar-track-rounded-full"
+          class="elementCollection mt-3 pt-3 overflow-y-scroll scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-blue-100 scrollbar-thumb-rounded-full scrollbar-track-rounded-full"
       >
         <div v-for="element in filteredElements" :key="element.elementId">
           <ElementChooser
-            v-bind:symbol="element.symbol"
-            v-bind:name="element.name"
-            v-bind:atomic-weight="element.atomicWeight"
-            v-bind:category-name="element.category.categoryName"
-            v-bind:id="element.elementId"
-            v-bind:valences="element.valences"
-            v-bind:category="element.categoryId.toString()"
-            v-bind:is-locked="element.isLocked"
-            v-bind:draggable="!element.isLocked"
-            v-bind:price="element.price"
-            @click="addElement(element)"
-            @dragstart="startDrag($event, element)"
+              v-bind:symbol="element.symbol"
+              v-bind:name="element.name"
+              v-bind:atomic-weight="element.atomicWeight"
+              v-bind:category-name="element.category.categoryName"
+              v-bind:id="element.elementId"
+              v-bind:valences="element.valences"
+              v-bind:category="element.categoryId.toString()"
+              v-bind:is-locked="element.isLocked"
+              v-bind:draggable="!element.isLocked"
+              v-bind:price="element.price"
+              @click="addElement(element)"
+              @dragstart="startDrag($event, element)"
           />
         </div>
       </div>
@@ -60,19 +61,19 @@
 
   <Footer />
   <div
-    class="inset-0 z-20 fixed sm:pt-2 md:pt-5 overflow-auto lg:pt-10 w-full h-full bg-csblack bg-opacity-50"
-    v-show="this.isBackgroundShown == 'achievement'"
-    @click="closeForm('none')"
+      class="inset-0 z-20 fixed sm:pt-2 md:pt-5 overflow-auto lg:pt-10 w-full h-full bg-csblack bg-opacity-50"
+      v-show="this.isBackgroundShown == 'achievement'"
+      @click="closeForm('none')"
   >
     <transition name="bounce">
       <NewAchievement
-        @mouseleave="this.isMouseOut = true"
-        @mouseover="this.isMouseOut = false"
-        v-show="this.isFormShow == 'achievement'"
-        :heading="this.achievement.heading"
-        :description="this.achievement.description"
-        :moneyReward="this.achievement.moneyReward"
-        :ratingReward="this.achievement.ratingReward"
+          @mouseleave="this.isMouseOut = true"
+          @mouseover="this.isMouseOut = false"
+          v-show="this.isFormShow == 'achievement'"
+          :heading="this.achievement.heading"
+          :description="this.achievement.description"
+          :moneyReward="this.achievement.moneyReward"
+          :ratingReward="this.achievement.ratingReward"
       />
     </transition>
   </div>
@@ -86,7 +87,6 @@ import WorkspaceComp from '@/components/WorkspaceComp'
 import Footer from '@/components/Footer'
 import storage from '@/store'
 import apiService from '@/services'
-
 export default {
   data() {
     return {
@@ -158,11 +158,11 @@ export default {
           for (let i = 0; i < resp.data.elements.length; ++i) {
             try {
               let el = this.unlockableElements.find(
-                (e) => e.id === resp.data.elements[i].id
+                  (e) => e.id === resp.data.elements[i].id
               )
               this.elements.push(el)
               this.unlockableElements.filter(
-                (e) => e.id !== resp.data.elements[i].id
+                  (e) => e.id !== resp.data.elements[i].id
               )
             } catch (e) {
               continue
@@ -202,14 +202,10 @@ export default {
           clientY: event.offsetY,
           movementX: event.movementX,
           movementY: event.movementY,
-
-          name: this.dragElement.name,
-          categoryName: this.dragElement.category.categoryName,
-          atomicWeight: this.dragElement.atomicWeight,
         })
         if (
-          this.value.filter((el) => el.elementId === this.dragElement.elementId)
-            .length === 0
+            this.value.filter((el) => el.elementId === this.dragElement.elementId)
+                .length === 0
         ) {
           this.value.push({
             amount: 1,
@@ -233,29 +229,27 @@ export default {
             })
             //NEW ACHIEVEMENT
             if (
-              resp.data.newAchievementsId !== undefined &&
-              storage.state.token.length != 0 &&
-              this.achievement.heading.length != 0
+                resp.data.newAchievementsId !== undefined &&
+                storage.state.token.length != 0 &&
+                this.achievement.heading.length != 0
             )
               apiService
-                .getAchievement(resp.data.newAchievementsId[0])
-                .then((r) => {
-                  this.achievement.heading = r.data.heading
-                  this.achievement.description = r.data.description
-                  this.achievement.moneyReward = r.data.moneyReward
-                  this.achievement.ratingReward = r.data.ratingReward
-                })
-                .finally(() => {
-                  this.openForm('achievement')
-                })
-
+                  .getAchievement(resp.data.newAchievementsId[0])
+                  .then((r) => {
+                    this.achievement.heading = r.data.heading
+                    this.achievement.description = r.data.description
+                    this.achievement.moneyReward = r.data.moneyReward
+                    this.achievement.ratingReward = r.data.ratingReward
+                  })
+                  .finally(() => {
+                    this.openForm('achievement')
+                  })
             this.atoms = []
             this.value = []
             console.log(this.materials)
           }
         })
       }
-
       if (this.dragAtom != null) {
         this.atoms.push({
           id: this.dragAtom.id,
@@ -265,10 +259,6 @@ export default {
           clientY: event.offsetY,
           movementX: event.movementX,
           movementY: event.movementY,
-
-          name: this.dragAtom.name,
-          categoryName: this.dragAtom.categoryName,
-          atomicWeight: this.dragAtom.atomicWeight,
         })
         this.atoms = this.atoms.filter((el) => el !== this.dragAtom)
         this.dragAtom = null
@@ -306,7 +296,6 @@ export default {
       this.isBackgroundShown = form
       this.isFormShow = form
     },
-
     //Form Close
     closeForm(form) {
       if (this.isMouseOut || form !== 'none') {
@@ -328,8 +317,8 @@ export default {
       if (this.search) {
         return this.elements.filter((element) => {
           return (
-            element.name.toLowerCase().includes(this.search.toLowerCase()) ||
-            element.symbol.toLowerCase().includes(this.search.toLowerCase())
+              element.name.toLowerCase().includes(this.search.toLowerCase()) ||
+              element.symbol.toLowerCase().includes(this.search.toLowerCase())
           )
         })
       } else {
@@ -345,11 +334,9 @@ export default {
 .elementCollection {
   height: 70vh;
 }
-
 .elementCollection:hover ~ #slider {
   right: 0;
 }
-
 #slider {
   position: fixed;
   top: 400px;
@@ -366,17 +353,14 @@ export default {
   padding: 10px;
   box-sizing: initial;
 }
-
 #infoGraphics #infoNumber {
   font-size: 1vw;
   color: white;
 }
-
 #infoGraphics #infoSymbol {
   font-size: 2vw;
   color: white;
 }
-
 #infoGraphics {
   padding: 0.7vw;
   position: relative;
