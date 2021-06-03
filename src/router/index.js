@@ -22,9 +22,9 @@ const routes = [
     component: () => import('../views/Admin.vue'),
   },
   {
-    path: '/o2',
-    name: 'o2',
-    component: () => import('../components/materials/O2 dnd.vue'),
+    path: '/h2',
+    name: 'h2',
+    component: () => import('../components/materials/static_h2.vue'),
   },
   {
     path: '/workspace',

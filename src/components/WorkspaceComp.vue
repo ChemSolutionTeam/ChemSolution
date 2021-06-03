@@ -33,8 +33,8 @@
 /* eslint-disable vue/no-unused-components */
 
 import Atom from '@/components/Atom'
-import H2 from '@/components/materials/H2_dnd'
-import O2 from '@/components/materials/O2_dnd'
+import H2 from '@/components/materials/H2'
+import O2 from '@/components/materials/O2'
 export default {
   data() {
     return {
