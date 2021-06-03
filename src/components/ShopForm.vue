@@ -10,6 +10,7 @@
         method="POST"
         accept-charset="utf-8"
         action="https://www.liqpay.ua/api/3/checkout"
+        target="_blank"
       >
         <input type="hidden" name="data" :value="donateData" />
         <input type="hidden" name="signature" :value="donateSignature" />
@@ -22,7 +23,7 @@
               :atoms="300"
               :money="142.5"
               :sales="5"
-              @click="buy(300)"
+              @click="buy(143)"
             />
             <ShopItem :atoms="600" :money="270" :sales="10" @click="buy(270)" />
             <ShopItem
@@ -54,7 +55,7 @@
                 </div>
                 <div class="flex flex-row-reverse">
                   <h1 class="text-3xl">
-                    Всього: {{ this.atomAmount / 2 }} грн
+                    Всього: {{ parseInt(this.atomAmount / 2) }} грн
                   </h1>
                 </div>
               </div>
@@ -69,6 +70,7 @@
 <script>
 import ShopItem from '@/components/ShopItem'
 import apiService from '@/services/index'
+import storage from '@/store/index'
 export default {
   name: 'ShopForm',
   components: {
@@ -102,6 +104,7 @@ export default {
                 this.donateSignature.length != 0
               ) {
                 document.getElementById('donateForm').submit()
+                storage.dispatch('getBalance')
               }
             })
         })
