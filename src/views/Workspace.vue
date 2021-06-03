@@ -229,7 +229,8 @@ export default {
             //NEW ACHIEVEMENT
             if (
               resp.data.newAchievementsId !== undefined &&
-              storage.state.token.length != 0
+              storage.state.token.length != 0 &&
+              this.achievement.heading.length != 0
             )
               apiService
                 .getAchievement(resp.data.newAchievementsId[0])
