@@ -86,7 +86,6 @@ import WorkspaceComp from '@/components/WorkspaceComp'
 import Footer from '@/components/Footer'
 import storage from '@/store'
 import apiService from '@/services'
-
 export default {
   data() {
     return {
@@ -202,10 +201,6 @@ export default {
           clientY: event.offsetY,
           movementX: event.movementX,
           movementY: event.movementY,
-
-          name: this.dragElement.name,
-          categoryName: this.dragElement.category.categoryName,
-          atomicWeight: this.dragElement.atomicWeight,
         })
         if (
           this.value.filter((el) => el.elementId === this.dragElement.elementId)
@@ -255,7 +250,6 @@ export default {
           }
         })
       }
-
       if (this.dragAtom != null) {
         this.atoms.push({
           id: this.dragAtom.id,
@@ -265,10 +259,6 @@ export default {
           clientY: event.offsetY,
           movementX: event.movementX,
           movementY: event.movementY,
-
-          name: this.dragAtom.name,
-          categoryName: this.dragAtom.categoryName,
-          atomicWeight: this.dragAtom.atomicWeight,
         })
         this.atoms = this.atoms.filter((el) => el !== this.dragAtom)
         this.dragAtom = null
@@ -306,7 +296,6 @@ export default {
       this.isBackgroundShown = form
       this.isFormShow = form
     },
-
     //Form Close
     closeForm(form) {
       if (this.isMouseOut || form !== 'none') {
@@ -345,11 +334,9 @@ export default {
 .elementCollection {
   height: 70vh;
 }
-
 .elementCollection:hover ~ #slider {
   right: 0;
 }
-
 #slider {
   position: fixed;
   top: 400px;
@@ -366,17 +353,14 @@ export default {
   padding: 10px;
   box-sizing: initial;
 }
-
 #infoGraphics #infoNumber {
   font-size: 1vw;
   color: white;
 }
-
 #infoGraphics #infoSymbol {
   font-size: 2vw;
   color: white;
 }
-
 #infoGraphics {
   padding: 0.7vw;
   position: relative;
