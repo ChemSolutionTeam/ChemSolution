@@ -227,7 +227,10 @@ export default {
               formula: resp.data.formula,
             })
             //NEW ACHIEVEMENT
-            if (resp.data.newAchievementsId !== undefined)
+            if (
+              resp.data.newAchievementsId !== undefined &&
+              storage.state.token.length != 0
+            )
               apiService
                 .getAchievement(resp.data.newAchievementsId[0])
                 .then((r) => {
