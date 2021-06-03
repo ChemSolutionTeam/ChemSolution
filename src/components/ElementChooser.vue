@@ -44,22 +44,26 @@
         :atomic-weight="atomicWeight"
         :valences="valences"
       />
-      <div class="flex-1">
-        <p class="self-center overflow-y-auto text-2xl w-3/4">{{ name }}</p>
-        <div class="self-center overflow-y-auto text-2xl">
-          <p style="float: left; text-align: right" class="text-csgreen p-0">
-            {{ price }}
-          </p>
-          <img
-            style="
-              margin-right: 0px;
-              position: relative;
-              bottom: -3px;
-              left: 3px;
-            "
-            src="AtomCoinGreen.png"
-            class="w-7 h-7 p-0"
-          />
+      <div class="w-9/12">
+        <p class="self-center text-center text-2xl w-full">
+          {{ name }}
+        </p>
+        <div class="flex flex-row self-center text-2xl">
+          <div class="mx-auto">
+            <p style="float: left; text-align: right" class="text-csgreen p-0">
+              {{ price }}
+            </p>
+            <img
+              style="
+                margin-right: 0px;
+                position: relative;
+                bottom: -3px;
+                left: 3px;
+              "
+              src="AtomCoinGreen.png"
+              class="w-7 h-7 p-0"
+            />
+          </div>
         </div>
       </div>
     </div>
