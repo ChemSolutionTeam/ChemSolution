@@ -7,6 +7,7 @@
     <Atom div-id="el2" id="8" symbol="O" category="1" class="w-full" />
   </div>
 
+  <canvas id="canvas" class="block"></canvas>
 </template>
 
 <script>

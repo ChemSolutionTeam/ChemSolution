@@ -138,7 +138,7 @@ import BaseCheck from '@/components/BaseCheck.vue'
 import Logo from '@/components/Logo.vue'
 import Validation from '@/services/validation.js'
 import apiService from '@/services/index.js'
-import storage from '@/store/index.js'
+// import storage from '@/store/index.js'
 import firebase from 'firebase'
 
 export default {
@@ -224,15 +224,15 @@ export default {
       //verification.
       this.validate()
       await apiService.postUser(this.user).then(() => {
-        apiService.getToken(this.user).then(() => {
-          console.log(storage.state.token.length)
-          if (storage.state.token.length !== 0) {
-            this.$emit('login')
-          } else {
-            this.passIsIncorrect = true
-          }
-        })
-        this.$emit('register')
+        // apiService.getToken(this.user).then(() => {
+        //   console.log(storage.state.token.length)
+        //   if (storage.state.token.length !== 0) {
+        //     this.$emit('login')
+        //   } else {
+        //     this.passIsIncorrect = true
+        //   }
+        // })
+        this.$emit('openLogin')
       })
     },
   },

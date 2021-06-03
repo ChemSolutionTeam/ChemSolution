@@ -218,6 +218,7 @@
 import storage from '@/store'
 import BaseTooltip from '@/components/BaseTooltip'
 import apiService from '@/services'
+import router from "../router";
 
 export default {
   components: {
@@ -251,6 +252,8 @@ export default {
     buyElement(idElement) {
       apiService.buyElements(idElement)
       this.getUserElements()
+      //router.push("/UserPage")
+      router.push("/PeriodicTable")
     }
   },
   computed: {

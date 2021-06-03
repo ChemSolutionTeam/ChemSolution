@@ -6,7 +6,6 @@
   />
   <div class="flex flex-row my-20">
     <div
-    
       class="column border border-csblack rounded-3xl rounded-l-none w-1/4 h-11/12 bg-csbluewhite p-4 shadow-xl mt-20"
     >
       <!-- Search -->
@@ -203,6 +202,10 @@ export default {
           clientY: event.offsetY,
           movementX: event.movementX,
           movementY: event.movementY,
+
+          name: this.dragElement.name,
+          categoryName: this.dragElement.category.categoryName,
+          atomicWeight: this.dragElement.atomicWeight,
         })
         if (
           this.value.filter((el) => el.elementId === this.dragElement.elementId)
@@ -252,6 +255,7 @@ export default {
           }
         })
       }
+
       if (this.dragAtom != null) {
         this.atoms.push({
           id: this.dragAtom.id,
@@ -261,6 +265,10 @@ export default {
           clientY: event.offsetY,
           movementX: event.movementX,
           movementY: event.movementY,
+
+          name: this.dragAtom.name,
+          categoryName: this.dragAtom.categoryName,
+          atomicWeight: this.dragAtom.atomicWeight,
         })
         this.atoms = this.atoms.filter((el) => el !== this.dragAtom)
         this.dragAtom = null

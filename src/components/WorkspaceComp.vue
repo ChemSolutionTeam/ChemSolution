@@ -1,20 +1,17 @@
 <template>
   <div
-      class="column w-3/4 h-11/12 p-4 shadow-xl mt-20"
-      style="position: relative"
+    class="column w-3/4 h-11/12 p-4 shadow-xl mt-20"
+    style="position: relative"
   >
-
-    <H2 @added="incCounter" v-once init-number="0"/>
-    <H2 @added="incCounter" init-number="2"/>
-    <canvas id="canvas" class="block"></canvas>
+    <H2 el1="el0" el2="el1" />
     <div v-for="atom in atoms" :key="atom.id">
       <div
-          draggable="true"
-          v-on:click.ctrl="this.$emit('remove', atom)"
-          v-on:dragstart="
+        draggable="true"
+        v-on:click.ctrl="this.$emit('remove', atom)"
+        v-on:dragstart="
           this.$emit('dragAndDrop', { atom: atom, event: $event })
         "
-          v-bind:style="{
+        v-bind:style="{
           position: 'absolute',
           top: atom.clientY + 'px',
           left: atom.clientX + 'px',
@@ -26,12 +23,14 @@
           v-bind:id="atom.id"
           v-bind:symbol="atom.symbol"
           v-bind:category="atom.category"
+          v-bind:name="atom.name"
+          v-bind:categoryName="atom.categoryName"
+          v-bind:atomicWeight="atom.atomicWeight"
           class="w-full"
         />
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -45,15 +44,11 @@ export default {
     return {
       dragAtom: null,
       isShown: true,
-      elementCounter: this.counter
     }
   },
   props: {
-    atoms: {type: Array},
-    value: {type: Array},
-    counter: {
-      type: Number
-    }
+    atoms: { type: Array },
+    value: { type: Array },
   },
   model: {
     prop: 'atoms',
@@ -65,12 +60,7 @@ export default {
     H2,
     O2,
   },
-  methods: {
-    incCounter(value) {
-      this.elementCounter += value
-    }
-  },
-  computed() {
-  },
+  methods: {},
+  computed() {},
 }
 </script>
