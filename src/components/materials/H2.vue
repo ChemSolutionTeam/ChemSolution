@@ -39,18 +39,26 @@ export default {
   },
   data() {
     return {
-      valences: [1]
+      valences: [1],
+      el1: 'el' + this.initNumber,
+      el2: 'el' + (parseInt(this.initNumber) + 1)
     }
   },
   props: {
-    el1: {
+    initNumber: {
+      type: Number,
+      default: 0
+    },
+    /*el1: {
       type: String
     },
     el2: {
       type: String
-    }
+    }*/
   },
   mounted() {
+    /*this.el1 += this.initNumber.toString()
+    this.el2 += this.initNumber.toString() + 1*/
     //let componentId = this._uid
     const el1 = document.getElementById(this.el1)
     const el2 = document.getElementById(this.el2)

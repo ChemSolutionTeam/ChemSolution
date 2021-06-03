@@ -4,7 +4,8 @@
       style="position: relative"
   >
 
-    <H2 el1="el0" el2="el1"/>
+    <H2 init-number="0"/>
+    <H2 init-number="2"/>
     <div v-for="atom in atoms" :key="atom.id">
       <div
           draggable="true"
