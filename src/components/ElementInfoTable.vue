@@ -257,6 +257,7 @@ export default {
       apiService.buyElements(idElement)
       this.getUserElements()
       //router.push("/UserPage")
+      storage.dispatch('getBalance')
       router.push('/PeriodicTable')
     },
   },
