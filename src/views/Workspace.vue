@@ -230,12 +230,11 @@ export default {
             console.log('NEW ACHIVEMENT')
             console.log(resp.data.newAchievementsId !== undefined)
             console.log(storage.state.token.length != 0)
-            console.log(this.achievement.heading !== '')
 
             if (
               resp.data.newAchievementsId !== undefined &&
               storage.state.token.length != 0 &&
-              this.achievement.heading !== ''
+              resp.data.newAchievementsId.length != 0
             )
               apiService
                 .getAchievement(resp.data.newAchievementsId[0])
@@ -252,7 +251,13 @@ export default {
             storage.dispatch('getBalance')
             this.atoms = []
             this.value = []
-            console.log(this.materials)
+            ;(this.achievement = {
+              heading: '',
+              description: '',
+              moneyReward: '',
+              ratingReward: '',
+            }),
+              console.log(this.materials)
           }
         })
       }
