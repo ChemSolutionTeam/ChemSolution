@@ -4,6 +4,13 @@
     class="z-50"
     v-bind:element="this.element"
   />
+
+  <div
+    class="z-40 fixed h-52 w-3/4 border-2 bottom-7 right-0 border-csblack rounded-3xl p-2 bg-white"
+  >
+    <h1 class="text-csblack text-xl">{{ info }}</h1>
+  </div>
+
   <div class="flex flex-row my-20">
     <div
       class="column border border-csblack rounded-3xl rounded-l-none w-1/4 h-11/12 bg-csbluewhite p-4 shadow-xl mt-20"
@@ -97,6 +104,8 @@ export default {
         moneyReward: '',
         ratingReward: '',
       },
+      info:
+        'Вода, Н2O — хімічна речовина у вигляді прозорої, безбарвної рідини без запаху і смаку, (в нормальних умовах). У природі існує у трьох агрегатних станах — твердому (лід), рідкому (вода) і газоподібному (водяна пара). Молекула води складається з одного атома оксигену і двох атомів гідрогену. Атоми гідрогену розташовані в молекулі таким чином, що напрямки до них утворюють кут 104,45o із вершиною в центрі атома оксигену. Таке розташування зумовлює молекулі води дипольний момент у 1,844 дебаї. При заміні атомів гідрогену (протонів) на атоми дейтерію утворюється модифікація, яка називається важкою водою.',
       loading: true,
       isMouseOut: false,
       isFormShow: '',
@@ -357,6 +366,22 @@ export default {
   position: fixed;
   top: 400px;
   right: -16vw;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  box-shadow: 0 0 5px #777;
+  color: #fff;
+  background: #ffffff;
+  width: 15vw;
+  height: 20vw;
+  padding: 10px;
+  box-sizing: initial;
+}
+#slider2 {
+  position: fixed;
+  left: 500px;
+  bottom: -16vw;
   -webkit-transition-duration: 0.3s;
   -moz-transition-duration: 0.3s;
   -o-transition-duration: 0.3s;
