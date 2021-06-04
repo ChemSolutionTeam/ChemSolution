@@ -47,16 +47,13 @@ export default {
       startY: 0, 
     }
 
-    // начальное положение
     translate(molecule, moleculePosition.x, moleculePosition.y)
-    /*------------------------------------*/
     molecule.addEventListener('mousedown', onMouseDown)
     molecule.addEventListener('mousedown', onMouseDown)
 
     function onMouseDown(e) {
       e.preventDefault()
       console.log(e.target.id)
-      // координаты нажатия мыши внутри молекулы
       moleculePosition.startX = e.x - moleculePosition.x
       moleculePosition.startY = e.y - moleculePosition.y
       document.body.addEventListener('mousemove', onMouseMove)
@@ -72,7 +69,6 @@ export default {
       document.body.removeEventListener('mousemove', onMouseMove)
       document.body.removeEventListener('mouseup', onMouseUp)
     }
-    /*------------------------------------*/
     function translate(el, x, y) {
       el.style.transform = `translate(${x}px, ${y}px)`
     }

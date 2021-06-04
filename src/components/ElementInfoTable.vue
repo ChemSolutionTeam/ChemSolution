@@ -193,7 +193,8 @@
         <BaseTooltip v-else text="Елемент не відкрито">
           <i class="fas fa-lock mx-3 self-end scale-125 transform w-1/12" />
         </BaseTooltip>
-
+      </div>
+      <div>
         <div
           v-if="
             !isUserAuthorised ||
