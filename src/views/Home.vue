@@ -269,7 +269,7 @@ export default {
   computed: {},
   methods: {
     downloadAndroid() {
-      window.location = '../assets/ChemSolution.apk'
+      window.location = '../ChemSolution.apk'
     },
     openForm(args) {
       this.$emit('showForm', args)

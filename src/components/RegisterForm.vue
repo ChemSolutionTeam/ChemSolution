@@ -87,6 +87,7 @@
 
           <button
             @click="registerGoogle"
+            type="button"
             id="google-sign-up"
             class="hover:text-csblack shadow-lg p-3 border border-grey-300 button-enter w-11/12 ml-3 m-5 sm:text-xl"
           >
@@ -160,6 +161,7 @@ export default {
         agreeToTerms: false,
         isMyInfoTrue: false,
       },
+      googleRegiser: false,
       passDontMatch: false,
       passWrong: false,
       dateWrong: false,
@@ -182,6 +184,7 @@ export default {
   },
   methods: {
     registerGoogle: function () {
+      this.googleRegiser = true
       let provider = new firebase.auth.GoogleAuthProvider()
       firebase
         .auth()
@@ -213,12 +216,14 @@ export default {
         })
     },
     validate() {
-      this.passWrong = !Validation.pass(this.user.pass)
-      this.passDontMatch = !Validation.passRepeat(
-        this.user.pass,
-        this.user.passRepeat
-      )
-      this.dateWrong = !Validation.age(this.user.birthDate)
+      if (!this.registerGoogle) {
+        this.passWrong = !Validation.pass(this.user.pass)
+        this.passDontMatch = !Validation.passRepeat(
+          this.user.pass,
+          this.user.passRepeat
+        )
+        this.dateWrong = !Validation.age(this.user.birthDate)
+      }
     },
     async register() {
       //verification.
