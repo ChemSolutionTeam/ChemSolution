@@ -40,8 +40,8 @@
             v-bind:id="element.elementId"
             v-bind:valences="element.valences"
             v-bind:category="element.categoryId.toString()"
-            v-bind:is-locked="element.isLocked"
-            v-bind:draggable="!element.isLocked"
+            v-bind:is-locked="element.isLocked && !this.userElements.some(e => e.elementId === element.elementId)"
+            v-bind:draggable="!element.isLocked || this.userElements.some(e => e.elementId === element.elementId)"
             v-bind:price="element.price"
             @click="addElement(element)"
             @dragstart="startDrag($event, element)"
@@ -115,7 +115,7 @@ export default {
       dragElement: null,
       dragAtom: null,
       elements: [],
-      unlockableElements: [],
+      userElements: [],
       atoms: [],
       value: [],
       materials: [],
@@ -168,19 +168,8 @@ export default {
     async getUserElements() {
       if (this.isUserAuthorised) {
         await apiService.getUser().then((resp) => {
-          
           for (let i = 0; i < resp.data.elements.length; ++i) {
-            try {
-              let el = this.unlockableElements.find(
-                (e) => e.id === resp.data.elements[i].id
-              )
-              this.elements.push(el)
-              this.unlockableElements.filter(
-                (e) => e.id !== resp.data.elements[i].id
-              )
-            } catch (e) {
-              continue
-            }
+            this.userElements.push(resp.data.elements[i])
           }
         })
       }
