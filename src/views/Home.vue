@@ -269,7 +269,7 @@ export default {
   computed: {},
   methods: {
     downloadAndroid() {
-      window.location = 'CenturyGothic.ttf'
+      window.location = '../assets/ChemSolution.apk'
     },
     openForm(args) {
       this.$emit('showForm', args)
