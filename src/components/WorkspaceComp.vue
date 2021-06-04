@@ -1,6 +1,6 @@
 <template>
   <div
-    class="column w-3/4 h-11/12 p-4 shadow-xl mt-20"
+    class="column w-3/4 h-11/12 p-4 mt-20"
     style="position: relative"
   >
 
@@ -82,5 +82,15 @@ export default {
     },
   },
   computed() {},
+  mounted() {
+    setTimeout(function () {}, 3000);
+    document.getElementById('moleculeInfoText').innerText = 'Спробуйте зібрати молекулу!'
+    document.getElementById('moleculeInfo').style.right = '3vw'
+    setTimeout(closeHint, 3000);
+    function closeHint() {
+      if (document.getElementById('moleculeInfoText').innerText === 'Спробуйте зібрати молекулу!')
+        document.getElementById('moleculeInfo').style.right = '-61vw'
+    }
+  }
 }
 </script>

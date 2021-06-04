@@ -6,10 +6,10 @@
   />
 
   <div
-    class="z-40 fixed h-52 w-8/12 border-2 bottom-7 right-0 border-csblack rounded-3xl p-2 bg-white"
-    style=""
+  id="moleculeInfo"
+    class="z-40 fixed border-1 bottom-7 border-csblack rounded-3xl bg-white"
   >
-    <h1 id="moleculeInfo" class="text-csblack text-xl"> Спробуйте зібрати молекулу! </h1>
+    <h1 id="moleculeInfoText" class="text-csblack text-xl"> Спробуйте зібрати молекулу! </h1>
   </div>
 
   <div class="flex flex-row my-20">
@@ -376,9 +376,24 @@ export default {
 .elementCollection:hover ~ #slider {
   right: 0;
 }
+#moleculeInfo {
+  position: fixed;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  box-shadow: 0 0 1px #777;
+  color: #EAF9FE;
+  background: #EAF9FE;
+  right: -61vw;
+  width: 60vw;
+  height: 15vw;
+  padding: 6px;
+  box-sizing: initial;
+}
 #slider {
   position: fixed;
-  top: 400px;
+  top: 160px;
   right: -16vw;
   -webkit-transition-duration: 0.3s;
   -moz-transition-duration: 0.3s;

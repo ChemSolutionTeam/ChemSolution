@@ -38,6 +38,7 @@ export default {
     },
   },
   mounted() {
+    
     const molecule = document.getElementById(this.idCounter)
     const moleculePosition = {
       x: 20,
@@ -75,13 +76,15 @@ export default {
     function translate(el, x, y) {
       el.style.transform = `translate(${x}px, ${y}px)`
     }
+    
   },
   methods: {
     changeItem() {
-      document.getElementById('moleculeInfo').innerText = this.info.toString()
+      document.getElementById('moleculeInfoText').innerText = this.info.toString()
+      document.getElementById('moleculeInfo').style.right = '3vw'
     },
     rechangeItem() {
-      document.getElementById('moleculeInfo').innerText = 'Спробуйте зібрати молекулу!'
+      document.getElementById('moleculeInfo').style.right = '-61vw'
     },
   }
 }
