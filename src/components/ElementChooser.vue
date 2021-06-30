@@ -106,7 +106,7 @@ export default {
     },
     category: {
       type: String,
-      default: 'csgreen',
+      default: '1',
     },
     atomicWeight: {
       type: Number,
