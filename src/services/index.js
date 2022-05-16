@@ -1,9 +1,7 @@
 import axios from 'axios'
 import storage from '../store/index'
+
 const API = axios.create({
-  // baseURL: 'http://192.168.0.104:5001',
-  //baseURL: 'http://192.168.1.8:5001',
-  // baseURL: 'https://localhost:5001',
   baseURL: 'https://chemsolutionapi.azurewebsites.net',
   headers: {
     'Access-Control-Allow-Origin': '*',
@@ -47,6 +45,7 @@ export default {
       console.error(e)
     })
   },
+
   getUsers() {
     API.get('/Users', {
       headers: {
@@ -60,13 +59,14 @@ export default {
       .catch((e) => console.error(e))
   },
 
-  getUser() {
+  async getUser() {
     return API.get('/Users/', {
       headers: {
         Authorization: 'Bearer ' + storage.state.token,
       },
     }).catch((e) => console.error(e))
   },
+
   deleteUser(id) {
     API.delete('/Users/' + id, {
       headers: {
@@ -78,19 +78,22 @@ export default {
       })
       .catch((e) => console.error(e))
   },
+
   resetUser() {
     //TODO USER PUT request
   },
-  getUsersByRating() {
+
+  async getUsersByRating() {
     return API.get('/Users/rating').catch((e) => console.error(e))
   },
 
   //Request queries
-  getRequests() {
+  async getRequests() {
     return API.get('/Requests').catch((e) => {
       console.error(e)
     })
   },
+
   async postRequest(request) {
     console.info(request)
     await API.post(
@@ -109,6 +112,7 @@ export default {
       }
     )
   },
+
   getRequest(id) {
     API.get('/Requests/' + id)
       .then((resp) => {
@@ -118,6 +122,7 @@ export default {
         console.error(e)
       })
   },
+
   putRequest() {
     //TODO PUT Request
   },
@@ -141,6 +146,7 @@ export default {
         console.error(e)
       })
   },
+
   postMaterial(material) {
     material
     API.post('/Materials')
@@ -151,6 +157,7 @@ export default {
         console.error(e)
       })
   },
+
   getMaterial(id) {
     API.get('/Materials/' + id)
       .then((resp) => {
@@ -160,10 +167,12 @@ export default {
         console.error(e)
       })
   },
+
   putMaterial(id) {
     id
     //TODO PUT Material
   },
+
   deleteMaterial(id) {
     API.delete('/Materials/' + id)
       .then((resp) => {
@@ -174,7 +183,7 @@ export default {
       })
   },
 
-  searchMaterial(value) {
+  async searchMaterial(value) {
     return API.post(
       '/Materials/search',
       { value: value },
@@ -199,6 +208,7 @@ export default {
         console.error(e)
       })
   },
+
   postMGroup(group) {
     group
     API.post('/MaterialGroups')
@@ -209,6 +219,7 @@ export default {
         console.error(e)
       })
   },
+
   getMGroup(id) {
     API.get('/MaterialGroups/' + id)
       .then((resp) => {
@@ -218,10 +229,12 @@ export default {
         console.error(e)
       })
   },
+
   putMGroup(id) {
     id
     //TODO PUT MaterialGroup
   },
+
   deleteMGroup(id) {
     API.delete('/MaterialGroups/' + id)
       .then((resp) => {
@@ -247,6 +260,7 @@ export default {
         })
     )
   },
+
   postElement(element) {
     element
     API.post('/Elements')
@@ -257,15 +271,18 @@ export default {
         console.error(e)
       })
   },
+
   getElement(id) {
     return API.get('/Elements/' + id).catch((e) => {
       console.error(e)
     })
   },
+
   putElement(element) {
     alert(element)
     //TODO PUT Element
   },
+
   deleteElement(id) {
     API.delete('/Elements/' + id)
       .then((resp) => {
@@ -286,6 +303,7 @@ export default {
         console.error(e)
       })
   },
+
   postBlogPost(blogPost) {
     blogPost
     API.post('/BlogPosts')
@@ -296,6 +314,7 @@ export default {
         console.error(e)
       })
   },
+
   getBlogPost(id) {
     API.get('/BlogPosts/' + id)
       .then((resp) => {
@@ -305,10 +324,12 @@ export default {
         console.error(e)
       })
   },
+
   putBlogPost(id) {
     id
     //TODO PUT BlogPosts
   },
+
   deleteBlogPost(id) {
     API.delete('/BlogPosts/' + id)
       .then((resp) => {
@@ -320,11 +341,12 @@ export default {
   },
 
   //Achievements queries
-  getAchievements() {
+  async getAchievements() {
     return API.get('/Achievements').catch((e) => {
       console.error(e)
     })
   },
+
   postAchievement(achievement) {
     achievement
     API.post('/Achievements')
@@ -335,15 +357,18 @@ export default {
         console.error(e)
       })
   },
-  getAchievement(id) {
+
+  async getAchievement(id) {
     return API.get('/Achievements/' + id).catch((e) => {
       console.error(e)
     })
   },
+
   putAchievement(id) {
     id
     //TODO PUT Achievements
   },
+
   deleteAchievement(id) {
     API.delete('/Achievements/' + id)
       .then((resp) => {
@@ -378,7 +403,8 @@ export default {
       return 'Fail'
     })
   },
-  getDonate(amount) {
+
+  async getDonate(amount) {
     return API.get('/Donate?amount=' + parseInt(amount), {
       headers: {
         Authorization: 'Bearer ' + storage.state.token,
@@ -387,7 +413,8 @@ export default {
       console.error(error)
     })
   },
-  postDonate(data, signature) {
+
+  async postDonate(data, signature) {
     return API.post(
       '/Donate/',
       {
