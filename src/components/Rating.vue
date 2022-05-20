@@ -15,7 +15,6 @@ export default {
   computed: {
     rating() {
       return {
-        //not sure if this is what we need
         userName: 'Наріман Намазов',
         numberInRating: 1,
       }

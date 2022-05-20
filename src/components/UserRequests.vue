@@ -1,10 +1,34 @@
 <template>
   <div
-    @mousemove="getRequests()"
-    class="transform md:scale-50 lg:scale-100 flex items-start inset-0 my-4 shadow-lg max-w-6xl mx-auto"
+    class="
+      transform
+      md:scale-50
+      lg:scale-100
+      flex
+      items-start
+      inset-0
+      my-4
+      shadow-lg
+      max-w-6xl
+      mx-auto
+    "
+    @click="getRequests()"
   >
     <div
-      class="box self-center px-12 p-3 pb-16 text-left w-full bg-white border-csblack shadow-2xl border rounded-lg"
+      class="
+        box
+        self-center
+        px-12
+        p-3
+        pb-16
+        text-left
+        w-full
+        bg-white
+        border-csblack
+        shadow-2xl
+        border
+        rounded-lg
+      "
     >
       <div class="column w-full mt-4">
         <h3 class="text-4xl text-center pb-5">Запити</h3>
@@ -29,8 +53,6 @@
 </template>
 
 <script>
-// import apiService from '@/services'
-// import storage from '@/store'
 import Request from '@/components/Request'
 import Button from '@/components/HomePageButtons'
 
@@ -49,11 +71,18 @@ export default {
       requests: [],
     }
   },
+  created() {
+    if (storage.state.token.length !== 0) {
+      apiService.getRequests().then((resp) => {
+        this.requests = resp.data
+      })
+    }
+  },
   methods: {
     getRequests() {
       if (storage.state.token.length !== 0) {
-        apiService.getUser().then((resp) => {
-          this.requests = resp.data.requests
+        apiService.getRequests().then((resp) => {
+          this.requests = resp.data
         })
       }
     },

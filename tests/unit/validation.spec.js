@@ -11,7 +11,6 @@ describe('Validation tests', () => {
     expect(validation.passRepeat(undefined, undefined)).toBe(false)
   })
   test('Pass tests', () => {
-    //edge
     expect(validation.pass('')).toBe(false)
     expect(validation.pass(undefined)).toBe(false)
 
@@ -24,7 +23,6 @@ describe('Validation tests', () => {
     expect(validation.pass('*p42nj{+Xb;')).toBe(true)
   })
   test('Age tests', () => {
-    //edge
     expect(validation.age('')).toBe(false)
     expect(validation.age(undefined)).toBe(false)
 

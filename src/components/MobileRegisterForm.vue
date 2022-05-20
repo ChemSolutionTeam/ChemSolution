@@ -1,11 +1,20 @@
 <template>
   <div class="inset-0 z-20 fixed w-full h-full bg-csblack">
     <div
-      class="mt-0 flex flex-row bg-white absolute inset-3 rounded-3xl self-center p-2"
+      class="
+        mt-0
+        flex flex-row
+        bg-white
+        absolute
+        inset-3
+        rounded-3xl
+        self-center
+        p-2
+      "
     >
       <div class="w-full overflow-scroll">
         <h1 class="text-2xl">Реєстрація</h1>
-        <BaseInput
+        <base-input
           label="Ім'я користувача"
           type="text"
           placeholder="Уведіть ваше ім'я"
@@ -13,14 +22,14 @@
           v-model="user.username"
           errorMassage=""
         />
-        <BaseInput
+        <base-input
           label="Email"
           type="email"
           placeholder="Уведіть E-mail"
           :isMultiline="true"
           v-model="user.email"
         />
-        <BaseInput
+        <base-input
           label="Пароль"
           type="password"
           placeholder="Уведіть пароль"
@@ -31,7 +40,7 @@
           errorMassage="Пароль має містити 8 знаків, 1 цифру, 1 велику , 1 малу літери та 1 символ"
         />
 
-        <BaseInput
+        <base-input
           label="Підтвердження паролю"
           type="password"
           placeholder="Уведіть пароль"
@@ -41,7 +50,7 @@
           :isIncorrect="passDontMatch"
           errorMassage="Паролі не співпадають"
         />
-        <BaseInput
+        <base-input
           label="Дата народження"
           type="date"
           :isMultiline="true"
@@ -50,12 +59,12 @@
           :isIncorrect="dateWrong"
           @change="validate()"
         />
-        <BaseCheck
+        <base-input
           v-model="user.agreeToTerms"
           label="Я даю згоду на обробку персональних даних та
             погоджуюсь із правилами користування сервісом"
         />
-        <BaseCheck
+        <base-input
           v-model="user.isMyInfoTrue"
           label="Я підтверджую достовірність внесених даних"
         />
@@ -63,7 +72,19 @@
           id="sign-up"
           type="submit"
           :disabled="!registerable"
-          class="hover:text-csblack disabled:opacity-25 shadow-lg p-3 border border-grey-300 bg-csblue button-enter w-11/12 ml-3 m-5 focus:outline-none focus:ring-4 focus:ring-csgreen"
+          class="
+            hover:text-csblack
+            disabled:opacity-25
+            shadow-lg
+            p-3
+            border border-grey-300
+            bg-csblue
+            button-enter
+            w-11/12
+            ml-3
+            m-5
+            focus:outline-none focus:ring-4 focus:ring-csgreen
+          "
         >
           Створити акаунт
         </button>
@@ -74,7 +95,6 @@
 
 <script>
 import BaseInput from '@/components/BaseInput'
-import BaseCheck from '@/components/BaseCheck'
 import Validation from '@/services/validation.js'
 import apiService from '@/services/index'
 import storage from '@/store/index.js'
@@ -83,7 +103,6 @@ export default {
   name: 'MobileRegister',
   components: {
     BaseInput,
-    BaseCheck,
   },
   data() {
     return {

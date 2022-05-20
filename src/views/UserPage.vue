@@ -3,11 +3,29 @@
     <div class="row">
       <div class="column mt-20 w-8/12">
         <div
-          class="user-info flex w-11/12 bg-csblack text-white mb-20 border border-csblack overflow-hidden"
+          class="
+            user-info
+            flex
+            w-11/12
+            bg-csblack
+            text-white
+            mb-20
+            border border-csblack
+            overflow-hidden
+          "
         >
           <BaseTooltip text="Мої запроси" class="self-center">
             <i
-              class="fas fa-tasks text-6xl ml-5 cursor-pointer transform hover:scale-125 duration-200"
+              class="
+                fas
+                fa-tasks
+                text-6xl
+                ml-5
+                cursor-pointer
+                transform
+                hover:scale-125
+                duration-200
+              "
               @click="openForm('requests')"
             ></i>
           </BaseTooltip>
@@ -20,7 +38,17 @@
         </div>
 
         <div
-          class="scroll-achievements ml-10 w-11/12 bg-white text-csblack border border-csblack rounded-3xl block overflow-hidden"
+          class="
+            scroll-achievements
+            ml-10
+            w-11/12
+            bg-white
+            text-csblack
+            border border-csblack
+            rounded-3xl
+            block
+            overflow-hidden
+          "
         >
           <p class="text-5xl font-semibold text-center mb-4">Досягнення</p>
           <hr />
@@ -28,6 +56,7 @@
             <li
               v-for="achievement in achievements"
               :key="achievement.achievementId"
+              @click="fetchAchievements()"
             >
               <div class="row">
                 <span class="column w-7/12 ml-5 achievement-text">
@@ -59,7 +88,17 @@
 
       <div class="column mt-20 w-4/12">
         <div
-          class="scroll-rating border border-csblack mr-10 rounded-3xl bg-white text-csblack h-full block overflow-hidden"
+          class="
+            scroll-rating
+            border border-csblack
+            mr-10
+            rounded-3xl
+            bg-white
+            text-csblack
+            h-full
+            block
+            overflow-hidden
+          "
         >
           <img src="../assets/ratingCup.png" class="w-10 h-10 inline" />
           <p class="text-4xl font-semibold inline align-middle">Рейтинг</p>
@@ -121,13 +160,21 @@ export default {
       apiService.getUser().then((resp) => {
         console.log(resp)
         this.currentUserName = resp.data.userName
-        this.achievements = resp.data.achievement
       })
+      apiService
+        .getAchievements()
+        .then((resp) => (this.achievements = resp.data))
     }
+    console.log(this.achievements)
   },
   methods: {
     openForm(args) {
       this.$emit('showForm', args)
+    },
+    fetchAchievements() {
+      apiService
+        .getAchievements()
+        .then((resp) => (this.achievements = resp.data))
     },
   },
 }

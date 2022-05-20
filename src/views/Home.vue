@@ -37,12 +37,31 @@
   </svg>
   <div
     id="block2"
-    class="bg-csbluewhite h-5/6 px-40 py-5 text-csblack justify-items-start text-left"
+    class="
+      bg-csbluewhite
+      h-5/6
+      px-40
+      py-5
+      text-csblack
+      justify-items-start
+      text-left
+    "
   >
     <div class="flex flex-row w-full">
       <img
         src="@/assets/workspace.png"
-        class="h-full w-1/2 my-36 m-3 rounded-3xl border-csblue border-2 transform duration-300 ease-in-out hover:scale-105"
+        class="
+          h-full
+          w-1/2
+          my-36
+          m-3
+          rounded-3xl
+          border-csblue border-2
+          transform
+          duration-300
+          ease-in-out
+          hover:scale-105
+        "
       />
       <div class="text-center items-center py-36">
         <h1 class="text-5xl z-0 m-3 px-10">ChemSolution</h1>
@@ -81,7 +100,18 @@
       </div>
       <img
         src="@/assets/periodic.png"
-        class="h-full w-1/2 m-3 my-36 rounded-3xl border-csblue border-2 transform duration-300 ease-in-out hover:scale-105"
+        class="
+          h-full
+          w-1/2
+          m-3
+          my-36
+          rounded-3xl
+          border-csblue border-2
+          transform
+          duration-300
+          ease-in-out
+          hover:scale-105
+        "
       />
     </div>
   </div>
@@ -106,12 +136,31 @@
 
   <div
     id="block4"
-    class="bg-csbluewhite h-5/6 px-40 py-5 text-csblack justify-items-start text-left"
+    class="
+      bg-csbluewhite
+      h-5/6
+      px-40
+      py-5
+      text-csblack
+      justify-items-start
+      text-left
+    "
   >
     <div class="flex flex-row w-full">
       <img
         src="@/assets/userpage.png"
-        class="h-full w-1/2 my-36 m-3 rounded-3xl border-csblue border-2 transform duration-300 ease-in-out hover:scale-105"
+        class="
+          h-full
+          w-1/2
+          my-36
+          m-3
+          rounded-3xl
+          border-csblue border-2
+          transform
+          duration-300
+          ease-in-out
+          hover:scale-105
+        "
       />
       <div class="text-center items-center py-36">
         <h1 class="text-5xl z-0 m-3 px-10">ChemSolution</h1>
@@ -160,10 +209,17 @@
           його на своєму смартфоні!
         </p>
 
-        <!-- Slideshow -->
         <div class="flex flex-row items-center">
           <div
-            class="bg-white flex w-2/4 self-center mx-auto border-2 border-csblack rounded-3xl"
+            class="
+              bg-white
+              flex
+              w-2/4
+              self-center
+              mx-auto
+              border-2 border-csblack
+              rounded-3xl
+            "
           >
             <img
               src="@/assets/mobile.png"
@@ -174,7 +230,22 @@
         <div class="w-auto flex my-3">
           <div
             @click="downloadAndroid()"
-            class="shadow-2xl flex border mx-auto border-csblack bg-csblack text-white rounded-xl p-1 cursor-pointer hover:scale-125 transform duration-200 ease-in-out"
+            class="
+              shadow-2xl
+              flex
+              border
+              mx-auto
+              border-csblack
+              bg-csblack
+              text-white
+              rounded-xl
+              p-1
+              cursor-pointer
+              hover:scale-125
+              transform
+              duration-200
+              ease-in-out
+            "
           >
             <i class="fab fa-android text-6xl text-csgreen"></i>
             <h1 class="self-center text-2xl m-1">Скачати для Android™</h1>

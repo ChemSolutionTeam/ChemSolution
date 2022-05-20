@@ -5,7 +5,16 @@
         type="checkbox"
         :checked="modelValue"
         @change="$emit('update:modelValue', $event.target.checked)"
-        class="focus:animate-pulse focus:ring-cslightgreen border-2 m-2 h-4 w-4 text-csgreen border-csblack-300 rounded"
+        class="
+          focus:animate-pulse focus:ring-cslightgreen
+          border-2
+          m-2
+          h-4
+          w-4
+          text-csgreen
+          border-csblack-300
+          rounded
+        "
       />
     </div>
     <div class="ml-1 h-auto text-sm">
@@ -22,7 +31,24 @@
         :disabled="isDisabled"
         :class="[isDisabled ? 'bg-csblack bg-opacity-10' : 'bg-red-300 ']"
         @change="$emit('update:modelValue', $event.target.checked)"
-        class="focus:animate-pulse focus:ring-cslightgreen text-csgreen bg-opacity-20 focus:border-csgreen border-csblack-300 focus:outline-none focus:ring-4 focus:ring-opacity-20 text-lg h-10 w-3/5 border-2 border-csblack rounded-2xl mr-5 pr-0 px-3 py-1 text-center"
+        class="
+          focus:animate-pulse focus:ring-cslightgreen
+          text-csgreen
+          bg-opacity-20
+          focus:border-csgreen
+          border-csblack-300
+          focus:outline-none focus:ring-4 focus:ring-opacity-20
+          text-lg
+          h-10
+          w-3/5
+          border-2 border-csblack
+          rounded-2xl
+          mr-5
+          pr-0
+          px-3
+          py-1
+          text-center
+        "
       />
     </div>
     <div class="m-2 flex flex-row justify-end">

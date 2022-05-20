@@ -1,24 +1,16 @@
 <template>
-  <div
-    class="column w-3/4 h-11/12 p-4 mt-20"
-    style="position: relative"
-  >
-
-  <div v-for="molecule in materials" :key="molecule.idCounter">
-  
-  <Molecule 
-    :id-counter="molecule.idCounter"
-    :materialId="molecule.materialId"
-    :formula="molecule.formula"
-    :info="molecule.info"
-    v-on:click.ctrl="this.$emit('removeMolecule', molecule)"
-
-  />
-  
-  </div>
+  <div class="column w-3/4 h-11/12 p-4 mt-20" style="position: relative">
+    <div v-for="molecule in materials" :key="molecule.idCounter">
+      <Molecule
+        :id-counter="molecule.idCounter"
+        :materialId="molecule.materialId"
+        :formula="molecule.formula"
+        :info="molecule.info"
+        v-on:click.ctrl="this.$emit('removeMolecule', molecule)"
+      />
+    </div>
 
     <div v-for="atom in atoms" :key="atom.id">
-
       <div
         draggable="true"
         v-on:click.ctrl="this.$emit('remove', atom)"
@@ -48,7 +40,6 @@
 </template>
 
 <script>
-/* eslint-disable vue/no-unused-components */
 import Atom from '@/components/Atom'
 import Molecule from '@/components/Molecule'
 export default {
@@ -74,7 +65,7 @@ export default {
   name: 'WorkspaceComp',
   components: {
     Atom,
-    Molecule
+    Molecule,
   },
   methods: {
     incCounter(value) {
@@ -83,14 +74,18 @@ export default {
   },
   computed() {},
   mounted() {
-    setTimeout(function () {}, 3000);
-    document.getElementById('moleculeInfoText').innerText = 'Спробуйте зібрати молекулу!'
+    setTimeout(function () {}, 3000)
+    document.getElementById('moleculeInfoText').innerText =
+      'Спробуйте зібрати молекулу!'
     document.getElementById('moleculeInfo').style.right = '3vw'
-    setTimeout(closeHint, 3000);
+    setTimeout(closeHint, 3000)
     function closeHint() {
-      if (document.getElementById('moleculeInfoText').innerText === 'Спробуйте зібрати молекулу!')
+      if (
+        document.getElementById('moleculeInfoText').innerText ===
+        'Спробуйте зібрати молекулу!'
+      )
         document.getElementById('moleculeInfo').style.right = '-61vw'
     }
-  }
+  },
 }
 </script>

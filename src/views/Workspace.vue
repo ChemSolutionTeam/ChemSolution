@@ -6,20 +6,40 @@
   />
 
   <div
-  id="moleculeInfo"
+    id="moleculeInfo"
     class="z-40 fixed border-1 bottom-7 border-csblack rounded-3xl bg-white"
   >
-    <h1 id="moleculeInfoText" class="text-csblack text-xl"> Спробуйте зібрати молекулу! </h1>
+    <h1 id="moleculeInfoText" class="text-csblack text-xl">
+      Спробуйте зібрати молекулу!
+    </h1>
   </div>
 
   <div class="flex flex-row my-20">
     <div
-      class="column border border-csblack rounded-3xl rounded-l-none w-1/4 h-11/12 bg-csbluewhite p-4 shadow-xl mt-20"
+      class="
+        column
+        border border-csblack
+        rounded-3xl rounded-l-none
+        w-1/4
+        h-11/12
+        bg-csbluewhite
+        p-4
+        shadow-xl
+        mt-20
+      "
     >
-      <!-- Search -->
       <div class="w-full text-xl my-5">
         <i
-          class="fas fa-search mx-3 self-center scale-125 transform w-1/12 cursor-pointer"
+          class="
+            fas
+            fa-search
+            mx-3
+            self-center
+            scale-125
+            transform
+            w-1/12
+            cursor-pointer
+          "
         />
         <input
           class="w-10/12 border-csblack border rounded-xl outline-none px-5"
@@ -28,20 +48,39 @@
         />
       </div>
       <div
-        class="elementCollection mt-3 pt-3 overflow-y-scroll scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-blue-100 scrollbar-thumb-rounded-full scrollbar-track-rounded-full"
+        class="
+          elementCollection
+          mt-3
+          pt-3
+          overflow-y-scroll
+          scrollbar-thin
+          scrollbar-thumb-blue-400
+          scrollbar-track-blue-100
+          scrollbar-thumb-rounded-full
+          scrollbar-track-rounded-full
+        "
       >
-        <Preloader v-if="elements.length == 0" />
-        <div v-for="element in filteredElements" :key="element.elementId">
+        <Preloader v-if="elements.length === 0" />
+        <div
+          v-else
+          v-for="element of filteredElements"
+          :key="element.elementId"
+        >
           <ElementChooser
             v-bind:symbol="element.symbol"
             v-bind:name="element.name"
             v-bind:atomic-weight="element.atomicWeight"
-            v-bind:category-name="element.category.categoryName"
+            v-bind:category-name="element.elementCategory"
             v-bind:id="element.elementId"
             v-bind:valences="element.valences"
-            v-bind:category="element.categoryId.toString()"
-            v-bind:is-locked="element.isLocked && !this.userElements.some(e => e.elementId === element.elementId)"
-            v-bind:draggable="!element.isLocked || this.userElements.some(e => e.elementId === element.elementId)"
+            v-bind:is-locked="
+              element.isLocked &&
+              !this.userElements.some((e) => e.elementId === element.elementId)
+            "
+            v-bind:draggable="
+              !element.isLocked ||
+              this.userElements.some((e) => e.elementId === element.elementId)
+            "
             v-bind:price="element.price"
             @click="addElement(element)"
             @dragstart="startDrag($event, element)"
@@ -49,12 +88,8 @@
         </div>
       </div>
     </div>
-    <!-- scrollbar:
-    overflow-y-auto
-      scrollbar-thin scrollbar-thumb-blue-0 scrollbar-track-blue-0 scrollbar-thumb-rounded-full scrollbar-track-rounded-full
-      !-->
-
-    <WorkspaceComp id="elementContainer"
+    <WorkspaceComp
+      id="elementContainer"
       @mouseup="atomKeyupLeft()"
       v-bind:atoms="atoms"
       v-bind:value="value"
@@ -71,7 +106,18 @@
 
   <Footer />
   <div
-    class="inset-0 z-20 fixed sm:pt-2 md:pt-5 overflow-auto lg:pt-10 w-full h-full bg-csblack bg-opacity-50"
+    class="
+      inset-0
+      z-20
+      fixed
+      sm:pt-2
+      md:pt-5
+      overflow-auto
+      lg:pt-10
+      w-full
+      h-full
+      bg-csblack bg-opacity-50
+    "
     v-show="this.isBackgroundShown == 'achievement'"
     @click="closeForm('none')"
   >
@@ -98,6 +144,7 @@ import Footer from '@/components/Footer'
 import Preloader from '@/components/Preloader'
 import storage from '@/store'
 import apiService from '@/services'
+
 export default {
   data() {
     return {
@@ -124,9 +171,7 @@ export default {
         atomicRadius: 454.59,
         atomicWeight: 1.008,
         boilingTemperature: 607,
-        category: {
-          categoryName: 'неметали',
-        },
+        elementCategory: 'неметали',
         electronQuantity: 588,
         electronegativity: 511.1,
         elementId: 1,
@@ -168,8 +213,9 @@ export default {
     async getUserElements() {
       if (this.isUserAuthorised) {
         await apiService.getUser().then((resp) => {
-          for (let i = 0; i < resp.data.elements.length; ++i) {
-            this.userElements.push(resp.data.elements[i])
+          console.log(resp)
+          for (const el of resp.data.elements) {
+            this.userElements.push(el)
           }
         })
       }
@@ -200,14 +246,13 @@ export default {
         this.atoms.push({
           id: this.dragElement.elementId,
           symbol: this.dragElement.symbol,
-          category: this.dragElement.category.categoryId,
           clientX: event.offsetX,
           clientY: event.offsetY,
           movementX: event.movementX,
           movementY: event.movementY,
-          
+
           name: this.dragElement.name,
-          categoryName: this.dragElement.category.categoryName,
+          categoryName: this.dragElement.categoryName,
           atomicWeight: this.dragElement.atomicWeight,
         })
         if (
@@ -234,7 +279,7 @@ export default {
               materialId: resp.data.resultMaterialId,
               formula: resp.data.formula,
               info: resp.data.info,
-              idCounter: this.counter  
+              idCounter: this.counter,
             })
             //NEW ACHIEVEMENT
             console.log('NEW ACHIVEMENT')
@@ -288,8 +333,8 @@ export default {
         this.dragAtom = null
       }
     },
-    removeMolecule(molecule){
-      this.materials = this.materials.filter((el)=>el!=molecule)
+    removeMolecule(molecule) {
+      this.materials = this.materials.filter((el) => el != molecule)
     },
     removeElement(atom) {
       this.atoms = this.atoms.filter((el) => el !== atom)
@@ -372,8 +417,8 @@ export default {
   -o-transition-duration: 0.3s;
   transition-duration: 0.3s;
   box-shadow: 0 0 1px #777;
-  color: #EAF9FE;
-  background: #EAF9FE;
+  color: #eaf9fe;
+  background: #eaf9fe;
   right: -61vw;
   width: 60vw;
   height: 15vw;

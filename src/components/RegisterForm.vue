@@ -1,22 +1,46 @@
 <template>
   <div
-    class="transform md:scale-50 lg:scale-100 flex items-start inset-0 my-4 shadow-lg max-w-6xl mx-auto"
+    class="
+      transform
+      md:scale-50
+      lg:scale-100
+      flex
+      items-start
+      inset-0
+      my-4
+      shadow-lg
+      max-w-6xl
+      mx-auto
+    "
   >
     <div
-      class="box self-center pl-12 p-3 pb-16 text-left w-full bg-white border-csblack shadow-2xl border rounded-lg"
+      class="
+        box
+        self-center
+        pl-12
+        p-3
+        pb-16
+        text-left
+        w-full
+        bg-white
+        border-csblack
+        shadow-2xl
+        border
+        rounded-lg
+      "
     >
       <form @submit.prevent="register()">
         <div class="column w-7/12 mt-4">
           <h3 class="text-4xl text-center heading pb-5">Реєстрація</h3>
           <div class="column w-6/12">
-            <BaseInput
+            <base-input
               label="Email"
               type="email"
               placeholder="Уведіть E-mail"
               :isMultiline="true"
               v-model="user.email"
             />
-            <BaseInput
+            <base-input
               label="Пароль"
               type="password"
               placeholder="Уведіть пароль"
@@ -27,7 +51,7 @@
               errorMassage="Пароль має містити 8 знаків, 1 цифру, 1 велику , 1 малу літери та 1 символ"
             />
             <div class="mt-7">
-              <BaseInput
+              <base-input
                 label="Дата народження"
                 type="date"
                 :isMultiline="true"
@@ -39,7 +63,7 @@
             </div>
           </div>
           <div class="column w-6/12">
-            <BaseInput
+            <base-input
               label="Ім'я користувача"
               type="text"
               placeholder="Уведіть ваше ім'я"
@@ -47,7 +71,7 @@
               v-model="user.username"
               errorMassage=""
             />
-            <BaseInput
+            <base-input
               label="Підтвердження паролю"
               type="password"
               placeholder="Уведіть пароль"
@@ -56,15 +80,15 @@
               @change="validate()"
               :isIncorrect="passDontMatch"
               errorMassage="Паролі не співпадають"
-            ></BaseInput>
+            ></base-input>
           </div>
           <div class="column">
-            <BaseCheck
+            <base-check
               v-model="user.agreeToTerms"
               label="Я даю згоду на обробку персональних даних та
             погоджуюсь із правилами користування сервісом"
             />
-            <BaseCheck
+            <base-check
               v-model="user.isMyInfoTrue"
               label="Я підтверджую достовірність внесених даних"
             />
@@ -79,32 +103,21 @@
             id="sign-up"
             type="submit"
             :disabled="!registerable"
-            class="hover:text-csblack disabled:opacity-25 shadow-lg p-3 border border-grey-300 bg-csblue button-enter w-11/12 ml-3 m-5 focus:outline-none focus:ring-4 focus:ring-csgreen"
+            class="
+              hover:text-csblack
+              disabled:opacity-25
+              shadow-lg
+              p-3
+              border border-grey-300
+              bg-csblue
+              button-enter
+              w-11/12
+              ml-3
+              m-5
+              focus:outline-none focus:ring-4 focus:ring-csgreen
+            "
           >
             Створити акаунт
-          </button>
-          <hr class="mt-3 mb-3" />
-
-          <button
-            @click="registerGoogle"
-            type="button"
-            id="google-sign-up"
-            class="hover:text-csblack shadow-lg p-3 border border-grey-300 button-enter w-11/12 ml-3 m-5 sm:text-xl"
-          >
-            <i
-              class="text-white animate-pulse fab fa-google mr-3 transform scale-200"
-            />
-            Зареєструватися з Google
-          </button>
-
-          <button
-            id="facebook-sign-up"
-            class="hover:text-csblack shadow-lg border p-3 border-grey-300 button-enter w-11/12 ml-3 mt-0 m-5 text-xl"
-          >
-            <i
-              class="text-white animate-pulse fab fa-facebook mr-3 transform scale-200"
-            />
-            Зареєструватися з Facebook
           </button>
           <hr class="mt-3 mb-3" />
           <div class="text-center">
@@ -139,7 +152,6 @@ import BaseCheck from '@/components/BaseCheck.vue'
 import Logo from '@/components/Logo.vue'
 import Validation from '@/services/validation.js'
 import apiService from '@/services/index.js'
-// import storage from '@/store/index.js'
 import firebase from 'firebase'
 
 export default {
@@ -192,8 +204,8 @@ export default {
         .then((result) => {
           let token = result.credential
           let user = result.user
-          console.log(token) // Token
-          console.log(user) // User that was authenticated
+          console.log(token)
+          console.log(user)
           this.user.email = user.email
           this.user.pass = user.uid
           this.user.passRepeat = user.uid
@@ -212,7 +224,7 @@ export default {
           })
         })
         .catch((err) => {
-          console.log(err) // This will give you all the information needed to further debug any errors
+          console.log(err)
         })
     },
     validate() {
@@ -226,17 +238,8 @@ export default {
       }
     },
     async register() {
-      //verification.
       this.validate()
       await apiService.postUser(this.user).then(() => {
-        // apiService.getToken(this.user).then(() => {
-        //   console.log(storage.state.token.length)
-        //   if (storage.state.token.length !== 0) {
-        //     this.$emit('login')
-        //   } else {
-        //     this.passIsIncorrect = true
-        //   }
-        // })
         this.$emit('openLogin')
       })
     },

@@ -1,18 +1,15 @@
 <template>
   <li>
-    <!--Find better way to show achievements-->
     <img
       src="{{achievement.achievementPicture}}"
       class="icons-achievement pl-10 float-left"
     />
     <p class="achievement-text pl-20 float-left">{{ achievement.heading }}</p>
     <div style="float: right">
-      <!-- CHANGE PATH TO IMAGE -->
       <img src="coin.png" class="icons-achievement pl-10 float-left" />
       <p class="achievement-text pl-20 float-left">
         {{ achievement.moneyReward }}
       </p>
-      <!-- CHANGE PATH TO IMAGE -->
       <img src="rating.png" class="icons-achievement pl-10 float-left" />
       <p class="achievement-text pl-20 float-left">
         {{ achievement.ratingReward }}
@@ -33,7 +30,6 @@ export default {
   computed: {
     achievement() {
       return {
-        //not sure if this is what we need
         countGoal: 1,
         achievementPicture: 'achievementpicture.png',
         description: 'Справжній пельмень',

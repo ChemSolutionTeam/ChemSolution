@@ -1,6 +1,4 @@
 <template>
-  <!-- CHANGE DIV ID DEPENDING ON STATUS   -->
-
   <div
     id="approved"
     class="w-full p-3 border border-csblack rounded-xl my-1 text-2xl"
@@ -21,7 +19,7 @@
     </div>
     <div class="flex m-1">
       <h1 class="mr-3">Статус:</h1>
-      <p>{{ request.status.statusName }}</p>
+      <p>{{ request.status }}</p>
     </div>
   </div>
 </template>
@@ -41,15 +39,15 @@ export default {
   },
   computed: {
     bgColor() {
-      switch (this.request.status.statusName) {
-        case 'Підтверджено':
+      switch (this.request.status) {
+        case 'Accepted':
           return 'bg-requestaccept'
-        case 'Розглядається':
+        case 'Consider':
           return 'bg-requestwait'
-        case 'Відхилено':
+        case 'Rejected':
           return 'bg-requestcancel'
         default:
-          return ''
+          return 'bg-requestwait'
       }
     },
   },

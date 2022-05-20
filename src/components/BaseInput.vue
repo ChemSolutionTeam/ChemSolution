@@ -9,7 +9,22 @@
         @input="$emit('update:modelValue', $event.target.value)"
         :disabled="isDisabled"
         :class="[isDisabled ? 'bg-csblack bg-opacity-10' : 'bg-white']"
-        class="focus:animate-pulse focus:ring-cslightgreen focus:border-csgreen focus:outline-none focus:ring-4 focus:ring-opacity-20 text-lg w-3/5 border-2 border-csblack rounded-2xl mr-5 px-3 py-1 text-center"
+        class="
+          focus:animate-pulse
+          focus:ring-cslightgreen
+          focus:border-csgreen
+          focus:outline-none
+          focus:ring-4
+          focus:ring-opacity-20
+          text-lg
+          w-3/5
+          border-2 border-csblack
+          rounded-2xl
+          mr-5
+          px-3
+          py-1
+          text-center
+        "
       />
     </div>
   </div>
@@ -25,7 +40,23 @@
         :placeholder="placeholder"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
-        class="focus:animate-pulse focus:ring-cslightgreen focus:border-csgreen focus:outline-none focus:ring-4 focus:ring-opacity-20 text-lg w-full border-2 border-csblack rounded-2xl mr-0 pr-0 px-3 py-1 text-center"
+        class="
+          focus:animate-pulse
+          focus:ring-cslightgreen
+          focus:border-csgreen
+          focus:outline-none
+          focus:ring-4
+          focus:ring-opacity-20
+          text-lg
+          w-full
+          border-2 border-csblack
+          rounded-2xl
+          mr-0
+          pr-0
+          px-3
+          py-1
+          text-center
+        "
       />
     </div>
     <div
@@ -37,7 +68,23 @@
         :placeholder="placeholder"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
-        class="focus:animate-pulse focus:ring-cslightgreen focus:border-csgreen focus:outline-none focus:ring-4 focus:ring-opacity-20 text-lg w-full border-2 border-csblack rounded-2xl mr-0 pr-0 px-3 py-1 text-center"
+        class="
+          focus:animate-pulse
+          focus:ring-cslightgreen
+          focus:border-csgreen
+          focus:outline-none
+          focus:ring-4
+          focus:ring-opacity-20
+          text-lg
+          w-full
+          border-2 border-csblack
+          rounded-2xl
+          mr-0
+          pr-0
+          px-3
+          py-1
+          text-center
+        "
       />
     </div>
   </div>

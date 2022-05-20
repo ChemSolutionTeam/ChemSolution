@@ -10,7 +10,18 @@
   <!-- </div> -->
   <router-view v-on:showForm="openForm($event)" class="pt-40" />
   <div
-    class="inset-0 z-20 fixed sm:pt-2 md:pt-5 overflow-auto lg:pt-10 w-full h-full bg-csblack bg-opacity-50"
+    class="
+      inset-0
+      z-20
+      fixed
+      sm:pt-2
+      md:pt-5
+      overflow-auto
+      lg:pt-10
+      w-full
+      h-full
+      bg-csblack bg-opacity-50
+    "
     v-show="isBackgroundShown == 'login'"
     @click="closeForm('none')"
   >
@@ -26,7 +37,18 @@
     </transition>
   </div>
   <div
-    class="inset-0 z-20 fixed sm:pt-2 md:pt-5 overflow-auto lg:pt-10 w-full h-full bg-csblack bg-opacity-50"
+    class="
+      inset-0
+      z-20
+      fixed
+      sm:pt-2
+      md:pt-5
+      overflow-auto
+      lg:pt-10
+      w-full
+      h-full
+      bg-csblack bg-opacity-50
+    "
     v-show="isBackgroundShown == 'register'"
     @click="closeForm('none')"
   >
@@ -42,7 +64,18 @@
     </transition>
   </div>
   <div
-    class="inset-0 z-20 fixed sm:pt-2 md:pt-5 overflow-auto lg:pt-10 w-full h-full bg-csblack bg-opacity-50"
+    class="
+      inset-0
+      z-20
+      fixed
+      sm:pt-2
+      md:pt-5
+      overflow-auto
+      lg:pt-10
+      w-full
+      h-full
+      bg-csblack bg-opacity-50
+    "
     v-show="isBackgroundShown == 'reset'"
     @click="closeForm('none')"
   >
@@ -56,7 +89,18 @@
   </div>
 
   <div
-    class="inset-0 z-20 fixed sm:pt-2 md:pt-5 overflow-auto lg:pt-10 w-full h-full bg-csblack bg-opacity-50"
+    class="
+      inset-0
+      z-20
+      fixed
+      sm:pt-2
+      md:pt-5
+      overflow-auto
+      lg:pt-10
+      w-full
+      h-full
+      bg-csblack bg-opacity-50
+    "
     v-show="isBackgroundShown == 'shop'"
     @click="closeForm('none')"
   >
@@ -70,7 +114,18 @@
   </div>
 
   <div
-    class="inset-0 z-20 fixed sm:pt-2 md:pt-5 overflow-auto lg:pt-10 w-full h-full bg-csblack bg-opacity-50"
+    class="
+      inset-0
+      z-20
+      fixed
+      sm:pt-2
+      md:pt-5
+      overflow-auto
+      lg:pt-10
+      w-full
+      h-full
+      bg-csblack bg-opacity-50
+    "
     v-show="isBackgroundShown == 'requests'"
     @click="closeForm('none')"
   >
@@ -84,7 +139,18 @@
     </transition>
   </div>
   <div
-    class="inset-0 z-20 fixed sm:pt-2 md:pt-5 overflow-auto lg:pt-10 w-full h-full bg-csblack bg-opacity-50"
+    class="
+      inset-0
+      z-20
+      fixed
+      sm:pt-2
+      md:pt-5
+      overflow-auto
+      lg:pt-10
+      w-full
+      h-full
+      bg-csblack bg-opacity-50
+    "
     v-show="isBackgroundShown == 'createRequest'"
     @click="closeForm('none')"
   >
@@ -130,14 +196,11 @@ export default {
     }
   },
   methods: {
-    //Open forms
     openForm(form) {
-      // alert(form)
       this.isBackgroundShown = form
       this.isFormShow = form
     },
 
-    //Form Close
     closeForm(form) {
       if (this.isMouseOut || form !== 'none') {
         this.isFormShow = 'none'

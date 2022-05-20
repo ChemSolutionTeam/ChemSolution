@@ -1,19 +1,28 @@
 <template>
   <div class="inset-0 z-20 fixed w-full h-full bg-csblack">
     <div
-      class="mt-0 flex flex-row bg-white absolute inset-3 rounded-3xl self-center p-2"
+      class="
+        mt-0
+        flex flex-row
+        bg-white
+        absolute
+        inset-3
+        rounded-3xl
+        self-center
+        p-2
+      "
     >
       <div class="w-full overflow-scroll">
         <h1 class="text-2xl">Відновлення паролю</h1>
-        <BaseInput
+        <base-input
           label="Email"
           type="email"
           placeholder="Уведіть E-mail"
           v-model="user.email"
           :isIncorrect="emailIsIncorrect"
           :isMultiline="true"
-        ></BaseInput>
-        <BaseInput
+        ></base-input>
+        <base-input
           label="Новий пароль"
           type="password"
           placeholder="Уведіть пароль"
@@ -23,7 +32,7 @@
           :isMultiline="true"
           errorMassage="Пароль має містити 8 знаків, 1 цифру, 1 велику , 1 малу літери та 1 символ"
         />
-        <BaseInput
+        <base-input
           label="Повторіть пароль"
           type="password"
           placeholder="Уведіть пароль"
@@ -37,7 +46,17 @@
           @click="changePassword()"
           id="sign-in"
           type="submit"
-          class="shadow-lg p-3 border border-grey-300 bg-csblue button-enter w-11/12 ml-3 m-5 focus:outline-none focus:ring-4 focus:ring-csgreen"
+          class="
+            shadow-lg
+            p-3
+            border border-grey-300
+            bg-csblue
+            button-enter
+            w-11/12
+            ml-3
+            m-5
+            focus:outline-none focus:ring-4 focus:ring-csgreen
+          "
         >
           Відновити пароль
         </button>

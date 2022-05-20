@@ -1,6 +1,14 @@
 <template>
   <div
-    class="w-full border border-csblack rounded-3xl bg-shopbg p-3 flex cursor-pointer"
+    class="
+      w-full
+      border border-csblack
+      rounded-3xl
+      bg-shopbg
+      p-3
+      flex
+      cursor-pointer
+    "
   >
     <img src="AtomCoinGreen.png" class="w-2/12 h-full self-center" />
     <div class="w-full">

@@ -1,13 +1,28 @@
 <template>
   <div
     @click="redirect()"
-    class="shadow-xl self-center hover:border-csgreen border-4 border-opacity-25 border-csblack m-5 rounded-xl cursor-pointer"
+    class="
+      shadow-xl
+      self-center
+      hover:border-csgreen
+      border-4 border-opacity-25 border-csblack
+      m-5
+      rounded-xl
+      cursor-pointer
+    "
   >
     <div class="relative">
       <img :src="image" class="rounded-2xl p-3 pb-0 rounded-b-none" />
     </div>
     <div
-      class="bg-gradient-to-tr text-2xl p-3 from-csgreen to-cslightgreen rounded-b-lg"
+      class="
+        bg-gradient-to-tr
+        text-2xl
+        p-3
+        from-csgreen
+        to-cslightgreen
+        rounded-b-lg
+      "
     >
       <h1>{{ label }}</h1>
     </div>

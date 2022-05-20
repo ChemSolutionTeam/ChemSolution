@@ -1,7 +1,6 @@
 <template>
-  <div :id="idCounter" @mouseenter="changeItem"
-    @mouseleave="rechangeItem">
-    <img :src="imageSrc"/>
+  <div :id="idCounter" @mouseenter="changeItem" @mouseleave="rechangeItem">
+    <img :src="imageSrc" />
   </div>
 </template>
 
@@ -9,7 +8,7 @@
 export default {
   name: 'Molecule',
   data() {
-    return { }
+    return {}
   },
   props: {
     idCounter: {
@@ -22,29 +21,25 @@ export default {
     },
     formula: {
       type: String,
-      default: 'H2'
+      default: 'H2',
     },
     info: {
       type: String,
-      default: 'Information'
+      default: 'Information',
     },
   },
   computed: {
-    imageSrc () {
-      return (
-        require(
-        '../assets/materials/' + this.formula + '.png')
-      )
+    imageSrc() {
+      return require('@/assets/materials/' + this.formula + '.png')
     },
   },
   mounted() {
-    
     const molecule = document.getElementById(this.idCounter)
     const moleculePosition = {
       x: 20,
       y: 20,
       startX: 0,
-      startY: 0, 
+      startY: 0,
     }
 
     translate(molecule, moleculePosition.x, moleculePosition.y)
@@ -72,17 +67,17 @@ export default {
     function translate(el, x, y) {
       el.style.transform = `translate(${x}px, ${y}px)`
     }
-    
   },
   methods: {
     changeItem() {
-      document.getElementById('moleculeInfoText').innerText = this.info.toString()
+      document.getElementById('moleculeInfoText').innerText =
+        this.info.toString()
       document.getElementById('moleculeInfo').style.right = '3vw'
     },
     rechangeItem() {
       document.getElementById('moleculeInfo').style.right = '-61vw'
     },
-  }
+  },
 }
 </script>
 <style></style>

@@ -36,7 +36,9 @@
         <p class="text-left">Категорія:</p>
       </div>
       <div class="p-1 float-right text-right w-8/12">
-        <p class="text-right font-bold">{{ element.category.categoryName }}</p>
+        <p class="text-right font-bold">
+          {{ element.elementCategory }}
+        </p>
       </div>
       <div class="p-1 float-left w-8/12">
         <p class="text-left">Атомна маса:</p>
@@ -61,7 +63,8 @@
         <p
           v-else-if="
             !element.isLocked ||
-            userElements.some((e) => e.elementId === element.elementId)
+            (userElements &&
+              userElements.some((e) => e.elementId === element.elementId))
           "
           class="text-right"
         >
@@ -82,7 +85,8 @@
         <p
           v-else-if="
             !element.isLocked ||
-            userElements.some((e) => e.elementId === element.elementId)
+            (userElements &&
+              userElements.some((e) => e.elementId === element.elementId))
           "
           class="text-right"
         >
@@ -103,7 +107,8 @@
         <p
           v-else-if="
             !element.isLocked ||
-            userElements.some((e) => e.elementId === element.elementId)
+            (userElements &&
+              userElements.some((e) => e.elementId === element.elementId))
           "
           class="text-right"
         >
@@ -123,7 +128,8 @@
         <p
           v-else-if="
             !element.isLocked ||
-            userElements.some((e) => e.elementId === element.elementId)
+            (userElements &&
+              userElements.some((e) => e.elementId === element.elementId))
           "
           class="text-right"
         >
@@ -143,7 +149,8 @@
         <p
           v-else-if="
             !element.isLocked ||
-            userElements.some((e) => e.elementId === element.elementId)
+            (userElements &&
+              userElements.some((e) => e.elementId === element.elementId))
           "
           class="text-right"
         >
@@ -163,7 +170,8 @@
         <p
           v-else-if="
             !element.isLocked ||
-            userElements.some((e) => e.elementId === element.elementId)
+            (userElements &&
+              userElements.some((e) => e.elementId === element.elementId))
           "
           class="text-right"
         >
@@ -184,7 +192,8 @@
         <p
           v-else-if="
             !element.isLocked ||
-            userElements.some((e) => e.elementId === element.elementId)
+            (userElements &&
+              userElements.some((e) => e.elementId === element.elementId))
           "
           class="text-right"
         >
@@ -199,7 +208,8 @@
           v-if="
             !isUserAuthorised ||
             !element.isLocked ||
-            userElements.some((e) => e.elementId === element.elementId)
+            (userElements &&
+              userElements.some((e) => e.elementId === element.elementId))
           "
           class="clear-none float-right"
         />
@@ -207,7 +217,17 @@
         <div v-else class="clear-none float-right">
           <button
             @click="buyElement(element.elementId)"
-            class="shadow-lg p-3 border border-grey-300 bg-csblue button-enter w-11/12 ml-3 m-5 focus:outline-none focus:ring-4 focus:ring-csgreen"
+            class="
+              shadow-lg
+              p-3
+              border border-grey-300
+              bg-csblue
+              button-enter
+              w-11/12
+              ml-3
+              m-5
+              focus:outline-none focus:ring-4 focus:ring-csgreen
+            "
           >
             Купити елемент <br />
             <p class="text-lg inline">{{ element.price }}</p>
@@ -243,6 +263,7 @@ export default {
     async getUserElements() {
       if (this.isUserAuthorised) {
         await apiService.getUser().then((resp) => {
+          console.log(resp)
           console.error(resp.data.elements)
           this.userElements = resp.data.elements
           return resp.data.elements
@@ -266,41 +287,46 @@ export default {
       return storage.state.token.length !== 0
     },
     valencyString() {
-      if (!this.element.valences.length) return 'невизначено'
+      if (
+        !this.element.elementValences ||
+        !this.element.elementValences.length
+      ) {
+        return 'невизначено'
+      }
 
       let result = ''
 
-      for (let i = 0; i < this.element.valences.length; i++) {
-        switch (this.element.valences[i].valenceVal) {
-          case 1:
+      for (let i = 0; i < this.element.elementValences.length; i++) {
+        switch (this.element.elementValences[i].valenceVal) {
+          case 'One':
             result += 'I, '
             break
-          case 2:
+          case 'Two':
             result += 'II, '
             break
-          case 3:
+          case 'Three':
             result += 'III, '
             break
-          case 4:
+          case 'Four':
             result += 'IV, '
             break
-          case 5:
+          case 'Five':
             result += 'V, '
             break
-          case 6:
+          case 'Six':
             result += 'VI, '
             break
-          case 7:
+          case 'Seven':
             result += 'VII, '
             break
-          case 8:
+          case 'Eight':
             result += 'VIII, '
             break
           default:
             break
         }
       }
-      return result.substr(0, result.length - 2)
+      return result.substring(0, result.length - 2)
     },
   },
   created() {
@@ -324,7 +350,7 @@ export default {
         type: Number,
         default: 607,
       },
-      category: {
+      elementCategory: {
         type: String,
         default: 'Неметали',
       },
@@ -368,7 +394,7 @@ export default {
         type: String,
         default: 'H',
       },
-      valences: {
+      elementValences: {
         type: Array,
         default: [],
       },

@@ -2,7 +2,7 @@ import axios from 'axios'
 import storage from '../store/index'
 
 const API = axios.create({
-  baseURL: 'https://chemsolutionapi.azurewebsites.net',
+  baseURL: 'https://chemsolution-re-api-v2.azurewebsites.net/api',
   headers: {
     'Access-Control-Allow-Origin': '*',
     Accept: 'text/plan',
@@ -11,14 +11,18 @@ const API = axios.create({
 })
 export default {
   //Token queries
-  async getToken(user) {
-    await API.post('/getjwt?email=' + user.email + '&password=' + user.password)
-      .then((resp) => {
-        storage.commit('setToken', resp.data.access_token)
-        storage.state.username = resp.data.username
-        storage.state.email = user.email
+  async getToken({ email, password }) {
+    await API.post('/Auth/login', {
+      email: email,
+      password: password,
+    })
+      .then((res) => {
+        storage.commit('setToken', res.data.accessToken)
+        localStorage.setItem('accessToken', res.data.accessToken)
+        storage.state.username = res.data.username
+        storage.state.email = email.email
 
-        console.log(resp)
+        console.log(res)
       })
       .catch((e) => {
         console.info(e)
@@ -29,7 +33,7 @@ export default {
   //Регистрация
   async postUser(user) {
     await API.post(
-      '/Users',
+      '/Auth/register',
       {
         userEmail: user.email,
         userName: user.username,
@@ -70,7 +74,7 @@ export default {
   deleteUser(id) {
     API.delete('/Users/' + id, {
       headers: {
-        Authorization: 'Bearer' + storage.state.token,
+        Authorization: 'Bearer ' + storage.state.token,
       },
     })
       .then((resp) => {
@@ -84,12 +88,20 @@ export default {
   },
 
   async getUsersByRating() {
-    return API.get('/Users/rating').catch((e) => console.error(e))
+    return API.get('/Users/rating', {
+      headers: {
+        Authorization: 'Bearer ' + storage.state.token,
+      },
+    }).catch((e) => console.error(e))
   },
 
   //Request queries
   async getRequests() {
-    return API.get('/Requests').catch((e) => {
+    return API.get('/Requests/OwnRequests', {
+      headers: {
+        Authorization: 'Bearer ' + storage.state.token,
+      },
+    }).catch((e) => {
       console.error(e)
     })
   },
@@ -114,7 +126,11 @@ export default {
   },
 
   getRequest(id) {
-    API.get('/Requests/' + id)
+    API.get('/Requests/' + id, {
+      headers: {
+        Authorization: 'Bearer' + storage.state.token,
+      },
+    })
       .then((resp) => {
         console.log(resp)
       })
@@ -127,7 +143,11 @@ export default {
     //TODO PUT Request
   },
   deleteRequest(id) {
-    API.delete('/Requests' + id)
+    API.delete('/Requests' + id, {
+      headers: {
+        Authorization: 'Bearer' + storage.state.token,
+      },
+    })
       .then((resp) => {
         console.log(resp)
       })
@@ -138,7 +158,11 @@ export default {
 
   //Materials queries
   getMaterials() {
-    API.get('/Materials')
+    API.get('/Materials', {
+      headers: {
+        Authorization: 'Bearer' + storage.state.token,
+      },
+    })
       .then((resp) => {
         console.log(resp)
       })
@@ -149,7 +173,11 @@ export default {
 
   postMaterial(material) {
     material
-    API.post('/Materials')
+    API.post('/Materials', {
+      headers: {
+        Authorization: 'Bearer' + storage.state.token,
+      },
+    })
       .then((resp) => {
         console.log(resp)
       })
@@ -159,7 +187,11 @@ export default {
   },
 
   getMaterial(id) {
-    API.get('/Materials/' + id)
+    API.get('/Materials/' + id, {
+      headers: {
+        Authorization: 'Bearer' + storage.state.token,
+      },
+    })
       .then((resp) => {
         console.log(resp)
       })
@@ -174,7 +206,11 @@ export default {
   },
 
   deleteMaterial(id) {
-    API.delete('/Materials/' + id)
+    API.delete('/Materials/' + id, {
+      headers: {
+        Authorization: 'Bearer' + storage.state.token,
+      },
+    })
       .then((resp) => {
         console.log(resp)
       })
@@ -200,7 +236,11 @@ export default {
 
   //MaterialGroups queries
   getMGroups() {
-    API.get('/MaterialGroups')
+    API.get('/MaterialGroups', {
+      headers: {
+        Authorization: 'Bearer' + storage.state.token,
+      },
+    })
       .then((resp) => {
         console.log(resp)
       })
@@ -211,7 +251,11 @@ export default {
 
   postMGroup(group) {
     group
-    API.post('/MaterialGroups')
+    API.post('/MaterialGroups', {
+      headers: {
+        Authorization: 'Bearer' + storage.state.token,
+      },
+    })
       .then((resp) => {
         console.log(resp)
       })
@@ -221,7 +265,11 @@ export default {
   },
 
   getMGroup(id) {
-    API.get('/MaterialGroups/' + id)
+    API.get('/MaterialGroups/' + id, {
+      headers: {
+        Authorization: 'Bearer' + storage.state.token,
+      },
+    })
       .then((resp) => {
         console.log(resp)
       })
@@ -236,7 +284,11 @@ export default {
   },
 
   deleteMGroup(id) {
-    API.delete('/MaterialGroups/' + id)
+    API.delete('/MaterialGroups/' + id, {
+      headers: {
+        Authorization: 'Bearer' + storage.state.token,
+      },
+    })
       .then((resp) => {
         console.log(resp)
       })
@@ -248,7 +300,11 @@ export default {
   //Elements queries
   getElements() {
     return (
-      API.get('/Elements')
+      API.get('/Elements', {
+        headers: {
+          Authorization: 'Bearer' + storage.state.token,
+        },
+      })
         /*.then((resp) => {
           console.log(resp)
            let data = resp.data
@@ -263,7 +319,11 @@ export default {
 
   postElement(element) {
     element
-    API.post('/Elements')
+    API.post('/Elements', {
+      headers: {
+        Authorization: 'Bearer' + storage.state.token,
+      },
+    })
       .then((resp) => {
         console.log(resp)
       })
@@ -272,10 +332,15 @@ export default {
       })
   },
 
-  getElement(id) {
-    return API.get('/Elements/' + id).catch((e) => {
+  async getElement(id) {
+    const el = await API.get('/Elements/' + id, {
+      headers: {
+        Authorization: 'Bearer' + storage.state.token,
+      },
+    }).catch((e) => {
       console.error(e)
     })
+    return el
   },
 
   putElement(element) {
@@ -284,7 +349,11 @@ export default {
   },
 
   deleteElement(id) {
-    API.delete('/Elements/' + id)
+    API.delete('/Elements/' + id, {
+      headers: {
+        Authorization: 'Bearer' + storage.state.token,
+      },
+    })
       .then((resp) => {
         console.log(resp)
       })
@@ -295,7 +364,11 @@ export default {
 
   //BlogPosts queries
   getBlogPosts() {
-    API.get('/BlogPosts')
+    API.get('/BlogPosts', {
+      headers: {
+        Authorization: 'Bearer' + storage.state.token,
+      },
+    })
       .then((resp) => {
         console.log(resp)
       })
@@ -306,7 +379,11 @@ export default {
 
   postBlogPost(blogPost) {
     blogPost
-    API.post('/BlogPosts')
+    API.post('/BlogPosts', {
+      headers: {
+        Authorization: 'Bearer' + storage.state.token,
+      },
+    })
       .then((resp) => {
         console.log(resp)
       })
@@ -316,7 +393,11 @@ export default {
   },
 
   getBlogPost(id) {
-    API.get('/BlogPosts/' + id)
+    API.get('/BlogPosts/' + id, {
+      headers: {
+        Authorization: 'Bearer' + storage.state.token,
+      },
+    })
       .then((resp) => {
         console.log(resp)
       })
@@ -331,7 +412,11 @@ export default {
   },
 
   deleteBlogPost(id) {
-    API.delete('/BlogPosts/' + id)
+    API.delete('/BlogPosts/' + id, {
+      headers: {
+        Authorization: 'Bearer' + storage.state.token,
+      },
+    })
       .then((resp) => {
         console.log(resp)
       })
@@ -342,14 +427,22 @@ export default {
 
   //Achievements queries
   async getAchievements() {
-    return API.get('/Achievements').catch((e) => {
+    return API.get('/Achievements/OwnAchievements', {
+      headers: {
+        Authorization: 'Bearer ' + storage.state.token,
+      },
+    }).catch((e) => {
       console.error(e)
     })
   },
 
   postAchievement(achievement) {
     achievement
-    API.post('/Achievements')
+    API.post('/Achievements', {
+      headers: {
+        Authorization: 'Bearer' + storage.state.token,
+      },
+    })
       .then((resp) => {
         console.log(resp)
       })
@@ -359,7 +452,11 @@ export default {
   },
 
   async getAchievement(id) {
-    return API.get('/Achievements/' + id).catch((e) => {
+    return API.get('/Achievements/' + id, {
+      headers: {
+        Authorization: 'Bearer' + storage.state.token,
+      },
+    }).catch((e) => {
       console.error(e)
     })
   },
@@ -370,7 +467,11 @@ export default {
   },
 
   deleteAchievement(id) {
-    API.delete('/Achievements/' + id)
+    API.delete('/Achievements/' + id, {
+      headers: {
+        Authorization: 'Bearer' + storage.state.token,
+      },
+    })
       .then((resp) => {
         console.log(resp)
       })
@@ -381,9 +482,11 @@ export default {
 
   //recovering Password
   recoverPassword(email, newPassword) {
-    API.post(
-      '/UserSecurity/RecoverPassword/' + email + '/' + newPassword
-    ).catch((e) => {
+    API.post('/UserSecurity/RecoverPassword/' + email + '/' + newPassword, {
+      headers: {
+        Authorization: 'Bearer' + storage.state.token,
+      },
+    }).catch((e) => {
       console.error(e)
     })
   },

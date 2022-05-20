@@ -1,6 +1,18 @@
 <template>
   <button
-    class="focus:outline-none block mt-4 lg:inline-block lg:mt-0 hover:text-cslightgreen mr-8 cursor-pointer transform duration-300 ease-in-out hover:scale-125 hover:animate-pulse"
+    class="
+      focus:outline-none
+      block
+      mt-4
+      lg:inline-block lg:mt-0
+      hover:text-cslightgreen
+      mr-8
+      cursor-pointer
+      transform
+      duration-300
+      ease-in-out
+      hover:scale-125 hover:animate-pulse
+    "
     :class="[isCurrent ? 'text-csgreen animate-pulse' : 'text-white']"
     @click="redirect()"
   >

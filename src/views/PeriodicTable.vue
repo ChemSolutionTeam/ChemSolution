@@ -1077,6 +1077,7 @@ export default {
   methods: {
     getData(id, bgColor, borderColor) {
       apiService.getElement(id).then((resp) => {
+        console.log(resp)
         this.element = resp.data
         this.bgColor = bgColor
         this.borderColor = borderColor
