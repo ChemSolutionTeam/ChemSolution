@@ -101,10 +101,12 @@ export default {
       document.getElementById('infoSymbol1').innerText = this.symbol
       document.getElementById('infoName').innerText = this.name
       document.getElementById('infoName1').innerText = this.name
-      document.getElementById('infoWeight').innerText =
-        this.atomicWeight.toString()
-      document.getElementById('infoWeight1').innerText =
-        this.atomicWeight.toString()
+      document.getElementById(
+        'infoWeight'
+      ).innerText = this.atomicWeight.toString()
+      document.getElementById(
+        'infoWeight1'
+      ).innerText = this.atomicWeight.toString()
       document.getElementById('infoValences').innerText = this.valencyString
       document.getElementById('infoCategory').innerText = this.categoryName
       document.getElementById('slider').style.right = '0vw'
