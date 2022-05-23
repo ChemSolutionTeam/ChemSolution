@@ -1,45 +1,15 @@
 <template>
   <back-to-top-button :isShown="toTop" />
   <nav
-    class="
-      top-0
-      z-20
-      lg:h-auto
-      sm:h-1/6
-      flex
-      items-center
-      justify-between
-      flex-grow
-      bg-csblack
-      p-5
-      m-auto
-      shadow-2xl
-      fixed
-      w-full
-    "
+    class="top-0 z-20 lg:h-auto sm:h-1/6 flex items-center justify-between flex-grow bg-csblack p-5 m-auto shadow-2xl fixed w-full"
   >
     <div
-      class="
-        transform
-        md:scale-50
-        lg:scale-100
-        flex
-        items-center
-        flex-shrink
-        text-white
-        ml-3
-        mr-6
-      "
+      class="transform md:scale-50 lg:scale-100 flex items-center flex-shrink text-white ml-3 mr-6"
     >
       <img :src="require('@/assets/logo2.png')" class="w-20 h-20" />
     </div>
     <div
-      class="
-        w-full
-        h-full
-        flex-grow flex
-        lg:items-center lg:mr-6 lg:ml-9 lg:w-auto
-      "
+      class="w-full h-full flex-grow flex lg:items-center lg:mr-6 lg:ml-9 lg:w-auto"
     >
       <div class="lg:text-lg sm:text-sm lg:flex-grow flex justify-start">
         <div class="flex flex-grow" v-if="!isUserAuthorised">
@@ -63,53 +33,14 @@
 
       <div v-if="!isUserAuthorised" class="flex flex-row">
         <div
-          class="
-            block
-            mt-4
-            text-lg
-            lg:inline-block
-            cursor-pointer
-            self-center
-            focus:outline-none
-            lg:mt-0
-            text-white
-            hover:text-cslightgreen hover:scale-110
-            transform
-            duration-300
-            ease-in-out
-          "
+          class="block mt-4 text-lg lg:inline-block cursor-pointer self-center focus:outline-none lg:mt-0 text-white hover:text-cslightgreen hover:scale-110 transform duration-300 ease-in-out"
           @click="openForm('login')"
         >
           Авторизуватися
         </div>
         <div
           @click="openForm('register')"
-          class="
-            inline-block
-            self-center
-            cursor-pointer
-            ml-6
-            text-lg
-            items-center
-            bg-gradient-to-tr
-            from-cslightgreen
-            via-csgreen
-            to-csblue
-            px-4
-            py-2
-            leading-none
-            border
-            rounded
-            text-csblack
-            border-csgreen
-            hover:border-transparent hover:text-white
-            transform
-            duration-300
-            ease-in-out
-            hover:scale-110 hover:animate-pulse
-            mt-4
-            lg:mt-0
-          "
+          class="inline-block self-center cursor-pointer ml-6 text-lg items-center bg-gradient-to-tr from-cslightgreen via-csgreen to-csblue px-4 py-2 leading-none border rounded text-csblack border-csgreen hover:border-transparent hover:text-white transform duration-300 ease-in-out hover:scale-110 hover:animate-pulse mt-4 lg:mt-0"
         >
           Зареєструватися
         </div>
@@ -118,30 +49,11 @@
         <i
           v-if="userRole !== 'Admin'"
           @click="openForm('shop')"
-          class="
-            fas
-            fa-plus-circle
-            text-white
-            scale-200
-            cursor-pointer
-            transform
-            mx-2
-            self-center
-            hover:scale-250
-            duration-150
-            ease-in-out
-          "
+          class="fas fa-plus-circle text-white scale-200 cursor-pointer transform mx-2 self-center hover:scale-250 duration-150 ease-in-out"
         ></i>
 
         <div
-          class="
-            text-white text-center
-            flex
-            mx-3
-            items-center
-            self-center
-            text-2xl
-          "
+          class="text-white text-center flex mx-3 items-center self-center text-2xl"
           v-if="userRole !== 'Admin'"
         >
           Баланс:
@@ -153,31 +65,7 @@
 
         <button
           @click="logout()"
-          class="
-            inline-block
-            ml-6
-            h-10
-            text-lg
-            items-center
-            bg-gradient-to-tr
-            from-cslightgreen
-            via-csgreen
-            to-csblue
-            px-4
-            py-2
-            leading-none
-            border
-            rounded
-            text-csblack
-            border-csgreen
-            hover:border-transparent hover:text-white
-            transform
-            duration-300
-            ease-in-out
-            hover:scale-110 hover:animate-pulse
-            mt-4
-            lg:mt-0
-          "
+          class="inline-block ml-6 h-10 text-lg items-center bg-gradient-to-tr from-cslightgreen via-csgreen to-csblue px-4 py-2 leading-none border rounded text-csblack border-csgreen hover:border-transparent hover:text-white transform duration-300 ease-in-out hover:scale-110 hover:animate-pulse mt-4 lg:mt-0"
         >
           Вийти
         </button>
@@ -289,7 +177,7 @@ export default {
   font-family: ColonnaMT, Colonna MT;
 }
 nav {
-  font-family: 'Century Gothic', serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: 700;
 }
 button {

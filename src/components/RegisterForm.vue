@@ -1,33 +1,9 @@
 <template>
   <div
-    class="
-      transform
-      md:scale-50
-      lg:scale-100
-      flex
-      items-start
-      inset-0
-      my-4
-      shadow-lg
-      max-w-6xl
-      mx-auto
-    "
+    class="transform md:scale-50 lg:scale-100 flex items-start inset-0 my-4 shadow-lg max-w-6xl mx-auto"
   >
     <div
-      class="
-        box
-        self-center
-        pl-12
-        p-3
-        pb-16
-        text-left
-        w-full
-        bg-white
-        border-csblack
-        shadow-2xl
-        border
-        rounded-lg
-      "
+      class="box self-center pl-12 p-3 pb-16 text-left w-full bg-white border-csblack shadow-2xl border rounded-lg"
     >
       <form @submit.prevent="register()">
         <div class="column w-7/12 mt-4">
@@ -103,19 +79,7 @@
             id="sign-up"
             type="submit"
             :disabled="!registerable"
-            class="
-              hover:text-csblack
-              disabled:opacity-25
-              shadow-lg
-              p-3
-              border border-grey-300
-              bg-csblue
-              button-enter
-              w-11/12
-              ml-3
-              m-5
-              focus:outline-none focus:ring-4 focus:ring-csgreen
-            "
+            class="hover:text-csblack disabled:opacity-25 shadow-lg p-3 border border-grey-300 bg-csblue button-enter w-11/12 ml-3 m-5 focus:outline-none focus:ring-4 focus:ring-csgreen"
           >
             Створити акаунт
           </button>
@@ -249,7 +213,7 @@ export default {
 
 <style>
 form {
-  font-family: 'Century Gothic', serif;
+  font-family: 'Open Sans', sans-serif;
 }
 .heading {
   font-weight: 700;

@@ -47,7 +47,7 @@ export default {
 
 <style>
 h1 {
-  font-family: 'Century Gothic';
+  font-family: 'Open Sans', sans-serif;
   font-weight: 700;
 }
 </style>

@@ -8,54 +8,22 @@
       </div>
       <div class="text-7xl">
         <i
-          class="
-            fab
-            fa-twitter-square
-            mx-6
-            cursor-pointer
-            hover:text-white hover:animate-wiggle
-          "
+          class="fab fa-twitter-square mx-6 cursor-pointer hover:text-white hover:animate-wiggle"
         ></i>
         <i
-          class="
-            fab
-            fa-telegram
-            mx-6
-            cursor-pointer
-            hover:text-white hover:animate-wiggle
-          "
+          class="fab fa-telegram mx-6 cursor-pointer hover:text-white hover:animate-wiggle"
         ></i>
         <i
-          class="
-            fab
-            fa-instagram
-            mx-6
-            cursor-pointer
-            hover:text-white hover:animate-wiggle
-            ease-in-out
-          "
+          class="fab fa-instagram mx-6 cursor-pointer hover:text-white hover:animate-wiggle ease-in-out"
         ></i>
         <i
-          class="
-            fab
-            fa-facebook-square
-            mx-6
-            cursor-pointer
-            hover:text-white hover:animate-wiggle
-          "
+          class="fab fa-facebook-square mx-6 cursor-pointer hover:text-white hover:animate-wiggle"
         ></i>
       </div>
     </div>
 
     <div
-      class="
-        bg-csblack
-        text-white
-        flex flex-row
-        px-48
-        py-6
-        place-content-between
-      "
+      class="bg-csblack text-white flex flex-row px-48 py-6 place-content-between"
     >
       <div class="w-1/3 content-start text-left">
         <h1 class="text-2xl">ChemSolution</h1>
@@ -75,7 +43,7 @@
         </div>
         <div class="flex flex-row-reverse text-xl">
           <i class="fas fa-envelope-open-text self-center m-3"></i>
-          <p class="self-center">chemsolution2021@gmail.com</p>
+          <p class="self-center">chemsolution2022@cs.org</p>
         </div>
         <div class="flex flex-row-reverse text-xl">
           <i class="fas fa-phone self-center m-3"></i>

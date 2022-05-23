@@ -1,34 +1,10 @@
 <template>
   <div
-    class="
-      transform
-      md:scale-50
-      lg:scale-100
-      flex
-      items-start
-      inset-0
-      my-4
-      shadow-lg
-      max-w-6xl
-      mx-auto
-    "
+    class="transform md:scale-50 lg:scale-100 flex items-start inset-0 my-4 shadow-lg max-w-6xl mx-auto"
     @click="getRequests()"
   >
     <div
-      class="
-        box
-        self-center
-        px-12
-        p-3
-        pb-16
-        text-left
-        w-full
-        bg-white
-        border-csblack
-        shadow-2xl
-        border
-        rounded-lg
-      "
+      class="box self-center px-12 p-3 pb-16 text-left w-full bg-white border-csblack shadow-2xl border rounded-lg"
     >
       <div class="column w-full mt-4">
         <h3 class="text-4xl text-center pb-5">Запити</h3>
@@ -92,7 +68,8 @@ export default {
 
 <style type="text/css">
 @font-face {
-  font-family: 'Century Gothic';
-  src: url('/public/CenturyGothic.ttf');
+  font-family: 'Open Sans';
+  src: url('/fonts/OpenSans-Regular-webfont.woff2') format('woff2'),
+    url('/fonts/OpenSans-Regular-webfont.woff') format('woff');
 }
 </style>

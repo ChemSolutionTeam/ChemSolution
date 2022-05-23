@@ -1,33 +1,9 @@
 <template>
   <div
-    class="
-      transform
-      lg:scale-100
-      sm:scale-50
-      md:scale-50
-      flex
-      items-start
-      inset-0
-      my-4
-      shadow-lg
-      max-w-xl
-      mx-auto
-    "
+    class="transform lg:scale-100 sm:scale-50 md:scale-50 flex items-start inset-0 my-4 shadow-lg max-w-xl mx-auto"
   >
     <div
-      class="
-        box
-        self-center
-        pl-12
-        p-3
-        text-left
-        w-full
-        bg-white
-        border-csblack
-        shadow-2xl
-        border
-        rounded-lg
-      "
+      class="box self-center pl-12 p-3 text-left w-full bg-white border-csblack shadow-2xl border rounded-lg"
     >
       <form @submit.prevent="logIn">
         <h3 class="text-4xl text-center heading pb-5">Авторизація</h3>
@@ -51,21 +27,7 @@
         <button
           id="sign-in"
           type="submit"
-          class="
-            hover:text-csblack
-            transform
-            shadow-lg
-            p-3
-            border
-            focus:ring-offset-2
-            border-grey-300
-            bg-csblue
-            button-enter
-            w-11/12
-            ml-3
-            m-5
-            focus:outline-none focus:ring-4 focus:ring-csgreen
-          "
+          class="hover:text-csblack transform shadow-lg p-3 border focus:ring-offset-2 border-grey-300 bg-csblue button-enter w-11/12 ml-3 m-5 focus:outline-none focus:ring-4 focus:ring-csgreen"
         >
           Увійти
         </button>
@@ -163,7 +125,7 @@ export default {
 
 <style>
 form {
-  font-family: 'Century Gothic', serif;
+  font-family: 'Open Sans', serif;
 }
 .heading {
   font-weight: 700;

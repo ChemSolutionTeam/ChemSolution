@@ -10,18 +10,7 @@
   <!-- </div> -->
   <router-view v-on:showForm="openForm($event)" class="pt-40" />
   <div
-    class="
-      inset-0
-      z-20
-      fixed
-      sm:pt-2
-      md:pt-5
-      overflow-auto
-      lg:pt-10
-      w-full
-      h-full
-      bg-csblack bg-opacity-50
-    "
+    class="inset-0 z-20 fixed sm:pt-2 md:pt-5 overflow-auto lg:pt-10 w-full h-full bg-csblack bg-opacity-50"
     v-show="isBackgroundShown == 'login'"
     @click="closeForm('none')"
   >
@@ -37,18 +26,7 @@
     </transition>
   </div>
   <div
-    class="
-      inset-0
-      z-20
-      fixed
-      sm:pt-2
-      md:pt-5
-      overflow-auto
-      lg:pt-10
-      w-full
-      h-full
-      bg-csblack bg-opacity-50
-    "
+    class="inset-0 z-20 fixed sm:pt-2 md:pt-5 overflow-auto lg:pt-10 w-full h-full bg-csblack bg-opacity-50"
     v-show="isBackgroundShown == 'register'"
     @click="closeForm('none')"
   >
@@ -64,18 +42,7 @@
     </transition>
   </div>
   <div
-    class="
-      inset-0
-      z-20
-      fixed
-      sm:pt-2
-      md:pt-5
-      overflow-auto
-      lg:pt-10
-      w-full
-      h-full
-      bg-csblack bg-opacity-50
-    "
+    class="inset-0 z-20 fixed sm:pt-2 md:pt-5 overflow-auto lg:pt-10 w-full h-full bg-csblack bg-opacity-50"
     v-show="isBackgroundShown == 'reset'"
     @click="closeForm('none')"
   >
@@ -89,18 +56,7 @@
   </div>
 
   <div
-    class="
-      inset-0
-      z-20
-      fixed
-      sm:pt-2
-      md:pt-5
-      overflow-auto
-      lg:pt-10
-      w-full
-      h-full
-      bg-csblack bg-opacity-50
-    "
+    class="inset-0 z-20 fixed sm:pt-2 md:pt-5 overflow-auto lg:pt-10 w-full h-full bg-csblack bg-opacity-50"
     v-show="isBackgroundShown == 'shop'"
     @click="closeForm('none')"
   >
@@ -114,18 +70,7 @@
   </div>
 
   <div
-    class="
-      inset-0
-      z-20
-      fixed
-      sm:pt-2
-      md:pt-5
-      overflow-auto
-      lg:pt-10
-      w-full
-      h-full
-      bg-csblack bg-opacity-50
-    "
+    class="inset-0 z-20 fixed sm:pt-2 md:pt-5 overflow-auto lg:pt-10 w-full h-full bg-csblack bg-opacity-50"
     v-show="isBackgroundShown == 'requests'"
     @click="closeForm('none')"
   >
@@ -139,18 +84,7 @@
     </transition>
   </div>
   <div
-    class="
-      inset-0
-      z-20
-      fixed
-      sm:pt-2
-      md:pt-5
-      overflow-auto
-      lg:pt-10
-      w-full
-      h-full
-      bg-csblack bg-opacity-50
-    "
+    class="inset-0 z-20 fixed sm:pt-2 md:pt-5 overflow-auto lg:pt-10 w-full h-full bg-csblack bg-opacity-50"
     v-show="isBackgroundShown == 'createRequest'"
     @click="closeForm('none')"
   >
@@ -247,11 +181,12 @@ export default {
 </script>
 <style>
 @font-face {
-  font-family: 'Century Gothic';
-  src: url('/public/CenturyGothic.ttf') format('ttf');
+  font-family: 'Open Sans';
+  src: url('/fonts/OpenSans-Regular-webfont.woff2') format('woff2'),
+    url('/fonts/OpenSans-Regular-webfont.woff') format('woff');
 }
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Open Sanc', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

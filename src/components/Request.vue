@@ -62,7 +62,8 @@ export default {
 
 <style>
 @font-face {
-  font-family: 'Century Gothic';
-  src: url('/public/CenturyGothic.ttf');
+  font-family: 'Open Sans';
+  src: url('/fonts/OpenSans-Regular-webfont.woff2') format('woff2'),
+    url('/fonts/OpenSans-Regular-webfont.woff') format('woff');
 }
 </style>
